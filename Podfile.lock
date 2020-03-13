@@ -1,20 +1,28 @@
 PODS:
+  - lottie-ios (3.1.6)
   - Mapbox-iOS-SDK (5.7.0):
     - MapboxMobileEvents (= 0.10.2)
   - MapboxMobileEvents (0.10.2)
+  - SegementSlide (2.2.3)
 
 DEPENDENCIES:
+  - lottie-ios
   - Mapbox-iOS-SDK (~> 5.7)
+  - SegementSlide
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - lottie-ios
     - Mapbox-iOS-SDK
     - MapboxMobileEvents
+    - SegementSlide
 
 SPEC CHECKSUMS:
+  lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   Mapbox-iOS-SDK: 1b7cb0e739247d20ef75f5f14aa6ce34e1f0660f
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
+  SegementSlide: 7a35da31eaa87fa0af42cc402395821a0c6835ae
 
-PODFILE CHECKSUM: c1c803fbd86e891be2255be48d1f0b1e5f2737da
+PODFILE CHECKSUM: 0da91980598343f0bfe05f32503cdeb880da2ab4
 
 COCOAPODS: 1.5.3

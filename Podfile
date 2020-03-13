@@ -7,5 +7,7 @@ target 'KyotoTrip' do
 
   # Pods for KyotoTrip
   pod 'Mapbox-iOS-SDK', '~> 5.7'
+  pod 'SegementSlide'
+  pod 'lottie-ios'
 
 end
