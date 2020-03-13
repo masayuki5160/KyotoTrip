@@ -25,20 +25,20 @@
             </objects>
             <point key="canvasLocation" x="-17" y="208"/>
         </scene>
-        <!--InfoView-->
+        <!--Info-->
         <scene sceneID="fq2-XV-4dc">
             <objects>
-                <viewControllerPlaceholder storyboardName="InfoView" id="hrk-el-m3N" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Info" id="hrk-el-m3N" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="UQs-Sf-pmV"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qr-qV-SnL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="717" y="23"/>
         </scene>
-        <!--MapView-->
+        <!--Map-->
         <scene sceneID="a9X-e9-hQE">
             <objects>
-                <viewControllerPlaceholder storyboardName="MapView" id="3da-jn-9WM" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Map" id="3da-jn-9WM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="CYk-nT-YOq"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCw-kw-8HG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
