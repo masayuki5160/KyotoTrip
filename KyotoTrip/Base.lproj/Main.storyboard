@@ -3,101 +3,47 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Infor View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="InforViewController" customModule="KyotoTrip" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="cNX-xH-ZGv"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1893" y="-250"/>
-        </scene>
-        <!--Map View Controller-->
-        <scene sceneID="EE6-Ng-egP">
-            <objects>
-                <viewController id="Rf8-g2-8RP" customClass="MapViewController" customModule="KyotoTrip" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GTT-7f-kFO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="TDb-MT-2Fm"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="iQA-0U-iFE"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SL6-2r-tMV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1893" y="501"/>
-        </scene>
-        <!--Info-->
-        <scene sceneID="6RG-7N-Ins">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BHz-cS-CCN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Info" image="info.circle" catalog="system" id="5WY-9E-mN9"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Dtq-qn-6qA">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="R16-DJ-8YS"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WYG-BT-lUT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1077" y="-250"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="jg9-LK-yEI">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="nQK-G6-Nuy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="20a-QG-yXL">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BHz-cS-CCN" kind="relationship" relationship="viewControllers" id="rzP-Vn-HJV"/>
-                        <segue destination="E5m-9t-ezi" kind="relationship" relationship="viewControllers" id="hbf-3u-leh"/>
+                        <segue destination="hrk-el-m3N" kind="relationship" relationship="viewControllers" id="OT5-NK-dLD"/>
+                        <segue destination="3da-jn-9WM" kind="relationship" relationship="viewControllers" id="P7I-RW-hYL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLT-Fa-yMR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="177" y="115"/>
+            <point key="canvasLocation" x="-17" y="208"/>
         </scene>
-        <!--Map-->
-        <scene sceneID="s6F-Ke-B9S">
+        <!--InfoView-->
+        <scene sceneID="fq2-XV-4dc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="E5m-9t-ezi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="mappin" catalog="system" id="2Pj-wz-yaI"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Czf-Li-CiQ">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Rf8-g2-8RP" kind="relationship" relationship="rootViewController" id="Vgj-Z9-QDV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kdB-LZ-ETs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="InfoView" id="hrk-el-m3N" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="UQs-Sf-pmV"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6qr-qV-SnL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077" y="501"/>
+            <point key="canvasLocation" x="717" y="23"/>
+        </scene>
+        <!--MapView-->
+        <scene sceneID="a9X-e9-hQE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MapView" id="3da-jn-9WM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="CYk-nT-YOq"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CCw-kw-8HG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="718" y="208"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="info.circle" catalog="system" width="64" height="62"/>
-        <image name="mappin" catalog="system" width="32" height="64"/>
-    </resources>
 </document>
