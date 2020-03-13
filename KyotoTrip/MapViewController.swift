@@ -7,24 +7,22 @@
 //
 
 import UIKit
+import Mapbox
 
 class MapViewController: UIViewController {
+    
+    let kyotoStationLat = 34.9857083
+    let kyotoStationLong = 135.7560416
+    let defaultZoomLv = 13.0
+    let mbxStyleURL = "mapbox://styles/mapbox/streets-v11"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let url = URL(string: mbxStyleURL)
+        let mapView = MGLMapView(frame: view.bounds, styleURL: url)
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mapView.setCenter(CLLocationCoordinate2D(latitude: kyotoStationLat, longitude: kyotoStationLong), zoomLevel: defaultZoomLv, animated: false)
+        view.addSubview(mapView)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
