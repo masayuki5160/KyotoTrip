@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D6241B978B0032CC53 /* AppDelegate.swift */; };
 		4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D8241B978B0032CC53 /* SceneDelegate.swift */; };
-		4CF773DB241B978B0032CC53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773DA241B978B0032CC53 /* ViewController.swift */; };
 		4CF773DE241B978B0032CC53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773DC241B978B0032CC53 /* Main.storyboard */; };
 		4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773DF241B97900032CC53 /* Assets.xcassets */; };
 		4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */; };
+		4CF773EB241B9B820032CC53 /* InforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773EA241B9B820032CC53 /* InforViewController.swift */; };
+		4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773EC241B9D910032CC53 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4CF773D3241B978B0032CC53 /* KyotoTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotoTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF773D6241B978B0032CC53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CF773D8241B978B0032CC53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4CF773DA241B978B0032CC53 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4CF773DD241B978B0032CC53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4CF773DF241B97900032CC53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CF773E2241B97900032CC53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4CF773E4241B97900032CC53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CF773EA241B9B820032CC53 /* InforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InforViewController.swift; sourceTree = "<group>"; };
+		4CF773EC241B9D910032CC53 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +60,12 @@
 			children = (
 				4CF773D6241B978B0032CC53 /* AppDelegate.swift */,
 				4CF773D8241B978B0032CC53 /* SceneDelegate.swift */,
-				4CF773DA241B978B0032CC53 /* ViewController.swift */,
 				4CF773DC241B978B0032CC53 /* Main.storyboard */,
 				4CF773DF241B97900032CC53 /* Assets.xcassets */,
 				4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */,
 				4CF773E4241B97900032CC53 /* Info.plist */,
+				4CF773EA241B9B820032CC53 /* InforViewController.swift */,
+				4CF773EC241B9D910032CC53 /* MapViewController.swift */,
 			);
 			path = KyotoTrip;
 			sourceTree = "<group>";
@@ -138,9 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CF773DB241B978B0032CC53 /* ViewController.swift in Sources */,
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,
+				4CF773EB241B9B820032CC53 /* InforViewController.swift in Sources */,
+				4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -310,7 +314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
