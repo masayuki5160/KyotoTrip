@@ -20,6 +20,7 @@ class InfoTopPageViewController: UITableViewController, SegementSlideContentScro
     let xmlItemNamePublishDate = "pubDate"
     
     var kyotoCityInfoList: [KyotoCityInfoModel] = []
+    private var kyotoCityInfoVM: KyotoCityInfoListViewModel!
     var currentNewsModel: KyotoCityInfoModel? = nil
     
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class InfoTopPageViewController: UITableViewController, SegementSlideContentScro
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        
+                
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
     }
     
@@ -47,13 +48,13 @@ class InfoTopPageViewController: UITableViewController, SegementSlideContentScro
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return kyotoCityInfoList.count
+        return kyotoCityInfoVM.kyotoCityInfoListVM.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTopPageTableViewCell", for: indexPath) as! InfoTopPageTableViewCell
-        cell.title.text = kyotoCityInfoList[indexPath.row].title
-        cell.publishDate.text = kyotoCityInfoList[indexPath.row].publishDate
+        cell.title.text = kyotoCityInfoVM.kyotoCityInfoListAt(indexPath.row).title
+        cell.publishDate.text = kyotoCityInfoVM.kyotoCityInfoListAt(indexPath.row).publishDate
         
         return cell
     }
@@ -64,9 +65,8 @@ class InfoTopPageViewController: UITableViewController, SegementSlideContentScro
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let data = kyotoCityInfoList[indexPath.row]
         
-        if let url = URL(string: data.link) {
+        if let url = kyotoCityInfoVM.kyotoCityInfoListAt(indexPath.row).link {
             let controller: SFSafariViewController = SFSafariViewController(url: url)
             self.present(controller, animated: true, completion: nil)
         }
@@ -119,6 +119,10 @@ extension InfoTopPageViewController: XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        self.tableView.reloadData()
+        kyotoCityInfoVM = KyotoCityInfoListViewModel(kyotoCityInfoList)
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
