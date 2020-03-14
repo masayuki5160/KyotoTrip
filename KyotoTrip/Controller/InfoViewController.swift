@@ -10,6 +10,8 @@ import UIKit
 import SegementSlide
 
 class InfoViewController: SegementSlideViewController {
+    
+    let pages = ["TOP", "EVENT"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class InfoViewController: SegementSlideViewController {
 //    }
     
     override var titlesInSwitcher: [String] {
-        return ["TOP", "EVENT"]
+        return pages
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
