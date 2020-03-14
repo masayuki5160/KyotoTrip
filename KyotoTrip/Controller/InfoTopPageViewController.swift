@@ -9,14 +9,14 @@
 import Foundation
 import SegementSlide
 
-class InfoTopPageViewController: UIViewController, SegementSlideContentScrollViewDelegate {
+class InfoTopPageViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-//    @objc var scrollView: UIScrollView {
-//        return tableView
-//    }
+    @objc var scrollView: UIScrollView {
+        return tableView
+    }
     
 }
