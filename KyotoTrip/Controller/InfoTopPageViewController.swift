@@ -53,6 +53,7 @@ class InfoTopPageViewController: UITableViewController, SegementSlideContentScro
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTopPageTableViewCell", for: indexPath) as! InfoTopPageTableViewCell
         cell.title.text = kyotoCityInfoList[indexPath.row].title
+        cell.publishDate.text = kyotoCityInfoList[indexPath.row].publishDate
         
         return cell
     }

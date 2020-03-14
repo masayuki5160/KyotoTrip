@@ -11,6 +11,7 @@ import UIKit
 class InfoTopPageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var publishDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
