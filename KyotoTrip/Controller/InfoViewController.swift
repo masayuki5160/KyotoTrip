@@ -20,13 +20,14 @@ class InfoViewController: SegementSlideViewController {
         scrollToSlide(at: 0, animated: true)
     }
     
-//    override var headerView: UIView? {
-//        let headerView = UIView()
-//        headerView.translatesAutoresizingMaskIntoConstraints = false
-//        headerView.heightAnchor.constraint(equalToConstant: view.bounds.height/4).isActive = true
-//
-//        return headerView
-//    }
+    override var headerView: UIView? {
+        // TODO: [WIP] Add test headerView
+        let headerView = UIView()
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.heightAnchor.constraint(equalToConstant: view.bounds.height/10).isActive = true
+
+        return headerView
+    }
     
     override var titlesInSwitcher: [String] {
         return pages
