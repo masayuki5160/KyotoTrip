@@ -17,6 +17,9 @@
 		4CC1ADE9241CC39700BF84B9 /* InfoTopPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADE7241CC39700BF84B9 /* InfoTopPageTableViewCell.xib */; };
 		4CC1ADEB241CEC6100BF84B9 /* KyotoCityInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADEA241CEC6100BF84B9 /* KyotoCityInfoViewModel.swift */; };
 		4CC1ADED241FA3F500BF84B9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADEC241FA3F500BF84B9 /* Settings.storyboard */; };
+		4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADEE241FA55F00BF84B9 /* SettingsViewController.swift */; };
+		4CC1ADF2241FA76800BF84B9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADF0241FA76800BF84B9 /* SettingsTableViewCell.swift */; };
+		4CC1ADF3241FA76800BF84B9 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADF1241FA76800BF84B9 /* SettingsTableViewCell.xib */; };
 		4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D6241B978B0032CC53 /* AppDelegate.swift */; };
 		4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D8241B978B0032CC53 /* SceneDelegate.swift */; };
 		4CF773DE241B978B0032CC53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773DC241B978B0032CC53 /* Main.storyboard */; };
@@ -40,6 +43,9 @@
 		4CC1ADE7241CC39700BF84B9 /* InfoTopPageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTopPageTableViewCell.xib; sourceTree = "<group>"; };
 		4CC1ADEA241CEC6100BF84B9 /* KyotoCityInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoViewModel.swift; sourceTree = "<group>"; };
 		4CC1ADEC241FA3F500BF84B9 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		4CC1ADEE241FA55F00BF84B9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4CC1ADF0241FA76800BF84B9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		4CC1ADF1241FA76800BF84B9 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		4CF773D3241B978B0032CC53 /* KyotoTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotoTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF773D6241B978B0032CC53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CF773D8241B978B0032CC53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +80,7 @@
 				4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */,
 				4CC1ADDE241BC82000BF84B9 /* EventPageViewController.swift */,
 				4CC1ADE0241C5B8B00BF84B9 /* MainTabBarController.swift */,
+				4CC1ADEE241FA55F00BF84B9 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -105,6 +112,8 @@
 				4CC1ADE6241CC39700BF84B9 /* InfoTopPageTableViewCell.swift */,
 				4CC1ADE7241CC39700BF84B9 /* InfoTopPageTableViewCell.xib */,
 				4CC1ADEC241FA3F500BF84B9 /* Settings.storyboard */,
+				4CC1ADF0241FA76800BF84B9 /* SettingsTableViewCell.swift */,
+				4CC1ADF1241FA76800BF84B9 /* SettingsTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,6 +231,7 @@
 				4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */,
 				4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */,
 				4CF773DE241B978B0032CC53 /* Main.storyboard in Resources */,
+				4CC1ADF3241FA76800BF84B9 /* SettingsTableViewCell.xib in Resources */,
 				4CC1ADED241FA3F500BF84B9 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +290,8 @@
 			files = (
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
+				4CC1ADF2241FA76800BF84B9 /* SettingsTableViewCell.swift in Sources */,
+				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,
 				4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */,
 				4CC1ADE1241C5B8B00BF84B9 /* MainTabBarController.swift in Sources */,

@@ -10,14 +10,35 @@
         <!--Settings-->
         <scene sceneID="QYg-MX-FQr">
             <objects>
-                <viewController id="E5c-q1-jV4" sceneMemberID="viewController">
+                <viewController id="E5c-q1-jV4" customClass="SettingsViewController" customModule="KyotoTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6dw-tx-MtA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BtW-DE-PTr">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BtW-DE-PTr" firstAttribute="leading" secondItem="Voj-CG-VbT" secondAttribute="leading" id="ECp-9J-x3a"/>
+                            <constraint firstItem="Voj-CG-VbT" firstAttribute="trailing" secondItem="BtW-DE-PTr" secondAttribute="trailing" id="b0E-jH-Ea1"/>
+                            <constraint firstItem="Voj-CG-VbT" firstAttribute="bottom" secondItem="BtW-DE-PTr" secondAttribute="bottom" id="lKs-PW-es7"/>
+                            <constraint firstItem="BtW-DE-PTr" firstAttribute="top" secondItem="Voj-CG-VbT" secondAttribute="top" id="o6Y-K0-hKM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Voj-CG-VbT"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="iDv-IY-Qnb"/>
+                    <navigationItem key="navigationItem" title="Settings" id="iDv-IY-Qnb">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="xmark" catalog="system" id="DaS-jP-yAC">
+                            <connections>
+                                <action selector="tapCloseButton:" destination="E5c-q1-jV4" id="jJK-C8-4XO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="BtW-DE-PTr" id="ij1-WP-88a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dg-26-9ag" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,4 +63,7 @@
             <point key="canvasLocation" x="56.521739130434788" y="152.67857142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="64" height="56"/>
+    </resources>
 </document>
