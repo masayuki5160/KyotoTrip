@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="iAF-8h-vPe"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="mappin" catalog="system" id="yiw-OH-d3a"/>
-                    <navigationItem key="navigationItem" id="n6f-Nf-Iv1"/>
+                    <navigationItem key="navigationItem" title="Map" id="n6f-Nf-Iv1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVc-Uf-G7i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

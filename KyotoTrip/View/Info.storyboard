@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Info-->
+        <!--Information-->
         <scene sceneID="hwE-pa-ffo">
             <objects>
                 <viewController id="6bd-Nq-sQZ" customClass="InfoViewController" customModule="KyotoTrip" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,12 +18,26 @@
                         <viewLayoutGuide key="safeArea" id="de5-EY-un2"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="info.circle" catalog="system" id="KKl-D3-tcR"/>
-                    <navigationItem key="navigationItem" id="shi-VL-hNh"/>
+                    <navigationItem key="navigationItem" title="Information" id="shi-VL-hNh">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="UYw-87-kCv">
+                            <connections>
+                                <segue destination="Kgy-4Z-cMc" kind="presentation" id="aQB-zM-0Hd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfH-q7-aQi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="989.85507246376824" y="73.660714285714278"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="wpf-NG-E0b">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="Kgy-4Z-cMc" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CsC-yh-UeR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1633" y="-161"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ikp-mb-Xk7">
@@ -45,6 +59,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gear" catalog="system" width="64" height="60"/>
         <image name="info.circle" catalog="system" width="64" height="62"/>
     </resources>
 </document>
