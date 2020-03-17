@@ -7,10 +7,11 @@
 //
 
 import Foundation
-import SegementSlide
 import SafariServices
 
-class InfoTopPageViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
+class InfoTopPageViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     var currentXMLItemName: String? = nil
@@ -30,8 +31,8 @@ class InfoTopPageViewController: UITableViewController, SegementSlideContentScro
     }
     
     private func setupTableView() {
-        tableView.dataSource = self
         tableView.delegate = self
+        tableView.dataSource = self
         
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
     }
@@ -42,35 +43,38 @@ class InfoTopPageViewController: UITableViewController, SegementSlideContentScro
         parser?.parse()
     }
     
-    @objc var scrollView: UIScrollView {
-        return tableView
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+}
+
+extension InfoTopPageViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return kyotoCityInfoList.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTopPageTableViewCell", for: indexPath) as! InfoTopPageTableViewCell
         cell.title.text = kyotoCityInfoList[indexPath.row].title
         cell.publishDate.text = kyotoCityInfoList[indexPath.row].publishDate
-        
+
         return cell
     }
+}
+
+extension InfoTopPageViewController: UITableViewDelegate {
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let data = kyotoCityInfoList[indexPath.row]
-        
+    
         if let url = URL(string: data.link) {
             let controller: SFSafariViewController = SFSafariViewController(url: url)
             self.present(controller, animated: true, completion: nil)
         }
     }
+
 }
 
 extension InfoTopPageViewController: XMLParserDelegate {
