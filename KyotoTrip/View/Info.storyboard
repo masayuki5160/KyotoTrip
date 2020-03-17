@@ -15,7 +15,7 @@
             </objects>
             <point key="canvasLocation" x="2542.753623188406" y="-161.38392857142856"/>
         </scene>
-        <!--Item-->
+        <!--Information-->
         <scene sceneID="nBp-jy-aRz">
             <objects>
                 <viewController id="2AX-ip-tH2" customClass="InfoTopPageViewController" customModule="KyotoTrip" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,7 +38,7 @@
                         <viewLayoutGuide key="safeArea" id="dRG-RW-bgy"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="info.circle" catalog="system" id="rga-jg-yQj"/>
-                    <navigationItem key="navigationItem" id="7kC-rX-hus">
+                    <navigationItem key="navigationItem" title="Information" id="7kC-rX-hus">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="neD-qq-SjX">
                             <connections>
                                 <segue destination="Kgy-4Z-cMc" kind="presentation" id="5Y4-f3-0ht"/>
