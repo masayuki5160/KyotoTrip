@@ -3,11 +3,16 @@ PODS:
   - Mapbox-iOS-SDK (5.7.0):
     - MapboxMobileEvents (= 0.10.2)
   - MapboxMobileEvents (0.10.2)
+  - RxCocoa (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
   - SegementSlide (2.2.3)
 
 DEPENDENCIES:
   - lottie-ios
   - Mapbox-iOS-SDK (~> 5.7)
+  - RxCocoa (~> 4.5)
+  - RxSwift (~> 4.5)
   - SegementSlide
 
 SPEC REPOS:
@@ -15,14 +20,18 @@ SPEC REPOS:
     - lottie-ios
     - Mapbox-iOS-SDK
     - MapboxMobileEvents
+    - RxCocoa
+    - RxSwift
     - SegementSlide
 
 SPEC CHECKSUMS:
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   Mapbox-iOS-SDK: 1b7cb0e739247d20ef75f5f14aa6ce34e1f0660f
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SegementSlide: 7a35da31eaa87fa0af42cc402395821a0c6835ae
 
-PODFILE CHECKSUM: 0da91980598343f0bfe05f32503cdeb880da2ab4
+PODFILE CHECKSUM: 9ec9911e807ff1b62f496ff93b3570497b6cadce
 
 COCOAPODS: 1.5.3
