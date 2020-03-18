@@ -25,7 +25,7 @@ class InfoTopPageViewController: UIViewController {
     var kyotoCityInfoList: [KyotoCityInfoModel] = []
     var currentNewsModel: KyotoCityInfoModel? = nil
 
-    let data = PublishRelay<[InfoTopPageTableViewCell]>()
+    private var vm = KyotoCityInfoViewModel()
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -36,8 +36,10 @@ class InfoTopPageViewController: UIViewController {
     }
     
     private func setupTableView() {
+        
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
-        data.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
+
+        vm.subscribable.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
             cell.title.text = "test title"
             cell.publishDate.text = "yyyy"
         }.disposed(by: disposeBag)
@@ -52,37 +54,23 @@ class InfoTopPageViewController: UIViewController {
     
 }
 
-//extension InfoTopPageViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return kyotoCityInfoList.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTopPageTableViewCell", for: indexPath) as! InfoTopPageTableViewCell
-//        cell.title.text = kyotoCityInfoList[indexPath.row].title
-//        cell.publishDate.text = kyotoCityInfoList[indexPath.row].publishDate
-//
-//        return cell
-//    }
-//}
-//
-//extension InfoTopPageViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let data = kyotoCityInfoList[indexPath.row]
-//
-//        if let url = URL(string: data.link) {
-//            let controller: SFSafariViewController = SFSafariViewController(url: url)
-//            self.present(controller, animated: true, completion: nil)
-//        }
-//    }
-//
-//}
+extension InfoTopPageViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let data = kyotoCityInfoList[indexPath.row]
+
+        if let url = URL(string: data.link) {
+            let controller: SFSafariViewController = SFSafariViewController(url: url)
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+
+}
 
 extension InfoTopPageViewController: XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
@@ -130,8 +118,7 @@ extension InfoTopPageViewController: XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-
-        data.accept([InfoTopPageTableViewCell(),InfoTopPageTableViewCell()])
-        // self.tableView.reloadData()
+        // TEST
+        vm.update()
     }
 }
