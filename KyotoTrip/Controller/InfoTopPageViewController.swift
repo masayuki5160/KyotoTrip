@@ -39,9 +39,9 @@ class InfoTopPageViewController: UIViewController {
         
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
 
-        vm.subscribable.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
-            cell.title.text = "test title"
-            cell.publishDate.text = "yyyy"
+        vm.data.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
+            cell.title.text = element.title
+            cell.publishDate.text = element.publishDate
         }.disposed(by: disposeBag)
         
     }
@@ -118,7 +118,5 @@ extension InfoTopPageViewController: XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        // TEST
-        vm.update()
     }
 }

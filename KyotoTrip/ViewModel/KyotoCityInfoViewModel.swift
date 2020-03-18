@@ -18,6 +18,12 @@ class KyotoCityInfoViewModel {
     }
     var disposeBag = DisposeBag()
     
+    // TODO: 後で修正
+    let data = Observable<[KyotoCityInfoModel]>.just([
+        KyotoCityInfoModel(),
+        KyotoCityInfoModel()
+    ])
+    
 //    init(_ model :Observable<[KyotoCityInfoModel]>) {
     init() {
     }
