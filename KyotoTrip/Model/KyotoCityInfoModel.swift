@@ -12,5 +12,5 @@ struct KyotoCityInfoModel {
     var title = ""
     var link = ""
     var description = ""
-    var publishDate = "" // TODO: 修正
+    var publishDate = ""
 }

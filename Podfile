@@ -10,6 +10,6 @@ target 'KyotoTrip' do
   pod 'lottie-ios'
   pod 'RxSwift', '~> 4.5'
   pod 'RxCocoa', '~> 4.5'
-
-
+  pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
+  pod 'Alamofire', '~> 4.9'
 end

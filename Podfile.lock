@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.9.1)
   - lottie-ios (3.1.6)
   - Mapbox-iOS-SDK (5.7.0):
     - MapboxMobileEvents (= 0.10.2)
@@ -6,28 +7,43 @@ PODS:
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxSwift (4.5.0)
+  - SwiftyXMLParser (5.1.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.9)
   - lottie-ios
   - Mapbox-iOS-SDK (~> 5.7)
   - RxCocoa (~> 4.5)
   - RxSwift (~> 4.5)
+  - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - lottie-ios
     - Mapbox-iOS-SDK
     - MapboxMobileEvents
     - RxCocoa
     - RxSwift
 
+EXTERNAL SOURCES:
+  SwiftyXMLParser:
+    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
+
+CHECKOUT OPTIONS:
+  SwiftyXMLParser:
+    :commit: bc85162ecee60d6eb94b778648bc4c51e1c4d34f
+    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
+
 SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   Mapbox-iOS-SDK: 1b7cb0e739247d20ef75f5f14aa6ce34e1f0660f
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  SwiftyXMLParser: 8271497e0a37b5c04b0b167c77b4896e36175a21
 
-PODFILE CHECKSUM: 35e9a44fdc5fcdd1a7f7d6de93fb52de3a70aecf
+PODFILE CHECKSUM: cbfbbae9150699402ced406597826d51112ac333
 
 COCOAPODS: 1.5.3
