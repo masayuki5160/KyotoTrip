@@ -16,32 +16,37 @@ class KyotoCityInfoViewModel {
     
     let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     
-    private let publishRelay = PublishRelay<[InfoTopPageTableViewCell]>()
-    var subscribable: Observable<[InfoTopPageTableViewCell]> {
-        return publishRelay.asObservable()
+    private let modelListPublishRelay = PublishRelay<[KyotoCityInfoModel]>()
+    var subscribableModelList: Observable<[KyotoCityInfoModel]> {
+        return modelListPublishRelay.asObservable()
     }
     var disposeBag = DisposeBag()
     
-    // TODO: 後で修正
-    let data = Observable<[KyotoCityInfoModel]>.just([
-        KyotoCityInfoModel(),
-        KyotoCityInfoModel()
-    ])
+    private var modelList: [KyotoCityInfoModel] = []
     
     init() {
-//        // TODO: 後で削除(TEST用に追加)
-//        Alamofire.request(rssUrlStr).responseData { (response) in
-//            if let data = response.data {
-//                let xml = XML.parse(data)
-//                print(xml.rss.channel.item[0].title.text)
-//                print(xml.rss.channel.item[0].link.text)
-//                print(xml.rss.channel.item[0].pubDate.text)
-//            }
-//        }
+
+        Alamofire.request(rssUrlStr).responseData { [weak self] (response) in
+            if let data = response.data {
+                let xml = XML.parse(data)
+
+                for element in xml.rss.channel.item {
+                    var model = KyotoCityInfoModel()
+                    model.title = element.title.text ?? ""
+                    model.publishDate = element.pubDate.text ?? ""
+                    model.link = element.link.text ?? ""
+                    
+                    self?.modelList.append(model)
+                }
+                
+                self?.modelListPublishRelay.accept(self?.modelList ?? [])
+            }
+        }
+        
     }
     
-    public func update() {
-        // TEST
-        self.publishRelay.accept([InfoTopPageTableViewCell(),InfoTopPageTableViewCell()])
+    func modelList(index: Int) -> KyotoCityInfoModel {
+        return modelList[index]
     }
+    
 }

@@ -9,8 +9,8 @@
 import Foundation
 
 struct KyotoCityInfoModel {
-    var title = "test title" // TODO: デフォルトは空白に戻す
+    var title = ""
     var link = ""
     var description = ""
-    var publishDate = "yyyy" // TODO: デフォルトは空白に戻す
+    var publishDate = ""
 }
