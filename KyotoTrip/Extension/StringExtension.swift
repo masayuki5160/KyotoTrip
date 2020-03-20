@@ -9,6 +9,7 @@
 import Foundation
 
 extension String {
+    // appendix: https://techblog.zozo.com/entry/ios-localization
     var localized: String {
         return NSLocalizedString(self, comment: "")
     }
