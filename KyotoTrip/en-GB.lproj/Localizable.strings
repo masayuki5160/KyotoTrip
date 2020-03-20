@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  KyotoTrip
+
+  Created by TANAKA MASAYUKI on 2020/03/20.
+  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
+*/
+
+"Yes"     = "Yes";
+"No"      = "No";
+"Cancel"  = "Cancel";
+"Confirm" = "Confirm";
+"Search"  = "Search";
+"Else"    = "Other";
+"Edit"    = "Edit";
+"Done"    = "Done";
+"Friend"  = "Friends";
+"Save"    = "Save";
+"Title"   = "Title";
+"Decide"  = "Enter";
+"NavigationBarTitleMap" = "KyotoCityMap";
+"NavigationBarTitleInfo" = "Information";

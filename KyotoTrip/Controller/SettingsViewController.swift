@@ -16,6 +16,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "SettingsPageTitle".localized
+        
         tableView.delegate = self
         tableView.dataSource = self
         
