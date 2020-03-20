@@ -18,6 +18,7 @@
 		4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADEE241FA55F00BF84B9 /* SettingsViewController.swift */; };
 		4CC1ADF2241FA76800BF84B9 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADF0241FA76800BF84B9 /* SettingsTableViewCell.swift */; };
 		4CC1ADF3241FA76800BF84B9 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADF1241FA76800BF84B9 /* SettingsTableViewCell.xib */; };
+		4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADFC242459EE00BF84B9 /* StringExtension.swift */; };
 		4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D6241B978B0032CC53 /* AppDelegate.swift */; };
 		4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D8241B978B0032CC53 /* SceneDelegate.swift */; };
 		4CF773DE241B978B0032CC53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773DC241B978B0032CC53 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		4CC1ADEE241FA55F00BF84B9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4CC1ADF0241FA76800BF84B9 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		4CC1ADF1241FA76800BF84B9 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
+		4CC1ADFC242459EE00BF84B9 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		4CF773D3241B978B0032CC53 /* KyotoTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotoTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF773D6241B978B0032CC53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CF773D8241B978B0032CC53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4CC1ADFB242459C900BF84B9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4CC1ADFC242459EE00BF84B9 /* StringExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		4CF773CA241B978B0032CC53 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +140,7 @@
 		4CF773D5241B978B0032CC53 /* KyotoTrip */ = {
 			isa = PBXGroup;
 			children = (
+				4CC1ADFB242459C900BF84B9 /* Extension */,
 				4CC1ADDA241BBED000BF84B9 /* ViewModel */,
 				4CC1ADD9241BBEC200BF84B9 /* Model */,
 				4CC1ADD8241BBEB500BF84B9 /* Controller */,
@@ -289,6 +300,7 @@
 			files = (
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
+				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
 				4CC1ADF2241FA76800BF84B9 /* SettingsTableViewCell.swift in Sources */,
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,
