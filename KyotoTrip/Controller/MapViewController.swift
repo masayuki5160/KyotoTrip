@@ -14,7 +14,7 @@ class MapViewController: UIViewController {
     let kyotoStationLat = 34.9857083
     let kyotoStationLong = 135.7560416
     let defaultZoomLv = 13.0
-    let mbxStyleURL = "mapbox://styles/mapbox/streets-v11"
+    let mbxStyleURL = "mapbox://styles/masayuki5160/ck7zskhvl0z781invsfh0fv46"
 
     override func viewDidLoad() {
         super.viewDidLoad()
