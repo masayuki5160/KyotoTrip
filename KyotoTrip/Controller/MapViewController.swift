@@ -16,24 +16,31 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MGLMapView!
     @IBOutlet weak var busStopButton: UIButton!
     
-    let kyotoStationLat = 34.9857083
-    let kyotoStationLong = 135.7560416
-    let defaultZoomLv = 13.0
-    
+    private var vm: MapViewModel!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.title = "NavigationBarTitleMap".localized
-        
-        // TODO: MapViewとbusボタンをVMに移行する方がいいのかも
-        mapView.setCenter(CLLocationCoordinate2D(latitude: kyotoStationLat, longitude: kyotoStationLong), zoomLevel: defaultZoomLv, animated: false)
-        
         busStopButton.layer.cornerRadius = 10.0
-        busStopButton.rx.tap.subscribe { (onNext) in
-            print("taped")
-            // TODO: ここでバス停の表示ON/OFF + バスルートのON/OFF
+        
+        setupVM()
+    }
+    
+    private func setupVM() {
+        vm = MapViewModel(mapView: mapView, busstopButtonObservable: busStopButton.rx.tap.asObservable())
+        vm.busstopButtonStatusObservable.bind { (buttonStatus) in
+            // TODO: この実装でいいのかあとで確認(VMの責務があってるか確認)
+            // TODO: ステータスに応じて地図のレイヤーの表示非表示対応をする
+            switch buttonStatus {
+            case BusstopButtonStatus.hidden:
+                print("test1")
+            case BusstopButtonStatus.busstop:
+                print("test2")
+            case BusstopButtonStatus.routeAndBusstop:
+                print("test3")
+            }
         }.disposed(by: disposeBag)
     }
     
