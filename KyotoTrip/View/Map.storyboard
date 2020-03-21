@@ -47,7 +47,7 @@
                     <navigationItem key="navigationItem" title="KyotoCityMap" id="n6f-Nf-Iv1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="busStopButton" destination="iJl-YJ-Q4x" id="alP-ZI-X2L"/>
+                        <outlet property="busstopButton" destination="iJl-YJ-Q4x" id="alP-ZI-X2L"/>
                         <outlet property="mapView" destination="tcE-OM-EDr" id="X4d-xU-1NW"/>
                     </connections>
                 </viewController>
