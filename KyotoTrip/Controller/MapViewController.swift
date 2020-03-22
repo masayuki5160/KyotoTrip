@@ -45,3 +45,7 @@ class MapViewController: UIViewController {
     }
     
 }
+
+extension MapViewController: MGLMapViewDelegate {
+    
+}

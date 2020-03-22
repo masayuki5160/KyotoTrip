@@ -32,9 +32,9 @@ class MapViewModel {
     let disposeBag = DisposeBag()
     
     init(mapView: MGLMapView, busstopButtonObservable: Observable<Void>) {
-        
+
         self.mapView = mapView
-        mapView.setCenter(CLLocationCoordinate2D(latitude: kyotoStationLat, longitude: kyotoStationLong), zoomLevel: defaultZoomLv, animated: false)
+        setupMapView()
         
         busstopButtonObservable.subscribe { [weak self] (onNext) in
             // TODO: enumのrawバリューを定義しているのでタップした回数と合わせて書き直せないか
@@ -52,5 +52,14 @@ class MapViewModel {
             self?.busstopButtonStatusPublishRelay.accept(self?.busstopButtonStatus ?? BusstopButtonStatus.hidden)
             
         }.disposed(by: disposeBag)
+    }
+    
+    // TODO: MapViewのセットアップをここですべきかはあとで検討
+    private func setupMapView() {
+        
+        mapView.setCenter(CLLocationCoordinate2D(latitude: kyotoStationLat, longitude: kyotoStationLong), zoomLevel: defaultZoomLv, animated: false)
+
+        mapView.showsUserLocation = true
+        mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
     }
 }
