@@ -31,7 +31,7 @@ class MapViewModel {
     
     let disposeBag = DisposeBag()
     
-    init(mapView: MGLMapView, busstopButtonObservable: Observable<Void>) {
+    init(mapView: MGLMapView, busstopButtonObservable: Observable<Void>, compassButtonObservable: Observable<Void>) {
 
         self.mapView = mapView
         setupMapView()
@@ -51,6 +51,12 @@ class MapViewModel {
             
             self?.busstopButtonStatusPublishRelay.accept(self?.busstopButtonStatus ?? BusstopButtonStatus.hidden)
             
+        }.disposed(by: disposeBag)
+        
+        compassButtonObservable.subscribe { (onNext) in
+            // TODO: ボタンを押された回数に応じてTrackingModeを変えるのもあり
+            // TODO: TrackingModeを変更する処理はVM側で実施するのがいい？VCで実施するのがいい？
+            mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
         }.disposed(by: disposeBag)
     }
     
