@@ -37,17 +37,9 @@ class MapViewModel {
         setupMapView()
         
         busstopButtonObservable.subscribe { [weak self] (onNext) in
-            // TODO: enumのrawバリューを定義しているのでタップした回数と合わせて書き直せないか
-            switch self?.busstopButtonStatus {
-            case .hidden:
-                self?.busstopButtonStatus = .busstop
-            case .busstop:
-                self?.busstopButtonStatus = .routeAndBusstop
-            case .routeAndBusstop:
-                self?.busstopButtonStatus = .hidden
-            default:
-                self?.busstopButtonStatus = .hidden
-            }
+
+            let nextStatusRawValue = (self?.busstopButtonStatus.rawValue ?? 0) + 1
+            self?.busstopButtonStatus = BusstopButtonStatus(rawValue: nextStatusRawValue) ?? BusstopButtonStatus.hidden
             
             self?.busstopButtonStatusPublishRelay.accept(self?.busstopButtonStatus ?? BusstopButtonStatus.hidden)
             
