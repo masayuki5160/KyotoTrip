@@ -17,16 +17,29 @@ enum BusstopButtonStatus: Int {
     case routeAndBusstop
 }
 
+enum CompassButtonStatus: Int {
+    case kyotoCity = 0
+    case currentLocation
+}
+
 class MapViewModel {
     private let mapView: MGLMapView
-    let kyotoStationLat = 34.9857083
-    let kyotoStationLong = 135.7560416
-    let defaultZoomLv = 13.0
+
+    // TODO: このプロパティはどこでもつべきか？
+    static let kyotoStationLat = 34.9857083
+    static let kyotoStationLong = 135.7560416
+    static let defaultZoomLv = 13.0
     
     private var busstopButtonStatus = BusstopButtonStatus.hidden
     private let busstopButtonStatusPublishRelay = PublishRelay<BusstopButtonStatus>()
     var busstopButtonStatusObservable: Observable<BusstopButtonStatus> {
         return busstopButtonStatusPublishRelay.asObservable()
+    }
+    
+    private var compassButtonStatus = CompassButtonStatus.kyotoCity
+    private let compassButtonStatusPublishRelay = PublishRelay<CompassButtonStatus>()
+    var compassButtonStatusObservable: Observable<CompassButtonStatus> {
+        return compassButtonStatusPublishRelay.asObservable()
     }
     
     let disposeBag = DisposeBag()
@@ -36,7 +49,7 @@ class MapViewModel {
         self.mapView = mapView
         setupMapView()
         
-        busstopButtonObservable.subscribe { [weak self] (onNext) in
+        busstopButtonObservable.subscribe { [weak self] (_) in
 
             let nextStatusRawValue = (self?.busstopButtonStatus.rawValue ?? 0) + 1
             self?.busstopButtonStatus = BusstopButtonStatus(rawValue: nextStatusRawValue) ?? BusstopButtonStatus.hidden
@@ -45,19 +58,22 @@ class MapViewModel {
             
         }.disposed(by: disposeBag)
         
-        compassButtonObservable.subscribe { (onNext) in
-            // TODO: ボタンを押された回数に応じてTrackingModeを変えるのもあり
+        compassButtonObservable.subscribe { [weak self] (_) in
             // TODO: TrackingModeを変更する処理はVM側で実施するのがいい？VCで実施するのがいい？
-            mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+            let nextStatusRawValue = (self?.compassButtonStatus.rawValue ?? 0) + 1
+            self?.compassButtonStatus = CompassButtonStatus(rawValue: nextStatusRawValue) ?? CompassButtonStatus.kyotoCity
+            
+            self?.compassButtonStatusPublishRelay.accept(self?.compassButtonStatus ?? CompassButtonStatus.kyotoCity)
+            
         }.disposed(by: disposeBag)
+        
     }
     
     // TODO: MapViewのセットアップをここですべきかはあとで検討
     private func setupMapView() {
         
-        mapView.setCenter(CLLocationCoordinate2D(latitude: kyotoStationLat, longitude: kyotoStationLong), zoomLevel: defaultZoomLv, animated: false)
-
+        mapView.setCenter(CLLocationCoordinate2D(latitude: MapViewModel.kyotoStationLat, longitude: MapViewModel.kyotoStationLong), zoomLevel: MapViewModel.defaultZoomLv, animated: false)
         mapView.showsUserLocation = true
-        mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+        
     }
 }

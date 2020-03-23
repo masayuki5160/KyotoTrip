@@ -56,6 +56,20 @@ class MapViewController: UIViewController {
                 self?.busRouteLayer?.isVisible = true
             }
         }.disposed(by: disposeBag)
+        
+        vm.compassButtonStatusObservable.bind { [weak self] (compassButtonStatus) in
+            
+            // TODO:kyotoStationLatとkyotoStationLongはどこでもつべき？
+            let clLocationCoordinate2D = CLLocationCoordinate2DMake(MapViewModel.kyotoStationLat, MapViewModel.kyotoStationLong)
+            
+            switch compassButtonStatus {
+            case .kyotoCity:
+                self?.mapView.setCenter(clLocationCoordinate2D, animated: true)
+            case .currentLocation:
+                self?.mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+            }
+            
+        }.disposed(by: disposeBag)
     }
     
 }
