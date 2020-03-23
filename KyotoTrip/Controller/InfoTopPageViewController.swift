@@ -26,8 +26,8 @@ class InfoTopPageViewController: UIViewController {
         
         setupTableView()
         
-        tlanslate(source: "りんご") { (tlanslatedText) in
-            print("TEST RESULT: \(tlanslatedText)")
+        translate(source: "りんご") { (translatedText) in
+            print("TEST RESULT: \(translatedText)")
         }
     }
     
@@ -45,7 +45,7 @@ class InfoTopPageViewController: UIViewController {
     }
     
     // TODO: complitionにエラー情報をいれる
-    private func tlanslate(source: String, completion: @escaping (String) -> Void) {
+    private func translate(source: String, completion: @escaping (String) -> Void) {
         let options = TranslatorOptions(sourceLanguage: .ja, targetLanguage: .en)
         let englishGermanTranslator = NaturalLanguage.naturalLanguage().translator(options: options)
                 
