@@ -10,6 +10,7 @@ import Foundation
 import SafariServices
 import RxSwift
 import RxCocoa
+import Firebase
 
 class InfoTopPageViewController: UIViewController {
     
@@ -24,6 +25,10 @@ class InfoTopPageViewController: UIViewController {
         self.navigationItem.title = "NavigationBarTitleInfo".localized
         
         setupTableView()
+        
+        tlanslate(source: "りんご") { (tlanslatedText) in
+            print("TEST RESULT: \(tlanslatedText)")
+        }
     }
     
     private func setupTableView() {
@@ -37,6 +42,27 @@ class InfoTopPageViewController: UIViewController {
             cell.publishDate.text = element.publishDate
         }.disposed(by: disposeBag)
         
+    }
+    
+    // TODO: complitionにエラー情報をいれる
+    private func tlanslate(source: String, completion: @escaping (String) -> Void) {
+        let options = TranslatorOptions(sourceLanguage: .ja, targetLanguage: .en)
+        let englishGermanTranslator = NaturalLanguage.naturalLanguage().translator(options: options)
+                
+        let conditions = ModelDownloadConditions(
+            allowsCellularAccess: false,
+            allowsBackgroundDownloading: true
+        )
+        englishGermanTranslator.downloadModelIfNeeded(with: conditions) { error in
+            guard error == nil else { return }
+
+            // Model downloaded successfully. Okay to start translating.
+            englishGermanTranslator.translate(source) { translatedText, error in
+                guard error == nil, let translatedText = translatedText else { return }
+
+                completion(translatedText)
+            }
+        }
     }
         
 }
