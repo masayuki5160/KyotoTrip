@@ -12,4 +12,5 @@ target 'KyotoTrip' do
   pod 'RxCocoa', '~> 4.5'
   pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
   pod 'Alamofire', '~> 4.9'
+  pod 'Firebase/MLNLTranslate'
 end
