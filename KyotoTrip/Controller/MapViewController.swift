@@ -13,19 +13,13 @@ import RxCocoa
 
 class MapViewController: UIViewController {
     
-    @IBOutlet weak var mapView: MGLMapView!
+    @IBOutlet weak var mapView: KyotoMapView!
     @IBOutlet weak var busstopButton: UIButton!
     @IBOutlet weak var compassButton: UIButton!
     
     
     private var vm: MapViewModel!
     let disposeBag = DisposeBag()
-    
-    // TODO: fix later
-    private var busstopLayer: MGLStyleLayer?
-    private var busRouteLayer: MGLStyleLayer?
-    private let busstopLayerName = "kyoto-busstop"
-    private let busRouteLayerName = "kyoto-bus-route"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,32 +29,34 @@ class MapViewController: UIViewController {
         compassButton.layer.cornerRadius = 10.0
         
         mapView.delegate = self
-        
+        mapView.setup()
+
         setupVM()
     }
     
     private func setupVM() {
-        vm = MapViewModel(mapView: mapView, busstopButtonObservable: busstopButton.rx.tap.asObservable(), compassButtonObservable: compassButton.rx.tap.asObservable())
+        vm = MapViewModel(busstopButtonObservable: busstopButton.rx.tap.asObservable(), compassButtonObservable: compassButton.rx.tap.asObservable())
 
         vm.busstopButtonStatusObservable.bind { [weak self] (buttonStatus) in
+            
             // TODO: この実装でいいのかあとで確認(VMの責務があってるか確認)
             switch buttonStatus {
             case BusstopButtonStatus.hidden:
-                self?.busstopLayer?.isVisible = false
-                self?.busRouteLayer?.isVisible = false
+                self?.mapView.busstopLayer?.isVisible = false
+                self?.mapView.busRouteLayer?.isVisible = false
             case BusstopButtonStatus.busstop:
-                self?.busstopLayer?.isVisible = true
-                self?.busRouteLayer?.isVisible = false
+                self?.mapView.busstopLayer?.isVisible = true
+                self?.mapView.busRouteLayer?.isVisible = false
             case BusstopButtonStatus.routeAndBusstop:
-                self?.busstopLayer?.isVisible = true
-                self?.busRouteLayer?.isVisible = true
+                self?.mapView.busstopLayer?.isVisible = true
+                self?.mapView.busRouteLayer?.isVisible = true
             }
+            
         }.disposed(by: disposeBag)
         
         vm.compassButtonStatusObservable.bind { [weak self] (compassButtonStatus) in
             
-            // TODO:kyotoStationLatとkyotoStationLongはどこでもつべき？
-            let clLocationCoordinate2D = CLLocationCoordinate2DMake(MapViewModel.kyotoStationLat, MapViewModel.kyotoStationLong)
+            let clLocationCoordinate2D = CLLocationCoordinate2DMake(KyotoMapView.kyotoStationLat, KyotoMapView.kyotoStationLong)
             
             switch compassButtonStatus {
             case .kyotoCity:
@@ -77,11 +73,11 @@ class MapViewController: UIViewController {
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         
-        busstopLayer = style.layer(withIdentifier: busstopLayerName)
-        busRouteLayer = style.layer(withIdentifier: busRouteLayerName)
+        self.mapView.busstopLayer = style.layer(withIdentifier: self.mapView.busstopLayerName)
+        self.mapView.busRouteLayer = style.layer(withIdentifier: self.mapView.busRouteLayerName)
         
         // Init busstop and bus route layers
-        self.busstopLayer?.isVisible = false
-        self.busRouteLayer?.isVisible = false
+        self.mapView.busstopLayer?.isVisible = false
+        self.mapView.busRouteLayer?.isVisible = false
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Mapbox
 import RxSwift
 import RxCocoa
 
@@ -23,12 +22,6 @@ enum CompassButtonStatus: Int {
 }
 
 class MapViewModel {
-    private let mapView: MGLMapView
-
-    // TODO: このプロパティはどこでもつべきか？
-    static let kyotoStationLat = 34.9857083
-    static let kyotoStationLong = 135.7560416
-    static let defaultZoomLv = 13.0
     
     private var busstopButtonStatus = BusstopButtonStatus.hidden
     private let busstopButtonStatusPublishRelay = PublishRelay<BusstopButtonStatus>()
@@ -44,10 +37,7 @@ class MapViewModel {
     
     let disposeBag = DisposeBag()
     
-    init(mapView: MGLMapView, busstopButtonObservable: Observable<Void>, compassButtonObservable: Observable<Void>) {
-
-        self.mapView = mapView
-        setupMapView()
+    init(busstopButtonObservable: Observable<Void>, compassButtonObservable: Observable<Void>) {
         
         busstopButtonObservable.subscribe { [weak self] (_) in
 
@@ -66,14 +56,6 @@ class MapViewModel {
             self?.compassButtonStatusPublishRelay.accept(self?.compassButtonStatus ?? CompassButtonStatus.kyotoCity)
             
         }.disposed(by: disposeBag)
-        
-    }
-    
-    // TODO: MapViewのセットアップをここですべきかはあとで検討
-    private func setupMapView() {
-        
-        mapView.setCenter(CLLocationCoordinate2D(latitude: MapViewModel.kyotoStationLat, longitude: MapViewModel.kyotoStationLong), zoomLevel: MapViewModel.defaultZoomLv, animated: false)
-        mapView.showsUserLocation = true
         
     }
 }
