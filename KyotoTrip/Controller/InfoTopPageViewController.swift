@@ -33,8 +33,16 @@ class InfoTopPageViewController: UIViewController {
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
 
         vm.subscribableModelList.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
-            cell.title.text = element.title
+            cell.title.text = element.title// TODO: デフォルト値を空文字にしておけば良さそう、見せ方は調整
             cell.publishDate.text = element.publishDate
+            
+            // TODO: この実装で本当に大丈夫か要確認
+            // TODO: アプリの言語設定を確認し翻訳処理を実行するようにする
+            let translator = Translator()
+            translator.translate(source: element.title, targetLanguage: .en) { (translatedText) in
+                cell.title.text = translatedText
+            }
+            
         }.disposed(by: disposeBag)
         
     }
