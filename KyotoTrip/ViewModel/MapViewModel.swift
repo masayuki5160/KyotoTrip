@@ -49,7 +49,7 @@ class MapViewModel {
         }.disposed(by: disposeBag)
         
         compassButtonObservable.subscribe { [weak self] (_) in
-            // TODO: TrackingModeを変更する処理はVM側で実施するのがいい？VCで実施するのがいい？
+
             let nextStatusRawValue = (self?.compassButtonStatus.rawValue ?? 0) + 1
             self?.compassButtonStatus = CompassButtonStatus(rawValue: nextStatusRawValue) ?? CompassButtonStatus.kyotoCity
             

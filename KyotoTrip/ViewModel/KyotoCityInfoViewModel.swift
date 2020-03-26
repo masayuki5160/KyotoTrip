@@ -14,7 +14,7 @@ import Alamofire
 
 class KyotoCityInfoViewModel {
     
-    let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
+    private let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     
     private let modelListPublishRelay = PublishRelay<[KyotoCityInfoModel]>()
     var subscribableModelList: Observable<[KyotoCityInfoModel]> {
