@@ -12,7 +12,7 @@ import RxCocoa
 import SwiftyXMLParser
 import Alamofire
 
-class KyotoCityInfoViewModel {
+class InfoTopPageViewModel {
     
     private let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     

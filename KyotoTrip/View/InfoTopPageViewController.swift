@@ -15,7 +15,7 @@ class InfoTopPageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    private var vm = KyotoCityInfoViewModel()
+    private var vm = InfoTopPageViewModel()
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
