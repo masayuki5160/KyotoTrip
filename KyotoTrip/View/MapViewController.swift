@@ -35,37 +35,46 @@ class MapViewController: UIViewController {
     }
     
     private func setupVM() {
-        vm = MapViewModel(busstopButtonObservable: busstopButton.rx.tap.asObservable(), compassButtonObservable: compassButton.rx.tap.asObservable())
+        vm = MapViewModel(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
 
-        vm.busstopButtonStatusObservable.bind { [weak self] (buttonStatus) in
-            
-            // TODO: この実装でいいのかあとで確認(VMの責務があってるか確認)
-            switch buttonStatus {
-            case BusstopButtonStatus.hidden:
-                self?.mapView.busstopLayer?.isVisible = false
-                self?.mapView.busRouteLayer?.isVisible = false
-            case BusstopButtonStatus.busstop:
-                self?.mapView.busstopLayer?.isVisible = true
-                self?.mapView.busRouteLayer?.isVisible = false
-            case BusstopButtonStatus.routeAndBusstop:
-                self?.mapView.busstopLayer?.isVisible = true
-                self?.mapView.busRouteLayer?.isVisible = true
-            }
-            
-        }.disposed(by: disposeBag)
+        vm.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
+            self?.updateBusstopLayer(buttonStatus)
+        }).disposed(by: disposeBag)
         
-        vm.compassButtonStatusObservable.bind { [weak self] (compassButtonStatus) in
-            
-            let clLocationCoordinate2D = CLLocationCoordinate2DMake(KyotoMapView.kyotoStationLat, KyotoMapView.kyotoStationLong)
-            
-            switch compassButtonStatus {
-            case .kyotoCity:
-                self?.mapView.setCenter(clLocationCoordinate2D, animated: true)
-            case .currentLocation:
-                self?.mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
-            }
-            
-        }.disposed(by: disposeBag)
+        vm.compassButtonStatusObservable.drive(onNext: { [weak self] (compassButtonStatus) in
+            self?.updateMapCenterPosition(compassButtonStatus)
+        }).disposed(by: disposeBag)
+    }
+    
+    private func updateBusstopLayer(_ buttonStatus: BusstopButtonStatus) {
+        
+        switch buttonStatus {
+        case BusstopButtonStatus.hidden:
+            self.mapView.busstopLayer?.isVisible = false
+            self.mapView.busRouteLayer?.isVisible = false
+        case BusstopButtonStatus.busstop:
+            self.mapView.busstopLayer?.isVisible = true
+            self.mapView.busRouteLayer?.isVisible = false
+        case BusstopButtonStatus.routeAndBusstop:
+            self.mapView.busstopLayer?.isVisible = true
+            self.mapView.busRouteLayer?.isVisible = true
+        }
+        
+    }
+    
+    private func updateMapCenterPosition(_ compassButtonStatus: CompassButtonStatus) {
+        
+        let clLocationCoordinate2D = CLLocationCoordinate2DMake(
+            KyotoMapView.kyotoStationLat,
+            KyotoMapView.kyotoStationLong)
+        
+        switch compassButtonStatus {
+        case .kyotoCity:
+            self.mapView.setCenter(clLocationCoordinate2D, animated: true)
+        case .currentLocation:
+            self.mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+        }
+        
     }
     
 }

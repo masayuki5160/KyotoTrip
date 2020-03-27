@@ -24,38 +24,42 @@ enum CompassButtonStatus: Int {
 class MapViewModel {
     
     private var busstopButtonStatus = BusstopButtonStatus.hidden
-    private let busstopButtonStatusPublishRelay = PublishRelay<BusstopButtonStatus>()
-    var busstopButtonStatusObservable: Observable<BusstopButtonStatus> {
-        return busstopButtonStatusPublishRelay.asObservable()
+    private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
+    var busstopButtonStatusDriver: Driver<BusstopButtonStatus> {
+        return busstopButtonStatusBehaviorRelay.asDriver()
     }
     
     private var compassButtonStatus = CompassButtonStatus.kyotoCity
-    private let compassButtonStatusPublishRelay = PublishRelay<CompassButtonStatus>()
-    var compassButtonStatusObservable: Observable<CompassButtonStatus> {
-        return compassButtonStatusPublishRelay.asObservable()
+    private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
+    var compassButtonStatusObservable: Driver<CompassButtonStatus> {
+        return compassButtonStatusBehaviorRelay.asDriver()
     }
     
     let disposeBag = DisposeBag()
     
-    init(busstopButtonObservable: Observable<Void>, compassButtonObservable: Observable<Void>) {
+    init(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
         
-        busstopButtonObservable.subscribe { [weak self] (_) in
-
-            let nextStatusRawValue = (self?.busstopButtonStatus.rawValue ?? 0) + 1
-            self?.busstopButtonStatus = BusstopButtonStatus(rawValue: nextStatusRawValue) ?? BusstopButtonStatus.hidden
-            
-            self?.busstopButtonStatusPublishRelay.accept(self?.busstopButtonStatus ?? BusstopButtonStatus.hidden)
-            
-        }.disposed(by: disposeBag)
+        busstopButton.subscribe(onNext: { [weak self] in
+            self?.updateBusstopButtonStatus()
+        }).disposed(by: disposeBag)
         
-        compassButtonObservable.subscribe { [weak self] (_) in
-
-            let nextStatusRawValue = (self?.compassButtonStatus.rawValue ?? 0) + 1
-            self?.compassButtonStatus = CompassButtonStatus(rawValue: nextStatusRawValue) ?? CompassButtonStatus.kyotoCity
-            
-            self?.compassButtonStatusPublishRelay.accept(self?.compassButtonStatus ?? CompassButtonStatus.kyotoCity)
-            
-        }.disposed(by: disposeBag)
+        compassButton.subscribe(onNext: { [weak self] in
+            self?.updateCompassButtonStatus()
+        }).disposed(by: disposeBag)
         
+    }
+    
+    private func updateBusstopButtonStatus() {
+        let nextStatusRawValue = self.busstopButtonStatus.rawValue + 1
+        self.busstopButtonStatus = BusstopButtonStatus(rawValue: nextStatusRawValue) ?? BusstopButtonStatus.hidden
+        
+        self.busstopButtonStatusBehaviorRelay.accept(self.busstopButtonStatus)
+    }
+    
+    private func updateCompassButtonStatus() {
+        let nextStatusRawValue = self.compassButtonStatus.rawValue + 1
+        self.compassButtonStatus = CompassButtonStatus(rawValue: nextStatusRawValue) ?? CompassButtonStatus.kyotoCity
+        
+        self.compassButtonStatusBehaviorRelay.accept(self.compassButtonStatus)
     }
 }
