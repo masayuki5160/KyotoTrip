@@ -16,13 +16,13 @@ class InfoTopPageViewModel {
     
     private let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     
-    private let modelListPublishRelay = PublishRelay<[KyotoCityInfoModel]>()
-    var subscribableModelList: Observable<[KyotoCityInfoModel]> {
+    private let modelListPublishRelay = PublishRelay<[KyotoCityInfo]>()
+    var subscribableModelList: Observable<[KyotoCityInfo]> {
         return modelListPublishRelay.asObservable()
     }
     var disposeBag = DisposeBag()
     
-    private var modelList: [KyotoCityInfoModel] = []
+    private var modelList: [KyotoCityInfo] = []
     
     init() {
 
@@ -31,7 +31,7 @@ class InfoTopPageViewModel {
                 let xml = XML.parse(data)
 
                 for element in xml.rss.channel.item {
-                    var model = KyotoCityInfoModel()
+                    var model = KyotoCityInfo()
                     model.title = element.title.text ?? ""
                     model.publishDate = element.pubDate.text ?? ""
                     model.link = element.link.text ?? ""
@@ -45,7 +45,7 @@ class InfoTopPageViewModel {
         
     }
     
-    func modelList(index: Int) -> KyotoCityInfoModel {
+    func modelList(index: Int) -> KyotoCityInfo {
         return modelList[index]
     }
     
