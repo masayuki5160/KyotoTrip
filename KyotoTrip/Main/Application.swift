@@ -38,3 +38,8 @@ class Application {
         // (本プロジェクトではTabBarControllerのawakeFromNib())
     }
 }
+
+// TODO: このprotocolはここでいいのか
+protocol KyotoCityInfoPresenterInjectable {
+    func inject(kyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol)
+}

@@ -7,35 +7,47 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol KyotoCityInfoPresenterProtocol: AnyObject {
     func fetch()
-    var kyotoCityInfoPresenterOutput: KyotoCityInfoPresenterOutput? { get set }
+    // var kyotoCityInfoPresenterOutput: KyotoCityInfoPresenterOutput? { get set }
+    
+    // TODO:  KyotoCityInfoPresenterOutputでなくていい？
+    var subscribableModelList: Observable<[KyotoCityInfo]> { get }
 }
 
+// CleanArchitectureはoutputが必要だが非同期でのやり取りが可能であれば必須ではないと判断
 protocol KyotoCityInfoPresenterOutput {
     // TODO: あとで修正(Subscrivableで渡せばいい？)
-    func update()
+    // func update()
+//    var subscribableModelList: Observable<[KyotoCityInfo]> { get }
 }
 
-class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol, KyotoCityInfoUseCaseOutput {
+//class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol, KyotoCityInfoUseCaseOutput {
+class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol {
+    var subscribableModelList: Observable<[KyotoCityInfo]>
     
     private weak var useCase: KyotoCityInfoUseCaseProtocol!
-    var kyotoCityInfoPresenterOutput: KyotoCityInfoPresenterOutput?
+//    var kyotoCityInfoPresenterOutput: KyotoCityInfoPresenterOutput?
     
     init(useCase: KyotoCityInfoUseCaseProtocol) {
         self.useCase = useCase
-        self.useCase.output = self
+        // self.useCase.output = self
+        
+        self.subscribableModelList = useCase.subscribableModelList// TODO: これでいい？
     }
     
     func fetch() {
-        // TODO: UseCaseに京都市の情報を取得する処理を依頼
         useCase.fetch()
+        // TODO: View側にuseCase.subscribableModelListを渡してやる？
+        
     }
     
     // KyotoCityInfoUseCaseOutput
-    func useCaseDidFetchKyotoCityInfo(_ infoList: KyotoCityInfoList) {
-        // TODO: UseCaseからもらったデータをViewに渡して反映させる
-        self.kyotoCityInfoPresenterOutput?.update()
-    }
+//    func useCaseDidFetchKyotoCityInfo(_ infoList: KyotoCityInfoList) {
+//        // TODO: UseCaseからもらったデータをViewに渡して反映させる
+//        self.kyotoCityInfoPresenterOutput?.update()
+//    }
 }
