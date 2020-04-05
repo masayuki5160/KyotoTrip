@@ -40,6 +40,7 @@ final class KyotoCityInfoUseCase: KyotoCityInfoUseCaseProtocol {
         // self.output.useCaseDidFetchKyotoCityInfo(KyotoCityInfoList(kyotoCityInfoList: dummyInfo))
         
         // TODO: InfoTopPageViewModelから移行した処理、あとで整理
+        // TODO: この処理はUseCaseではなくGatewayという別のInterfaceAdapterレイヤーを挟んで処理すべき
         Alamofire.request(rssUrlStr).responseData { [weak self] (response) in
             guard let self = self else { return }
             
