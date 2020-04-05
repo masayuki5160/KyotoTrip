@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import SwiftyXMLParser
 import Alamofire
-import Firebase
 
 protocol KyotoCityInfoUseCaseProtocol: AnyObject {
     // note: UseCaseがRxに依存するのはいいのか? -> 厳密にはよくないが外部ライブラリに依存することを許容する
