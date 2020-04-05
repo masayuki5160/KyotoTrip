@@ -37,8 +37,17 @@ final class KyotoCityInfoUseCase: KyotoCityInfoUseCaseProtocol {
             case .failure(let error):
                 self.modelListPublishRelay.accept([])// TODO: Fix later
             case .success(let data):
+                // TODO: 翻訳処理の実装はあとで見直し
+                let translator = TranslatorGateway()
+                let translatedData = data.map { element -> KyotoCityInfo in
+                    var newElement = element
+                    translator.translate(source: element.title, targetLanguage: .en) { (translatedText) in
+                        newElement.title = translatedText
+                    }
+                    return newElement
+                }
                 // outputとして通知
-                self.modelListPublishRelay.accept(data)
+                self.modelListPublishRelay.accept(translatedData)
             }
         }
         
