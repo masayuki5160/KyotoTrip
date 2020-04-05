@@ -15,12 +15,9 @@ protocol KyotoCityInfoGatewayProtocol: AnyObject {
 
 class KyotoCityInfoGateway: KyotoCityInfoGatewayProtocol {
     
-    private let useCase: KyotoCityInfoUseCaseProtocol
     private let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     
-    init(useCase: KyotoCityInfoUseCaseProtocol) {
-        // TODO: UseCaseが不要か？
-        self.useCase = useCase
+    init() {
     }
     
     func fetch(commplition: @escaping (Result<[KyotoCityInfo]>) -> Void) {

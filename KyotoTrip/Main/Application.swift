@@ -12,7 +12,7 @@ class Application {
     static let shared = Application()
     private init() {}
     
-    private(set) var useCase: KyotoCityInfoUseCase!
+//    private(set) var useCase: KyotoCityInfoUseCase!
     
     func configure(with window: UIWindow) {
         buildLayer()
@@ -24,7 +24,7 @@ class Application {
     private func buildLayer() {
         
         // -- Use Case
-        useCase = KyotoCityInfoUseCase()
+        // useCase = KyotoCityInfoUseCase()
         
         // -- Interface Adapters
         

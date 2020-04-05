@@ -17,12 +17,22 @@ class InfoTopPageViewController: UIViewController {
 
     private var vm = InfoTopPageViewModel()
     var disposeBag = DisposeBag()
-    private weak var presenter: KyotoCityInfoPresenterProtocol!
+    
+    // TODO: 依存関係の構築はあとで整理する
+    private var presenter: KyotoCityInfoPresenterProtocol!
+    private var usecase: KyotoCityInfoUseCase!
+    private var gateway: KyotoCityInfoGateway!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = "NavigationBarTitleInfo".localized
+        
+        // TODO: 依存関係の構築はここでやるべきではないはずなので修正
+        usecase = KyotoCityInfoUseCase()
+        presenter = KyotoCityInfoPresenter(useCase: usecase)
+        gateway = KyotoCityInfoGateway()
+        usecase.kyotoCityInfoGateway = gateway
         
         setupTableView()
     }
@@ -30,43 +40,15 @@ class InfoTopPageViewController: UIViewController {
     private func setupTableView() {
         
         tableView.delegate = self
-        
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
 
-        vm.subscribableModelList.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
+        usecase.fetch()
+        
+        presenter.subscribableModelList.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
             cell.title.text = element.title// TODO: デフォルト値を空文字にしておけば良さそう、見せ方は調整
             cell.publishDate.text = element.publishDate
-
-            // TODO: この実装で本当に大丈夫か要確認
-            // TODO: アプリの言語設定を確認し翻訳処理を実行するようにする
-            let translator = Translator()
-            translator.translate(source: element.title, targetLanguage: .en) { (translatedText) in
-                cell.title.text = translatedText
-            }
-
         }.disposed(by: disposeBag)
         
-    }
-}
-
-// TODO: injectをApplicationとかで呼ぶ
-extension InfoTopPageViewController: KyotoCityInfoPresenterInjectable {
-    func inject(kyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol) {
-        presenter = kyotoCityInfoPresenter
-        presenter.fetch()
-
-        presenter.subscribableModelList.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
-//            cell.title.text = element.title// TODO: デフォルト値を空文字にしておけば良さそう、見せ方は調整
-//            cell.publishDate.text = element.publishDate
-//
-//            // TODO: この実装で本当に大丈夫か要確認
-//            // TODO: アプリの言語設定を確認し翻訳処理を実行するようにする
-//            let translator = Translator()
-//            translator.translate(source: element.title, targetLanguage: .en) { (translatedText) in
-//                cell.title.text = translatedText
-//            }
-
-        }.disposed(by: disposeBag)
     }
 }
 

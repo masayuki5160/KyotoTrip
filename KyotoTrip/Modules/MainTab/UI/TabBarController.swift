@@ -11,6 +11,6 @@ import UIKit
 class TabBarController: UITabBarController {
     
     override func awakeFromNib() {
-        let useCase: KyotoCityInfoUseCase = Application.shared.useCase
+//        let useCase: KyotoCityInfoUseCase = Application.shared.useCase
     }
 }
