@@ -54,7 +54,7 @@ final class KyotoCityInfoUseCase: KyotoCityInfoUseCaseProtocol {
             let translator = TranslatorGateway()
             translator.translate(source: element.title, targetLanguage: .en) { (translatedText) in
                 newElement.title = translatedText
-                semaphore.signal()// 翻訳処理が完了したことを
+                semaphore.signal()
             }
             semaphore.wait()// 翻訳処理が完了するまでwait
             return newElement
