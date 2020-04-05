@@ -53,8 +53,8 @@ class InfoTopPageViewController: UIViewController {
 extension InfoTopPageViewController: KyotoCityInfoPresenterInjectable {
     func inject(kyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol) {
         presenter = kyotoCityInfoPresenter
-//        presenter.kyotoCityInfoPresenterOutput = self
         presenter.fetch()
+
         presenter.subscribableModelList.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
 //            cell.title.text = element.title// TODO: デフォルト値を空文字にしておけば良さそう、見せ方は調整
 //            cell.publishDate.text = element.publishDate
@@ -69,12 +69,6 @@ extension InfoTopPageViewController: KyotoCityInfoPresenterInjectable {
         }.disposed(by: disposeBag)
     }
 }
-
-//extension InfoTopPageViewController: KyotoCityInfoPresenterOutput {
-////    func update() {
-////        // TODO: presenterからのoutputを受け取る
-////    }
-//}
 
 // TODO: Rxを使うとUITableViewDelegateをなくせるか確認
 extension InfoTopPageViewController: UITableViewDelegate {

@@ -14,21 +14,9 @@ import Alamofire
 
 protocol KyotoCityInfoUseCaseProtocol: AnyObject {
     func fetch()
-    // var output: KyotoCityInfoUseCaseOutput! { get set }
-    // var kyotoCityInfoGateway: KyotoCityInfoGatewayProtocol! { get set } // TODO: これいる？
 
-    // TODO: UseCaseがRxに依存するのはいいのか？？？ -> 厳密にはよくないが外部ライブラリに依存することを許容する
+    // note: UseCaseがRxに依存するのはいいのか？？？ -> 厳密にはよくないが外部ライブラリに依存することを許容する
     var subscribableModelList: Observable<[KyotoCityInfo]> { get }
-}
-
-protocol KyotoCityInfoUseCaseOutput {
-    // TODO: このメソッドはこの実装でいいのか再度確認する
-    // func useCaseDidFetchKyotoCityInfo(_ infoList: KyotoCityInfoList)
-}
-
-// TODO: これいる？
-protocol KyotoCityInfoGatewayProtocol {
-    
 }
 
 final class KyotoCityInfoUseCase: KyotoCityInfoUseCaseProtocol {
@@ -38,7 +26,6 @@ final class KyotoCityInfoUseCase: KyotoCityInfoUseCaseProtocol {
     private let modelListPublishRelay = PublishRelay<[KyotoCityInfo]>()
 
     // TODO: KyotoCityInfoUseCaseProtocolにこのsubscribeを公開しておくことで良いのか？
-    // そうすると、KyotoCityInfoUseCaseOutputはいらなくなりそうな・・・
     var subscribableModelList: Observable<[KyotoCityInfo]> {
         // TODO: mapで必要な処理を行いObservable or Driveを返す
         return modelListPublishRelay.asObservable()
@@ -46,10 +33,6 @@ final class KyotoCityInfoUseCase: KyotoCityInfoUseCaseProtocol {
     private var disposeBag = DisposeBag()
     private var modelList: [KyotoCityInfo] = []
 
-    
-    // var output: KyotoCityInfoUseCaseOutput!
-    // var kyotoCityInfoGateway: KyotoCityInfoGatewayProtocol!
-    
     func fetch() {
         // TODO: 京都市のAPI経由でデータを集めてくる
         // TODO: Kyotoというワードがなんども出てきて不要なので変数名などはあとで修正
