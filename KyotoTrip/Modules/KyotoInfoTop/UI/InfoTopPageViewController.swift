@@ -10,13 +10,13 @@ import Foundation
 import SafariServices
 import RxSwift
 import RxCocoa
+import SafariServices// TODO: Use WKWebView
 
 class InfoTopPageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    private var vm = InfoTopPageViewModel()
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     // TODO: 依存関係の構築はあとで整理する
     private var presenter: KyotoCityInfoPresenterProtocol!
@@ -39,7 +39,6 @@ class InfoTopPageViewController: UIViewController {
     
     private func setupTableView() {
         
-        tableView.delegate = self
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
 
         usecase.fetch()
@@ -49,24 +48,13 @@ class InfoTopPageViewController: UIViewController {
             cell.publishDate.text = element.publishDate
         }.disposed(by: disposeBag)
         
+        tableView.rx.modelSelected(KyotoCityInfo.self)
+            .map{ URL(string: $0.link) }
+            .subscribe(onNext: { [weak self] (url) in
+                guard let self = self, let url = url else { return }
+                self.present(SFSafariViewController(url: url), animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
     }
-}
-
-// TODO: Rxを使うとUITableViewDelegateをなくせるか確認
-extension InfoTopPageViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let data = vm.modelList(index: indexPath.row)
-
-        if let url = URL(string: data.link) {
-            let controller: SFSafariViewController = SFSafariViewController(url: url)
-            self.present(controller, animated: true, completion: nil)
-        }
-    }
-
 }
