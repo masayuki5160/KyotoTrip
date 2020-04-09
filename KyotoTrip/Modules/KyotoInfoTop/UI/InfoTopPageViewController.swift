@@ -18,7 +18,6 @@ class InfoTopPageViewController: UIViewController {
 
     private var disposeBag = DisposeBag()
     
-    // TODO: 依存関係の構築はあとで整理する
     private var presenter: KyotoCityInfoPresenterProtocol!
     private var usecase: KyotoCityInfoUseCase!
     private var gateway: KyotoCityInfoGateway!
