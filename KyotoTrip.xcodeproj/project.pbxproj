@@ -14,6 +14,8 @@
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
 		4C416650243964A4005EF1C2 /* KyotoCityInfoGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41664F243964A4005EF1C2 /* KyotoCityInfoGateway.swift */; };
 		4C4166532439D2DA005EF1C2 /* TranslatorGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166522439D2DA005EF1C2 /* TranslatorGateway.swift */; };
+		4C416655243FFA38005EF1C2 /* KyotoMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416654243FFA38005EF1C2 /* KyotoMapUseCase.swift */; };
+		4C416657243FFAF1005EF1C2 /* KyotoMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416656243FFAF1005EF1C2 /* KyotoMapPresenter.swift */; };
 		4C4CA0C224258EC400C7AEAE /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CA0C124258EC400C7AEAE /* MapViewModel.swift */; };
 		4C7D2367243026680003A324 /* KyotoCityInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D2366243026680003A324 /* KyotoCityInfoList.swift */; };
 		4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */; };
@@ -49,6 +51,8 @@
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4C41664F243964A4005EF1C2 /* KyotoCityInfoGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoGateway.swift; sourceTree = "<group>"; };
 		4C4166522439D2DA005EF1C2 /* TranslatorGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorGateway.swift; sourceTree = "<group>"; };
+		4C416654243FFA38005EF1C2 /* KyotoMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapUseCase.swift; sourceTree = "<group>"; };
+		4C416656243FFAF1005EF1C2 /* KyotoMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapPresenter.swift; sourceTree = "<group>"; };
 		4C4CA0C124258EC400C7AEAE /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		4C7D2366243026680003A324 /* KyotoCityInfoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoList.swift; sourceTree = "<group>"; };
 		4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 		4C3F094F24301E7900FAEDC2 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				4C416654243FFA38005EF1C2 /* KyotoMapUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 		4C3F095124301F8000FAEDC2 /* InterfaceAdapter */ = {
 			isa = PBXGroup;
 			children = (
+				4C416656243FFAF1005EF1C2 /* KyotoMapPresenter.swift */,
 			);
 			path = InterfaceAdapter;
 			sourceTree = "<group>";
@@ -509,6 +515,7 @@
 				4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */,
 				4C0CAECB242B992800EDCA82 /* KyotoMapView.swift in Sources */,
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
+				4C416657243FFAF1005EF1C2 /* KyotoMapPresenter.swift in Sources */,
 				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
 				4CC1ADF2241FA76800BF84B9 /* SettingsTableViewCell.swift in Sources */,
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
@@ -519,6 +526,7 @@
 				4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */,
 				4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */,
 				4C416650243964A4005EF1C2 /* KyotoCityInfoGateway.swift in Sources */,
+				4C416655243FFA38005EF1C2 /* KyotoMapUseCase.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CF668CE24336514006AB40C /* KyotoCityInfoUseCase.swift in Sources */,
 			);
