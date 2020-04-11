@@ -1,5 +1,5 @@
 //
-//  KyotoInfoUseCase.swift
+//  KyotoCityInfoInteractor.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/03/31.
@@ -12,27 +12,27 @@ import RxCocoa
 import SwiftyXMLParser
 import Alamofire
 
-protocol KyotoCityInfoUseCaseProtocol: AnyObject {
+protocol KyotoCityInfoInteractorProtocol: AnyObject {
     // note: UseCaseがRxに依存するのはいいのか? -> 厳密にはよくないが外部ライブラリに依存することを許容する
     var subscribableModelList: Observable<[KyotoCityInfo]> { get }
-    var kyotoCityInfoGateway: KyotoCityInfoGateway!{ get }
+    var kyotoCityInfoAPIRequest: KyotoCityInfoAPIRequest!{ get }
 
     func fetch()
 }
 
-final class KyotoCityInfoUseCase: KyotoCityInfoUseCaseProtocol {
+final class KyotoCityInfoInteractor: KyotoCityInfoInteractorProtocol {
     
     private let modelListPublishRelay = PublishRelay<[KyotoCityInfo]>()
-    // TODO: KyotoCityInfoUseCaseProtocolにこのsubscribeを公開しておくことで良いのか？
+    // TODO: KyotoCityInfoInteractorProtocolにこのsubscribeを公開しておくことで良いのか？
     var subscribableModelList: Observable<[KyotoCityInfo]> {
         // TODO: mapで必要な処理を行いObservable or Driveを返す
         return modelListPublishRelay.asObservable()
     }
-    var kyotoCityInfoGateway: KyotoCityInfoGateway!
+    var kyotoCityInfoAPIRequest: KyotoCityInfoAPIRequest!
 
     func fetch() {
         // TODO: Kyotoというワードがなんども出てきて不要なので変数名などはあとで修正
-        kyotoCityInfoGateway.fetch {[weak self] (response) in
+        kyotoCityInfoAPIRequest.fetch {[weak self] (response) in
             guard let self = self else { return }
             
             switch response {

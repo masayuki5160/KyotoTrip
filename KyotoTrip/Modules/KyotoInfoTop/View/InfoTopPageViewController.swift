@@ -19,8 +19,8 @@ class InfoTopPageViewController: UIViewController {
     private var disposeBag = DisposeBag()
     
     private var presenter: KyotoCityInfoPresenterProtocol!
-    private var usecase: KyotoCityInfoUseCase!
-    private var gateway: KyotoCityInfoGateway!
+    private var usecase: KyotoCityInfoInteractor!
+    private var request: KyotoCityInfoAPIRequest!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +33,10 @@ class InfoTopPageViewController: UIViewController {
     
     private func setupDependency() {
         // TODO: 依存関係の構築はここでやるべきではないはずなので修正
-        usecase = KyotoCityInfoUseCase()// TODO: sharedインスタンスがいいのかもしれない
+        usecase = KyotoCityInfoInteractor()// TODO: sharedインスタンスがいいのかもしれない
         presenter = KyotoCityInfoPresenter(useCase: usecase)
-        gateway = KyotoCityInfoGateway()
-        usecase.kyotoCityInfoGateway = gateway
+        request = KyotoCityInfoAPIRequest()
+        usecase.kyotoCityInfoAPIRequest = request
     }
     
     private func setupTableView() {

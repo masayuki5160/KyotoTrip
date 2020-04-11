@@ -20,9 +20,9 @@ protocol KyotoCityInfoPresenterProtocol: AnyObject {
 class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol {
     var subscribableModelList: Observable<[KyotoCityInfo]>
     
-    private weak var useCase: KyotoCityInfoUseCaseProtocol!
+    private weak var useCase: KyotoCityInfoInteractorProtocol!
     
-    init(useCase: KyotoCityInfoUseCaseProtocol) {
+    init(useCase: KyotoCityInfoInteractorProtocol) {
         self.useCase = useCase
         
         // TODO: UseCaseではPresenterを意識して処理をしないため、Presenter側ではViewに依存しないが表示する情報を整理する
