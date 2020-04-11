@@ -9,8 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import SwiftyXMLParser
-import Alamofire
 
 protocol KyotoCityInfoInteractorProtocol: AnyObject {
     // note: UseCaseがRxに依存するのはいいのか? -> 厳密にはよくないが外部ライブラリに依存することを許容する
