@@ -14,7 +14,7 @@
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
 		4C416650243964A4005EF1C2 /* KyotoCityInfoAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41664F243964A4005EF1C2 /* KyotoCityInfoAPIRequest.swift */; };
 		4C4166532439D2DA005EF1C2 /* TranslatorGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166522439D2DA005EF1C2 /* TranslatorGateway.swift */; };
-		4C416655243FFA38005EF1C2 /* KyotoMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416654243FFA38005EF1C2 /* KyotoMapUseCase.swift */; };
+		4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416654243FFA38005EF1C2 /* KyotoMapInteractor.swift */; };
 		4C416657243FFAF1005EF1C2 /* KyotoMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416656243FFAF1005EF1C2 /* KyotoMapPresenter.swift */; };
 		4C4CA0C224258EC400C7AEAE /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CA0C124258EC400C7AEAE /* MapViewModel.swift */; };
 		4C7D2367243026680003A324 /* KyotoCityInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D2366243026680003A324 /* KyotoCityInfoList.swift */; };
@@ -51,7 +51,7 @@
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4C41664F243964A4005EF1C2 /* KyotoCityInfoAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoAPIRequest.swift; sourceTree = "<group>"; };
 		4C4166522439D2DA005EF1C2 /* TranslatorGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorGateway.swift; sourceTree = "<group>"; };
-		4C416654243FFA38005EF1C2 /* KyotoMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapUseCase.swift; sourceTree = "<group>"; };
+		4C416654243FFA38005EF1C2 /* KyotoMapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapInteractor.swift; sourceTree = "<group>"; };
 		4C416656243FFAF1005EF1C2 /* KyotoMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapPresenter.swift; sourceTree = "<group>"; };
 		4C4CA0C124258EC400C7AEAE /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		4C7D2366243026680003A324 /* KyotoCityInfoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoList.swift; sourceTree = "<group>"; };
@@ -133,9 +133,9 @@
 		4C3F094A24301C0000FAEDC2 /* KyotoMap */ = {
 			isa = PBXGroup;
 			children = (
-				4C3F094F24301E7900FAEDC2 /* UseCase */,
-				4C3F095124301F8000FAEDC2 /* InterfaceAdapter */,
-				4C3F094D24301E4F00FAEDC2 /* UI */,
+				4C3F094F24301E7900FAEDC2 /* Interactor */,
+				4C3F095124301F8000FAEDC2 /* Presenter */,
+				4C3F094D24301E4F00FAEDC2 /* View */,
 			);
 			path = KyotoMap;
 			sourceTree = "<group>";
@@ -152,30 +152,30 @@
 			path = KyotoInfoTop;
 			sourceTree = "<group>";
 		};
-		4C3F094D24301E4F00FAEDC2 /* UI */ = {
+		4C3F094D24301E4F00FAEDC2 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				4C0CAECA242B992800EDCA82 /* KyotoMapView.swift */,
 				4CC1ADD6241BB13700BF84B9 /* Map.storyboard */,
 				4CF773EC241B9D910032CC53 /* MapViewController.swift */,
 			);
-			path = UI;
+			path = View;
 			sourceTree = "<group>";
 		};
-		4C3F094F24301E7900FAEDC2 /* UseCase */ = {
+		4C3F094F24301E7900FAEDC2 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				4C416654243FFA38005EF1C2 /* KyotoMapUseCase.swift */,
+				4C416654243FFA38005EF1C2 /* KyotoMapInteractor.swift */,
 			);
-			path = UseCase;
+			path = Interactor;
 			sourceTree = "<group>";
 		};
-		4C3F095124301F8000FAEDC2 /* InterfaceAdapter */ = {
+		4C3F095124301F8000FAEDC2 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				4C416656243FFAF1005EF1C2 /* KyotoMapPresenter.swift */,
 			);
-			path = InterfaceAdapter;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		4C3F0952243020E500FAEDC2 /* AppSettings */ = {
@@ -348,12 +348,12 @@
 			children = (
 				4C3F0956243021A600FAEDC2 /* Main */,
 				4C3F094424301AFE00FAEDC2 /* Common */,
+				4C0CAEC8242ACD3900EDCA82 /* Translator.swift */,
 				4CC1ADDA241BBED000BF84B9 /* ViewModel */,
 				4C3F094924301B5900FAEDC2 /* Modules */,
 				4CF773E4241B97900032CC53 /* Info.plist */,
 				4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */,
 				4CC1AE0F2424615D00BF84B9 /* Localizable.strings */,
-				4C0CAEC8242ACD3900EDCA82 /* Translator.swift */,
 			);
 			path = KyotoTrip;
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 				4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */,
 				4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */,
 				4C416650243964A4005EF1C2 /* KyotoCityInfoAPIRequest.swift in Sources */,
-				4C416655243FFA38005EF1C2 /* KyotoMapUseCase.swift in Sources */,
+				4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CF668CE24336514006AB40C /* KyotoCityInfoInteractor.swift in Sources */,
 			);

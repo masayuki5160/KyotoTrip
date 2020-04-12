@@ -6,10 +6,10 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-protocol KyotoMapUseCaseProtocol: AnyObject {
+protocol KyotoMapInteractorProtocol: AnyObject {
     
 }
 
-final class KyotoMapUseCase: KyotoMapUseCaseProtocol {
+final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     
 }
