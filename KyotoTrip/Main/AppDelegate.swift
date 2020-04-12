@@ -12,19 +12,8 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-         self.window = UIWindow(frame: UIScreen.main.bounds)
-
-        // Clean Architectureのレイヤーを構築
-        Application.shared.configure(with: self.window!)
-        self.window?.makeKeyAndVisible()
-        
-        // TODO: info.plistに起動するシーン名を設定しているのであとで修正する
-        // appendix: https://qiita.com/omochimetaru/items/31df103ef98a9d84ae6b
-
         FirebaseApp.configure()
         
         return true
