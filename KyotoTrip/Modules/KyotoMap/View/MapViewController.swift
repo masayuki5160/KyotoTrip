@@ -18,7 +18,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var compassButton: UIButton!
     
     
-    private var vm: MapViewModel!
+    private var presenter: KyotoMapPresenter!
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -35,13 +35,13 @@ class MapViewController: UIViewController {
     }
     
     private func setupVM() {
-        vm = MapViewModel(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
+        presenter = KyotoMapPresenter(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
 
-        vm.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
+        presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
             self?.updateBusstopLayer(buttonStatus)
         }).disposed(by: disposeBag)
         
-        vm.compassButtonStatusObservable.drive(onNext: { [weak self] (compassButtonStatus) in
+        presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             self?.updateMapCenterPosition(compassButtonStatus)
         }).disposed(by: disposeBag)
     }
