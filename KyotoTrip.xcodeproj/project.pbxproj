@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4C0CAEC72429735300EDCA82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */; };
-		4C0CAEC9242ACD3900EDCA82 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0CAEC8242ACD3900EDCA82 /* Translator.swift */; };
 		4C0CAECB242B992800EDCA82 /* KyotoMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0CAECA242B992800EDCA82 /* KyotoMapView.swift */; };
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
 		4C416650243964A4005EF1C2 /* KyotoCityInfoAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41664F243964A4005EF1C2 /* KyotoCityInfoAPIRequest.swift */; };
@@ -44,7 +43,6 @@
 		204C325FD10BE0F143E5B29D /* Pods-KyotoTrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip.release.xcconfig"; sourceTree = "<group>"; };
 		404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4C0CAEC8242ACD3900EDCA82 /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
 		4C0CAECA242B992800EDCA82 /* KyotoMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapView.swift; sourceTree = "<group>"; };
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4C41664F243964A4005EF1C2 /* KyotoCityInfoAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoAPIRequest.swift; sourceTree = "<group>"; };
@@ -338,7 +336,6 @@
 			children = (
 				4C3F0956243021A600FAEDC2 /* Main */,
 				4C3F094424301AFE00FAEDC2 /* Common */,
-				4C0CAEC8242ACD3900EDCA82 /* Translator.swift */,
 				4C3F094924301B5900FAEDC2 /* Modules */,
 				4CF773E4241B97900032CC53 /* Info.plist */,
 				4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */,
@@ -530,7 +527,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
-				4C0CAEC9242ACD3900EDCA82 /* Translator.swift in Sources */,
 				4C4166532439D2DA005EF1C2 /* TranslatorGateway.swift in Sources */,
 				4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */,
 				4C0CAECB242B992800EDCA82 /* KyotoMapView.swift in Sources */,
