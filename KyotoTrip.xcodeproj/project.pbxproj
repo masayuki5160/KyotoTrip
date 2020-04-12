@@ -209,18 +209,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4C3F0956243021A600FAEDC2 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				4CF773D6241B978B0032CC53 /* AppDelegate.swift */,
-				4CF773D8241B978B0032CC53 /* SceneDelegate.swift */,
-				4CF773DF241B97900032CC53 /* Assets.xcassets */,
-				4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */,
-				4C41666224434E07005EF1C2 /* AppDependencies.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		4C41664B24361C3B005EF1C2 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,7 +322,11 @@
 		4CF773D5241B978B0032CC53 /* KyotoTrip */ = {
 			isa = PBXGroup;
 			children = (
-				4C3F0956243021A600FAEDC2 /* Main */,
+				4CF773D6241B978B0032CC53 /* AppDelegate.swift */,
+				4CF773D8241B978B0032CC53 /* SceneDelegate.swift */,
+				4CF773DF241B97900032CC53 /* Assets.xcassets */,
+				4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */,
+				4C41666224434E07005EF1C2 /* AppDependencies.swift */,
 				4C3F094424301AFE00FAEDC2 /* Common */,
 				4C3F094924301B5900FAEDC2 /* Modules */,
 				4CF773E4241B97900032CC53 /* Info.plist */,
