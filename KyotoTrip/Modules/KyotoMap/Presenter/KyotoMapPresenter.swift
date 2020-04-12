@@ -22,20 +22,17 @@ enum CompassButtonStatus: Int {
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
-    // TODO: Presenterのすべきことか再度整理
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
-    private var busstopButtonStatus = BusstopButtonStatus.hidden
     private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> {
         return busstopButtonStatusBehaviorRelay.asDriver()
     }
     
-    private var compassButtonStatus = CompassButtonStatus.kyotoCity
     private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
     var compassButtonStatusDriver: Driver<CompassButtonStatus> {
         return compassButtonStatusBehaviorRelay.asDriver()
@@ -56,16 +53,16 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
     
     private func updateBusstopButtonStatus() {
-        let nextStatusRawValue = self.busstopButtonStatus.rawValue + 1
-        self.busstopButtonStatus = BusstopButtonStatus(rawValue: nextStatusRawValue) ?? BusstopButtonStatus.hidden
+        let nextStatusRawValue = self.busstopButtonStatusBehaviorRelay.value.rawValue + 1
+        let nextStatus = BusstopButtonStatus(rawValue: nextStatusRawValue) ?? BusstopButtonStatus.hidden
         
-        self.busstopButtonStatusBehaviorRelay.accept(self.busstopButtonStatus)
+        self.busstopButtonStatusBehaviorRelay.accept(nextStatus)
     }
     
     private func updateCompassButtonStatus() {
-        let nextStatusRawValue = self.compassButtonStatus.rawValue + 1
-        self.compassButtonStatus = CompassButtonStatus(rawValue: nextStatusRawValue) ?? CompassButtonStatus.kyotoCity
+        let nextStatusRawValue = self.compassButtonStatusBehaviorRelay.value.rawValue + 1
+        let nextStatus = CompassButtonStatus(rawValue: nextStatusRawValue) ?? CompassButtonStatus.kyotoCity
         
-        self.compassButtonStatusBehaviorRelay.accept(self.compassButtonStatus)
+        self.compassButtonStatusBehaviorRelay.accept(nextStatus)
     }
 }
