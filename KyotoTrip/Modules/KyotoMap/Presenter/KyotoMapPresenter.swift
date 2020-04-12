@@ -40,6 +40,10 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     let disposeBag = DisposeBag()
     
+    struct Dependency {
+    }
+    private var dependency: Dependency!
+    
     init(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
         
         busstopButton.subscribe(onNext: { [weak self] in

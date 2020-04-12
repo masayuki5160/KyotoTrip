@@ -22,6 +22,10 @@ class InfoTopPageViewController: UIViewController {
     private var usecase: KyotoCityInfoInteractor!
     private var request: KyotoCityInfoAPIRequest!
     
+    struct Dependency {
+    }
+    private var dependency: Dependency!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

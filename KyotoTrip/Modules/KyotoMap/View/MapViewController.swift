@@ -20,6 +20,10 @@ class MapViewController: UIViewController {
     
     private var presenter: KyotoMapPresenter!
     let disposeBag = DisposeBag()
+    
+    struct Dependency {
+    }
+    private var dependency: Dependency!
 
     override func viewDidLoad() {
         super.viewDidLoad()

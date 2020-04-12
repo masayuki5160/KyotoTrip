@@ -19,8 +19,11 @@ protocol KyotoCityInfoPresenterProtocol: AnyObject {
 
 class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol {
     var subscribableModelList: Observable<[KyotoCityInfo]>
-    
     private weak var useCase: KyotoCityInfoInteractorProtocol!
+    
+    struct Dependency {
+    }
+    private var dependency: Dependency!
     
     init(useCase: KyotoCityInfoInteractorProtocol) {
         self.useCase = useCase
