@@ -10,26 +10,64 @@
 import UIKit
 
 protocol AppDependencies {
-//    func assembleGithubRepoSearchModule() -> UIViewController
 //    func assembleGithubRepoDetailModule(githubRepoEntity: GithubRepoEntity) -> UIViewController
-    func assembleMainTabModule() -> UIViewController?
+    func assembleMainTabModule() -> UIViewController
+    func assembleSettingsModule() -> UIViewController
+    func assembleKyotoInfoTopModule() -> UIViewController
+    func assembleKyotoMapModule() -> UIViewController
 }
 
 public struct AppDefaultDependencies {
 
     public init() {}
 
-    public func rootViewController() -> UIViewController? {
+    public func rootViewController() -> UIViewController {
         return assembleMainTabModule()
     }
 }
 
 extension AppDefaultDependencies: AppDependencies {
     
-    func assembleMainTabModule() -> UIViewController? {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateInitialViewController()
+    func assembleMainTabModule() -> UIViewController {
+        let viewController = {() -> TabBarController in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! TabBarController
+        }()
+        
+        return viewController
     }
+    
+    func assembleSettingsModule() -> UIViewController {
+        let viewController = { () -> SettingsViewController in
+            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! SettingsViewController
+        }()
+        
+        return viewController
+    }
+    
+    func assembleKyotoInfoTopModule() -> UIViewController {
+        let viewController = { () -> InfoTopPageViewController in
+            let storyboard = UIStoryboard(name: "Info", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! InfoTopPageViewController
+        }()
+        
+        // TODO: ViewControllerへのDI実施
+        
+        return viewController
+    }
+    
+    func assembleKyotoMapModule() -> UIViewController {
+        let viewController = { () -> MapViewController in
+            let storyboard = UIStoryboard(name: "Map", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! MapViewController
+        }()
+        
+        // TODO: ViewControllerへのDI実施
+        
+        return viewController
+    }
+
     
 //    public func assembleGithubRepoSearchModule() -> UIViewController {
 //        let viewController = { () -> GithubRepoSearchViewController in
