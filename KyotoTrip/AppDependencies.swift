@@ -12,7 +12,7 @@ import UIKit
 protocol AppDependencies {
 //    func assembleGithubRepoSearchModule() -> UIViewController
 //    func assembleGithubRepoDetailModule(githubRepoEntity: GithubRepoEntity) -> UIViewController
-    func assenmbleMainTabModule() -> UIViewController?
+    func assembleMainTabModule() -> UIViewController?
 }
 
 public struct AppDefaultDependencies {
@@ -20,13 +20,13 @@ public struct AppDefaultDependencies {
     public init() {}
 
     public func rootViewController() -> UIViewController? {
-        return assenmbleMainTabModule()
+        return assembleMainTabModule()
     }
 }
 
 extension AppDefaultDependencies: AppDependencies {
     
-    func assenmbleMainTabModule() -> UIViewController? {
+    func assembleMainTabModule() -> UIViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateInitialViewController()
     }
