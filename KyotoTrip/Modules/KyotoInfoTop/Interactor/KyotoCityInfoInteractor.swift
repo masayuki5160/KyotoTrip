@@ -46,7 +46,7 @@ final class KyotoCityInfoInteractor: KyotoCityInfoInteractorProtocol {
     private func fetchTranslatedTextSync(source list: [KyotoCityInfo]) {
         // TODO: 同期処理に不具合があるためあとで再実装
         // TODO: 翻訳処理が不要な場合は処理しない判定処理追加
-//        let translator = TranslatorGateway()
+//        let translator = TranslatorInteractor()
 //        let translatedList = list.map { element -> KyotoCityInfo in
 //            var newElement = element
 //            let semaphore = DispatchSemaphore(value: 0)

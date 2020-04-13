@@ -8,11 +8,11 @@
 
 import Firebase
 
-protocol TranslatorGatewayProtocol: AnyObject {
+protocol TranslatorInteractorProtocol: AnyObject {
     
 }
 
-class TranslatorGateway: TranslatorGatewayProtocol {
+class TranslatorInteractor: TranslatorInteractorProtocol {
     private let sourceLanguage = TranslateLanguage.ja
     
     init() {
