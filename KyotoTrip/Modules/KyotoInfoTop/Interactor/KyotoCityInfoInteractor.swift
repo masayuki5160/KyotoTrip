@@ -13,7 +13,7 @@ import RxCocoa
 protocol KyotoCityInfoInteractorProtocol: AnyObject {
     // note: UseCaseがRxに依存するのはいいのか? -> 厳密にはよくないが外部ライブラリに依存することを許容する
     var subscribableModelList: Observable<[KyotoCityInfo]> { get }
-    var kyotoCityInfoAPIRequest: KyotoCityInfoAPIRequest!{ get }
+    var kyotoCityInfoGateway: KyotoCityInfoGateway!{ get }
 
     func fetch()
 }
@@ -26,11 +26,11 @@ final class KyotoCityInfoInteractor: KyotoCityInfoInteractorProtocol {
         // TODO: mapで必要な処理を行いObservable or Driveを返す
         return modelListPublishRelay.asObservable()
     }
-    var kyotoCityInfoAPIRequest: KyotoCityInfoAPIRequest!
+    var kyotoCityInfoGateway: KyotoCityInfoGateway!
 
     func fetch() {
         // TODO: Kyotoというワードがなんども出てきて不要なので変数名などはあとで修正
-        kyotoCityInfoAPIRequest.fetch {[weak self] (response) in
+        kyotoCityInfoGateway.fetch {[weak self] (response) in
             guard let self = self else { return }
             
             switch response {

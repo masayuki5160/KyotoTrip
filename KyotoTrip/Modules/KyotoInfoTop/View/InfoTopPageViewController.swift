@@ -20,7 +20,7 @@ class InfoTopPageViewController: UIViewController {
     
     private var presenter: KyotoCityInfoPresenterProtocol!
     private var usecase: KyotoCityInfoInteractor!
-    private var request: KyotoCityInfoAPIRequest!
+    private var request: KyotoCityInfoGateway!
     
     struct Dependency {
     }
@@ -39,8 +39,8 @@ class InfoTopPageViewController: UIViewController {
         // TODO: 依存関係の構築はここでやるべきではないはずなので修正
         usecase = KyotoCityInfoInteractor()// TODO: sharedインスタンスがいいのかもしれない
         presenter = KyotoCityInfoPresenter(useCase: usecase)
-        request = KyotoCityInfoAPIRequest()
-        usecase.kyotoCityInfoAPIRequest = request
+        request = KyotoCityInfoGateway()
+        usecase.kyotoCityInfoGateway = request
     }
     
     private func setupTableView() {

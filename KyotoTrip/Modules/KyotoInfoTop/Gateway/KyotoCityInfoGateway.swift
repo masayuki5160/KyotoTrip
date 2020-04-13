@@ -1,5 +1,5 @@
 //
-//  KyotoCityInfoAPIRequest.swift
+//  KyotoCityInfoGateway.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/04/05.
@@ -9,11 +9,11 @@
 import SwiftyXMLParser
 import Alamofire
 
-protocol KyotoCityInfoAPIRequestProtocol: AnyObject {
+protocol KyotoCityInfoGatewayProtocol: AnyObject {
     func fetch(commplition: @escaping (Result<[KyotoCityInfo]>) -> Void)
 }
 
-class KyotoCityInfoAPIRequest: KyotoCityInfoAPIRequestProtocol {
+class KyotoCityInfoGateway: KyotoCityInfoGatewayProtocol {
     
     private let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     
