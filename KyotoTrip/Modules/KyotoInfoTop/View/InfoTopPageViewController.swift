@@ -19,10 +19,10 @@ class InfoTopPageViewController: UIViewController {
     private var disposeBag = DisposeBag()
     
     private var presenter: KyotoCityInfoPresenterProtocol!
-    private var usecase: KyotoCityInfoInteractor!
-    private var request: KyotoCityInfoGateway!
+    private var interactor: KyotoCityInfoInteractor!
     
     struct Dependency {
+        let presenter: KyotoCityInfoPresenter
     }
     private var dependency: Dependency!
     
@@ -32,15 +32,13 @@ class InfoTopPageViewController: UIViewController {
         setupDependency()
         setupTableView()
         
-        usecase.fetch()
+        interactor.fetch()
     }
     
     private func setupDependency() {
         // TODO: 依存関係の構築はここでやるべきではないはずなので修正
-        usecase = KyotoCityInfoInteractor()// TODO: sharedインスタンスがいいのかもしれない
-        presenter = KyotoCityInfoPresenter(useCase: usecase)
-        request = KyotoCityInfoGateway()
-        usecase.kyotoCityInfoGateway = request
+        interactor = KyotoCityInfoInteractor()// TODO: sharedインスタンスがいいのかもしれない
+        presenter = KyotoCityInfoPresenter(dependency: .init(interactor: interactor))
     }
     
     private func setupTableView() {
@@ -62,5 +60,11 @@ class InfoTopPageViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+    }
+}
+
+extension InfoTopPageViewController: DependencyInjectable {
+    func inject(_ dependency: InfoTopPageViewController.Dependency) {
+        self.dependency = dependency
     }
 }

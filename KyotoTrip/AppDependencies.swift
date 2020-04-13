@@ -47,12 +47,19 @@ extension AppDefaultDependencies: AppDependencies {
     }
     
     func assembleKyotoInfoTopModule() -> UIViewController {
+        
+        let interactor = KyotoCityInfoInteractor()
+        let presenter = KyotoCityInfoPresenter(
+            dependency: .init(
+                interactor: interactor
+            )
+        )
+        
         let viewController = { () -> InfoTopPageViewController in
             let storyboard = UIStoryboard(name: "Info", bundle: nil)
             return storyboard.instantiateInitialViewController() as! InfoTopPageViewController
         }()
-        
-        // TODO: ViewControllerへのDI実施
+        viewController.inject(.init(presenter: presenter))
         
         return viewController
     }

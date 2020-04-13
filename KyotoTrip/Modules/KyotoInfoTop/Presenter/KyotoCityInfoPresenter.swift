@@ -19,21 +19,19 @@ protocol KyotoCityInfoPresenterProtocol: AnyObject {
 
 class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol {
     var subscribableModelList: Observable<[KyotoCityInfo]>
-    private weak var useCase: KyotoCityInfoInteractorProtocol!
-    
+
     struct Dependency {
+        let interactor: KyotoCityInfoInteractorProtocol
     }
-    private var dependency: Dependency!
+    private let dependency: Dependency
     
-    init(useCase: KyotoCityInfoInteractorProtocol) {
-        self.useCase = useCase
-        
-        // TODO: UseCaseではPresenterを意識して処理をしないため、Presenter側ではViewに依存しないが表示する情報を整理する
-        self.subscribableModelList = useCase.subscribableModelList
+    init(dependency: Dependency) {
+        self.dependency = dependency
+        subscribableModelList = self.dependency.interactor.subscribableModelList// TODO: 問題ないかあとで確認
     }
     
     func fetch() {
-        useCase.fetch()
+        dependency.interactor.fetch()
     }
 
 }
