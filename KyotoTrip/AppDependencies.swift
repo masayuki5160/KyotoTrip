@@ -13,8 +13,8 @@ protocol AppDependencies {
 //    func assembleGithubRepoDetailModule(githubRepoEntity: GithubRepoEntity) -> UIViewController
     func assembleMainTabModule() -> UIViewController
     func assembleSettingsModule() -> UIViewController
-    func assembleKyotoInfoTopModule() -> UIViewController
-    func assembleKyotoMapModule() -> UIViewController
+    func assembleKyotoInfoTopModule() -> UINavigationController
+    func assembleKyotoMapModule() -> UINavigationController
 }
 
 public struct AppDefaultDependencies {
@@ -46,7 +46,7 @@ extension AppDefaultDependencies: AppDependencies {
         return viewController
     }
     
-    func assembleKyotoInfoTopModule() -> UIViewController {
+    func assembleKyotoInfoTopModule() -> UINavigationController {
         
         let interactor = KyotoCityInfoInteractor()
         let presenter = KyotoCityInfoPresenter(
@@ -55,24 +55,28 @@ extension AppDefaultDependencies: AppDependencies {
             )
         )
         
-        let viewController = { () -> InfoTopPageViewController in
+        let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Info", bundle: nil)
-            return storyboard.instantiateInitialViewController() as! InfoTopPageViewController
+            let navVC = storyboard.instantiateInitialViewController() as! UINavigationController
+            let vc = navVC.viewControllers[0] as! InfoTopPageViewController
+            vc.inject(.init(presenter: presenter))
+            
+            return navVC
         }()
-        viewController.inject(.init(presenter: presenter))
         
-        return viewController
+        return naviViewController
     }
     
-    func assembleKyotoMapModule() -> UIViewController {
-        let viewController = { () -> MapViewController in
+    func assembleKyotoMapModule() -> UINavigationController {
+        let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Map", bundle: nil)
-            return storyboard.instantiateInitialViewController() as! MapViewController
+            let navVC = storyboard.instantiateInitialViewController() as! UINavigationController
+            // TODO: ViewControllerへのDI
+
+            return navVC
         }()
         
-        // TODO: ViewControllerへのDI実施
-        
-        return viewController
+        return naviViewController
     }
 
     

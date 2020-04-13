@@ -11,6 +11,12 @@ import UIKit
 class TabBarController: UITabBarController {
     
     override func awakeFromNib() {
-//        let useCase: KyotoCityInfoUseCase = Application.shared.useCase
+    }
+    
+    override func viewDidLoad() {
+        let infoTopViewController = AppDefaultDependencies().assembleKyotoInfoTopModule()
+        let mapViewController = AppDefaultDependencies().assembleKyotoMapModule()
+        
+        self.viewControllers = [infoTopViewController, mapViewController]
     }
 }

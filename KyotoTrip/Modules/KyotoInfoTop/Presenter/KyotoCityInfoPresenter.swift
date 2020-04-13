@@ -12,14 +12,15 @@ import RxCocoa
 
 protocol KyotoCityInfoPresenterProtocol: AnyObject {
     func fetch()
-    
-    // TODO: あとで修正
+    // TODO: あとでDriveに修正？
     var subscribableModelList: Observable<[KyotoCityInfo]> { get }
 }
 
 class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol {
-    var subscribableModelList: Observable<[KyotoCityInfo]>
-
+    private let modelListPublishRelay = PublishRelay<[KyotoCityInfo]>()
+    var subscribableModelList: Observable<[KyotoCityInfo]> {
+        return modelListPublishRelay.asObservable()
+    }
     struct Dependency {
         let interactor: KyotoCityInfoInteractorProtocol
     }
@@ -27,11 +28,19 @@ class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol {
     
     init(dependency: Dependency) {
         self.dependency = dependency
-        subscribableModelList = self.dependency.interactor.subscribableModelList// TODO: 問題ないかあとで確認
     }
     
     func fetch() {
-        dependency.interactor.fetch()
+        dependency.interactor.fetch { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .failure(let error):
+                self.modelListPublishRelay.accept([])
+            case .success(let data):
+                self.modelListPublishRelay.accept(data)
+            }
+        }
     }
 
 }

@@ -7,36 +7,22 @@
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
 
 protocol KyotoCityInfoInteractorProtocol: AnyObject {
-    // note: UseCaseがRxに依存するのはいいのか? -> 厳密にはよくないが外部ライブラリに依存することを許容する
-    var subscribableModelList: Observable<[KyotoCityInfo]> { get }
-    func fetch()
+    func fetch(complition: @escaping (Result<[KyotoCityInfo], Error>) -> Void)
 }
 
 final class KyotoCityInfoInteractor: KyotoCityInfoInteractorProtocol {
     
-    private let modelListPublishRelay = PublishRelay<[KyotoCityInfo]>()
-    // TODO: KyotoCityInfoInteractorProtocolにこのsubscribeを公開しておくことで良いのか？
-    var subscribableModelList: Observable<[KyotoCityInfo]> {
-        // TODO: mapで必要な処理を行いObservable or Driveを返す
-        return modelListPublishRelay.asObservable()
-    }
-
-    // TODO: complitionで返すように修正
-    func fetch() {
+    func fetch(complition: @escaping (Result<[KyotoCityInfo], Error>) -> Void) {
         let kyotoCityInfoGateway = KyotoCityInfoGateway()
-        kyotoCityInfoGateway.fetch {[weak self] (response) in
-            guard let self = self else { return }
-            
+        kyotoCityInfoGateway.fetch { [weak self] response in
             switch response {
             case .failure(let error):
-                self.modelListPublishRelay.accept([])// TODO: Fix later
+                complition(.failure(error))
             case .success(let data):
-                self.modelListPublishRelay.accept(data)
-                self.fetchTranslatedTextSync(source: data)
+                complition(.success(data))
+                self?.fetchTranslatedTextSync(source: data)
             }
         }
     }

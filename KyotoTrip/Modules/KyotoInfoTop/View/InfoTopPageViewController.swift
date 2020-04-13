@@ -17,10 +17,7 @@ class InfoTopPageViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private var disposeBag = DisposeBag()
-    
-    private var presenter: KyotoCityInfoPresenterProtocol!
-    private var interactor: KyotoCityInfoInteractor!
-    
+        
     struct Dependency {
         let presenter: KyotoCityInfoPresenter
     }
@@ -28,26 +25,17 @@ class InfoTopPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupDependency()
         setupTableView()
+    }
         
-        interactor.fetch()
-    }
-    
-    private func setupDependency() {
-        // TODO: 依存関係の構築はここでやるべきではないはずなので修正
-        interactor = KyotoCityInfoInteractor()// TODO: sharedインスタンスがいいのかもしれない
-        presenter = KyotoCityInfoPresenter(dependency: .init(interactor: interactor))
-    }
-    
     private func setupTableView() {
 
         self.navigationItem.title = "NavigationBarTitleInfo".localized
 
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
         
-        presenter.subscribableModelList.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
+        dependency.presenter.fetch()// TODO: fetchはここでいいのか確認
+        dependency.presenter.subscribableModelList.bind(to: tableView.rx.items(cellIdentifier: "InfoTopPageTableViewCell", cellType: InfoTopPageTableViewCell.self)) { row, element, cell in
             cell.title.text = element.title// TODO: デフォルト値を空文字にしておけば良さそう、見せ方は調整
             cell.publishDate.text = element.publishDate
         }.disposed(by: disposeBag)
