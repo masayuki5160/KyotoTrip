@@ -10,7 +10,6 @@
 import UIKit
 
 protocol AppDependencies {
-//    func assembleGithubRepoDetailModule(githubRepoEntity: GithubRepoEntity) -> UIViewController
     func assembleMainTabModule() -> UIViewController
     func assembleSettingsModule() -> UINavigationController
     func assembleKyotoInfoTopModule() -> UINavigationController
@@ -82,48 +81,4 @@ extension AppDefaultDependencies: AppDependencies {
         
         return naviViewController
     }
-
-    
-//    public func assembleGithubRepoSearchModule() -> UIViewController {
-//        let viewController = { () -> GithubRepoSearchViewController in
-//            let storyboard = UIStoryboard(name: "GithubRepoSearch", bundle: bundle)
-//            return storyboard.instantiateInitialViewController() as! GithubRepoSearchViewController
-//        }()
-//
-//        let router = GithubRepoSearchRouter(
-//            appDependencies: self,
-//            searchViewController: viewController
-//        )
-//
-//        let presenter = GithubRepoSearchPresenter(
-//            view: viewController,
-//            dependency: .init(
-//                wireframe: router,
-//                githubRepoRecommend: AnyUseCase(GithubRepoRecommendInteractor()),
-//                githubRepoSearch: AnyUseCase(GithubRepoSearchInteractor()),
-//                githubRepoSort: AnyUseCase(GithubRepoSortInteractor())
-//            )
-//        )
-//
-//        viewController.inject(.init(presenter: presenter))
-//
-//        return viewController
-//    }
-
-//    func assembleGithubRepoDetailModule(githubRepoEntity: GithubRepoEntity) -> UIViewController {
-//
-//        let viewController = { () -> GithubRepoDetailViewController in
-//            let storyboard = UIStoryboard(name: "GithubRepoDetail", bundle: bundle)
-//            return storyboard.instantiateInitialViewController() as! GithubRepoDetailViewController
-//        }()
-//
-//        let router = GithubRepoDetailRouter(
-//            detailViewController: viewController
-//        )
-//
-//        let presenter = GithubRepoDetailPresenter(wireframe: router, view: viewController)
-//        viewController.inject(.init(presenter: presenter, githubRepoEntity: githubRepoEntity))
-//
-//        return viewController
-//    }
 }
