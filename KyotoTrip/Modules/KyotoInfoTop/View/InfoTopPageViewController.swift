@@ -47,7 +47,11 @@ class InfoTopPageViewController: UIViewController {
                 self.present(SFSafariViewController(url: url), animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    @IBAction func tapSettingButton(_ sender: UIBarButtonItem) {
+        let settingVC = AppDefaultDependencies().assembleSettingsModule()
+        self.present(settingVC, animated: true, completion: nil)
     }
 }
 

@@ -12,7 +12,7 @@ import UIKit
 protocol AppDependencies {
 //    func assembleGithubRepoDetailModule(githubRepoEntity: GithubRepoEntity) -> UIViewController
     func assembleMainTabModule() -> UIViewController
-    func assembleSettingsModule() -> UIViewController
+    func assembleSettingsModule() -> UINavigationController
     func assembleKyotoInfoTopModule() -> UINavigationController
     func assembleKyotoMapModule() -> UINavigationController
 }
@@ -37,13 +37,17 @@ extension AppDefaultDependencies: AppDependencies {
         return viewController
     }
     
-    func assembleSettingsModule() -> UIViewController {
-        let viewController = { () -> SettingsViewController in
+    func assembleSettingsModule() -> UINavigationController {
+        let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-            return storyboard.instantiateInitialViewController() as! SettingsViewController
+            let navVC = storyboard.instantiateInitialViewController() as! UINavigationController
+            let vc = navVC.viewControllers[0] as! SettingsViewController
+            vc.inject(.init())
+
+            return navVC
         }()
         
-        return viewController
+        return naviViewController
     }
     
     func assembleKyotoInfoTopModule() -> UINavigationController {
