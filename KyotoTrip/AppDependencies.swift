@@ -74,8 +74,9 @@ extension AppDefaultDependencies: AppDependencies {
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Map", bundle: nil)
             let navVC = storyboard.instantiateInitialViewController() as! UINavigationController
-            // TODO: ViewControllerへのDI
-
+            let vc = navVC.viewControllers[0] as! MapViewController
+            vc.inject(.init())
+            
             return navVC
         }()
         

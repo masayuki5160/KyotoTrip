@@ -83,6 +83,12 @@ class MapViewController: UIViewController {
     
 }
 
+extension MapViewController: DependencyInjectable {
+    func inject(_ dependency: MapViewController.Dependency) {
+        self.dependency = dependency
+    }
+}
+
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         
