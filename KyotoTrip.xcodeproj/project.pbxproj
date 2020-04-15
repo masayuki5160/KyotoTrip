@@ -92,6 +92,7 @@
 		4C3F094424301AFE00FAEDC2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4C41666924473E8F005EF1C2 /* Localize */,
 				4C416665244495A6005EF1C2 /* Protocol */,
 				4CC1ADFB242459C900BF84B9 /* Extension */,
 				4C4166512439D229005EF1C2 /* Interactor */,
@@ -285,6 +286,14 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		4C41666924473E8F005EF1C2 /* Localize */ = {
+			isa = PBXGroup;
+			children = (
+				4CC1AE0F2424615D00BF84B9 /* Localizable.strings */,
+			);
+			path = Localize;
+			sourceTree = "<group>";
+		};
 		4CC1ADFB242459C900BF84B9 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,7 +332,6 @@
 				4C3F094924301B5900FAEDC2 /* Modules */,
 				4CF773E4241B97900032CC53 /* Info.plist */,
 				4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */,
-				4CC1AE0F2424615D00BF84B9 /* Localizable.strings */,
 			);
 			path = KyotoTrip;
 			sourceTree = "<group>";
