@@ -41,11 +41,16 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     let disposeBag = DisposeBag()
     
     struct Dependency {
+        let interactor: KyotoMapInteractorProtocol
     }
     private var dependency: Dependency!
     
-    init(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
-        
+    init(dependency: Dependency) {
+        self.dependency = dependency
+    }
+    
+    // TODO: 他に良い方法がないかあとで確認する(setup()みたいなものにまとめる？)
+    func subscribeButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
         busstopButton.subscribe(onNext: { [weak self] in
             self?.updateBusstopButtonStatus()
         }).disposed(by: disposeBag)
@@ -53,7 +58,6 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         compassButton.subscribe(onNext: { [weak self] in
             self?.updateCompassButtonStatus()
         }).disposed(by: disposeBag)
-        
     }
     
     private func updateBusstopButtonStatus() {

@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     struct Dependency {
+        let presenter: KyotoMapPresenter
     }
     private var dependency: Dependency!
 
@@ -35,17 +36,17 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.setup()
 
-        setupVM()
+        setupPresenter()
     }
     
-    private func setupVM() {
-        presenter = KyotoMapPresenter(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
+    private func setupPresenter() {
+        dependency.presenter.subscribeButtonTapEvent(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
 
-        presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
+        dependency.presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
             self?.updateBusstopLayer(buttonStatus)
         }).disposed(by: disposeBag)
         
-        presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
+        dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             self?.updateMapCenterPosition(compassButtonStatus)
         }).disposed(by: disposeBag)
     }

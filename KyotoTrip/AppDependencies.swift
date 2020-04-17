@@ -71,11 +71,19 @@ extension AppDefaultDependencies: AppDependencies {
     }
     
     func assembleKyotoMapModule() -> UINavigationController {
+        
+        let interactor = KyotoMapInteractor()
+        let presenter = KyotoMapPresenter(
+            dependency: .init(
+                interactor: interactor
+            )
+        )
+        
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Map", bundle: nil)
             let navVC = storyboard.instantiateInitialViewController() as! UINavigationController
             let vc = navVC.viewControllers[0] as! MapViewController
-            vc.inject(.init())
+            vc.inject(.init(presenter: presenter))
             
             return navVC
         }()
