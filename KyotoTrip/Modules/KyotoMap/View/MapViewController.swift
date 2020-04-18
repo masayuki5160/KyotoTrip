@@ -13,13 +13,16 @@ import RxCocoa
 
 class MapViewController: UIViewController {
     
+    struct Dependency {
+        let presenter: KyotoMapPresenterProtocol
+    }
+    
     @IBOutlet weak var mapView: KyotoMapView!
     @IBOutlet weak var busstopButton: UIButton!
     @IBOutlet weak var compassButton: UIButton!
-    
-    
-    private var vm: MapViewModel!
-    let disposeBag = DisposeBag()
+
+    private let disposeBag = DisposeBag()
+    private var dependency: Dependency!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +34,17 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.setup()
 
-        setupVM()
+        bindPresenter()
     }
     
-    private func setupVM() {
-        vm = MapViewModel(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
+    private func bindPresenter() {
+        dependency.presenter.subscribeButtonTapEvent(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
 
-        vm.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
+        dependency.presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
             self?.updateBusstopLayer(buttonStatus)
         }).disposed(by: disposeBag)
         
-        vm.compassButtonStatusObservable.drive(onNext: { [weak self] (compassButtonStatus) in
+        dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             self?.updateMapCenterPosition(compassButtonStatus)
         }).disposed(by: disposeBag)
     }
@@ -77,6 +80,12 @@ class MapViewController: UIViewController {
         
     }
     
+}
+
+extension MapViewController: DependencyInjectable {
+    func inject(_ dependency: MapViewController.Dependency) {
+        self.dependency = dependency
+    }
 }
 
 extension MapViewController: MGLMapViewDelegate {

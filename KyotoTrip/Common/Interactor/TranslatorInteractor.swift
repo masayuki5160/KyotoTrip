@@ -1,16 +1,18 @@
 //
-//  Translator.swift
+//  TranslatorGateway.swift
 //  KyotoTrip
 //
-//  Created by TANAKA MASAYUKI on 2020/03/25.
+//  Created by TANAKA MASAYUKI on 2020/04/05.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-import Foundation
 import Firebase
 
-class Translator {
+protocol TranslatorInteractorProtocol: AnyObject {
     
+}
+
+class TranslatorInteractor: TranslatorInteractorProtocol {
     private let sourceLanguage = TranslateLanguage.ja
     
     init() {
@@ -77,5 +79,4 @@ class Translator {
             }
         }
     }
-    
 }

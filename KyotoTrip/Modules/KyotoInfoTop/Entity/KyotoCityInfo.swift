@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct KyotoCityInfoModel {
+struct KyotoCityInfo {
     var title = ""
     var link = ""
     var description = ""

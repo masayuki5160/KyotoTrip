@@ -12,6 +12,10 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let sectionList = ["basic", "language"]
+    
+    struct Dependency {
+    }
+    private var dependency: Dependency!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,4 +49,10 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     
+}
+
+extension SettingsViewController: DependencyInjectable {
+    func inject(_ dependency: SettingsViewController.Dependency) {
+        self.dependency = dependency
+    }
 }

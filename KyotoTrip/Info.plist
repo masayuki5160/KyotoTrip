@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>現在地情報を利用します</string>
-	<key>MGLMapboxAccessToken</key>
-	<string>pk.eyJ1IjoibWFzYXl1a2k1MTYwIiwiYSI6ImNqc2FmdGI5NjEwanY0M3FwNDJsdjd0YzkifQ.vkh1xLO76g2bU25WhVAQ5g</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -24,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoibWFzYXl1a2k1MTYwIiwiYSI6ImNqc2FmdGI5NjEwanY0M3FwNDJsdjd0YzkifQ.vkh1xLO76g2bU25WhVAQ5g</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>現在地情報を利用します</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -45,8 +45,6 @@
 	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

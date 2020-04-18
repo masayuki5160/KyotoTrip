@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6v9-Tx-efB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6v9-Tx-efB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Settings-->
-        <scene sceneID="wpf-NG-E0b">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Settings" id="Kgy-4Z-cMc" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CsC-yh-UeR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2542.753623188406" y="-161.38392857142856"/>
-        </scene>
         <!--Information-->
         <scene sceneID="nBp-jy-aRz">
             <objects>
@@ -41,7 +33,7 @@
                     <navigationItem key="navigationItem" title="Information" id="7kC-rX-hus">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="neD-qq-SjX">
                             <connections>
-                                <segue destination="Kgy-4Z-cMc" kind="presentation" id="5Y4-f3-0ht"/>
+                                <action selector="tapSettingButton:" destination="2AX-ip-tH2" id="pPL-nT-cXz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -74,7 +66,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gear" catalog="system" width="64" height="60"/>
-        <image name="info.circle" catalog="system" width="64" height="62"/>
+        <image name="gear" catalog="system" width="64" height="58"/>
+        <image name="info.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>
