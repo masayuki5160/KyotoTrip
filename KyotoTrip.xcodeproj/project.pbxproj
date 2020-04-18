@@ -92,6 +92,8 @@
 		4C3F094424301AFE00FAEDC2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4CF773DF241B97900032CC53 /* Assets.xcassets */,
+				4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */,
 				4C41666924473E8F005EF1C2 /* Localize */,
 				4C416665244495A6005EF1C2 /* Protocol */,
 				4CC1ADFB242459C900BF84B9 /* Extension */,
@@ -111,6 +113,7 @@
 		4C3F094924301B5900FAEDC2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4C41666224434E07005EF1C2 /* AppDependencies.swift */,
 				4C41664B24361C3B005EF1C2 /* MainTab */,
 				4C3F0952243020E500FAEDC2 /* AppSettings */,
 				4C3F094B24301C3700FAEDC2 /* KyotoInfoTop */,
@@ -325,9 +328,6 @@
 			children = (
 				4CF773D6241B978B0032CC53 /* AppDelegate.swift */,
 				4CF773D8241B978B0032CC53 /* SceneDelegate.swift */,
-				4CF773DF241B97900032CC53 /* Assets.xcassets */,
-				4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */,
-				4C41666224434E07005EF1C2 /* AppDependencies.swift */,
 				4C3F094424301AFE00FAEDC2 /* Common */,
 				4C3F094924301B5900FAEDC2 /* Modules */,
 				4CF773E4241B97900032CC53 /* Info.plist */,
