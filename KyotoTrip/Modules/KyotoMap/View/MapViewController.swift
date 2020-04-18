@@ -27,14 +27,17 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupUI()
+        bindPresenter()
+    }
+    
+    private func setupUI() {
         self.navigationItem.title = "NavigationBarTitleMap".localized
         busstopButton.layer.cornerRadius = 10.0
         compassButton.layer.cornerRadius = 10.0
         
         mapView.delegate = self
         mapView.setup()
-
-        bindPresenter()
     }
     
     private func bindPresenter() {
@@ -50,7 +53,6 @@ class MapViewController: UIViewController {
     }
     
     private func updateBusstopLayer(_ buttonStatus: BusstopButtonStatus) {
-        
         switch buttonStatus {
         case BusstopButtonStatus.hidden:
             self.mapView.busstopLayer?.isVisible = false
@@ -66,7 +68,6 @@ class MapViewController: UIViewController {
     }
     
     private func updateMapCenterPosition(_ compassButtonStatus: CompassButtonStatus) {
-        
         let clLocationCoordinate2D = CLLocationCoordinate2DMake(
             KyotoMapView.kyotoStationLat,
             KyotoMapView.kyotoStationLong)
@@ -77,7 +78,6 @@ class MapViewController: UIViewController {
         case .currentLocation:
             self.mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
         }
-        
     }
     
 }
@@ -90,7 +90,6 @@ extension MapViewController: DependencyInjectable {
 
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        
         self.mapView.busstopLayer = style.layer(withIdentifier: self.mapView.busstopLayerName)
         self.mapView.busRouteLayer = style.layer(withIdentifier: self.mapView.busRouteLayerName)
         
