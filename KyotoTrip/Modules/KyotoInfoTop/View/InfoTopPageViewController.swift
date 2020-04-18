@@ -19,7 +19,7 @@ class InfoTopPageViewController: UIViewController {
     private var disposeBag = DisposeBag()
         
     struct Dependency {
-        let presenter: KyotoCityInfoPresenter
+        let presenter: KyotoCityInfoPresenterProtocol
     }
     private var dependency: Dependency!
     
