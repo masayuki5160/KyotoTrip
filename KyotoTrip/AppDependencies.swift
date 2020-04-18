@@ -39,33 +39,27 @@ extension AppDefaultDependencies: AppDependencies {
     func assembleSettingsModule() -> UINavigationController {
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-            let navVC = storyboard.instantiateInitialViewController() as! UINavigationController
-            let vc = navVC.viewControllers[0] as! SettingsViewController
-            vc.inject(.init())
-
-            return navVC
+            return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
+        let vc = naviViewController.viewControllers[0] as! SettingsViewController
+        vc.inject(.init())
         
         return naviViewController
     }
     
     func assembleKyotoInfoTopModule() -> UINavigationController {
-        
         let interactor = KyotoCityInfoInteractor()
         let presenter = KyotoCityInfoPresenter(
             dependency: .init(
                 interactor: interactor
             )
         )
-        
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Info", bundle: nil)
-            let navVC = storyboard.instantiateInitialViewController() as! UINavigationController
-            let vc = navVC.viewControllers[0] as! InfoTopPageViewController
-            vc.inject(.init(presenter: presenter))
-            
-            return navVC
+            return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
+        let vc = naviViewController.viewControllers[0] as! InfoTopPageViewController
+        vc.inject(.init(presenter: presenter))
         
         return naviViewController
     }
