@@ -24,32 +24,30 @@ enum CompassButtonStatus: Int {
 protocol KyotoMapPresenterProtocol: AnyObject {
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
+    func subscribeButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>)
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
-    
-    private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
-    var busstopButtonStatusDriver: Driver<BusstopButtonStatus> {
-        return busstopButtonStatusBehaviorRelay.asDriver()
-    }
-    
-    private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
-    var compassButtonStatusDriver: Driver<CompassButtonStatus> {
-        return compassButtonStatusBehaviorRelay.asDriver()
-    }
-    
-    let disposeBag = DisposeBag()
     
     struct Dependency {
         let interactor: KyotoMapInteractorProtocol
     }
     private var dependency: Dependency!
     
+    private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
+    private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
+    var busstopButtonStatusDriver: Driver<BusstopButtonStatus> {
+        return busstopButtonStatusBehaviorRelay.asDriver()
+    }
+    var compassButtonStatusDriver: Driver<CompassButtonStatus> {
+        return compassButtonStatusBehaviorRelay.asDriver()
+    }
+    private let disposeBag = DisposeBag()
+    
     init(dependency: Dependency) {
         self.dependency = dependency
     }
     
-    // TODO: 他に良い方法がないかあとで確認する(setup()みたいなものにまとめる？)
     func subscribeButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
         busstopButton.subscribe(onNext: { [weak self] in
             self?.updateBusstopButtonStatus()

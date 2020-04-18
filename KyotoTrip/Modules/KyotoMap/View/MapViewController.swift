@@ -13,17 +13,15 @@ import RxCocoa
 
 class MapViewController: UIViewController {
     
+    struct Dependency {
+        let presenter: KyotoMapPresenterProtocol
+    }
+    
     @IBOutlet weak var mapView: KyotoMapView!
     @IBOutlet weak var busstopButton: UIButton!
     @IBOutlet weak var compassButton: UIButton!
-    
-    
-    private var presenter: KyotoMapPresenter!
-    let disposeBag = DisposeBag()
-    
-    struct Dependency {
-        let presenter: KyotoMapPresenter
-    }
+
+    private let disposeBag = DisposeBag()
     private var dependency: Dependency!
 
     override func viewDidLoad() {
@@ -36,10 +34,10 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.setup()
 
-        setupPresenter()
+        bindPresenter()
     }
     
-    private func setupPresenter() {
+    private func bindPresenter() {
         dependency.presenter.subscribeButtonTapEvent(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
 
         dependency.presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
