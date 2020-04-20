@@ -14,11 +14,11 @@ class KyotoMapView: MGLMapView {
     static let kyotoStationLat = 34.9857083
     static let kyotoStationLong = 135.7560416
     static let defaultZoomLv = 13.0
+    static let busstopLayerName = "kyoto-busstop"
+    static let busRouteLayerName = "kyoto-bus-route"
     
     var busstopLayer: MGLStyleLayer?
     var busRouteLayer: MGLStyleLayer?
-    let busstopLayerName = "kyoto-busstop"
-    let busRouteLayerName = "kyoto-bus-route"
     
     func setup() {
         self.setCenter(CLLocationCoordinate2D(latitude: KyotoMapView.kyotoStationLat, longitude: KyotoMapView.kyotoStationLong), zoomLevel: KyotoMapView.defaultZoomLv, animated: false)

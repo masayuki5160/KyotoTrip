@@ -38,6 +38,13 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         mapView.setup()
+        
+        // TODO: Move to KyotoMapView.setup() or Presenter
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(sender:)))
+        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
+            singleTap.require(toFail: recognizer)
+        }
+        mapView.addGestureRecognizer(singleTap)
     }
     
     private func bindPresenter() {
@@ -80,6 +87,58 @@ class MapViewController: UIViewController {
         }
     }
     
+    @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let layerIdentifiers: Set = [KyotoMapView.busstopLayerName, KyotoMapView.busRouteLayerName]
+
+            // Try matching the exact point first.
+            let point = sender.location(in: sender.view!)
+            for feature in mapView.visibleFeatures(at: point, styleLayerIdentifiers: layerIdentifiers) where feature is MGLPointFeature {
+                guard let selectedFeature = feature as? MGLPointFeature else {
+                    fatalError("Failed to cast selected feature as MGLPointFeature")
+                }
+                
+                showCallout(feature: selectedFeature)
+                return
+            }
+            
+            let touchCoordinate = mapView.convert(point, toCoordinateFrom: sender.view!)
+            let touchLocation = CLLocation(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)
+            
+            // Otherwise, get all features within a rect the size of a touch (44x44).
+            let touchRect = CGRect(origin: point, size: .zero).insetBy(dx: -22.0, dy: -22.0)
+            let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(layerIdentifiers)).filter { $0 is MGLPointFeature }
+
+            // Select the closest feature to the touch center.
+            let closestFeatures = possibleFeatures.sorted(by: {
+                return CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude).distance(from: touchLocation) < CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude).distance(from: touchLocation)
+            })
+            if let feature = closestFeatures.first {
+                guard let closestFeature = feature as? MGLPointFeature else {
+                    fatalError("Failed to cast selected feature as MGLPointFeature")
+                }
+                showCallout(feature: closestFeature)
+                return
+            }
+            
+            // If no features were found, deselect the selected annotation, if any.
+            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
+        }
+    }
+    
+    private func showCallout(feature: MGLPointFeature) {
+        let point = MGLPointFeature()
+        point.title = feature.attributes["name"] as? String
+        point.coordinate = feature.coordinate
+        
+        // TODO: Modelの作成, バスのデータがあれば、などの処理も追加
+        let testVal = feature.attribute(forKey: "P11_001") as! String
+        print("P11_001=\(testVal)")
+        
+        // Selecting an feature that doesn’t already exist on the map will add a new annotation view.
+        // We’ll need to use the map’s delegate methods to add an empty annotation view and remove it when we’re done selecting it.
+        mapView.selectAnnotation(point, animated: true, completionHandler: nil)
+    }
 }
 
 extension MapViewController: DependencyInjectable {
@@ -90,8 +149,8 @@ extension MapViewController: DependencyInjectable {
 
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        self.mapView.busstopLayer = style.layer(withIdentifier: self.mapView.busstopLayerName)
-        self.mapView.busRouteLayer = style.layer(withIdentifier: self.mapView.busRouteLayerName)
+        self.mapView.busstopLayer = style.layer(withIdentifier: KyotoMapView.busstopLayerName)
+        self.mapView.busRouteLayer = style.layer(withIdentifier: KyotoMapView.busRouteLayerName)
         
         // Init busstop and bus route layers
         self.mapView.busstopLayer?.isVisible = false
