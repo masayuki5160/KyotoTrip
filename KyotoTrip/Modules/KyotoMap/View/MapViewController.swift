@@ -24,6 +24,8 @@ class MapViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
 
+    private var selectedAnnotation: MGLPointFeature!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -88,6 +90,11 @@ class MapViewController: UIViewController {
     }
     
     @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
+        // TODO: 他をタップしていたら削除するようにできているか確認
+        if let selectedAnnotation = selectedAnnotation {
+            mapView.removeAnnotation(selectedAnnotation)
+        }
+
         if sender.state == .ended {
             let layerIdentifiers: Set = [KyotoMapView.busstopLayerName, KyotoMapView.busRouteLayerName]
 
@@ -127,17 +134,15 @@ class MapViewController: UIViewController {
     }
     
     private func showCallout(feature: MGLPointFeature) {
-        let point = MGLPointFeature()
-        point.title = feature.attributes["name"] as? String
-        point.coordinate = feature.coordinate
-        
+        selectedAnnotation = MGLPointFeature()
         // TODO: Modelの作成, バスのデータがあれば、などの処理も追加
-        let testVal = feature.attribute(forKey: "P11_001") as! String
-        print("P11_001=\(testVal)")
+        let busstopName = feature.attribute(forKey: "P11_001") as! String
+
+        selectedAnnotation.title = busstopName
+        selectedAnnotation.subtitle = "This is subtitle"// TODO: Fix later
+        selectedAnnotation.coordinate = feature.coordinate
         
-        // Selecting an feature that doesn’t already exist on the map will add a new annotation view.
-        // We’ll need to use the map’s delegate methods to add an empty annotation view and remove it when we’re done selecting it.
-        mapView.selectAnnotation(point, animated: true, completionHandler: nil)
+        mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }
 }
 
@@ -155,5 +160,10 @@ extension MapViewController: MGLMapViewDelegate {
         // Init busstop and bus route layers
         self.mapView.busstopLayer?.isVisible = false
         self.mapView.busRouteLayer?.isVisible = false
+    }
+    
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        // Always allow callouts to popup when annotations are tapped.
+        return true
     }
 }
