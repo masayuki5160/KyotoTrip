@@ -167,8 +167,11 @@ extension MapViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-        print("touched annotation view")
-        // TODO: 詳細画面を作成する
-        self.navigationController?.pushViewController(UIViewController(), animated: true)
+        // TODO: AppDependenciesに移す
+        let viewController = {() -> BusstopDetailViewController in
+            let storyboard = UIStoryboard(name: "BusstopDetail", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! BusstopDetailViewController
+        }()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
