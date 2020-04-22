@@ -35,6 +35,8 @@ class MapViewController: UIViewController {
     
     private func setupUI() {
         self.navigationItem.title = "NavigationBarTitleMap".localized
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "NavigationBarItemBack".localized, style: .plain, target: nil, action: nil)
+
         busstopButton.layer.cornerRadius = 10.0
         compassButton.layer.cornerRadius = 10.0
         

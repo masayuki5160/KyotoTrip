@@ -10,7 +10,11 @@ import UIKit
 
 class BusstopDetailViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "BusstopDetailTitle".localized
     }
 }

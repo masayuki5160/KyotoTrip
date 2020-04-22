@@ -18,6 +18,8 @@
 "Save"    = "Save";
 "Title"   = "Title";
 "Decide"  = "Enter";
+"NavigationBarItemBack" = "Back";
 "NavigationBarTitleMap" = "Kyoto City Map";
 "NavigationBarTitleInfo" = "Information";
 "SettingsPageTitle" = "Settings";
+"BusstopDetailTitle" = "Busstop Infomation";

@@ -18,6 +18,8 @@
 "Save"    = "保存";
 "Title"   = "タイトル";
 "Decide"  = "決定";
+"NavigationBarItemBack" = "戻る";
 "NavigationBarTitleMap" = "京都市マップ";
 "NavigationBarTitleInfo" = "お知らせ/イベント情報";
 "SettingsPageTitle" = "設定";
+"BusstopDetailTitle" = "バス停情報";
