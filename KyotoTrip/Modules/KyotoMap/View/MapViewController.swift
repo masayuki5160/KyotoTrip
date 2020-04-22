@@ -90,11 +90,6 @@ class MapViewController: UIViewController {
     }
     
     @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
-        // TODO: 他をタップしていたら削除するようにできているか確認
-        if let selectedAnnotation = selectedAnnotation {
-            mapView.removeAnnotation(selectedAnnotation)
-        }
-
         if sender.state == .ended {
             let layerIdentifiers: Set = [KyotoMapView.busstopLayerName, KyotoMapView.busRouteLayerName]
 
@@ -165,6 +160,10 @@ extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         // Always allow callouts to popup when annotations are tapped.
         return true
+    }
+
+    func mapView(_ mapView: MGLMapView, didDeselect annotation: MGLAnnotation) {
+        mapView.removeAnnotations([annotation])
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
