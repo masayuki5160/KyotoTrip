@@ -166,4 +166,10 @@ extension MapViewController: MGLMapViewDelegate {
         // Always allow callouts to popup when annotations are tapped.
         return true
     }
+    
+    func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+        print("touched annotation view")
+        // TODO: 詳細画面を作成する
+        self.navigationController?.pushViewController(UIViewController(), animated: true)
+    }
 }
