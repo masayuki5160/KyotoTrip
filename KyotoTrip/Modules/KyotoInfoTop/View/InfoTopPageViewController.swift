@@ -50,6 +50,7 @@ class InfoTopPageViewController: UIViewController {
     }
     
     @IBAction func tapSettingButton(_ sender: UIBarButtonItem) {
+        // TODO: Presenterにイベントを渡して画面遷移はPresenterに委譲したい
         let settingVC = AppDefaultDependencies().assembleSettingsModule()
         self.present(settingVC, animated: true, completion: nil)
     }
