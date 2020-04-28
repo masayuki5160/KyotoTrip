@@ -154,7 +154,6 @@ class MapViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        floatingPanelController.removePanelFromParent(animated: true)
     }
 }
 
