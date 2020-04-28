@@ -10,6 +10,7 @@ import UIKit
 import Mapbox
 import RxSwift
 import RxCocoa
+import FloatingPanel
 
 class MapViewController: UIViewController {
     
@@ -25,6 +26,8 @@ class MapViewController: UIViewController {
     private var dependency: Dependency!
 
     private var selectedAnnotation: MGLPointFeature!
+    
+    private var floatingPanelController: FloatingPanelController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +52,13 @@ class MapViewController: UIViewController {
             singleTap.require(toFail: recognizer)
         }
         mapView.addGestureRecognizer(singleTap)
+        
+        // setup semi modal view
+        floatingPanelController = FloatingPanelController()
+        floatingPanelController.surfaceView.cornerRadius = 24.0
+        let categoryViewController = AppDefaultDependencies().assembleCategoryModule()
+        floatingPanelController.set(contentViewController: categoryViewController)
+        floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
     
     private func bindPresenter() {
@@ -140,6 +150,11 @@ class MapViewController: UIViewController {
         selectedAnnotation.coordinate = feature.coordinate
         
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        floatingPanelController.removePanelFromParent(animated: true)
     }
 }
 

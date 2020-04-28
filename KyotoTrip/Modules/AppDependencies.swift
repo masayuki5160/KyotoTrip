@@ -15,6 +15,7 @@ protocol AppDependencies {
     func assembleKyotoInfoTopModule() -> UINavigationController
     func assembleKyotoMapModule() -> UINavigationController
     func assembleBusstopDetailModule() -> UIViewController
+    func assembleCategoryModule() -> UIViewController
 }
 
 public struct AppDefaultDependencies {
@@ -86,6 +87,15 @@ extension AppDefaultDependencies: AppDependencies {
         let view = { () -> BusstopDetailViewController in
             let storyboard = UIStoryboard(name: "BusstopDetail", bundle: nil)
             return storyboard.instantiateInitialViewController() as! BusstopDetailViewController
+        }()
+        
+        return view
+    }
+    
+    func assembleCategoryModule() -> UIViewController {
+        let view = { () -> CategoryViewController in
+            let storyboard = UIStoryboard(name: "Category", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! CategoryViewController
         }()
         
         return view

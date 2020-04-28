@@ -60,6 +60,7 @@ PODS:
     - GoogleUtilities/Environment (~> 6.2)
     - "GoogleUtilities/NSData+zlib (~> 6.2)"
     - Protobuf (>= 3.9.2, ~> 3.9)
+  - FloatingPanel (1.7.4)
   - GoogleDataTransport (4.0.1)
   - GoogleDataTransportCCTSupport (1.4.1):
     - GoogleDataTransport (~> 4.0)
@@ -102,6 +103,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.9)
   - Firebase/MLNLTranslate
+  - FloatingPanel (~> 1.7.4)
   - lottie-ios
   - Mapbox-iOS-SDK (~> 5.7)
   - RxCocoa (~> 4.5)
@@ -123,6 +125,7 @@ SPEC REPOS:
     - FirebaseMLNaturalLanguage
     - FirebaseMLNLTranslate
     - FirebaseRemoteConfig
+    - FloatingPanel
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleToolboxForMac
@@ -160,6 +163,7 @@ SPEC CHECKSUMS:
   FirebaseMLNaturalLanguage: 9d38301a41b1201d248588bf66937b975391e8f4
   FirebaseMLNLTranslate: ed248c2c2eaf3bc2450505e3e0c4c8487c7879fd
   FirebaseRemoteConfig: 83d34cb1fa6fed2277370029b59b1883ae4861a4
+  FloatingPanel: 3c9d0e30fe350e1613157557769d2ec97f76b96b
   GoogleDataTransport: 653963cf5be60fb59cf051e070f0836fdc305f81
   GoogleDataTransportCCTSupport: 84e4d4bbab642f2e9d83ee65d78aca2b5527d314
   GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
@@ -175,6 +179,6 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SwiftyXMLParser: 8271497e0a37b5c04b0b167c77b4896e36175a21
 
-PODFILE CHECKSUM: 6e5cbafae8d7f22b468be4acbf64e535554b648c
+PODFILE CHECKSUM: d1927c8ae4f66bc57c4ac63a5750531eb3607e37
 
 COCOAPODS: 1.5.3
