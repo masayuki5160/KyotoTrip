@@ -65,13 +65,17 @@ class MapViewController: UIViewController {
         dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             self?.updateMapCenterPosition(compassButtonStatus)
         }).disposed(by: disposeBag)
+        
+        dependency.presenter.categoryButtonStatusDriver.drive(onNext: { (testCategoryButton) in
+            print("tapped category button at semi modal view")
+        }).disposed(by: disposeBag)
     }
     
     private func setupCategorySemiModalView() {
         floatingPanelController = FloatingPanelController()
-        floatingPanelController.surfaceView.cornerRadius = 24.0
+        let categoryViewController = AppDefaultDependencies().assembleCategoryModule(presenter: dependency.presenter)
 
-        let categoryViewController = AppDefaultDependencies().assembleCategoryModule()
+        floatingPanelController.surfaceView.cornerRadius = 24.0
         floatingPanelController.set(contentViewController: categoryViewController)
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }

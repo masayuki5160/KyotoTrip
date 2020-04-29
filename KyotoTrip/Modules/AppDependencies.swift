@@ -15,7 +15,7 @@ protocol AppDependencies {
     func assembleKyotoInfoTopModule() -> UINavigationController
     func assembleKyotoMapModule() -> UINavigationController
     func assembleBusstopDetailModule() -> UIViewController
-    func assembleCategoryModule() -> UIViewController
+    func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController
 }
 
 public struct AppDefaultDependencies {
@@ -92,11 +92,12 @@ extension AppDefaultDependencies: AppDependencies {
         return view
     }
     
-    func assembleCategoryModule() -> UIViewController {
+    func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController {
         let view = { () -> CategoryViewController in
             let storyboard = UIStoryboard(name: "Category", bundle: nil)
             return storyboard.instantiateInitialViewController() as! CategoryViewController
         }()
+        view.inject(.init(presenter: presenter))
         
         return view
     }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="99e-ZG-cHl">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Category View Controller-->
+        <scene sceneID="RuY-in-Rao">
+            <objects>
+                <viewController storyboardIdentifier="Category" id="99e-ZG-cHl" customClass="CategoryViewController" customModule="KyotoTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UEe-gc-huL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KG5-L2-H73">
+                                <rect key="frame" x="0.0" y="221" width="414" height="641"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCv-rd-kLZ">
+                                <rect key="frame" x="41" y="119" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="test"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="KG5-L2-H73" firstAttribute="trailing" secondItem="cWC-7U-zh8" secondAttribute="trailing" id="6Gg-DT-96g"/>
+                            <constraint firstItem="KG5-L2-H73" firstAttribute="bottom" secondItem="cWC-7U-zh8" secondAttribute="bottom" id="dJf-sb-h4S"/>
+                            <constraint firstItem="KG5-L2-H73" firstAttribute="leading" secondItem="cWC-7U-zh8" secondAttribute="leading" id="duH-QB-0eQ"/>
+                            <constraint firstItem="KG5-L2-H73" firstAttribute="top" secondItem="cWC-7U-zh8" secondAttribute="top" constant="177" id="p0g-pC-hLn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cWC-7U-zh8"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="KG5-L2-H73" id="kfq-fy-2Xg"/>
+                        <outlet property="testCategoryButton" destination="aCv-rd-kLZ" id="C2r-Qa-rTu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oda-eS-FKO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="189.85507246376812" y="-4.0178571428571423"/>
+        </scene>
+    </scenes>
+</document>
