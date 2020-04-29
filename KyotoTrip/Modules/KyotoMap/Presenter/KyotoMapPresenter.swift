@@ -27,8 +27,8 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     var categoryButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     
     // TODO: subscribeという名称は後で修正する
-    func subscribeButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>)
-    func subscribeCategoryButtonTapEvent(button: Observable<Void>)
+    func bindButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>)
+    func bindCategoryButtonTapEvent(button: Observable<Void>)
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
@@ -56,7 +56,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         self.dependency = dependency
     }
     
-    func subscribeButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
+    func bindButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
         busstopButton.subscribe(onNext: { [weak self] in
             self?.updateBusstopButtonStatus()
         }).disposed(by: disposeBag)
@@ -67,7 +67,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
     
     // TODO: Fix later
-    func subscribeCategoryButtonTapEvent(button: Observable<Void>) {
+    func bindCategoryButtonTapEvent(button: Observable<Void>) {
         button.subscribe(onNext: { [weak self] in
             self?.categoryButtonStatusBehaviorRelay.accept(.busstop)
         }).disposed(by: disposeBag)

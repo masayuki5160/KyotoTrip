@@ -26,7 +26,7 @@ class CategoryViewController: UIViewController {
         
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
         
-        dependency.presenter.subscribeCategoryButtonTapEvent(button: testCategoryButton.rx.tap.asObservable())
+        dependency.presenter.bindCategoryButtonTapEvent(button: testCategoryButton.rx.tap.asObservable())
     }
 }
 
