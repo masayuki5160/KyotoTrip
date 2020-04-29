@@ -26,7 +26,6 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
     var categoryButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     
-    // TODO: subscribeという名称は後で修正する
     func bindButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>)
     func bindCategoryButtonTapEvent(button: Observable<Void>)
 }
