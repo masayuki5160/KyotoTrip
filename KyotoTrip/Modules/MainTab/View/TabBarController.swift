@@ -17,6 +17,6 @@ class TabBarController: UITabBarController {
         let infoTopViewController = AppDefaultDependencies().assembleKyotoInfoTopModule()
         let mapViewController = AppDefaultDependencies().assembleKyotoMapModule()
         
-        self.viewControllers = [infoTopViewController, mapViewController]
+        self.viewControllers = [mapViewController, infoTopViewController]
     }
 }
