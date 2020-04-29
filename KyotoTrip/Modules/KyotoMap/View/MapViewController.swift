@@ -34,6 +34,7 @@ class MapViewController: UIViewController {
 
         setupUI()
         bindPresenter()
+        setupCategorySemiModalView()
     }
     
     private func setupUI() {
@@ -52,13 +53,6 @@ class MapViewController: UIViewController {
             singleTap.require(toFail: recognizer)
         }
         mapView.addGestureRecognizer(singleTap)
-        
-        // setup semi modal view
-        floatingPanelController = FloatingPanelController()
-        floatingPanelController.surfaceView.cornerRadius = 24.0
-        let categoryViewController = AppDefaultDependencies().assembleCategoryModule()
-        floatingPanelController.set(contentViewController: categoryViewController)
-        floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
     
     private func bindPresenter() {
@@ -71,6 +65,15 @@ class MapViewController: UIViewController {
         dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             self?.updateMapCenterPosition(compassButtonStatus)
         }).disposed(by: disposeBag)
+    }
+    
+    private func setupCategorySemiModalView() {
+        floatingPanelController = FloatingPanelController()
+        floatingPanelController.surfaceView.cornerRadius = 24.0
+
+        let categoryViewController = AppDefaultDependencies().assembleCategoryModule()
+        floatingPanelController.set(contentViewController: categoryViewController)
+        floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
     
     private func updateBusstopLayer(_ buttonStatus: BusstopButtonStatus) {
