@@ -20,6 +20,7 @@ class CategoryViewController: UIViewController {
     }
     
     private var dependency: Dependency!
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,10 @@ class CategoryViewController: UIViewController {
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
         
         dependency.presenter.bindCategoryButtonTapEvent(button: testCategoryButton.rx.tap.asObservable())
+        dependency.presenter.visibleFeatureDriver.drive(onNext: { [weak self] (features) in
+            print("test CategoryViewController")
+            print(features)
+        }).disposed(by: disposeBag)
     }
 }
 

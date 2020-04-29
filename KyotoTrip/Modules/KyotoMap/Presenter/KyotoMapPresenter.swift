@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Mapbox
 
 enum BusstopButtonStatus: Int {
     case hidden = 0
@@ -25,9 +26,11 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
     var categoryButtonStatusDriver: Driver<BusstopButtonStatus> { get }
+    var visibleFeatureDriver: Driver<[VisibleFeature]> { get }
     
     func bindButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>)
     func bindCategoryButtonTapEvent(button: Observable<Void>)
+    func bindVisibleFeatures(features: Observable<[MGLFeature]>)
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
@@ -40,6 +43,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
     private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
     private let categoryButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)// TODO: Fix later
+    private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeature]>(value: [])
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> {
         return busstopButtonStatusBehaviorRelay.asDriver()
     }
@@ -49,6 +53,10 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     var categoryButtonStatusDriver: Driver<BusstopButtonStatus> {
         return categoryButtonStatusBehaviorRelay.asDriver()
     }
+    var visibleFeatureDriver: Driver<[VisibleFeature]> {
+        return visibleFeatureBehaviorRelay.asDriver()
+    }
+
     private let disposeBag = DisposeBag()
     
     init(dependency: Dependency) {
@@ -69,6 +77,21 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     func bindCategoryButtonTapEvent(button: Observable<Void>) {
         button.subscribe(onNext: { [weak self] in
             self?.categoryButtonStatusBehaviorRelay.accept(.busstop)
+        }).disposed(by: disposeBag)
+    }
+    
+    func bindVisibleFeatures(features: Observable<[MGLFeature]>) {
+        features.map({ (features) -> [VisibleFeature] in
+            // TODO: 実装
+            var res: [VisibleFeature] = []
+            for feature in features {
+                var tmpFeature = VisibleFeature()
+                tmpFeature.title = feature.attribute(forKey: "P11_001") as! String
+                res.append(tmpFeature)
+            }
+            return res
+        }).subscribe(onNext: { [weak self] (features) in
+            self?.visibleFeatureBehaviorRelay.accept(features)
         }).disposed(by: disposeBag)
     }
     

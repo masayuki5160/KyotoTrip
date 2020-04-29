@@ -20,6 +20,7 @@
 		4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */; };
 		4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */; };
 		4CA84AEA2459247F00DAC5F3 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AE92459247F00DAC5F3 /* Category.storyboard */; };
+		4CA84AED24597FEC00DAC5F3 /* VisibleFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AEC24597FEC00DAC5F3 /* VisibleFeature.swift */; };
 		4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */; };
 		4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD6241BB13700BF84B9 /* Map.storyboard */; };
 		4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */; };
@@ -59,6 +60,7 @@
 		4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BusstopDetail.storyboard; sourceTree = "<group>"; };
 		4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		4CA84AE92459247F00DAC5F3 /* Category.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
+		4CA84AEC24597FEC00DAC5F3 /* VisibleFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeature.swift; sourceTree = "<group>"; };
 		4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		4CC1ADD6241BB13700BF84B9 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTopPageViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		4C3F094A24301C0000FAEDC2 /* KyotoMap */ = {
 			isa = PBXGroup;
 			children = (
+				4CA84AEB24597FC600DAC5F3 /* Entity */,
 				4C3F094F24301E7900FAEDC2 /* Interactor */,
 				4C3F095124301F8000FAEDC2 /* Presenter */,
 				4C3F094D24301E4F00FAEDC2 /* View */,
@@ -339,6 +342,14 @@
 			children = (
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4CA84AEB24597FC600DAC5F3 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				4CA84AEC24597FEC00DAC5F3 /* VisibleFeature.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		4CC1ADFB242459C900BF84B9 /* Extension */ = {
@@ -580,6 +591,7 @@
 				4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */,
 				4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */,
 				4C416650243964A4005EF1C2 /* KyotoCityInfoGateway.swift in Sources */,
+				4CA84AED24597FEC00DAC5F3 /* VisibleFeature.swift in Sources */,
 				4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */,
 				4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,

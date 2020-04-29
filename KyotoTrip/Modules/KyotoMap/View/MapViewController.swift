@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var busstopButton: UIButton!
     @IBOutlet weak var compassButton: UIButton!
 
+    private let visibleFeaturesPublishRelay = PublishRelay<[MGLFeature]>()
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
 
@@ -57,13 +58,20 @@ class MapViewController: UIViewController {
     
     private func bindPresenter() {
         dependency.presenter.bindButtonTapEvent(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
+        dependency.presenter.bindVisibleFeatures(features: visibleFeaturesPublishRelay.asObservable())
 
         dependency.presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
-            self?.updateBusstopLayer(buttonStatus)
+            guard let self = self else { return }
+
+            self.updateBusstopLayer(buttonStatus)
+            self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
         
         dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
-            self?.updateMapCenterPosition(compassButtonStatus)
+            guard let self = self else { return }
+
+            self.updateMapCenterPosition(compassButtonStatus)
+            self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
         
         dependency.presenter.categoryButtonStatusDriver.drive(onNext: { (testCategoryButton) in
@@ -93,6 +101,13 @@ class MapViewController: UIViewController {
             self.mapView.busRouteLayer?.isVisible = true
         }
         
+    }
+    
+    private func updateVisibleFeatures() {
+        let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: [KyotoMapView.busstopLayerName, KyotoMapView.busstopLayerName])
+        
+        visibleFeaturesPublishRelay.accept(features)
     }
     
     private func updateMapCenterPosition(_ compassButtonStatus: CompassButtonStatus) {
