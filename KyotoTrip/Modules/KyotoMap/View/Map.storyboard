@@ -17,25 +17,20 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcE-OM-EDr" customClass="KyotoMapView" customModule="KyotoTrip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIE-EC-psI">
-                                        <rect key="frame" x="362" y="62.5" width="35" height="34"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="SgN-s3-DkJ"/>
-                                            <constraint firstAttribute="width" constant="35" id="WYg-ET-SdG"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="location.circle" catalog="system"/>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="KIE-EC-psI" secondAttribute="trailing" constant="17" id="FVe-wO-W5t"/>
-                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/masayuki5160/ck7zskhvl0z781invsfh0fv46"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIE-EC-psI">
+                                <rect key="frame" x="362" y="150" width="35" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="CmU-na-vzh"/>
+                                    <constraint firstAttribute="width" constant="35" id="kpH-jd-Sqa"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="location.circle" catalog="system"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJl-YJ-Q4x">
                                 <rect key="frame" x="362" y="100" width="35" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,11 +45,12 @@
                         <constraints>
                             <constraint firstItem="iJl-YJ-Q4x" firstAttribute="top" secondItem="iAF-8h-vPe" secondAttribute="top" constant="12" id="DiT-dl-WP8"/>
                             <constraint firstItem="tcE-OM-EDr" firstAttribute="top" secondItem="iAF-8h-vPe" secondAttribute="top" id="JkP-d7-HRf"/>
+                            <constraint firstItem="iAF-8h-vPe" firstAttribute="trailing" secondItem="KIE-EC-psI" secondAttribute="trailing" constant="17" id="Ovj-l0-2hE"/>
                             <constraint firstItem="tcE-OM-EDr" firstAttribute="leading" secondItem="iAF-8h-vPe" secondAttribute="leading" id="Q6Q-hx-dWg"/>
                             <constraint firstItem="iAF-8h-vPe" firstAttribute="trailing" secondItem="tcE-OM-EDr" secondAttribute="trailing" id="Ru4-XC-jVe"/>
                             <constraint firstItem="iAF-8h-vPe" firstAttribute="bottom" secondItem="tcE-OM-EDr" secondAttribute="bottom" id="hgO-pf-aZW"/>
                             <constraint firstItem="iAF-8h-vPe" firstAttribute="trailing" secondItem="iJl-YJ-Q4x" secondAttribute="trailing" constant="17" id="otd-2T-umN"/>
-                            <constraint firstItem="KIE-EC-psI" firstAttribute="top" secondItem="iJl-YJ-Q4x" secondAttribute="bottom" constant="15" id="qpQ-wF-ZNy"/>
+                            <constraint firstItem="KIE-EC-psI" firstAttribute="top" secondItem="iJl-YJ-Q4x" secondAttribute="bottom" constant="14.5" id="uKc-bk-5t4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iAF-8h-vPe"/>
                     </view>
