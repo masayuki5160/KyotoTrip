@@ -42,7 +42,9 @@ private extension CategoryViewController {
     }
     
     private func bindPresenter() {
-        dependency.presenter.bindCategoryButtonTapEvent(button: testCategoryButton.rx.tap.asObservable())
+        dependency.presenter.bindCategoryView(input: CategoryViewInput(
+            testButton: testCategoryButton.rx.tap.asObservable())
+        )
 
         dependency.presenter.visibleFeatureDriver.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in
             cell.title.text = element.title

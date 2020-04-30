@@ -22,15 +22,24 @@ enum CompassButtonStatus: Int {
     case currentLocation
 }
 
+struct MapViewInput {
+    let busstopButton: Observable<Void>
+    let compassButton: Observable<Void>
+    let features: Observable<[MGLFeature]>
+}
+
+struct CategoryViewInput {
+    let testButton: Observable<Void>
+}
+
 protocol KyotoMapPresenterProtocol: AnyObject {
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
     var categoryButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     var visibleFeatureDriver: Driver<[VisibleFeature]> { get }
     
-    func bindButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>)
-    func bindCategoryButtonTapEvent(button: Observable<Void>)
-    func bindVisibleFeatures(features: Observable<[MGLFeature]>)
+    func bindMapView(input: MapViewInput)
+    func bindCategoryView(input: CategoryViewInput)
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
@@ -38,8 +47,8 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     struct Dependency {
         let interactor: KyotoMapInteractorProtocol
     }
+
     private var dependency: Dependency!
-    
     private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
     private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
     private let categoryButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)// TODO: Fix later
@@ -63,25 +72,16 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         self.dependency = dependency
     }
     
-    func bindButtonTapEvent(busstopButton: Observable<Void>, compassButton: Observable<Void>) {
-        busstopButton.subscribe(onNext: { [weak self] in
+    func bindMapView(input: MapViewInput) {
+        input.busstopButton.subscribe(onNext: { [weak self] in
             self?.updateBusstopButtonStatus()
         }).disposed(by: disposeBag)
         
-        compassButton.subscribe(onNext: { [weak self] in
+        input.compassButton.subscribe(onNext: { [weak self] in
             self?.updateCompassButtonStatus()
         }).disposed(by: disposeBag)
-    }
-    
-    // TODO: Fix later
-    func bindCategoryButtonTapEvent(button: Observable<Void>) {
-        button.subscribe(onNext: { [weak self] in
-            self?.categoryButtonStatusBehaviorRelay.accept(.busstop)
-        }).disposed(by: disposeBag)
-    }
-    
-    func bindVisibleFeatures(features: Observable<[MGLFeature]>) {
-        features.map({ (features) -> [VisibleFeature] in
+        
+        input.features.map({ (features) -> [VisibleFeature] in
             // TODO: 実装
             var res: [VisibleFeature] = []
             for feature in features {
@@ -92,6 +92,13 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             return res
         }).subscribe(onNext: { [weak self] (features) in
             self?.visibleFeatureBehaviorRelay.accept(features)
+        }).disposed(by: disposeBag)
+    }
+    
+    // TODO: Fix later
+    func bindCategoryView(input: CategoryViewInput) {
+        input.testButton.subscribe(onNext: { [weak self] in
+            self?.categoryButtonStatusBehaviorRelay.accept(.busstop)
         }).disposed(by: disposeBag)
     }
     

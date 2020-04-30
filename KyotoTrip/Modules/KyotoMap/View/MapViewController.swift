@@ -57,8 +57,11 @@ class MapViewController: UIViewController {
     }
     
     private func bindPresenter() {
-        dependency.presenter.bindButtonTapEvent(busstopButton: busstopButton.rx.tap.asObservable(), compassButton: compassButton.rx.tap.asObservable())
-        dependency.presenter.bindVisibleFeatures(features: visibleFeaturesPublishRelay.asObservable())
+        dependency.presenter.bindMapView(input: MapViewInput(
+            busstopButton: busstopButton.rx.tap.asObservable(),
+            compassButton: compassButton.rx.tap.asObservable(),
+            features: visibleFeaturesPublishRelay.asObservable())
+        )
 
         dependency.presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
             guard let self = self else { return }
