@@ -20,9 +20,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCv-rd-kLZ">
-                                <rect key="frame" x="41" y="119" width="30" height="30"/>
+                                <rect key="frame" x="44" y="92.5" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="test"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" backgroundImage="cube.fill" catalog="system"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -35,8 +36,8 @@
                         <viewLayoutGuide key="safeArea" id="cWC-7U-zh8"/>
                     </view>
                     <connections>
+                        <outlet property="culturalPropertyButton" destination="aCv-rd-kLZ" id="C2r-Qa-rTu"/>
                         <outlet property="tableView" destination="KG5-L2-H73" id="kfq-fy-2Xg"/>
-                        <outlet property="testCategoryButton" destination="aCv-rd-kLZ" id="C2r-Qa-rTu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oda-eS-FKO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -44,4 +45,7 @@
             <point key="canvasLocation" x="189.85507246376812" y="-4.0178571428571423"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cube.fill" catalog="system" width="64" height="62"/>
+    </resources>
 </document>

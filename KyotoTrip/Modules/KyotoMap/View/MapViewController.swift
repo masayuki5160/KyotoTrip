@@ -77,8 +77,15 @@ class MapViewController: UIViewController {
             self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
         
-        dependency.presenter.categoryButtonStatusDriver.drive(onNext: { (testCategoryButton) in
-            print("tapped category button at semi modal view")
+        dependency.presenter.culturalPropertyButtonStatusDriver.drive(onNext: { [weak self] (visibleStatus) in
+            guard let self = self else { return }
+            
+            switch visibleStatus {
+            case .hidden:
+                self.mapView.culturalPropertyLayer?.isVisible = false
+            case .visible:
+                self.mapView.culturalPropertyLayer?.isVisible = true
+            }
         }).disposed(by: disposeBag)
     }
     
@@ -108,8 +115,19 @@ class MapViewController: UIViewController {
     
     private func updateVisibleFeatures() {
         let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: [KyotoMapView.busstopLayerName, KyotoMapView.busstopLayerName])
+        var layers: Set<String> = []
         
+        if let busRouteLayer = mapView.busRouteLayer, busRouteLayer.isVisible {
+            layers.insert(KyotoMapView.busRouteLayerName)
+        }
+        if let busstopLayer = mapView.busstopLayer, busstopLayer.isVisible {
+            layers.insert(KyotoMapView.busstopLayerName)
+        }
+        if let culturalPropertyLayer = mapView.culturalPropertyLayer, culturalPropertyLayer.isVisible {
+            layers.insert(KyotoMapView.culturalPropertyLayerName)
+        }
+                
+        let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
         visibleFeaturesPublishRelay.accept(features)
     }
     
@@ -194,9 +212,10 @@ extension MapViewController: MGLMapViewDelegate {
         self.mapView.busRouteLayer = style.layer(withIdentifier: KyotoMapView.busRouteLayerName)
         self.mapView.culturalPropertyLayer = style.layer(withIdentifier: KyotoMapView.culturalPropertyLayerName)
         
-        // Init busstop and bus route layers
+        // Init visible layers
         self.mapView.busstopLayer?.isVisible = false
         self.mapView.busRouteLayer?.isVisible = false
+        self.mapView.culturalPropertyLayer?.isVisible = false
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {

@@ -22,6 +22,11 @@ enum CompassButtonStatus: Int {
     case currentLocation
 }
 
+enum VisibleLayerStatus: Int {
+    case hidden = 0
+    case visible
+}
+
 struct MapViewInput {
     let busstopButton: Observable<Void>
     let compassButton: Observable<Void>
@@ -29,13 +34,13 @@ struct MapViewInput {
 }
 
 struct CategoryViewInput {
-    let testButton: Observable<Void>
+    let culturalPropertyButton: Observable<Void>
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> { get }
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
-    var categoryButtonStatusDriver: Driver<BusstopButtonStatus> { get }
+    var culturalPropertyButtonStatusDriver: Driver<VisibleLayerStatus> { get }
     var visibleFeatureDriver: Driver<[VisibleFeature]> { get }
     
     func bindMapView(input: MapViewInput)
@@ -51,7 +56,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private var dependency: Dependency!
     private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
     private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
-    private let categoryButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)// TODO: Fix later
+    private let culturalPropertyButtonStatusBehaviorRelay = BehaviorRelay<VisibleLayerStatus>(value: .hidden)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeature]>(value: [])
     var busstopButtonStatusDriver: Driver<BusstopButtonStatus> {
         return busstopButtonStatusBehaviorRelay.asDriver()
@@ -59,8 +64,8 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     var compassButtonStatusDriver: Driver<CompassButtonStatus> {
         return compassButtonStatusBehaviorRelay.asDriver()
     }
-    var categoryButtonStatusDriver: Driver<BusstopButtonStatus> {
-        return categoryButtonStatusBehaviorRelay.asDriver()
+    var culturalPropertyButtonStatusDriver: Driver<VisibleLayerStatus> {
+        return culturalPropertyButtonStatusBehaviorRelay.asDriver()
     }
     var visibleFeatureDriver: Driver<[VisibleFeature]> {
         return visibleFeatureBehaviorRelay.asDriver()
@@ -82,24 +87,42 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         }).disposed(by: disposeBag)
         
         input.features.map({ (features) -> [VisibleFeature] in
-            // TODO: 実装
             var res: [VisibleFeature] = []
             for feature in features {
                 var tmpFeature = VisibleFeature()
-                tmpFeature.title = feature.attribute(forKey: "P11_001") as! String
+
+                // TODO: データのマッピング処理を再度実装
+                if let title = feature.attribute(forKey: "P11_001") as? String {
+                    tmpFeature.title = "[BUSSTOP]\(title)"
+                } else if let title = feature.attribute(forKey: "P32_006") as? String {
+                    tmpFeature.title = "[CULTURAL]\(title)"
+                } else if let title = feature.attribute(forKey: "N07_003") as? String {
+                    // TODO: キーがなぜか確認できない
+                    tmpFeature.title = "[BUS ROUTE]\(title)"
+                } else {
+                    tmpFeature.title = "NULL"
+                }
+                
                 res.append(tmpFeature)
             }
+            
             return res
-        }).subscribe(onNext: { [weak self] (features) in
+        }).share().subscribe(onNext: { [weak self] (features) in
             self?.visibleFeatureBehaviorRelay.accept(features)
         }).disposed(by: disposeBag)
     }
     
-    // TODO: Fix later
     func bindCategoryView(input: CategoryViewInput) {
-        input.testButton.subscribe(onNext: { [weak self] in
-            self?.categoryButtonStatusBehaviorRelay.accept(.busstop)
+        input.culturalPropertyButton.subscribe(onNext: { [weak self] in
+            self?.updateCulturalPropertyButtonStatus()
         }).disposed(by: disposeBag)
+    }
+    
+    private func updateCulturalPropertyButtonStatus() {
+        let nextStatusRawValue = self.culturalPropertyButtonStatusBehaviorRelay.value.rawValue + 1
+        let nextStatus = VisibleLayerStatus(rawValue: nextStatusRawValue) ?? VisibleLayerStatus.hidden
+        
+        self.culturalPropertyButtonStatusBehaviorRelay.accept(nextStatus)
     }
     
     private func updateBusstopButtonStatus() {
