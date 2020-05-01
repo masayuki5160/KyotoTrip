@@ -128,7 +128,7 @@ class MapViewController: UIViewController {
     
     @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            let layerIdentifiers: Set = [KyotoMapView.busstopLayerName, KyotoMapView.busRouteLayerName]
+            let layerIdentifiers: Set = [KyotoMapView.busstopLayerName, KyotoMapView.busRouteLayerName, KyotoMapView.culturalPropertyLayerName]
 
             // Try matching the exact point first.
             let point = sender.location(in: sender.view!)
@@ -192,6 +192,7 @@ extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         self.mapView.busstopLayer = style.layer(withIdentifier: KyotoMapView.busstopLayerName)
         self.mapView.busRouteLayer = style.layer(withIdentifier: KyotoMapView.busRouteLayerName)
+        self.mapView.culturalPropertyLayer = style.layer(withIdentifier: KyotoMapView.culturalPropertyLayerName)
         
         // Init busstop and bus route layers
         self.mapView.busstopLayer?.isVisible = false
