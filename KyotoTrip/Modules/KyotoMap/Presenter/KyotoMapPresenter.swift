@@ -22,7 +22,6 @@ enum VisibleLayerStatus: Int {
 }
 
 struct MapViewInput {
-    let busstopButton: Observable<Void>
     let compassButton: Observable<Void>
     let features: Observable<[MGLFeature]>
 }
@@ -93,11 +92,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         self.dependency = dependency
     }
     
-    func bindMapView(input: MapViewInput) {
-        input.busstopButton.subscribe(onNext: { [weak self] in
-            self?.updateBusstopButtonStatus()
-        }).disposed(by: disposeBag)
-        
+    func bindMapView(input: MapViewInput) {        
         input.compassButton.subscribe(onNext: { [weak self] in
             self?.updateCompassButtonStatus()
         }).disposed(by: disposeBag)
@@ -131,6 +126,10 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     func bindCategoryView(input: CategoryViewInput) {
         input.culturalPropertyButton.subscribe(onNext: { [weak self] in
             self?.updateCulturalPropertyButtonStatus()
+        }).disposed(by: disposeBag)
+        
+        input.busstopButton.subscribe(onNext: { [weak self] in
+            self?.updateBusstopButtonStatus()
         }).disposed(by: disposeBag)
     }
     

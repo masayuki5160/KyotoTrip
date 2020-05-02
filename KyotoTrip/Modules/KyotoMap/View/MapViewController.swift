@@ -19,7 +19,6 @@ class MapViewController: UIViewController {
     }
     
     @IBOutlet weak var mapView: KyotoMapView!
-    @IBOutlet weak var busstopButton: UIButton!
     @IBOutlet weak var compassButton: UIButton!
 
     private let visibleFeaturesPublishRelay = PublishRelay<[MGLFeature]>()
@@ -42,7 +41,6 @@ class MapViewController: UIViewController {
         self.navigationItem.title = "NavigationBarTitleMap".localized
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "NavigationBarItemBack".localized, style: .plain, target: nil, action: nil)
 
-        busstopButton.layer.cornerRadius = 10.0
         compassButton.layer.cornerRadius = 10.0
         
         mapView.delegate = self
@@ -58,7 +56,6 @@ class MapViewController: UIViewController {
     
     private func bindPresenter() {
         dependency.presenter.bindMapView(input: MapViewInput(
-            busstopButton: busstopButton.rx.tap.asObservable(),
             compassButton: compassButton.rx.tap.asObservable(),
             features: visibleFeaturesPublishRelay.asObservable())
         )
