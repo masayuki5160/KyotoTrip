@@ -94,17 +94,12 @@ class MapViewController: UIViewController {
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
     
-    private func updateBusstopLayer(_ buttonStatus: BusstopButtonStatus) {
-        switch buttonStatus {
-        case BusstopButtonStatus.hidden:
+    private func updateBusstopLayer(_ visibleStatus: VisibleLayerStatus) {
+        switch visibleStatus {
+        case .hidden:
             self.mapView.busstopLayer?.isVisible = false
-            self.mapView.busRouteLayer?.isVisible = false
-        case BusstopButtonStatus.busstop:
+        case .visible:
             self.mapView.busstopLayer?.isVisible = true
-            self.mapView.busRouteLayer?.isVisible = false
-        case BusstopButtonStatus.routeAndBusstop:
-            self.mapView.busstopLayer?.isVisible = true
-            self.mapView.busRouteLayer?.isVisible = true
         }
     }
     
@@ -117,6 +112,7 @@ class MapViewController: UIViewController {
         }
     }
     
+    // TODO: コールされる回数が多い
     private func updateVisibleFeatures() {
         let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         var layers: Set<String> = []

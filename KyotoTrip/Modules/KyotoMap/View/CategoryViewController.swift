@@ -16,6 +16,11 @@ class CategoryViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var culturalPropertyButton: UIButton!
+    @IBOutlet weak var busstopButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var rentalCycleButton: UIButton!
+    @IBOutlet weak var cycleParkingButton: UIButton!
+    
     
     struct Dependency {
         let presenter: KyotoMapPresenterProtocol
@@ -43,7 +48,12 @@ private extension CategoryViewController {
     
     private func bindPresenter() {
         dependency.presenter.bindCategoryView(input: CategoryViewInput(
-            culturalPropertyButton: culturalPropertyButton.rx.tap.asObservable())
+            culturalPropertyButton: culturalPropertyButton.rx.tap.asObservable(),
+            infoButton: infoButton.rx.tap.asObservable(),
+            busstopButton: busstopButton.rx.tap.asObservable(),
+            rentalCycleButton: rentalCycleButton.rx.tap.asObservable(),
+            cycleParkingButton: cycleParkingButton.rx.tap.asObservable()
+            )
         )
 
         dependency.presenter.visibleFeatureDriver.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in

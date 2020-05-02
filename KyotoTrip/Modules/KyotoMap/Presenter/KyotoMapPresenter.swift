@@ -11,12 +11,6 @@ import RxSwift
 import RxCocoa
 import Mapbox
 
-enum BusstopButtonStatus: Int {
-    case hidden = 0
-    case busstop
-    case routeAndBusstop
-}
-
 enum CompassButtonStatus: Int {
     case kyotoCity = 0
     case currentLocation
@@ -35,10 +29,14 @@ struct MapViewInput {
 
 struct CategoryViewInput {
     let culturalPropertyButton: Observable<Void>
+    let infoButton: Observable<Void>
+    let busstopButton: Observable<Void>
+    let rentalCycleButton: Observable<Void>
+    let cycleParkingButton: Observable<Void>
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
-    var busstopButtonStatusDriver: Driver<BusstopButtonStatus> { get }
+    var busstopButtonStatusDriver: Driver<VisibleLayerStatus> { get }
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
     var culturalPropertyButtonStatusDriver: Driver<VisibleLayerStatus> { get }
     var visibleFeatureDriver: Driver<[VisibleFeature]> { get }
@@ -54,11 +52,11 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
 
     private var dependency: Dependency!
-    private let busstopButtonStatusBehaviorRelay = BehaviorRelay<BusstopButtonStatus>(value: .hidden)
+    private let busstopButtonStatusBehaviorRelay = BehaviorRelay<VisibleLayerStatus>(value: .hidden)
     private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
     private let culturalPropertyButtonStatusBehaviorRelay = BehaviorRelay<VisibleLayerStatus>(value: .hidden)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeature]>(value: [])
-    var busstopButtonStatusDriver: Driver<BusstopButtonStatus> {
+    var busstopButtonStatusDriver: Driver<VisibleLayerStatus> {
         return busstopButtonStatusBehaviorRelay.asDriver()
     }
     var compassButtonStatusDriver: Driver<CompassButtonStatus> {
@@ -127,7 +125,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     private func updateBusstopButtonStatus() {
         let nextStatusRawValue = self.busstopButtonStatusBehaviorRelay.value.rawValue + 1
-        let nextStatus = BusstopButtonStatus(rawValue: nextStatusRawValue) ?? BusstopButtonStatus.hidden
+        let nextStatus = VisibleLayerStatus(rawValue: nextStatusRawValue) ?? VisibleLayerStatus.hidden
         
         self.busstopButtonStatusBehaviorRelay.accept(nextStatus)
     }
