@@ -43,6 +43,8 @@ class CategoryViewController: UIViewController {
 
 private extension CategoryViewController {
     private func setuUI() {
+        // TODO: アイコンが見えにくいためCategoryViewControllerについてはダークモードOFFとする
+        self.overrideUserInterfaceStyle = .light
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
     }
     
