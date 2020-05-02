@@ -79,13 +79,9 @@ class MapViewController: UIViewController {
         
         dependency.presenter.culturalPropertyButtonStatusDriver.drive(onNext: { [weak self] (visibleStatus) in
             guard let self = self else { return }
-            
-            switch visibleStatus {
-            case .hidden:
-                self.mapView.culturalPropertyLayer?.isVisible = false
-            case .visible:
-                self.mapView.culturalPropertyLayer?.isVisible = true
-            }
+
+            self.updateCulturalPropertyLayer(visibleStatus)
+            self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
     }
     
@@ -110,7 +106,15 @@ class MapViewController: UIViewController {
             self.mapView.busstopLayer?.isVisible = true
             self.mapView.busRouteLayer?.isVisible = true
         }
-        
+    }
+    
+    private func updateCulturalPropertyLayer(_ visibleStatus: VisibleLayerStatus) {
+        switch visibleStatus {
+        case .hidden:
+            self.mapView.culturalPropertyLayer?.isVisible = false
+        case .visible:
+            self.mapView.culturalPropertyLayer?.isVisible = true
+        }
     }
     
     private func updateVisibleFeatures() {
