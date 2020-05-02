@@ -63,10 +63,12 @@ class MapViewController: UIViewController {
             features: visibleFeaturesPublishRelay.asObservable())
         )
 
-        dependency.presenter.busstopButtonStatusDriver.drive(onNext: { [weak self] (buttonStatus) in
+        dependency.presenter.visibleLayerDriver.drive(onNext: { [weak self] (visibleLayer) in
             guard let self = self else { return }
 
-            self.updateBusstopLayer(buttonStatus)
+            self.updateBusstopLayer(visibleLayer.busstopLayer)
+            self.updateCulturalPropertyLayer(visibleLayer.culturalPropertyLayer)
+            
             self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
         
@@ -74,13 +76,6 @@ class MapViewController: UIViewController {
             guard let self = self else { return }
 
             self.updateMapCenterPosition(compassButtonStatus)
-            self.updateVisibleFeatures()
-        }).disposed(by: disposeBag)
-        
-        dependency.presenter.culturalPropertyButtonStatusDriver.drive(onNext: { [weak self] (visibleStatus) in
-            guard let self = self else { return }
-
-            self.updateCulturalPropertyLayer(visibleStatus)
             self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
     }
