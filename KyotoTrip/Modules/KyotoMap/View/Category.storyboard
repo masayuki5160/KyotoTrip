@@ -24,50 +24,47 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIf-Wn-rkB">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="9eu-JC-dAW"/>
                                             <constraint firstAttribute="width" constant="45" id="JcO-l9-vVL"/>
                                         </constraints>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" backgroundImage="icons8-busstop-60"/>
+                                        <state key="normal" backgroundImage="icons8-bus-80"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q15-iY-xeh">
-                                        <rect key="frame" x="75" y="0.5" width="45" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="75" y="0.0" width="45" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="2Px-vi-13h"/>
                                             <constraint firstAttribute="width" constant="45" id="haj-sA-shM"/>
                                         </constraints>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" backgroundImage="info.circle.fill" catalog="system"/>
+                                        <state key="normal" backgroundImage="icons8-news-96"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yi8-QT-IRA">
                                         <rect key="frame" x="150" y="0.0" width="45" height="45"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="Pqf-Oh-jnV"/>
                                             <constraint firstAttribute="height" constant="45" id="iHz-8l-JhB"/>
                                         </constraints>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" backgroundImage="cycle-64"/>
+                                        <state key="normal" backgroundImage="icons8-tricycle-48"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCv-rd-kLZ">
                                         <rect key="frame" x="225" y="0.0" width="45" height="45"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="8B2-am-NLN"/>
                                             <constraint firstAttribute="height" constant="45" id="9kA-D7-Dak"/>
                                         </constraints>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" backgroundImage="shrine-64"/>
+                                        <state key="normal" backgroundImage="icons8-torii-48"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E63-n3-ZyU">
                                         <rect key="frame" x="300" y="0.0" width="45" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" backgroundImage="cycle-parking-64"/>
+                                        <state key="normal" backgroundImage="icons8-bike-parking-100"/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -99,10 +96,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cycle-64" width="64" height="64"/>
-        <image name="cycle-parking-64" width="64" height="64"/>
-        <image name="icons8-busstop-60" width="60" height="60"/>
-        <image name="info.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="shrine-64" width="64" height="64"/>
+        <image name="icons8-bike-parking-100" width="100" height="100"/>
+        <image name="icons8-bus-80" width="80" height="80"/>
+        <image name="icons8-news-96" width="96" height="96"/>
+        <image name="icons8-torii-48" width="48" height="48"/>
+        <image name="icons8-tricycle-48" width="48" height="48"/>
     </resources>
 </document>
