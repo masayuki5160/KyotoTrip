@@ -193,10 +193,14 @@ class MapViewController: UIViewController {
     private func showCallout(feature: MGLPointFeature) {
         selectedAnnotation = MGLPointFeature()
         // TODO: Modelの作成, バスのデータがあれば、などの処理も追加
-        let busstopName = feature.attribute(forKey: "P11_001") as! String
+        if let busstopName = feature.attribute(forKey: "P11_001") {
+            selectedAnnotation.title = busstopName as? String
+            selectedAnnotation.subtitle = "This is subtitle"// TODO: Fix later
+        } else if let culturalProperty = feature.attribute(forKey: "P32_006") {
+            selectedAnnotation.title = culturalProperty as? String
+            selectedAnnotation.subtitle = "This is subtitle"// TODO: Fix later
+        }
 
-        selectedAnnotation.title = busstopName
-        selectedAnnotation.subtitle = "This is subtitle"// TODO: Fix later
         selectedAnnotation.coordinate = feature.coordinate
         
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
