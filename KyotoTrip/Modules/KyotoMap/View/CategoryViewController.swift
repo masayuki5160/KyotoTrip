@@ -61,6 +61,14 @@ private extension CategoryViewController {
 
         dependency.presenter.visibleFeatureDriver.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in
             cell.title.text = element.title
+            switch element.type {
+            case .Busstop:
+                cell.icon.image = UIImage(named: "icons8-bus-80")
+            case .CulturalProperty:
+                cell.icon.image = UIImage(named: "icons8-torii-48")
+            default:
+                cell.icon.image = UIImage()
+            }
         }.disposed(by: disposeBag)
     }
 }

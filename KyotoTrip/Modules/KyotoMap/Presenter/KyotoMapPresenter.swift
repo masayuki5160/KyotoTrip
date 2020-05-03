@@ -111,13 +111,17 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 // TODO: データのマッピング処理を再度実装
                 if let title = feature.attribute(forKey: "P11_001") as? String {
                     visibleFeature.title = "[BUSSTOP]\(title)"
+                    visibleFeature.type = .Busstop
                 } else if let title = feature.attribute(forKey: "P32_006") as? String {
                     visibleFeature.title = "[CULTURAL]\(title)"
+                    visibleFeature.type = .CulturalProperty
                 } else if let title = feature.attribute(forKey: "N07_003") as? String {
                     // TODO: キーがなぜか確認できない
                     visibleFeature.title = "[BUS ROUTE]\(title)"
+                    visibleFeature.type = .BusRoute
                 } else {
                     visibleFeature.title = "NULL"
+                    visibleFeature.type = .None
                 }
                 
                 visibleFeature.coordinate = feature.coordinate

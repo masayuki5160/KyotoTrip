@@ -10,6 +10,7 @@ import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
     
     override func awakeFromNib() {
