@@ -82,16 +82,16 @@ class MapViewController: UIViewController {
                 print("TEST \(feature.title), \(feature.coordinate)")
                 return
             }
-            
-            // TODO: Add annotation to mapview
+
+            // Add annotation to mapview
             let annotation = MGLPointAnnotation()
             annotation.coordinate = feature.coordinate
             annotation.title = feature.title
             annotation.subtitle = "This is subtitle"
             self?.mapView.addAnnotation(annotation)
 
-            // TODO: アニメーションパラメータ修正
-            let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 15, heading: 180)
+            // move camera position to the annotation position
+            let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 0, heading: 0)
             self?.mapView.fly(to: camera, withDuration: 4, completionHandler: nil)
         }).disposed(by: disposeBag)
     }
