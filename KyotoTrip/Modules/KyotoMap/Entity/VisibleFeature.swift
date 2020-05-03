@@ -6,8 +6,9 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-import Foundation
+import CoreLocation
 
 struct VisibleFeature {
     var title = ""
+    var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
 }

@@ -54,18 +54,14 @@ private extension CategoryViewController {
             infoButton: infoButton.rx.tap.asObservable(),
             busstopButton: busstopButton.rx.tap.asObservable(),
             rentalCycleButton: rentalCycleButton.rx.tap.asObservable(),
-            cycleParkingButton: cycleParkingButton.rx.tap.asObservable()
+            cycleParkingButton: cycleParkingButton.rx.tap.asObservable(),
+            tableViewCell: tableView.rx.modelSelected(VisibleFeature.self).asObservable()
             )
         )
 
         dependency.presenter.visibleFeatureDriver.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in
             cell.title.text = element.title
         }.disposed(by: disposeBag)
-
-        tableView.rx.modelSelected(VisibleFeature.self).subscribe(onNext: { feature in
-            // TODO: タップしたPOIをマップ上で示す
-            print("tapped cell \(feature.title)")
-        }).disposed(by: disposeBag)
     }
 }
 

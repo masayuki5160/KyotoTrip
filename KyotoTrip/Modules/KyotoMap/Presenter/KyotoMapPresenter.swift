@@ -32,6 +32,7 @@ struct CategoryViewInput {
     let busstopButton: Observable<Void>
     let rentalCycleButton: Observable<Void>
     let cycleParkingButton: Observable<Void>
+    let tableViewCell: Observable<VisibleFeature>
 }
 
 struct VisibleLayer {
@@ -49,6 +50,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
     var visibleLayerDriver: Driver<VisibleLayer> { get }
     var visibleFeatureDriver: Driver<[VisibleFeature]> { get }
+    var didSelectCellDriver: Driver<VisibleFeature> { get }
     
     // MARK: - Input IF
     
@@ -75,6 +77,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         rentalCycle: .hidden,
         cycleParking: .hidden)
     )
+    private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeature>(value: VisibleFeature())
     
     var compassButtonStatusDriver: Driver<CompassButtonStatus> {
         return compassButtonStatusBehaviorRelay.asDriver()
@@ -84,6 +87,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
     var visibleLayerDriver: Driver<VisibleLayer> {
         return visibleLayerBehaviorRelay.asDriver()
+    }
+    var didSelectCellDriver: Driver<VisibleFeature> {
+        return didSelectCellBehaviorRelay.asDriver()
     }
     
     // MARK: - Public functions
@@ -100,21 +106,23 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         input.features.map({ (features) -> [VisibleFeature] in
             var res: [VisibleFeature] = []
             for feature in features {
-                var tmpFeature = VisibleFeature()
+                var visibleFeature = VisibleFeature()
 
                 // TODO: データのマッピング処理を再度実装
                 if let title = feature.attribute(forKey: "P11_001") as? String {
-                    tmpFeature.title = "[BUSSTOP]\(title)"
+                    visibleFeature.title = "[BUSSTOP]\(title)"
                 } else if let title = feature.attribute(forKey: "P32_006") as? String {
-                    tmpFeature.title = "[CULTURAL]\(title)"
+                    visibleFeature.title = "[CULTURAL]\(title)"
                 } else if let title = feature.attribute(forKey: "N07_003") as? String {
                     // TODO: キーがなぜか確認できない
-                    tmpFeature.title = "[BUS ROUTE]\(title)"
+                    visibleFeature.title = "[BUS ROUTE]\(title)"
                 } else {
-                    tmpFeature.title = "NULL"
+                    visibleFeature.title = "NULL"
                 }
                 
-                res.append(tmpFeature)
+                visibleFeature.coordinate = feature.coordinate
+                
+                res.append(visibleFeature)
             }
             
             return res
@@ -130,6 +138,11 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         
         input.busstopButton.subscribe(onNext: { [weak self] in
             self?.updateBusstopButtonStatus()
+        }).disposed(by: disposeBag)
+        
+        input.tableViewCell.subscribe(onNext: { [weak self] (feature) in
+            print("tapped cell \(feature.title), \(feature.coordinate)")
+            self?.didSelectCellBehaviorRelay.accept(feature)
         }).disposed(by: disposeBag)
     }
     

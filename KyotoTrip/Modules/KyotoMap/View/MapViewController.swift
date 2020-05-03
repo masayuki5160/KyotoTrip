@@ -75,6 +75,25 @@ class MapViewController: UIViewController {
             self.updateMapCenterPosition(compassButtonStatus)
             self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
+        
+        dependency.presenter.didSelectCellDriver.drive(onNext: { [weak self] feature in
+            // FIXME: 初回起動時なイベントを購読する不具合回避
+            if feature.title.isEmpty {
+                print("TEST \(feature.title), \(feature.coordinate)")
+                return
+            }
+            
+            // TODO: Add annotation to mapview
+            let annotation = MGLPointAnnotation()
+            annotation.coordinate = feature.coordinate
+            annotation.title = feature.title
+            annotation.subtitle = "This is subtitle"
+            self?.mapView.addAnnotation(annotation)
+
+            // TODO: アニメーションパラメータ修正
+            let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 15, heading: 180)
+            self?.mapView.fly(to: camera, withDuration: 4, completionHandler: nil)
+        }).disposed(by: disposeBag)
     }
     
     private func setupCategorySemiModalView() {
