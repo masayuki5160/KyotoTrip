@@ -65,15 +65,12 @@ class MapViewController: UIViewController {
 
             self.updateBusstopLayer(visibleLayer.busstopLayer)
             self.updateCulturalPropertyLayer(visibleLayer.culturalPropertyLayer)
-            
-            self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
         
         dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             guard let self = self else { return }
 
             self.updateMapCenterPosition(compassButtonStatus)
-            self.updateVisibleFeatures()
         }).disposed(by: disposeBag)
         
         dependency.presenter.didSelectCellDriver.drive(onNext: { [weak self] feature in
@@ -123,7 +120,6 @@ class MapViewController: UIViewController {
         }
     }
     
-    // TODO: コールされる回数が多い
     private func updateVisibleFeatures() {
         let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         var layers: Set<String> = []
@@ -227,6 +223,10 @@ extension MapViewController: MGLMapViewDelegate {
         self.mapView.busstopLayer?.isVisible = false
         self.mapView.busRouteLayer?.isVisible = false
         self.mapView.culturalPropertyLayer?.isVisible = false
+    }
+    
+    func mapViewDidFinishRenderingFrame(_ mapView: MGLMapView, fullyRendered: Bool) {
+        self.updateVisibleFeatures()
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
