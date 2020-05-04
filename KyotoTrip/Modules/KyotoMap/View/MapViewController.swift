@@ -65,6 +65,12 @@ class MapViewController: UIViewController {
 
             self.updateBusstopLayer(visibleLayer.busstopLayer)
             self.updateCulturalPropertyLayer(visibleLayer.culturalPropertyLayer)
+            
+            // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.updateVisibleFeatures()
+            }
+
         }).disposed(by: disposeBag)
         
         dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
@@ -89,7 +95,9 @@ class MapViewController: UIViewController {
 
             // move camera position to the annotation position
             let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 0, heading: 0)
-            self?.mapView.fly(to: camera, withDuration: 4, completionHandler: nil)
+            self?.mapView.fly(to: camera, withDuration: 3, completionHandler: { [weak self] in
+                self?.updateVisibleFeatures()
+            })
         }).disposed(by: disposeBag)
     }
     
@@ -227,10 +235,6 @@ extension MapViewController: MGLMapViewDelegate {
         self.mapView.busstopLayer?.isVisible = false
         self.mapView.busRouteLayer?.isVisible = false
         self.mapView.culturalPropertyLayer?.isVisible = false
-    }
-    
-    func mapViewDidFinishRenderingFrame(_ mapView: MGLMapView, fullyRendered: Bool) {
-        self.updateVisibleFeatures()
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
