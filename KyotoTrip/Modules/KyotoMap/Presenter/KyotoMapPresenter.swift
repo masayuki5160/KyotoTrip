@@ -137,11 +137,17 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     func bindCategoryView(input: CategoryViewInput) {
         input.culturalPropertyButton.drive(onNext: { [weak self] in
-            self?.updateCulturalPropertyButtonStatus()
+            guard let self = self else { return }
+
+            let nextVisibleLayer = self.updateLayer(target: .CulturalProperty, layer: self.visibleLayerBehaviorRelay.value)
+            self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
         input.busstopButton.drive(onNext: { [weak self] in
-            self?.updateBusstopButtonStatus()
+            guard let self = self else { return }
+            
+            let nextVisibleLayer = self.updateLayer(target: .Busstop, layer: self.visibleLayerBehaviorRelay.value)
+            self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
         input.tableViewCell.drive(onNext: { [weak self] (feature) in
@@ -152,30 +158,49 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     // MARK: - Private functions
     
-    private func updateCulturalPropertyButtonStatus() {
-        let currentVisibleLayer = visibleLayerBehaviorRelay.value
-        let nextStatusRawValue = currentVisibleLayer.culturalPropertyLayer.rawValue + 1
-        let nextStatus = VisibleLayerStatus(rawValue: nextStatusRawValue) ?? VisibleLayerStatus.hidden
-        let nextVisibleLayer = VisibleLayer(busstopLayer: currentVisibleLayer.busstopLayer,
-                                culturalPropertyLayer: nextStatus,
-                                infoLayer: currentVisibleLayer.infoLayer,
-                                rentalCycle: currentVisibleLayer.rentalCycle,
-                                cycleParking: currentVisibleLayer.cycleParking)
-
-        visibleLayerBehaviorRelay.accept(nextVisibleLayer)
+    private func updateLayer(target: VisibleFeatureType, layer: VisibleLayer) -> VisibleLayer {
+        switch target {
+        case .Busstop:
+            return updateBusstopLayer(layer)
+        case .CulturalProperty:
+            return updateCulturalPropertylayer(layer)
+        default:
+            return VisibleLayer(
+                busstopLayer: .hidden,
+                culturalPropertyLayer: .hidden,
+                infoLayer: .hidden,
+                rentalCycle: .hidden,
+                cycleParking: .hidden
+            )
+        }
     }
     
-    private func updateBusstopButtonStatus() {
-        let currentVisibleLayer = visibleLayerBehaviorRelay.value
-        let nextStatusRawValue = currentVisibleLayer.busstopLayer.rawValue + 1
+    private func updateCulturalPropertylayer(_ layer: VisibleLayer) -> VisibleLayer {
+        let nextStatusRawValue = layer.culturalPropertyLayer.rawValue + 1
         let nextStatus = VisibleLayerStatus(rawValue: nextStatusRawValue) ?? VisibleLayerStatus.hidden
-        let nextVisibleLayer = VisibleLayer(busstopLayer: nextStatus,
-                                            culturalPropertyLayer: currentVisibleLayer.culturalPropertyLayer,
-                                infoLayer: currentVisibleLayer.infoLayer,
-                                rentalCycle: currentVisibleLayer.rentalCycle,
-                                cycleParking: currentVisibleLayer.cycleParking)
+        let nextVisibleLayer = VisibleLayer(
+            busstopLayer: layer.busstopLayer,
+            culturalPropertyLayer: nextStatus,
+            infoLayer: layer.infoLayer,
+            rentalCycle: layer.rentalCycle,
+            cycleParking: layer.cycleParking
+        )
 
-        visibleLayerBehaviorRelay.accept(nextVisibleLayer)
+        return nextVisibleLayer
+    }
+    
+    private func updateBusstopLayer(_ layer: VisibleLayer) -> VisibleLayer {
+        let nextStatusRawValue = layer.busstopLayer.rawValue + 1
+        let nextStatus = VisibleLayerStatus(rawValue: nextStatusRawValue) ?? VisibleLayerStatus.hidden
+        let nextVisibleLayer = VisibleLayer(
+            busstopLayer: nextStatus,
+            culturalPropertyLayer: layer.culturalPropertyLayer,
+            infoLayer: layer.infoLayer,
+            rentalCycle: layer.rentalCycle,
+            cycleParking: layer.cycleParking
+        )
+        
+        return nextVisibleLayer
     }
     
     private func updateCompassButtonStatus() {
