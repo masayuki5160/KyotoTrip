@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: KyotoMapView!
     @IBOutlet weak var compassButton: UIButton!
 
-    private let visibleFeaturesPublishRelay = PublishRelay<[MGLFeature]>()
+    private let visibleFeaturesBehaviorRelay = BehaviorRelay<[MGLFeature]>(value: [])
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
 
@@ -56,8 +56,8 @@ class MapViewController: UIViewController {
     
     private func bindPresenter() {
         dependency.presenter.bindMapView(input: MapViewInput(
-            compassButton: compassButton.rx.tap.asObservable(),
-            features: visibleFeaturesPublishRelay.asObservable())
+            compassButton: compassButton.rx.tap.asDriver(),
+            features: visibleFeaturesBehaviorRelay.asDriver())
         )
 
         dependency.presenter.visibleLayerDriver.drive(onNext: { [weak self] (visibleLayer) in
@@ -143,7 +143,7 @@ class MapViewController: UIViewController {
         }
                 
         let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
-        visibleFeaturesPublishRelay.accept(features)
+        visibleFeaturesBehaviorRelay.accept(features)
     }
     
     private func updateMapCenterPosition(_ compassButtonStatus: CompassButtonStatus) {

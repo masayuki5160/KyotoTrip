@@ -50,12 +50,12 @@ private extension CategoryViewController {
     
     private func bindPresenter() {
         dependency.presenter.bindCategoryView(input: CategoryViewInput(
-            culturalPropertyButton: culturalPropertyButton.rx.tap.asObservable(),
-            infoButton: infoButton.rx.tap.asObservable(),
-            busstopButton: busstopButton.rx.tap.asObservable(),
-            rentalCycleButton: rentalCycleButton.rx.tap.asObservable(),
-            cycleParkingButton: cycleParkingButton.rx.tap.asObservable(),
-            tableViewCell: tableView.rx.modelSelected(VisibleFeature.self).asObservable()
+            culturalPropertyButton: culturalPropertyButton.rx.tap.asDriver(),
+            infoButton: infoButton.rx.tap.asDriver(),
+            busstopButton: busstopButton.rx.tap.asDriver(),
+            rentalCycleButton: rentalCycleButton.rx.tap.asDriver(),
+            cycleParkingButton: cycleParkingButton.rx.tap.asDriver(),
+            tableViewCell: tableView.rx.modelSelected(VisibleFeature.self).asDriver()
             )
         )
 

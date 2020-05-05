@@ -22,17 +22,17 @@ enum VisibleLayerStatus: Int {
 }
 
 struct MapViewInput {
-    let compassButton: Observable<Void>
-    let features: Observable<[MGLFeature]>
+    let compassButton: Driver<Void>
+    let features: Driver<[MGLFeature]>
 }
 
 struct CategoryViewInput {
-    let culturalPropertyButton: Observable<Void>
-    let infoButton: Observable<Void>
-    let busstopButton: Observable<Void>
-    let rentalCycleButton: Observable<Void>
-    let cycleParkingButton: Observable<Void>
-    let tableViewCell: Observable<VisibleFeature>
+    let culturalPropertyButton: Driver<Void>
+    let infoButton: Driver<Void>
+    let busstopButton: Driver<Void>
+    let rentalCycleButton: Driver<Void>
+    let cycleParkingButton: Driver<Void>
+    let tableViewCell: Driver<VisibleFeature>
 }
 
 struct VisibleLayer {
@@ -99,7 +99,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
     
     func bindMapView(input: MapViewInput) {        
-        input.compassButton.subscribe(onNext: { [weak self] in
+        input.compassButton.drive(onNext: { [weak self] in
             self?.updateCompassButtonStatus()
         }).disposed(by: disposeBag)
         
@@ -130,21 +130,21 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             }
             
             return res
-        }).share().subscribe(onNext: { [weak self] (features) in
+        }).drive(onNext: { [weak self] (features) in
             self?.visibleFeatureBehaviorRelay.accept(features)
         }).disposed(by: disposeBag)
     }
     
     func bindCategoryView(input: CategoryViewInput) {
-        input.culturalPropertyButton.subscribe(onNext: { [weak self] in
+        input.culturalPropertyButton.drive(onNext: { [weak self] in
             self?.updateCulturalPropertyButtonStatus()
         }).disposed(by: disposeBag)
         
-        input.busstopButton.subscribe(onNext: { [weak self] in
+        input.busstopButton.drive(onNext: { [weak self] in
             self?.updateBusstopButtonStatus()
         }).disposed(by: disposeBag)
         
-        input.tableViewCell.subscribe(onNext: { [weak self] (feature) in
+        input.tableViewCell.drive(onNext: { [weak self] (feature) in
             print("tapped cell \(feature.title), \(feature.coordinate)")
             self?.didSelectCellBehaviorRelay.accept(feature)
         }).disposed(by: disposeBag)
