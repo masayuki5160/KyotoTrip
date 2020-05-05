@@ -58,9 +58,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeature]>(value: [])
     private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer(
-        busstopLayer: .hidden,
-        culturalPropertyLayer: .hidden,
-        infoLayer: .hidden,
+        busstop: .hidden,
+        culturalProperty: .hidden,
+        info: .hidden,
         rentalCycle: .hidden,
         cycleParking: .hidden)
     )
@@ -153,9 +153,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             return dependency.interactor.updateCulturalPropertylayer(layer)
         default:
             return VisibleLayer(
-                busstopLayer: .hidden,
-                culturalPropertyLayer: .hidden,
-                infoLayer: .hidden,
+                busstop: .hidden,
+                culturalProperty: .hidden,
+                info: .hidden,
                 rentalCycle: .hidden,
                 cycleParking: .hidden
             )

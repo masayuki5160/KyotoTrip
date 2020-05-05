@@ -12,9 +12,9 @@ struct VisibleLayer {
         case visible
     }
     
-    let busstopLayer: Status
-    let culturalPropertyLayer: Status
-    let infoLayer: Status
+    let busstop: Status
+    let culturalProperty: Status
+    let info: Status
     let rentalCycle: Status
     let cycleParking: Status
 }

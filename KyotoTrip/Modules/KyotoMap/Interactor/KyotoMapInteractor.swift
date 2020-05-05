@@ -13,12 +13,12 @@ protocol KyotoMapInteractorProtocol: AnyObject {
 
 final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     func updateCulturalPropertylayer(_ layer: VisibleLayer) -> VisibleLayer {
-        let nextStatusRawValue = layer.culturalPropertyLayer.rawValue + 1
+        let nextStatusRawValue = layer.culturalProperty.rawValue + 1
         let nextStatus = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
         let nextVisibleLayer = VisibleLayer(
-            busstopLayer: layer.busstopLayer,
-            culturalPropertyLayer: nextStatus,
-            infoLayer: layer.infoLayer,
+            busstop: layer.busstop,
+            culturalProperty: nextStatus,
+            info: layer.info,
             rentalCycle: layer.rentalCycle,
             cycleParking: layer.cycleParking
         )
@@ -27,12 +27,12 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     }
     
     func updateBusstopLayer(_ layer: VisibleLayer) -> VisibleLayer {
-        let nextStatusRawValue = layer.busstopLayer.rawValue + 1
+        let nextStatusRawValue = layer.busstop.rawValue + 1
         let nextStatus = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
         let nextVisibleLayer = VisibleLayer(
-            busstopLayer: nextStatus,
-            culturalPropertyLayer: layer.culturalPropertyLayer,
-            infoLayer: layer.infoLayer,
+            busstop: nextStatus,
+            culturalProperty: layer.culturalProperty,
+            info: layer.info,
             rentalCycle: layer.rentalCycle,
             cycleParking: layer.cycleParking
         )

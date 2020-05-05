@@ -63,8 +63,8 @@ class MapViewController: UIViewController {
         dependency.presenter.visibleLayerDriver.drive(onNext: { [weak self] (visibleLayer) in
             guard let self = self else { return }
 
-            self.updateBusstopLayer(visibleLayer.busstopLayer)
-            self.updateCulturalPropertyLayer(visibleLayer.culturalPropertyLayer)
+            self.updateBusstopLayer(visibleLayer.busstop)
+            self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
             
             // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
