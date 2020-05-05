@@ -23,6 +23,7 @@
 		4CA84AED24597FEC00DAC5F3 /* VisibleFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AEC24597FEC00DAC5F3 /* VisibleFeature.swift */; };
 		4CA84AF0245AB37900DAC5F3 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AEE245AB37900DAC5F3 /* CategoryTableViewCell.swift */; };
 		4CA84AF1245AB37900DAC5F3 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AEF245AB37900DAC5F3 /* CategoryTableViewCell.xib */; };
+		4CA84AF324618C4E00DAC5F3 /* VisibleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */; };
 		4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */; };
 		4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD6241BB13700BF84B9 /* Map.storyboard */; };
 		4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */; };
@@ -65,6 +66,7 @@
 		4CA84AEC24597FEC00DAC5F3 /* VisibleFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeature.swift; sourceTree = "<group>"; };
 		4CA84AEE245AB37900DAC5F3 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		4CA84AEF245AB37900DAC5F3 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleLayer.swift; sourceTree = "<group>"; };
 		4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		4CC1ADD6241BB13700BF84B9 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTopPageViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				4CA84AEC24597FEC00DAC5F3 /* VisibleFeature.swift */,
+				4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
 				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
 				4CC1ADF2241FA76800BF84B9 /* SettingsTableViewCell.swift in Sources */,
+				4CA84AF324618C4E00DAC5F3 /* VisibleLayer.swift in Sources */,
 				4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */,
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,

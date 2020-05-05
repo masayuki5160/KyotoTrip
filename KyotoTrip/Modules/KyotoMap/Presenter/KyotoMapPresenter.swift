@@ -16,11 +16,6 @@ enum CompassButtonStatus: Int {
     case currentLocation
 }
 
-enum VisibleLayerStatus: Int {
-    case hidden = 0
-    case visible
-}
-
 struct MapViewInput {
     let compassButton: Driver<Void>
     let features: Driver<[MGLFeature]>
@@ -33,14 +28,6 @@ struct CategoryViewInput {
     let rentalCycleButton: Driver<Void>
     let cycleParkingButton: Driver<Void>
     let tableViewCell: Driver<VisibleFeature>
-}
-
-struct VisibleLayer {
-    let busstopLayer: VisibleLayerStatus
-    let culturalPropertyLayer: VisibleLayerStatus
-    let infoLayer: VisibleLayerStatus
-    let rentalCycle: VisibleLayerStatus
-    let cycleParking: VisibleLayerStatus
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
@@ -158,12 +145,12 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     // MARK: - Private functions
     
-    private func updateLayer(target: VisibleFeatureType, layer: VisibleLayer) -> VisibleLayer {
+    private func updateLayer(target: VisibleFeature.Category, layer: VisibleLayer) -> VisibleLayer {
         switch target {
         case .Busstop:
-            return updateBusstopLayer(layer)
+            return dependency.interactor.updateBusstopLayer(layer)
         case .CulturalProperty:
-            return updateCulturalPropertylayer(layer)
+            return dependency.interactor.updateCulturalPropertylayer(layer)
         default:
             return VisibleLayer(
                 busstopLayer: .hidden,
@@ -173,34 +160,6 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 cycleParking: .hidden
             )
         }
-    }
-    
-    private func updateCulturalPropertylayer(_ layer: VisibleLayer) -> VisibleLayer {
-        let nextStatusRawValue = layer.culturalPropertyLayer.rawValue + 1
-        let nextStatus = VisibleLayerStatus(rawValue: nextStatusRawValue) ?? VisibleLayerStatus.hidden
-        let nextVisibleLayer = VisibleLayer(
-            busstopLayer: layer.busstopLayer,
-            culturalPropertyLayer: nextStatus,
-            infoLayer: layer.infoLayer,
-            rentalCycle: layer.rentalCycle,
-            cycleParking: layer.cycleParking
-        )
-
-        return nextVisibleLayer
-    }
-    
-    private func updateBusstopLayer(_ layer: VisibleLayer) -> VisibleLayer {
-        let nextStatusRawValue = layer.busstopLayer.rawValue + 1
-        let nextStatus = VisibleLayerStatus(rawValue: nextStatusRawValue) ?? VisibleLayerStatus.hidden
-        let nextVisibleLayer = VisibleLayer(
-            busstopLayer: nextStatus,
-            culturalPropertyLayer: layer.culturalPropertyLayer,
-            infoLayer: layer.infoLayer,
-            rentalCycle: layer.rentalCycle,
-            cycleParking: layer.cycleParking
-        )
-        
-        return nextVisibleLayer
     }
     
     private func updateCompassButtonStatus() {

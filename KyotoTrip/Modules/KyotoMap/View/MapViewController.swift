@@ -110,7 +110,7 @@ class MapViewController: UIViewController {
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
     
-    private func updateBusstopLayer(_ visibleStatus: VisibleLayerStatus) {
+    private func updateBusstopLayer(_ visibleStatus: VisibleLayer.Status) {
         switch visibleStatus {
         case .hidden:
             self.mapView.busstopLayer?.isVisible = false
@@ -119,7 +119,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    private func updateCulturalPropertyLayer(_ visibleStatus: VisibleLayerStatus) {
+    private func updateCulturalPropertyLayer(_ visibleStatus: VisibleLayer.Status) {
         switch visibleStatus {
         case .hidden:
             self.mapView.culturalPropertyLayer?.isVisible = false
