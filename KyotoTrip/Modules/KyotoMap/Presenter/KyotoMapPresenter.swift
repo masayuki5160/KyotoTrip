@@ -138,7 +138,6 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         }).disposed(by: disposeBag)
         
         input.tableViewCell.drive(onNext: { [weak self] (feature) in
-            print("tapped cell \(feature.title), \(feature.coordinate)")
             self?.didSelectCellBehaviorRelay.accept(feature)
         }).disposed(by: disposeBag)
     }
