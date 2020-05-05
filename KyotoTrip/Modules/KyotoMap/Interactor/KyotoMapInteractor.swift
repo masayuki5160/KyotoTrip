@@ -9,6 +9,7 @@
 protocol KyotoMapInteractorProtocol: AnyObject {
     func updateCulturalPropertylayer(_ layer: VisibleLayer) -> VisibleLayer
     func updateBusstopLayer(_ layer: VisibleLayer) -> VisibleLayer
+    func updateUserPosition(_ position: UserPosition) -> UserPosition
 }
 
 final class KyotoMapInteractor: KyotoMapInteractorProtocol {
@@ -38,5 +39,12 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
         )
         
         return nextVisibleLayer
+    }
+    
+    func updateUserPosition(_ position: UserPosition) -> UserPosition {
+        let nextStatusRawValue = position.rawValue + 1
+        let nextStatus = UserPosition(rawValue: nextStatusRawValue) ?? UserPosition.kyotoCity
+        
+        return nextStatus
     }
 }

@@ -11,11 +11,6 @@ import RxSwift
 import RxCocoa
 import Mapbox
 
-enum CompassButtonStatus: Int {
-    case kyotoCity = 0
-    case currentLocation
-}
-
 struct MapViewInput {
     let compassButton: Driver<Void>
     let features: Driver<[MGLFeature]>
@@ -34,7 +29,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     
     // MARK: - Output IF
     
-    var compassButtonStatusDriver: Driver<CompassButtonStatus> { get }
+    var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var visibleLayerDriver: Driver<VisibleLayer> { get }
     var visibleFeatureDriver: Driver<[VisibleFeature]> { get }
     var didSelectCellDriver: Driver<VisibleFeature> { get }
@@ -55,7 +50,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
 
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
-    private let compassButtonStatusBehaviorRelay = BehaviorRelay<CompassButtonStatus>(value: .kyotoCity)
+    private let userPositionButtonStatusBehaviorRelay = BehaviorRelay<UserPosition>(value: .kyotoCity)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeature]>(value: [])
     private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer(
         busstop: .hidden,
@@ -66,8 +61,8 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     )
     private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeature>(value: VisibleFeature())
     
-    var compassButtonStatusDriver: Driver<CompassButtonStatus> {
-        return compassButtonStatusBehaviorRelay.asDriver()
+    var userPositionButtonStatusDriver: Driver<UserPosition> {
+        return userPositionButtonStatusBehaviorRelay.asDriver()
     }
     var visibleFeatureDriver: Driver<[VisibleFeature]> {
         return visibleFeatureBehaviorRelay.asDriver()
@@ -87,7 +82,10 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     func bindMapView(input: MapViewInput) {        
         input.compassButton.drive(onNext: { [weak self] in
-            self?.updateCompassButtonStatus()
+            guard let self = self else { return }
+            
+            let nextPosition = self.dependency.interactor.updateUserPosition(self.userPositionButtonStatusBehaviorRelay.value)
+            self.userPositionButtonStatusBehaviorRelay.accept(nextPosition)
         }).disposed(by: disposeBag)
         
         input.features.map({ (features) -> [VisibleFeature] in
@@ -159,12 +157,5 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 cycleParking: .hidden
             )
         }
-    }
-    
-    private func updateCompassButtonStatus() {
-        let nextStatusRawValue = self.compassButtonStatusBehaviorRelay.value.rawValue + 1
-        let nextStatus = CompassButtonStatus(rawValue: nextStatusRawValue) ?? CompassButtonStatus.kyotoCity
-        
-        self.compassButtonStatusBehaviorRelay.accept(nextStatus)
     }
 }

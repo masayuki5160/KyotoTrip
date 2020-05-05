@@ -73,7 +73,7 @@ class MapViewController: UIViewController {
 
         }).disposed(by: disposeBag)
         
-        dependency.presenter.compassButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
+        dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             guard let self = self else { return }
 
             self.updateMapCenterPosition(compassButtonStatus)
@@ -146,7 +146,7 @@ class MapViewController: UIViewController {
         visibleFeaturesBehaviorRelay.accept(features)
     }
     
-    private func updateMapCenterPosition(_ compassButtonStatus: CompassButtonStatus) {
+    private func updateMapCenterPosition(_ compassButtonStatus: UserPosition) {
         let clLocationCoordinate2D = CLLocationCoordinate2DMake(
             KyotoMapView.kyotoStationLat,
             KyotoMapView.kyotoStationLong)
