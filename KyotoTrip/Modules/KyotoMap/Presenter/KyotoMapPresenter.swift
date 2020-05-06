@@ -100,32 +100,6 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         }).disposed(by: disposeBag)
     }
     
-    // TODO: 判定処理が多く煩雑なため後で修正する
-    private func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
-        if let title = source.attribute(forKey: BusstopFeature.titleId) as? String {
-            let subtitle = "busstop"// TODO: Fix later
-            let coordinate = source.coordinate
-            return BusstopFeature(
-                title: title,
-                subtitle: subtitle,
-                coordinate: coordinate,
-                type: .Busstop
-            )
-        } else if let title = source.attribute(forKey: CulturalPropertyFeature.titleId) as? String {
-            let subtitle = "culturalProperty"// TODO: Fix later
-            let coordinate = source.coordinate
-            return CulturalPropertyFeature(
-                title: title,
-                subtitle: subtitle,
-                coordinate: coordinate,
-                type: .CulturalProperty
-            )
-        }
-        
-        // TODO: Fix later
-        return BusstopFeature()
-    }
-    
     func bindCategoryView(input: CategoryViewInput) {
         input.culturalPropertyButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
@@ -163,5 +137,22 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 cycleParking: .hidden
             )
         }
+    }
+    
+    private func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
+        var category: VisibleFeatureCategory {
+            if let _ = source.attribute(forKey: BusstopFeature.titleId) as? String {
+                return .Busstop
+            } else if let _ = source.attribute(forKey: CulturalPropertyFeature.titleId) as? String {
+                return .CulturalProperty
+            }
+            return .None
+        }
+        
+        return dependency.interactor.createVisibleFeature(
+            category: category,
+            coordinate: source.coordinate,
+            attributes: source.attributes
+        )
     }
 }

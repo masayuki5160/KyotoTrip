@@ -6,10 +6,13 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
+import CoreLocation
+
 protocol KyotoMapInteractorProtocol: AnyObject {
     func updateCulturalPropertylayer(_ layer: VisibleLayer) -> VisibleLayer
     func updateBusstopLayer(_ layer: VisibleLayer) -> VisibleLayer
     func updateUserPosition(_ position: UserPosition) -> UserPosition
+    func createVisibleFeature(category: VisibleFeatureCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol
 }
 
 final class KyotoMapInteractor: KyotoMapInteractorProtocol {
@@ -46,5 +49,27 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
         let nextStatus = UserPosition(rawValue: nextStatusRawValue) ?? UserPosition.kyotoCity
         
         return nextStatus
+    }
+    
+    func createVisibleFeature(category: VisibleFeatureCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol {
+        switch category {
+        case .Busstop:
+            return BusstopFeature(
+                title: attributes[BusstopFeature.titleId] as! String,
+                subtitle: "",
+                coordinate: coordinate,
+                type: .Busstop
+            )
+        case .CulturalProperty:
+            return CulturalPropertyFeature(
+                title: attributes[CulturalPropertyFeature.titleId] as! String,
+                subtitle: "",
+                coordinate: coordinate,
+                type: .CulturalProperty
+            )
+        default:
+            // TODO: Fix later
+            return BusstopFeature(title: "", subtitle: "", coordinate: coordinate, type: .Busstop)
+        }
     }
 }
