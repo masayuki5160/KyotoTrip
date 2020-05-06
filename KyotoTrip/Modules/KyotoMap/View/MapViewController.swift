@@ -211,10 +211,6 @@ class MapViewController: UIViewController {
         
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
 }
 
 extension MapViewController: DependencyInjectable {
