@@ -14,10 +14,6 @@ class KyotoMapView: MGLMapView {
     static let kyotoStationLat = 34.9857083
     static let kyotoStationLong = 135.7560416
     static let defaultZoomLv = 13.0
-    static let busstopLayerName = "kyoto-busstop"
-    static let busRouteLayerName = "kyoto-bus-route"
-    static let culturalPropertyLayerName = "kyoto-cultural-property"
-    
     var busstopLayer: MGLStyleLayer?
     var busRouteLayer: MGLStyleLayer?
     var culturalPropertyLayer: MGLStyleLayer?

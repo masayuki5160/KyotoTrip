@@ -13,6 +13,8 @@ import CoreLocation
 ///    Japanese version http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P11.html
 ///    English version http://nlftp.mlit.go.jp/ksj-e/gml/datalist/KsjTmplt-P11.html
 struct BusstopFeature: VisibleFeatureProtocol {
+    static var layerId = "kyoto-busstop"
+    
     /// バス停名
     static var titleId = "P11_001"
     /// バス区分

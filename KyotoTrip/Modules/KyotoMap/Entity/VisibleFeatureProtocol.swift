@@ -9,6 +9,7 @@
 import CoreLocation
 
 protocol VisibleFeatureProtocol {
+    static var layerId: String { get }
     static var titleId: String { get }
     var title: String { get }
     var subtitle: String { get }

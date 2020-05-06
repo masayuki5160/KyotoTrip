@@ -43,9 +43,8 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
 
     static var layerIdentifiers: Set<String> = [
-        KyotoMapView.busstopLayerName,
-        KyotoMapView.busRouteLayerName,
-        KyotoMapView.culturalPropertyLayerName
+        BusstopFeature.layerId,
+        CulturalPropertyFeature.layerId
     ]
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
