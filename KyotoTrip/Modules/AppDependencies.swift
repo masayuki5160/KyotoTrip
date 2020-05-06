@@ -15,6 +15,7 @@ protocol AppDependencies {
     func assembleKyotoInfoTopModule() -> UINavigationController
     func assembleKyotoMapModule() -> UINavigationController
     func assembleBusstopDetailModule() -> UIViewController
+    func assembleCulturalPropertyDetailModule() -> UIViewController
     func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController
 }
 
@@ -87,6 +88,15 @@ extension AppDefaultDependencies: AppDependencies {
         let view = { () -> BusstopDetailViewController in
             let storyboard = UIStoryboard(name: "BusstopDetail", bundle: nil)
             return storyboard.instantiateInitialViewController() as! BusstopDetailViewController
+        }()
+        
+        return view
+    }
+    
+    func assembleCulturalPropertyDetailModule() -> UIViewController {
+        let view = { () -> CulturalPropertyDetailViewController in
+            let storyboard = UIStoryboard(name: "CulturalPropertyDetail", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! CulturalPropertyDetailViewController
         }()
         
         return view

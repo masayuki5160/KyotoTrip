@@ -25,6 +25,7 @@ class MapViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
+    private var tappedAnnotationCategory: VisibleFeatureCategory = .None
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,6 +212,7 @@ private extension MapViewController {
         selectedAnnotation.subtitle = visibleFeature.subtitle
         selectedAnnotation.coordinate = visibleFeature.coordinate
         
+        tappedAnnotationCategory = visibleFeature.type
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }
 }
@@ -241,10 +243,21 @@ extension MapViewController: MGLMapViewDelegate {
 
     func mapView(_ mapView: MGLMapView, didDeselect annotation: MGLAnnotation) {
         mapView.removeAnnotations([annotation])
+        tappedAnnotationCategory = .None
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-        let viewController = AppDefaultDependencies().assembleBusstopDetailModule()
+        let viewController: UIViewController
+
+        switch tappedAnnotationCategory {
+        case .Busstop:
+            viewController = AppDefaultDependencies().assembleBusstopDetailModule()
+        case .CulturalProperty:
+            viewController = AppDefaultDependencies().assembleCulturalPropertyDetailModule()
+        default:
+            viewController = AppDefaultDependencies().assembleBusstopDetailModule()
+        }
+
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

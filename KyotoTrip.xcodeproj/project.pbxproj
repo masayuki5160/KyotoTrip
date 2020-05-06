@@ -29,6 +29,8 @@
 		4CA84AFD246284EB00DAC5F3 /* VisibleFeatureCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */; };
 		4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeature.swift */; };
 		4CA84B012462FDC900DAC5F3 /* BusRouteFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B002462FDC900DAC5F3 /* BusRouteFeature.swift */; };
+		4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */; };
+		4CA84B07246313C500DAC5F3 /* CulturalPropertyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */; };
 		4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */; };
 		4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD6241BB13700BF84B9 /* Map.storyboard */; };
 		4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */; };
@@ -77,6 +79,8 @@
 		4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeatureCategory.swift; sourceTree = "<group>"; };
 		4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyFeature.swift; sourceTree = "<group>"; };
 		4CA84B002462FDC900DAC5F3 /* BusRouteFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteFeature.swift; sourceTree = "<group>"; };
+		4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailViewController.swift; sourceTree = "<group>"; };
+		4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CulturalPropertyDetail.storyboard; sourceTree = "<group>"; };
 		4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		4CC1ADD6241BB13700BF84B9 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTopPageViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				4C3F0952243020E500FAEDC2 /* AppSettings */,
 				4C3F094B24301C3700FAEDC2 /* KyotoInfoTop */,
 				4CA84ACD2450365700DAC5F3 /* BusstopDetail */,
+				4CA84B022463132A00DAC5F3 /* CulturalPropertyDetail */,
 				4C3F094A24301C0000FAEDC2 /* KyotoMap */,
 			);
 			path = Modules;
@@ -376,6 +381,23 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		4CA84B022463132A00DAC5F3 /* CulturalPropertyDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4CA84B032463137100DAC5F3 /* View */,
+			);
+			path = CulturalPropertyDetail;
+			sourceTree = "<group>";
+		};
+		4CA84B032463137100DAC5F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */,
+				4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4CC1ADFB242459C900BF84B9 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +526,7 @@
 				4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */,
 				4CA84AF1245AB37900DAC5F3 /* CategoryTableViewCell.xib in Resources */,
 				4CF773DE241B978B0032CC53 /* Main.storyboard in Resources */,
+				4CA84B07246313C500DAC5F3 /* CulturalPropertyDetail.storyboard in Resources */,
 				4C0CAEC72429735300EDCA82 /* GoogleService-Info.plist in Resources */,
 				4CC1ADF3241FA76800BF84B9 /* SettingsTableViewCell.xib in Resources */,
 				4CC1ADED241FA3F500BF84B9 /* Settings.storyboard in Resources */,
@@ -628,6 +651,7 @@
 				4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
+				4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */,
 				4CF668CE24336514006AB40C /* KyotoCityInfoInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
