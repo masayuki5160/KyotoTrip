@@ -52,13 +52,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let disposeBag = DisposeBag()
     private let userPositionButtonStatusBehaviorRelay = BehaviorRelay<UserPosition>(value: .kyotoCity)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
-    private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer(
-        busstop: .hidden,
-        culturalProperty: .hidden,
-        info: .hidden,
-        rentalCycle: .hidden,
-        cycleParking: .hidden)
-    )
+    private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer())
     private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeature())// TODO: Fix later
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
@@ -129,13 +123,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         case .CulturalProperty:
             return dependency.interactor.updateCulturalPropertylayer(layer)
         default:
-            return VisibleLayer(
-                busstop: .hidden,
-                culturalProperty: .hidden,
-                info: .hidden,
-                rentalCycle: .hidden,
-                cycleParking: .hidden
-            )
+            return VisibleLayer()
         }
     }
     

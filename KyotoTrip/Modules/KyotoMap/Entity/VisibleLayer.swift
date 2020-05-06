@@ -17,4 +17,20 @@ struct VisibleLayer {
     let info: Status
     let rentalCycle: Status
     let cycleParking: Status
+    
+    init() {
+        busstop = .hidden
+        culturalProperty = .hidden
+        info = .hidden
+        rentalCycle = .hidden
+        cycleParking = .hidden
+    }
+    
+    init(busstop: Status, culturalProperty: Status, info: Status, rentalCycle: Status, cycleParking: Status) {
+        self.busstop = busstop
+        self.culturalProperty = culturalProperty
+        self.info = info
+        self.rentalCycle = rentalCycle
+        self.cycleParking = cycleParking
+    }
 }
