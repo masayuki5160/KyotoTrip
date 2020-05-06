@@ -224,14 +224,15 @@ extension MapViewController: DependencyInjectable {
 
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        self.mapView.busstopLayer = style.layer(withIdentifier: BusstopFeature.layerId)
-        self.mapView.busRouteLayer = style.layer(withIdentifier: BusRouteFeature.layerId)
-        self.mapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyFeature.layerId)
+        let kyotoMapView = mapView as! KyotoMapView
+        kyotoMapView.busstopLayer = style.layer(withIdentifier: BusstopFeature.layerId)
+        kyotoMapView.busRouteLayer = style.layer(withIdentifier: BusRouteFeature.layerId)
+        kyotoMapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyFeature.layerId)
         
         // Init visible layers
-        self.mapView.busstopLayer?.isVisible = false
-        self.mapView.busRouteLayer?.isVisible = false
-        self.mapView.culturalPropertyLayer?.isVisible = false
+        kyotoMapView.busstopLayer?.isVisible = false
+        kyotoMapView.busRouteLayer?.isVisible = false
+        kyotoMapView.culturalPropertyLayer?.isVisible = false
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
