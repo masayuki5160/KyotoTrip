@@ -24,7 +24,6 @@ class MapViewController: UIViewController {
     private let visibleFeaturesBehaviorRelay = BehaviorRelay<[MGLFeature]>(value: [])
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
-    private var selectedAnnotation: MGLPointFeature!
     private var floatingPanelController: FloatingPanelController!
 
     override func viewDidLoad() {
