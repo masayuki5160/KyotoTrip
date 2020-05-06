@@ -55,7 +55,7 @@ private extension CategoryViewController {
             busstopButton: busstopButton.rx.tap.asDriver(),
             rentalCycleButton: rentalCycleButton.rx.tap.asDriver(),
             cycleParkingButton: cycleParkingButton.rx.tap.asDriver(),
-            tableViewCell: tableView.rx.modelSelected(VisibleFeature.self).asDriver()
+            tableViewCell: tableView.rx.modelSelected(VisibleFeatureProtocol.self).asDriver()
             )
         )
 

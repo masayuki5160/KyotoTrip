@@ -22,7 +22,7 @@ struct CategoryViewInput {
     let busstopButton: Driver<Void>
     let rentalCycleButton: Driver<Void>
     let cycleParkingButton: Driver<Void>
-    let tableViewCell: Driver<VisibleFeature>
+    let tableViewCell: Driver<VisibleFeatureProtocol>
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
@@ -31,8 +31,8 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var visibleLayerDriver: Driver<VisibleLayer> { get }
-    var visibleFeatureDriver: Driver<[VisibleFeature]> { get }
-    var didSelectCellDriver: Driver<VisibleFeature> { get }
+    var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> { get }
+    var didSelectCellDriver: Driver<VisibleFeatureProtocol> { get }
     
     // MARK: - Input IF
     
@@ -51,7 +51,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
     private let userPositionButtonStatusBehaviorRelay = BehaviorRelay<UserPosition>(value: .kyotoCity)
-    private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeature]>(value: [])
+    private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer(
         busstop: .hidden,
         culturalProperty: .hidden,
@@ -59,18 +59,18 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         rentalCycle: .hidden,
         cycleParking: .hidden)
     )
-    private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeature>(value: VisibleFeature())
+    private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeature())// TODO: Fix later
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatusBehaviorRelay.asDriver()
     }
-    var visibleFeatureDriver: Driver<[VisibleFeature]> {
+    var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> {
         return visibleFeatureBehaviorRelay.asDriver()
     }
     var visibleLayerDriver: Driver<VisibleLayer> {
         return visibleLayerBehaviorRelay.asDriver()
     }
-    var didSelectCellDriver: Driver<VisibleFeature> {
+    var didSelectCellDriver: Driver<VisibleFeatureProtocol> {
         return didSelectCellBehaviorRelay.asDriver()
     }
     
@@ -88,36 +88,42 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             self.userPositionButtonStatusBehaviorRelay.accept(nextPosition)
         }).disposed(by: disposeBag)
         
-        input.features.map({ (features) -> [VisibleFeature] in
-            var res: [VisibleFeature] = []
+        input.features.map({ [weak self] (features) -> [VisibleFeatureProtocol] in
+            var res: [VisibleFeatureProtocol] = []
             for feature in features {
-                var visibleFeature = VisibleFeature()
-
-                // TODO: データのマッピング処理を再度実装
-                if let title = feature.attribute(forKey: "P11_001") as? String {
-                    visibleFeature.title = title
-                    visibleFeature.type = .Busstop
-                } else if let title = feature.attribute(forKey: "P32_006") as? String {
-                    visibleFeature.title = title
-                    visibleFeature.type = .CulturalProperty
-                } else if let title = feature.attribute(forKey: "N07_003") as? String {
-                    // TODO: キーがなぜか確認できない
-                    visibleFeature.title = title
-                    visibleFeature.type = .BusRoute
-                } else {
-                    visibleFeature.title = "NULL"
-                    visibleFeature.type = .None
-                }
-                
-                visibleFeature.coordinate = feature.coordinate
-                
-                res.append(visibleFeature)
+                let visibleFeature = self?.convertMGLFeatureToVisibleFeature(source: feature)
+                res.append(visibleFeature ?? BusstopFeature())// TODO: Fix later
             }
-            
             return res
         }).drive(onNext: { [weak self] (features) in
             self?.visibleFeatureBehaviorRelay.accept(features)
         }).disposed(by: disposeBag)
+    }
+    
+    // TODO: 判定処理が多く煩雑なため後で修正する
+    private func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
+        if let title = source.attribute(forKey: BusstopFeature.titleId) as? String {
+            let subtitle = "busstop"// TODO: Fix later
+            let coordinate = source.coordinate
+            return BusstopFeature(
+                title: title,
+                subtitle: subtitle,
+                coordinate: coordinate,
+                type: .Busstop
+            )
+        } else if let title = source.attribute(forKey: CulturalPropertyFeature.titleId) as? String {
+            let subtitle = "culturalProperty"// TODO: Fix later
+            let coordinate = source.coordinate
+            return CulturalPropertyFeature(
+                title: title,
+                subtitle: subtitle,
+                coordinate: coordinate,
+                type: .CulturalProperty
+            )
+        }
+        
+        // TODO: Fix later
+        return BusstopFeature()
     }
     
     func bindCategoryView(input: CategoryViewInput) {
@@ -142,7 +148,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     // MARK: - Private functions
     
-    private func updateLayer(target: VisibleFeature.Category, layer: VisibleLayer) -> VisibleLayer {
+    private func updateLayer(target: VisibleFeatureCategory, layer: VisibleLayer) -> VisibleLayer {
         switch target {
         case .Busstop:
             return dependency.interactor.updateBusstopLayer(layer)
