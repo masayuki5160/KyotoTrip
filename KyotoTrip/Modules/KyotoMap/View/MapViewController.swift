@@ -24,9 +24,7 @@ class MapViewController: UIViewController {
     private let visibleFeaturesBehaviorRelay = BehaviorRelay<[MGLFeature]>(value: [])
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
-
     private var selectedAnnotation: MGLPointFeature!
-    
     private var floatingPanelController: FloatingPanelController!
 
     override func viewDidLoad() {
@@ -36,7 +34,9 @@ class MapViewController: UIViewController {
         bindPresenter()
         setupCategorySemiModalView()
     }
-    
+}
+
+private extension MapViewController {
     private func setupUI() {
         self.navigationItem.title = "NavigationBarTitleMap".localized
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "NavigationBarItemBack".localized, style: .plain, target: nil, action: nil)
@@ -164,11 +164,9 @@ class MapViewController: UIViewController {
     
     private func handleMapTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            let layerIdentifiers: Set = [KyotoMapView.busstopLayerName, KyotoMapView.busRouteLayerName, KyotoMapView.culturalPropertyLayerName]
-
             // Try matching the exact point first.
             let point = sender.location(in: sender.view!)
-            for feature in mapView.visibleFeatures(at: point, styleLayerIdentifiers: layerIdentifiers) where feature is MGLPointFeature {
+            for feature in mapView.visibleFeatures(at: point, styleLayerIdentifiers: KyotoMapPresenter.layerIdentifiers) where feature is MGLPointFeature {
                 guard let selectedFeature = feature as? MGLPointFeature else {
                     fatalError("Failed to cast selected feature as MGLPointFeature")
                 }
@@ -176,18 +174,9 @@ class MapViewController: UIViewController {
                 showCallout(feature: selectedFeature)
                 return
             }
-            
-            let touchCoordinate = mapView.convert(point, toCoordinateFrom: sender.view!)
-            let touchLocation = CLLocation(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)
-            
-            // Otherwise, get all features within a rect the size of a touch (44x44).
-            let touchRect = CGRect(origin: point, size: .zero).insetBy(dx: -22.0, dy: -22.0)
-            let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(layerIdentifiers)).filter { $0 is MGLPointFeature }
 
             // Select the closest feature to the touch center.
-            let closestFeatures = possibleFeatures.sorted(by: {
-                return CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude).distance(from: touchLocation) < CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude).distance(from: touchLocation)
-            })
+            let closestFeatures = searchClosestFeature(sender)
             if let feature = closestFeatures.first {
                 guard let closestFeature = feature as? MGLPointFeature else {
                     fatalError("Failed to cast selected feature as MGLPointFeature")
@@ -199,6 +188,23 @@ class MapViewController: UIViewController {
             // If no features were found, deselect the selected annotation, if any.
             mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
         }
+    }
+    
+    private func searchClosestFeature(_ sender: UITapGestureRecognizer) -> [MGLFeature] {
+        let point = sender.location(in: sender.view!)
+        let touchCoordinate = mapView.convert(point, toCoordinateFrom: sender.view!)
+        let touchLocation = CLLocation(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)
+        
+        // Get all features within a rect the size of a touch (44x44).
+        let touchRect = CGRect(origin: point, size: .zero).insetBy(dx: -22.0, dy: -22.0)
+        let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(KyotoMapPresenter.layerIdentifiers)).filter { $0 is MGLPointFeature }
+
+        // Select the closest feature to the touch center.
+        let closestFeatures = possibleFeatures.sorted(by: {
+            return CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude).distance(from: touchLocation) < CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude).distance(from: touchLocation)
+        })
+        
+        return closestFeatures
     }
     
     private func showCallout(feature: MGLPointFeature) {

@@ -26,6 +26,7 @@ struct CategoryViewInput {
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
+    static var layerIdentifiers: Set<String> { get }
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var visibleLayerDriver: Driver<VisibleLayer> { get }
     var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> { get }
@@ -36,13 +37,16 @@ protocol KyotoMapPresenterProtocol: AnyObject {
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
-    
     // MARK: - Properties
-    
     struct Dependency {
         let interactor: KyotoMapInteractorProtocol
     }
 
+    static var layerIdentifiers: Set<String> = [
+        KyotoMapView.busstopLayerName,
+        KyotoMapView.busRouteLayerName,
+        KyotoMapView.culturalPropertyLayerName
+    ]
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
     private let userPositionButtonStatusBehaviorRelay = BehaviorRelay<UserPosition>(value: .kyotoCity)
