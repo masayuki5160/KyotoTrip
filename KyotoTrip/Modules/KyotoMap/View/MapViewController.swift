@@ -46,12 +46,15 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.setup()
         
-        // TODO: Move to KyotoMapView.setup() or Presenter
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(sender:)))
+        // Add single tap gesture to mapView
+        let singleTap = UITapGestureRecognizer()
         for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
             singleTap.require(toFail: recognizer)
         }
         mapView.addGestureRecognizer(singleTap)
+        singleTap.rx.event.asDriver().drive(onNext: { [weak self] (gesture) in
+            self?.handleMapTap(sender: gesture)
+        }).disposed(by: disposeBag)
     }
     
     private func bindPresenter() {
@@ -159,7 +162,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
+    private func handleMapTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             let layerIdentifiers: Set = [KyotoMapView.busstopLayerName, KyotoMapView.busRouteLayerName, KyotoMapView.culturalPropertyLayerName]
 
@@ -199,17 +202,12 @@ class MapViewController: UIViewController {
     }
     
     private func showCallout(feature: MGLPointFeature) {
-        selectedAnnotation = MGLPointFeature()
-        // TODO: Modelの作成, バスのデータがあれば、などの処理も追加
-        if let busstopName = feature.attribute(forKey: "P11_001") {
-            selectedAnnotation.title = busstopName as? String
-            selectedAnnotation.subtitle = "This is subtitle"// TODO: Fix later
-        } else if let culturalProperty = feature.attribute(forKey: "P32_006") {
-            selectedAnnotation.title = culturalProperty as? String
-            selectedAnnotation.subtitle = "This is subtitle"// TODO: Fix later
-        }
+        let visibleFeature = dependency.presenter.convertMGLFeatureToVisibleFeature(source: feature)
 
-        selectedAnnotation.coordinate = feature.coordinate
+        let selectedAnnotation = MGLPointFeature()
+        selectedAnnotation.title = visibleFeature.title
+        selectedAnnotation.subtitle = visibleFeature.subtitle
+        selectedAnnotation.coordinate = visibleFeature.coordinate
         
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }

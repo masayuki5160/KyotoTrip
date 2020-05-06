@@ -26,18 +26,13 @@ struct CategoryViewInput {
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
-    
-    // MARK: - Output IF
-    
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var visibleLayerDriver: Driver<VisibleLayer> { get }
     var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> { get }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> { get }
-    
-    // MARK: - Input IF
-    
     func bindMapView(input: MapViewInput)
     func bindCategoryView(input: CategoryViewInput)
+    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
@@ -114,20 +109,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         }).disposed(by: disposeBag)
     }
     
-    // MARK: - Private functions
-    
-    private func updateLayer(target: VisibleFeatureCategory, layer: VisibleLayer) -> VisibleLayer {
-        switch target {
-        case .Busstop:
-            return dependency.interactor.updateBusstopLayer(layer)
-        case .CulturalProperty:
-            return dependency.interactor.updateCulturalPropertylayer(layer)
-        default:
-            return VisibleLayer()
-        }
-    }
-    
-    private func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
+    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
         var category: VisibleFeatureCategory {
             if let _ = source.attribute(forKey: BusstopFeature.titleId) as? String {
                 return .Busstop
@@ -142,5 +124,18 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             coordinate: source.coordinate,
             attributes: source.attributes
         )
+    }
+    
+    // MARK: - Private functions
+    
+    private func updateLayer(target: VisibleFeatureCategory, layer: VisibleLayer) -> VisibleLayer {
+        switch target {
+        case .Busstop:
+            return dependency.interactor.updateBusstopLayer(layer)
+        case .CulturalProperty:
+            return dependency.interactor.updateCulturalPropertylayer(layer)
+        default:
+            return VisibleLayer()
+        }
     }
 }
