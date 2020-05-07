@@ -26,13 +26,24 @@ struct CategoryViewInput {
 }
 
 protocol KyotoMapPresenterProtocol: AnyObject {
+    // MARK: - Properties
+
     static var layerIdentifiers: Set<String> { get }
+
+    // MARK: - Input to Presenter
+    
+    func bindMapView(input: MapViewInput)
+    func bindCategoryView(input: CategoryViewInput)
+
+    // MARK: - Output from Presenter
+
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var visibleLayerDriver: Driver<VisibleLayer> { get }
     var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> { get }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> { get }
-    func bindMapView(input: MapViewInput)
-    func bindCategoryView(input: CategoryViewInput)
+    
+    // MARK: - Others
+    
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol
     func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
 }
