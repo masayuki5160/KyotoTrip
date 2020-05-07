@@ -128,11 +128,15 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             guard let self = self else { return }
             
             // TODO: アプリで設定された条件でレストラン検索(Gateway改修しInteractorからコール)
-            // TODO: View用にmodel作成
             self.dependency.interactor.fetchRestaurantData { (response) in
                 switch response {
                 case .success(let data):
-                    print("Restaurant data => \(data.rest[0])")
+                    var res: [RestaurantFeatureEntity] = []
+                    for restaurant in data.rest {
+                        res.append(self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant) as! RestaurantFeatureEntity)
+                    }
+                    print("Restaurant data => \(res[0].title), \(res[0].subtitle), \(res[0].coordinate)")
+                    // TODO: 取得したデータをDriverを通してViewに渡していく
                 case .failure(let error):
                     print(error)
                 }

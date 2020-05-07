@@ -11,6 +11,7 @@ import CoreLocation
 protocol KyotoMapInteractorProtocol: AnyObject {
     func updateUserPosition(_ position: UserPosition) -> UserPosition
     func createVisibleFeature(category: VisibleFeatureCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol
+    func createRestaurantVisibleFeature(source: RestaurantEntity) -> VisibleFeatureProtocol
     func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void)
     func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayer) -> VisibleLayer
 }
@@ -48,6 +49,17 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
             // TODO: Fix later
             return BusstopFeature(title: "", subtitle: "", coordinate: coordinate, type: .Busstop)
         }
+    }
+    
+    func createRestaurantVisibleFeature(source: RestaurantEntity) -> VisibleFeatureProtocol {
+        let latitude = atof(source.location.latitude)
+        let longitude = atof(source.location.longitude)
+        return RestaurantFeatureEntity(
+            title: source.name.name,
+            subtitle: source.categories.category,
+            coordinate: CLLocationCoordinate2DMake(latitude, longitude),
+            type: .Restaurant
+        )
     }
     
     func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void) {

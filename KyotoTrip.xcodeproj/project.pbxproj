@@ -34,6 +34,8 @@
 		4CA84B0B246398A400DAC5F3 /* CustomFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */; };
 		4CA84B0E2463C1B600DAC5F3 /* RestaurantInfoGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0D2463C1B600DAC5F3 /* RestaurantInfoGateway.swift */; };
 		4CA84B102463C3EF00DAC5F3 /* RestaurantSearchResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0F2463C3EF00DAC5F3 /* RestaurantSearchResultEntity.swift */; };
+		4CA84B122464080A00DAC5F3 /* RestaurantEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */; };
+		4CA84B16246408DE00DAC5F3 /* RestaurantFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */; };
 		4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */; };
 		4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD6241BB13700BF84B9 /* Map.storyboard */; };
 		4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */; };
@@ -87,6 +89,8 @@
 		4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		4CA84B0D2463C1B600DAC5F3 /* RestaurantInfoGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoGateway.swift; sourceTree = "<group>"; };
 		4CA84B0F2463C3EF00DAC5F3 /* RestaurantSearchResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchResultEntity.swift; sourceTree = "<group>"; };
+		4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantEntity.swift; sourceTree = "<group>"; };
+		4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFeatureEntity.swift; sourceTree = "<group>"; };
 		4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		4CC1ADD6241BB13700BF84B9 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTopPageViewController.swift; sourceTree = "<group>"; };
@@ -383,9 +387,11 @@
 				4CA84AF82462817C00DAC5F3 /* BusstopFeature.swift */,
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeature.swift */,
 				4CA84B002462FDC900DAC5F3 /* BusRouteFeature.swift */,
+				4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */,
 				4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */,
 				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
 				4CA84B0F2463C3EF00DAC5F3 /* RestaurantSearchResultEntity.swift */,
+				4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -646,6 +652,7 @@
 				4CA84AF92462817C00DAC5F3 /* BusstopFeature.swift in Sources */,
 				4CA84AF0245AB37900DAC5F3 /* CategoryTableViewCell.swift in Sources */,
 				4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyFeature.swift in Sources */,
+				4CA84B16246408DE00DAC5F3 /* RestaurantFeatureEntity.swift in Sources */,
 				4CA84AFB246281F600DAC5F3 /* VisibleFeatureProtocol.swift in Sources */,
 				4CA84B012462FDC900DAC5F3 /* BusRouteFeature.swift in Sources */,
 				4CA84B102463C3EF00DAC5F3 /* RestaurantSearchResultEntity.swift in Sources */,
@@ -667,6 +674,7 @@
 				4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */,
 				4C416650243964A4005EF1C2 /* KyotoCityInfoGateway.swift in Sources */,
 				4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */,
+				4CA84B122464080A00DAC5F3 /* RestaurantEntity.swift in Sources */,
 				4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
