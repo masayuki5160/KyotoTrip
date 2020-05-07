@@ -6,7 +6,7 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-struct VisibleLayer {
+struct VisibleLayerEntity {
     enum Status: Int {
         case hidden = 0
         case visible
@@ -31,17 +31,17 @@ struct VisibleLayer {
         self.restaurant = restaurant
     }
     
-    mutating func update(layer: VisibleFeatureCategory) -> VisibleLayer {
+    mutating func update(layer: VisibleFeatureCategory) -> VisibleLayerEntity {
         switch layer {
         case .Busstop:
             let nextStatusRawValue = self.busstop.rawValue + 1
-            self.busstop = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            self.busstop = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .CulturalProperty:
             let nextStatusRawValue = self.culturalProperty.rawValue + 1
-            self.culturalProperty = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            self.culturalProperty = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .Restaurant:
             let nextStatusRawValue = self.restaurant.rawValue + 1
-            self.restaurant = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            self.restaurant = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         default:
             break
         }

@@ -129,7 +129,7 @@ private extension MapViewController {
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
     
-    private func updateBusstopLayer(_ visibleStatus: VisibleLayer.Status) {
+    private func updateBusstopLayer(_ visibleStatus: VisibleLayerEntity.Status) {
         switch visibleStatus {
         case .hidden:
             self.mapView.busstopLayer?.isVisible = false
@@ -138,7 +138,7 @@ private extension MapViewController {
         }
     }
     
-    private func updateCulturalPropertyLayer(_ visibleStatus: VisibleLayer.Status) {
+    private func updateCulturalPropertyLayer(_ visibleStatus: VisibleLayerEntity.Status) {
         switch visibleStatus {
         case .hidden:
             self.mapView.culturalPropertyLayer?.isVisible = false
@@ -147,7 +147,7 @@ private extension MapViewController {
         }
     }
     
-    private func updateRestaurantLayer(_ visibleStatus: VisibleLayer.Status) {
+    private func updateRestaurantLayer(_ visibleStatus: VisibleLayerEntity.Status) {
         // TODO: レストラン情報は個別にmarkerで管理をする必要があるため実装する
         switch visibleStatus {
         case .hidden:

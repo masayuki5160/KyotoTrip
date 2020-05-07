@@ -22,7 +22,7 @@
 		4CA84AEA2459247F00DAC5F3 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AE92459247F00DAC5F3 /* Category.storyboard */; };
 		4CA84AF0245AB37900DAC5F3 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AEE245AB37900DAC5F3 /* CategoryTableViewCell.swift */; };
 		4CA84AF1245AB37900DAC5F3 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AEF245AB37900DAC5F3 /* CategoryTableViewCell.xib */; };
-		4CA84AF324618C4E00DAC5F3 /* VisibleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */; };
+		4CA84AF324618C4E00DAC5F3 /* VisibleLayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF224618C4E00DAC5F3 /* VisibleLayerEntity.swift */; };
 		4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */; };
 		4CA84AF92462817C00DAC5F3 /* BusstopFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */; };
 		4CA84AFB246281F600DAC5F3 /* VisibleFeatureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */; };
@@ -79,7 +79,7 @@
 		4CA84AE92459247F00DAC5F3 /* Category.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
 		4CA84AEE245AB37900DAC5F3 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		4CA84AEF245AB37900DAC5F3 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
-		4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleLayer.swift; sourceTree = "<group>"; };
+		4CA84AF224618C4E00DAC5F3 /* VisibleLayerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleLayerEntity.swift; sourceTree = "<group>"; };
 		4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosition.swift; sourceTree = "<group>"; };
 		4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopFeatureEntity.swift; sourceTree = "<group>"; };
 		4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeatureProtocol.swift; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */,
 				4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */,
 				4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */,
-				4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */,
+				4CA84AF224618C4E00DAC5F3 /* VisibleLayerEntity.swift */,
 				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
 				4CA84B0F2463C3EF00DAC5F3 /* RestaurantSearchResultEntity.swift */,
 				4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */,
@@ -684,7 +684,7 @@
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
 				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
 				4CC1ADF2241FA76800BF84B9 /* SettingsTableViewCell.swift in Sources */,
-				4CA84AF324618C4E00DAC5F3 /* VisibleLayer.swift in Sources */,
+				4CA84AF324618C4E00DAC5F3 /* VisibleLayerEntity.swift in Sources */,
 				4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */,
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,

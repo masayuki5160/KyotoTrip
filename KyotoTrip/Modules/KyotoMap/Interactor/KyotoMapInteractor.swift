@@ -13,11 +13,11 @@ protocol KyotoMapInteractorProtocol: AnyObject {
     func createVisibleFeature(category: VisibleFeatureCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol
     func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantFeatureEntity
     func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void)
-    func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayer) -> VisibleLayer
+    func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayerEntity) -> VisibleLayerEntity
 }
 
 final class KyotoMapInteractor: KyotoMapInteractorProtocol {
-    func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayer) -> VisibleLayer {
+    func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayerEntity) -> VisibleLayerEntity {
         var next = current
         return next.update(layer: target)
     }

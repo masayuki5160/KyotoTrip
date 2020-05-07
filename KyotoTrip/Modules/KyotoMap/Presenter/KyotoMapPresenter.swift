@@ -37,7 +37,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     // MARK: - Output from Presenter
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
-    var visibleLayerDriver: Driver<VisibleLayer> { get }
+    var visibleLayerDriver: Driver<VisibleLayerEntity> { get }
     var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> { get }
     var visibleFeatureRestaurantDriver: Driver<[VisibleFeatureProtocol]> { get }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> { get }
@@ -63,7 +63,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let userPositionButtonStatusBehaviorRelay = BehaviorRelay<UserPosition>(value: .kyotoCity)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleFeatureRestaurantBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
-    private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer())
+    private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
     private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())// TODO: Fix later
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
@@ -75,7 +75,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     var visibleFeatureRestaurantDriver: Driver<[VisibleFeatureProtocol]> {
         return visibleFeatureRestaurantBehaviorRelay.asDriver()
     }
-    var visibleLayerDriver: Driver<VisibleLayer> {
+    var visibleLayerDriver: Driver<VisibleLayerEntity> {
         return visibleLayerBehaviorRelay.asDriver()
     }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> {
