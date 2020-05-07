@@ -56,7 +56,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
 
     static var layerIdentifiers: Set<String> = [
         BusstopFeatureEntity.layerId,
-        CulturalPropertyFeature.layerId
+        CulturalPropertyFeatureEntity.layerId
     ]
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
@@ -164,7 +164,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         var category: VisibleFeatureCategory {
             if let _ = source.attribute(forKey: BusstopFeatureEntity.titleId) as? String {
                 return .Busstop
-            } else if let _ = source.attribute(forKey: CulturalPropertyFeature.titleId) as? String {
+            } else if let _ = source.attribute(forKey: CulturalPropertyFeatureEntity.titleId) as? String {
                 return .CulturalProperty
             }
             return .None

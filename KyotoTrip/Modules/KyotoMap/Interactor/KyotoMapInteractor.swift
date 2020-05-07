@@ -39,8 +39,8 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
                 type: .Busstop
             )
         case .CulturalProperty:
-            return CulturalPropertyFeature(
-                title: attributes[CulturalPropertyFeature.titleId] as! String,
+            return CulturalPropertyFeatureEntity(
+                title: attributes[CulturalPropertyFeatureEntity.titleId] as! String,
                 subtitle: "",
                 coordinate: coordinate,
                 type: .CulturalProperty
