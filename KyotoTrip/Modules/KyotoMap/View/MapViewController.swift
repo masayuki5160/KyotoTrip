@@ -105,9 +105,10 @@ private extension MapViewController {
     }
     
     private func setupCategorySemiModalView() {
-        floatingPanelController = FloatingPanelController()
         let categoryViewController = AppDefaultDependencies().assembleCategoryModule(presenter: dependency.presenter)
 
+        floatingPanelController = FloatingPanelController()
+        floatingPanelController.delegate = self
         floatingPanelController.surfaceView.cornerRadius = 24.0
         floatingPanelController.set(contentViewController: categoryViewController)
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
@@ -218,6 +219,12 @@ private extension MapViewController {
 extension MapViewController: DependencyInjectable {
     func inject(_ dependency: MapViewController.Dependency) {
         self.dependency = dependency
+    }
+}
+
+extension MapViewController: FloatingPanelControllerDelegate {
+    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+        return CustomFloatingPanelLayout()
     }
 }
 
