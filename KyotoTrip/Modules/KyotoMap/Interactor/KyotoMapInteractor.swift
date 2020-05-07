@@ -9,39 +9,16 @@
 import CoreLocation
 
 protocol KyotoMapInteractorProtocol: AnyObject {
-    func updateCulturalPropertylayer(_ layer: VisibleLayer) -> VisibleLayer
-    func updateBusstopLayer(_ layer: VisibleLayer) -> VisibleLayer
     func updateUserPosition(_ position: UserPosition) -> UserPosition
     func createVisibleFeature(category: VisibleFeatureCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol
+    func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void)
+    func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayer) -> VisibleLayer
 }
 
 final class KyotoMapInteractor: KyotoMapInteractorProtocol {
-    func updateCulturalPropertylayer(_ layer: VisibleLayer) -> VisibleLayer {
-        let nextStatusRawValue = layer.culturalProperty.rawValue + 1
-        let nextStatus = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
-        let nextVisibleLayer = VisibleLayer(
-            busstop: layer.busstop,
-            culturalProperty: nextStatus,
-            info: layer.info,
-            rentalCycle: layer.rentalCycle,
-            cycleParking: layer.cycleParking
-        )
-
-        return nextVisibleLayer
-    }
-    
-    func updateBusstopLayer(_ layer: VisibleLayer) -> VisibleLayer {
-        let nextStatusRawValue = layer.busstop.rawValue + 1
-        let nextStatus = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
-        let nextVisibleLayer = VisibleLayer(
-            busstop: nextStatus,
-            culturalProperty: layer.culturalProperty,
-            info: layer.info,
-            rentalCycle: layer.rentalCycle,
-            cycleParking: layer.cycleParking
-        )
-        
-        return nextVisibleLayer
+    func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayer) -> VisibleLayer {
+        var next = current
+        return next.update(layer: target)
     }
     
     func updateUserPosition(_ position: UserPosition) -> UserPosition {
@@ -70,6 +47,18 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
         default:
             // TODO: Fix later
             return BusstopFeature(title: "", subtitle: "", coordinate: coordinate, type: .Busstop)
+        }
+    }
+    
+    func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void) {
+        let restaurantInfoGateway = RestaurantInfoGateway()
+        restaurantInfoGateway.fetch { response in
+            switch response {
+            case .success(let data):
+                complition(.success(data))
+            case .failure(let error):
+                complition(.failure(error))
+            }
         }
     }
 }

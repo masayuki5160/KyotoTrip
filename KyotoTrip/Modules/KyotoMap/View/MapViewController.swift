@@ -68,6 +68,7 @@ private extension MapViewController {
 
             self.updateBusstopLayer(visibleLayer.busstop)
             self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
+            self.updateRestaurantLayer(visibleLayer.restaurant)
             
             // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -129,6 +130,16 @@ private extension MapViewController {
             self.mapView.culturalPropertyLayer?.isVisible = false
         case .visible:
             self.mapView.culturalPropertyLayer?.isVisible = true
+        }
+    }
+    
+    private func updateRestaurantLayer(_ visibleStatus: VisibleLayer.Status) {
+        // TODO: レストラン情報は個別にmarkerで管理をする必要があるため実装する
+        switch visibleStatus {
+        case .hidden:
+            print("Restaurant layer is hidden")
+        case .visible:
+            print("Restaurant layer is visible")
         }
     }
     

@@ -12,25 +12,40 @@ struct VisibleLayer {
         case visible
     }
     
-    let busstop: Status
-    let culturalProperty: Status
-    let info: Status
-    let rentalCycle: Status
-    let cycleParking: Status
+    var busstop: Status
+    var culturalProperty: Status
+    var info: Status
+    var restaurant: Status
     
     init() {
         busstop = .hidden
         culturalProperty = .hidden
         info = .hidden
-        rentalCycle = .hidden
-        cycleParking = .hidden
+        restaurant = .hidden
     }
     
-    init(busstop: Status, culturalProperty: Status, info: Status, rentalCycle: Status, cycleParking: Status) {
+    init(busstop: Status, culturalProperty: Status, info: Status, restaurant: Status) {
         self.busstop = busstop
         self.culturalProperty = culturalProperty
         self.info = info
-        self.rentalCycle = rentalCycle
-        self.cycleParking = cycleParking
+        self.restaurant = restaurant
+    }
+    
+    mutating func update(layer: VisibleFeatureCategory) -> VisibleLayer {
+        switch layer {
+        case .Busstop:
+            let nextStatusRawValue = self.busstop.rawValue + 1
+            self.busstop = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
+        case .CulturalProperty:
+            let nextStatusRawValue = self.culturalProperty.rawValue + 1
+            self.culturalProperty = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
+        case .Restaurant:
+            let nextStatusRawValue = self.restaurant.rawValue + 1
+            self.restaurant = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
+        default:
+            break
+        }
+        
+        return self
     }
 }

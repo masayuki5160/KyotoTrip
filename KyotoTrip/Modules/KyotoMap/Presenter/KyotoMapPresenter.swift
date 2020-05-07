@@ -20,8 +20,7 @@ struct CategoryViewInput {
     let culturalPropertyButton: Driver<Void>
     let infoButton: Driver<Void>
     let busstopButton: Driver<Void>
-    let rentalCycleButton: Driver<Void>
-    let cycleParkingButton: Driver<Void>
+    let restaurantButton: Driver<Void>
     let tableViewCell: Driver<VisibleFeatureProtocol>
 }
 
@@ -108,14 +107,41 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         input.culturalPropertyButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
 
-            let nextVisibleLayer = self.updateLayer(target: .CulturalProperty, layer: self.visibleLayerBehaviorRelay.value)
+            let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
+                target: .CulturalProperty,
+                current: self.visibleLayerBehaviorRelay.value
+            )
             self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
         input.busstopButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let nextVisibleLayer = self.updateLayer(target: .Busstop, layer: self.visibleLayerBehaviorRelay.value)
+            let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
+                target: .Busstop,
+                current: self.visibleLayerBehaviorRelay.value
+            )
+            self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
+        }).disposed(by: disposeBag)
+        
+        input.restaurantButton.drive(onNext: { [weak self] in
+            guard let self = self else { return }
+            
+            // TODO: アプリで設定された条件でレストラン検索(Gateway改修しInteractorからコール)
+            // TODO: View用にmodel作成
+            self.dependency.interactor.fetchRestaurantData { (response) in
+                switch response {
+                case .success(let data):
+                    print("Restaurant data => \(data.rest[0])")
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
+            let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
+                target: .Restaurant,
+                current: self.visibleLayerBehaviorRelay.value
+            )
             self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
@@ -148,18 +174,5 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             
             return distanceFromLocationA < distanceFromLocationB
         })
-    }
-    
-    // MARK: - Private functions
-    
-    private func updateLayer(target: VisibleFeatureCategory, layer: VisibleLayer) -> VisibleLayer {
-        switch target {
-        case .Busstop:
-            return dependency.interactor.updateBusstopLayer(layer)
-        case .CulturalProperty:
-            return dependency.interactor.updateCulturalPropertylayer(layer)
-        default:
-            return VisibleLayer()
-        }
     }
 }

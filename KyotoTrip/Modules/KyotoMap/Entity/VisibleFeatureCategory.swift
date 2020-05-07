@@ -9,9 +9,8 @@
 enum VisibleFeatureCategory {
     case Busstop
     case Event
-    case RentalCycle
     case CulturalProperty
-    case CycleParking
     case BusRoute
+    case Restaurant
     case None
 }

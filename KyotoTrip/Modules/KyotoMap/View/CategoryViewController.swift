@@ -18,9 +18,7 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var culturalPropertyButton: UIButton!
     @IBOutlet weak var busstopButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var rentalCycleButton: UIButton!
-    @IBOutlet weak var cycleParkingButton: UIButton!
-    
+    @IBOutlet weak var restaurantButton: UIButton!
     
     struct Dependency {
         let presenter: KyotoMapPresenterProtocol
@@ -53,8 +51,7 @@ private extension CategoryViewController {
             culturalPropertyButton: culturalPropertyButton.rx.tap.asDriver(),
             infoButton: infoButton.rx.tap.asDriver(),
             busstopButton: busstopButton.rx.tap.asDriver(),
-            rentalCycleButton: rentalCycleButton.rx.tap.asDriver(),
-            cycleParkingButton: cycleParkingButton.rx.tap.asDriver(),
+            restaurantButton: restaurantButton.rx.tap.asDriver(),
             tableViewCell: tableView.rx.modelSelected(VisibleFeatureProtocol.self).asDriver()
             )
         )
