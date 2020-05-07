@@ -35,13 +35,13 @@ struct VisibleLayer {
         switch layer {
         case .Busstop:
             let nextStatusRawValue = self.busstop.rawValue + 1
-            self.busstop = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
+            self.busstop = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .CulturalProperty:
             let nextStatusRawValue = self.culturalProperty.rawValue + 1
-            self.culturalProperty = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
+            self.culturalProperty = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .Restaurant:
             let nextStatusRawValue = self.restaurant.rawValue + 1
-            self.restaurant = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? VisibleLayer.Status.hidden
+            self.restaurant = VisibleLayer.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         default:
             break
         }
