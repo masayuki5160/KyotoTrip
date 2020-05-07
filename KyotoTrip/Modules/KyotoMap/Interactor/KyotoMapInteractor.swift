@@ -32,8 +32,8 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     func createVisibleFeature(category: VisibleFeatureCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol {
         switch category {
         case .Busstop:
-            return BusstopFeature(
-                title: attributes[BusstopFeature.titleId] as! String,
+            return BusstopFeatureEntity(
+                title: attributes[BusstopFeatureEntity.titleId] as! String,
                 subtitle: "",
                 coordinate: coordinate,
                 type: .Busstop
@@ -47,7 +47,7 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
             )
         default:
             // TODO: Fix later
-            return BusstopFeature(title: "", subtitle: "", coordinate: coordinate, type: .Busstop)
+            return BusstopFeatureEntity(title: "", subtitle: "", coordinate: coordinate, type: .Busstop)
         }
     }
     

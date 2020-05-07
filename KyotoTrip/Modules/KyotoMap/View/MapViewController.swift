@@ -162,7 +162,7 @@ private extension MapViewController {
         var layers: Set<String> = []
         
         if let busstopLayer = mapView.busstopLayer, busstopLayer.isVisible {
-            layers.insert(BusstopFeature.layerId)
+            layers.insert(BusstopFeatureEntity.layerId)
         }
         if let culturalPropertyLayer = mapView.culturalPropertyLayer, culturalPropertyLayer.isVisible {
             layers.insert(CulturalPropertyFeature.layerId)
@@ -256,7 +256,7 @@ extension MapViewController: FloatingPanelControllerDelegate {
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         let kyotoMapView = mapView as! KyotoMapView
-        kyotoMapView.busstopLayer = style.layer(withIdentifier: BusstopFeature.layerId)
+        kyotoMapView.busstopLayer = style.layer(withIdentifier: BusstopFeatureEntity.layerId)
         kyotoMapView.busRouteLayer = style.layer(withIdentifier: BusRouteFeature.layerId)
         kyotoMapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyFeature.layerId)
         

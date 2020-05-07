@@ -55,7 +55,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
 
     static var layerIdentifiers: Set<String> = [
-        BusstopFeature.layerId,
+        BusstopFeatureEntity.layerId,
         CulturalPropertyFeature.layerId
     ]
     private var dependency: Dependency!
@@ -64,7 +64,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleFeatureRestaurantBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer())
-    private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeature())// TODO: Fix later
+    private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())// TODO: Fix later
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatusBehaviorRelay.asDriver()
@@ -100,7 +100,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             var res: [VisibleFeatureProtocol] = []
             for feature in features {
                 let visibleFeature = self?.convertMGLFeatureToVisibleFeature(source: feature)
-                res.append(visibleFeature ?? BusstopFeature())// TODO: Fix later
+                res.append(visibleFeature ?? BusstopFeatureEntity())// TODO: Fix later
             }
             return res
         }).drive(onNext: { [weak self] (features) in
@@ -162,7 +162,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
         var category: VisibleFeatureCategory {
-            if let _ = source.attribute(forKey: BusstopFeature.titleId) as? String {
+            if let _ = source.attribute(forKey: BusstopFeatureEntity.titleId) as? String {
                 return .Busstop
             } else if let _ = source.attribute(forKey: CulturalPropertyFeature.titleId) as? String {
                 return .CulturalProperty

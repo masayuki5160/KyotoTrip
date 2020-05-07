@@ -12,7 +12,7 @@ import CoreLocation
 ///   Using Shapefile from MLIT(Ministry of Land, Infrastructure and Transport)
 ///    Japanese version http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P11.html
 ///    English version http://nlftp.mlit.go.jp/ksj-e/gml/datalist/KsjTmplt-P11.html
-struct BusstopFeature: VisibleFeatureProtocol {
+struct BusstopFeatureEntity: VisibleFeatureProtocol {
     static var layerId = "kyoto-busstop"
     
     /// バス停名
