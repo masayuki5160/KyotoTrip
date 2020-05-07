@@ -16,7 +16,8 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         let infoTopViewController = AppDefaultDependencies().assembleKyotoInfoTopModule()
         let mapViewController = AppDefaultDependencies().assembleKyotoMapModule()
+        let settingViewController = AppDefaultDependencies().assembleSettingsModule()
         
-        self.viewControllers = [mapViewController, infoTopViewController]
+        self.viewControllers = [mapViewController, infoTopViewController, settingViewController]
     }
 }

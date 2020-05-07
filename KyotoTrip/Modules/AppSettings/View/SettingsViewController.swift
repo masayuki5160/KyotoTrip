@@ -27,11 +27,6 @@ class SettingsViewController: UIViewController {
         
         tableView.register(UINib(nibName: "SettingsTableViewCell", bundle: nil), forCellReuseIdentifier: "SettingsTableViewCell")
     }
-    
-    @IBAction func tapCloseButton(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 }
 
 extension SettingsViewController: UITableViewDelegate {

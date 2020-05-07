@@ -30,13 +30,7 @@
                         <viewLayoutGuide key="safeArea" id="dRG-RW-bgy"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="info.circle" catalog="system" id="rga-jg-yQj"/>
-                    <navigationItem key="navigationItem" title="Information" id="7kC-rX-hus">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="neD-qq-SjX">
-                            <connections>
-                                <action selector="tapSettingButton:" destination="2AX-ip-tH2" id="pPL-nT-cXz"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Information" id="7kC-rX-hus"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="ru3-Ap-vkM" id="arz-3C-Cku"/>
@@ -66,7 +60,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gear" catalog="system" width="64" height="58"/>
         <image name="info.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>

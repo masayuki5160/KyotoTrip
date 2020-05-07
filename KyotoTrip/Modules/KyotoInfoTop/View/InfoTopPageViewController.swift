@@ -29,7 +29,6 @@ class InfoTopPageViewController: UIViewController {
     }
         
     private func setupTableView() {
-
         self.navigationItem.title = "NavigationBarTitleInfo".localized
 
         tableView.register(UINib(nibName: "InfoTopPageTableViewCell", bundle: nil), forCellReuseIdentifier: "InfoTopPageTableViewCell")
@@ -47,12 +46,6 @@ class InfoTopPageViewController: UIViewController {
                 self.present(SFSafariViewController(url: url), animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
-    }
-    
-    @IBAction func tapSettingButton(_ sender: UIBarButtonItem) {
-        // TODO: Presenterにイベントを渡して画面遷移はPresenterに委譲したい
-        let settingVC = AppDefaultDependencies().assembleSettingsModule()
-        self.present(settingVC, animated: true, completion: nil)
     }
 }
 
