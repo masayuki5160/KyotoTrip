@@ -39,6 +39,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var visibleLayerDriver: Driver<VisibleLayer> { get }
     var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> { get }
+    var visibleFeatureRestaurantDriver: Driver<[VisibleFeatureProtocol]> { get }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> { get }
     
     // MARK: - Others
@@ -61,6 +62,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let disposeBag = DisposeBag()
     private let userPositionButtonStatusBehaviorRelay = BehaviorRelay<UserPosition>(value: .kyotoCity)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
+    private let visibleFeatureRestaurantBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayer>(value: VisibleLayer())
     private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeature())// TODO: Fix later
     
@@ -69,6 +71,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     }
     var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> {
         return visibleFeatureBehaviorRelay.asDriver()
+    }
+    var visibleFeatureRestaurantDriver: Driver<[VisibleFeatureProtocol]> {
+        return visibleFeatureRestaurantBehaviorRelay.asDriver()
     }
     var visibleLayerDriver: Driver<VisibleLayer> {
         return visibleLayerBehaviorRelay.asDriver()
@@ -133,10 +138,11 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 case .success(let data):
                     var res: [RestaurantFeatureEntity] = []
                     for restaurant in data.rest {
-                        res.append(self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant) as! RestaurantFeatureEntity)
+                        let restaurant = self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant)
+                        res.append(restaurant)
                     }
-                    print("Restaurant data => \(res[0].title), \(res[0].subtitle), \(res[0].coordinate)")
-                    // TODO: 取得したデータをDriverを通してViewに渡していく
+                    
+                    self.visibleFeatureRestaurantBehaviorRelay.accept(res)
                 case .failure(let error):
                     print(error)
                 }

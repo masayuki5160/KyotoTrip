@@ -77,6 +77,20 @@ private extension MapViewController {
 
         }).disposed(by: disposeBag)
         
+        dependency.presenter.visibleFeatureRestaurantDriver.drive(onNext: { [weak self] features in
+            var annotations: [MGLPointAnnotation] = []
+            for feature in features {
+                let annotation = MGLPointAnnotation()
+                annotation.title = feature.title
+                annotation.subtitle = feature.subtitle
+                annotation.coordinate = feature.coordinate
+                
+                annotations.append(annotation)
+            }
+            
+            self?.mapView.addAnnotations(annotations)
+        }).disposed(by: disposeBag)
+        
         dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
             guard let self = self else { return }
 

@@ -55,18 +55,25 @@ private extension CategoryViewController {
             tableViewCell: tableView.rx.modelSelected(VisibleFeatureProtocol.self).asDriver()
             )
         )
+        
+        let combineLatestFeatures = Driver.combineLatest(
+            dependency.presenter.visibleFeatureDriver,
+            dependency.presenter.visibleFeatureRestaurantDriver
+        ) { $0 + $1 }
 
-        dependency.presenter.visibleFeatureDriver.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in
-            cell.title.text = element.title
-            switch element.type {
-            case .Busstop:
-                cell.icon.image = UIImage(named: "icons8-bus-80")
-            case .CulturalProperty:
-                cell.icon.image = UIImage(named: "icons8-torii-48")
-            default:
-                cell.icon.image = UIImage()
-            }
-        }.disposed(by: disposeBag)
+        combineLatestFeatures.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in
+                cell.title.text = element.title
+                switch element.type {
+                case .Busstop:
+                    cell.icon.image = UIImage(named: "icons8-bus-80")
+                case .CulturalProperty:
+                    cell.icon.image = UIImage(named: "icons8-torii-48")
+                case .Restaurant:
+                    cell.icon.image = UIImage(named: "icons8-restaurant-100")
+                default:
+                    cell.icon.image = UIImage()
+                }
+            }.disposed(by: disposeBag)
     }
 }
 
