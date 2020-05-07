@@ -28,7 +28,7 @@
 		4CA84AFB246281F600DAC5F3 /* VisibleFeatureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */; };
 		4CA84AFD246284EB00DAC5F3 /* VisibleFeatureCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */; };
 		4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */; };
-		4CA84B012462FDC900DAC5F3 /* BusRouteFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B002462FDC900DAC5F3 /* BusRouteFeature.swift */; };
+		4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */; };
 		4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */; };
 		4CA84B07246313C500DAC5F3 /* CulturalPropertyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */; };
 		4CA84B0B246398A400DAC5F3 /* CustomFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */; };
@@ -85,7 +85,7 @@
 		4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeatureProtocol.swift; sourceTree = "<group>"; };
 		4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeatureCategory.swift; sourceTree = "<group>"; };
 		4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyFeatureEntity.swift; sourceTree = "<group>"; };
-		4CA84B002462FDC900DAC5F3 /* BusRouteFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteFeature.swift; sourceTree = "<group>"; };
+		4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteFeatureEntity.swift; sourceTree = "<group>"; };
 		4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CulturalPropertyDetail.storyboard; sourceTree = "<group>"; };
 		4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingPanelLayout.swift; sourceTree = "<group>"; };
@@ -391,7 +391,7 @@
 				4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */,
 				4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */,
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */,
-				4CA84B002462FDC900DAC5F3 /* BusRouteFeature.swift */,
+				4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */,
 				4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */,
 				4CA84AF224618C4E00DAC5F3 /* VisibleLayer.swift */,
 				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
@@ -677,7 +677,7 @@
 				4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift in Sources */,
 				4CA84B16246408DE00DAC5F3 /* RestaurantFeatureEntity.swift in Sources */,
 				4CA84AFB246281F600DAC5F3 /* VisibleFeatureProtocol.swift in Sources */,
-				4CA84B012462FDC900DAC5F3 /* BusRouteFeature.swift in Sources */,
+				4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */,
 				4CA84B102463C3EF00DAC5F3 /* RestaurantSearchResultEntity.swift in Sources */,
 				4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */,
 				4C0CAECB242B992800EDCA82 /* KyotoMapView.swift in Sources */,
