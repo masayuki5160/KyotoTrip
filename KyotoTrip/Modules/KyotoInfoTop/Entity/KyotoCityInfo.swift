@@ -6,8 +6,6 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-import Foundation
-
 struct KyotoCityInfo {
     var title = ""
     var link = ""
