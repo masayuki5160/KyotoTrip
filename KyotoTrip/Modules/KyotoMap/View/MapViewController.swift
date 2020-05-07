@@ -195,12 +195,9 @@ private extension MapViewController {
         // Get all features within a rect the size of a touch (44x44).
         let touchRect = CGRect(origin: point, size: .zero).insetBy(dx: -22.0, dy: -22.0)
         let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(KyotoMapPresenter.layerIdentifiers)).filter { $0 is MGLPointFeature }
-
         // Select the closest feature to the touch center.
-        let closestFeatures = possibleFeatures.sorted(by: {
-            return CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude).distance(from: touchLocation) < CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude).distance(from: touchLocation)
-        })
-        
+        let closestFeatures = dependency.presenter.sorteFeatures(features: possibleFeatures, center: touchLocation)
+
         return closestFeatures
     }
     

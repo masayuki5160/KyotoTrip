@@ -34,6 +34,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     func bindMapView(input: MapViewInput)
     func bindCategoryView(input: CategoryViewInput)
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol
+    func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
@@ -127,6 +128,15 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             coordinate: source.coordinate,
             attributes: source.attributes
         )
+    }
+    
+    func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature] {
+        return features.sorted(by: {
+            let distanceFromLocationA = CLLocation(latitude: $0.coordinate.latitude,longitude: $0.coordinate.longitude).distance(from: center)
+            let distanceFromLocationB = CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude).distance(from: center)
+            
+            return distanceFromLocationA < distanceFromLocationB
+        })
     }
     
     // MARK: - Private functions
