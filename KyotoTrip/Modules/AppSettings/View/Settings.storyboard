@@ -29,7 +29,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Voj-CG-VbT"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="T2U-VY-tTq"/>
+                    <tabBarItem key="tabBarItem" title="" image="gear" catalog="system" id="T2U-VY-tTq"/>
                     <navigationItem key="navigationItem" title="Settings" id="iDv-IY-Qnb"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

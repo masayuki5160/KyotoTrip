@@ -29,7 +29,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dRG-RW-bgy"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Info" image="info.circle" catalog="system" id="rga-jg-yQj"/>
+                    <tabBarItem key="tabBarItem" title="" image="info.circle" catalog="system" id="rga-jg-yQj"/>
                     <navigationItem key="navigationItem" title="Information" id="7kC-rX-hus"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

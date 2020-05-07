@@ -43,7 +43,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iAF-8h-vPe"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="mappin" catalog="system" id="yiw-OH-d3a"/>
+                    <tabBarItem key="tabBarItem" title="" image="mappin" catalog="system" id="yiw-OH-d3a"/>
                     <navigationItem key="navigationItem" title="KyotoCityMap" id="n6f-Nf-Iv1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
