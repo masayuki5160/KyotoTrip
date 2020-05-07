@@ -284,6 +284,8 @@ extension MapViewController: MGLMapViewDelegate {
             viewController = AppDefaultDependencies().assembleBusstopDetailModule()
         case .CulturalProperty:
             viewController = AppDefaultDependencies().assembleCulturalPropertyDetailModule()
+        case .Restaurant:
+            viewController = AppDefaultDependencies().assembleRestaurantDetailModule()
         default:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule()
         }

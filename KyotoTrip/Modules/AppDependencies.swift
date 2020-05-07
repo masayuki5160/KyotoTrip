@@ -16,6 +16,7 @@ protocol AppDependencies {
     func assembleKyotoMapModule() -> UINavigationController
     func assembleBusstopDetailModule() -> UIViewController
     func assembleCulturalPropertyDetailModule() -> UIViewController
+    func assembleRestaurantDetailModule() -> UIViewController
     func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController
 }
 
@@ -29,7 +30,6 @@ public struct AppDefaultDependencies {
 }
 
 extension AppDefaultDependencies: AppDependencies {
-    
     func assembleMainTabModule() -> UIViewController {
         let viewController = {() -> TabBarController in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -108,6 +108,15 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! CategoryViewController
         }()
         view.inject(.init(presenter: presenter))
+        
+        return view
+    }
+    
+    func assembleRestaurantDetailModule() -> UIViewController {
+        let view = { () -> RestaurantDetailViewController in
+            let storyboard = UIStoryboard(name: "RestaurantDetail", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! RestaurantDetailViewController
+        }()
         
         return view
     }
