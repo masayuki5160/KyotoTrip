@@ -40,9 +40,7 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
         case .CulturalProperty:
             return CulturalPropertyFeatureEntity(
                 title: attributes[CulturalPropertyFeatureEntity.titleId] as! String,
-                subtitle: "",
                 coordinate: coordinate,
-                type: .CulturalProperty,
                 address: attributes[CulturalPropertyFeatureEntity.addressId] as! String,
                 largeClassificationCode: attributes[CulturalPropertyFeatureEntity.largeClassificationCodeId] as! Int,
                 smallClassificationCode: attributes[CulturalPropertyFeatureEntity.smallClassificationCodeId] as! Int,

@@ -93,4 +93,14 @@ struct CulturalPropertyFeatureEntity: VisibleFeatureProtocol {
         let day = registerDateStr.suffix(2)
         return "\(year)/\(month)/\(day)"
     }
+    
+    init(title: String, coordinate: CLLocationCoordinate2D, address: String, largeClassificationCode: Int, smallClassificationCode: Int, registerdDate: Int) {
+        self.title = title
+        self.coordinate = coordinate
+        self.address = address
+        self.largeClassificationCode = largeClassificationCode
+        self.smallClassificationCode = smallClassificationCode
+        self.registerdDate = registerdDate
+        self.subtitle = largeClassification
+    }
 }
