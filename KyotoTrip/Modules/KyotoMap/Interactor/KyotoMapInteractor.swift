@@ -59,7 +59,8 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
             title: source.name.name,
             subtitle: source.categories.category,
             coordinate: CLLocationCoordinate2DMake(latitude, longitude),
-            type: .Restaurant
+            type: .Restaurant,
+            detail: source
         )
     }
     

@@ -16,6 +16,5 @@ struct RestaurantFeatureEntity: VisibleFeatureProtocol {
     var subtitle = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     var type: VisibleFeatureCategory = .Restaurant
-    
-    // TODO: 飲食店用の情報追記
+    var detail: RestaurantEntity? = nil
 }

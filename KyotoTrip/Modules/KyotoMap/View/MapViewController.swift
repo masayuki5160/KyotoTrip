@@ -68,8 +68,8 @@ private extension MapViewController {
         Driver.combineLatest(
             dependency.presenter.visibleLayerDriver,
             dependency.presenter.visibleFeatureRestaurantDriver
-        ){($0, $1)}.map { (visibleLayer, features) -> (VisibleLayerEntity, [MGLPointAnnotation]) in
-                var annotations: [MGLPointAnnotation] = []
+        ){($0, $1)}.map { (visibleLayer, features) -> (VisibleLayerEntity, [RestaurantPointAnnotation]) in
+                var annotations: [RestaurantPointAnnotation] = []
                 for feature in features {
                     let annotation = self.dependency.presenter.createRestaurantAnnotation(
                         entity: feature as! RestaurantFeatureEntity
@@ -288,15 +288,18 @@ extension MapViewController: MGLMapViewDelegate {
         switch currentVisibleLayer {
         case .Busstop:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
+            viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         case .CulturalProperty:
             viewController = AppDefaultDependencies().assembleCulturalPropertyDetailModule() as! CulturalPropertyDetailViewController
+            viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         case .Restaurant:
             viewController = AppDefaultDependencies().assembleRestaurantDetailModule() as! RestaurantDetailViewController
+            let restaurantAnnotation = annotation as! RestaurantPointAnnotation
+            viewController.visibleFeatureEntity = restaurantAnnotation.entity
         default:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
+            viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         }
-
-        viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         self.navigationController?.pushViewController(viewController as! UIViewController, animated: true)
     }
 }
