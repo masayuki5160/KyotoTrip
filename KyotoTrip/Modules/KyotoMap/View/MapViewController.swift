@@ -26,7 +26,7 @@ class MapViewController: UIViewController {
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
     private var tappedAnnotationCategory: VisibleFeatureCategory = .None
-    private var restaurantAnnotations: [MGLPointAnnotation] = []// TODO: Presenterで管理する
+    private var currentVisibleRestaurantAnnotations: [MGLPointAnnotation] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,13 +77,21 @@ private extension MapViewController {
 
         }).disposed(by: disposeBag)
         
-        let combineLatestVisibleLayer = Driver.combineLatest(
+        Driver.combineLatest(
             dependency.presenter.visibleLayerDriver,
             dependency.presenter.visibleFeatureRestaurantDriver
-        ) { ($0, $1) }
-        combineLatestVisibleLayer.drive(onNext: { [weak self] (visibleLayer, features) in
+        ) { ($0, $1) }.map { (visibleLayer, features) -> (VisibleLayerEntity, [MGLPointAnnotation]) in
+                var annotations: [MGLPointAnnotation] = []
+                for feature in features {
+                    let annotation = self.dependency.presenter.createRestaurantAnnotation(
+                        entity: feature as! RestaurantFeatureEntity
+                    )
+                    annotations.append(annotation)
+                }
+                return (visibleLayer, annotations)
+        }.drive(onNext: { [weak self] (visibleLayer, annotations) in
             guard let self = self else { return }
-            self.updateRestaurantLayer(visibleLayer.restaurant, features: features)
+            self.updateRestaurantLayer(visibleStatus:visibleLayer.restaurant, annotations: annotations)
         }).disposed(by: disposeBag)
         
         dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
@@ -143,24 +151,18 @@ private extension MapViewController {
     }
 
     // FIXME: 2回同時にコールされる不具合がある
-    private func updateRestaurantLayer(_ visibleStatus: VisibleLayerEntity.Status, features: [VisibleFeatureProtocol]) {
-        mapView.removeAnnotations(restaurantAnnotations)// TODO: レストランのAnnotationを消すタイミングの修正
+    private func updateRestaurantLayer(visibleStatus: VisibleLayerEntity.Status, annotations: [MGLPointAnnotation]) {
+        // TODO: レストランのAnnotationを消すタイミングの修正
+        mapView.removeAnnotations(currentVisibleRestaurantAnnotations)
+        self.currentVisibleRestaurantAnnotations = []
+
         switch visibleStatus {
         case .hidden:
             print("Restaurant layer is hidden")
         case .visible:
             print("Restaurant layer is visible")
-            
-            self.restaurantAnnotations = []
-            for feature in features {
-                let annotation = MGLPointAnnotation()
-                annotation.title = feature.title
-                annotation.subtitle = feature.subtitle
-                annotation.coordinate = feature.coordinate
-                
-                self.restaurantAnnotations.append(annotation)
-            }
-            self.mapView.addAnnotations(self.restaurantAnnotations)
+            self.currentVisibleRestaurantAnnotations = annotations
+            self.mapView.addAnnotations(annotations)
         }
     }
     

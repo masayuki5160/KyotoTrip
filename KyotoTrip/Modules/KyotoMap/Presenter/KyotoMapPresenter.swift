@@ -46,6 +46,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol
     func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
+    func createRestaurantAnnotation(entity: RestaurantFeatureEntity) -> MGLPointAnnotation
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
@@ -184,5 +185,14 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             
             return distanceFromLocationA < distanceFromLocationB
         })
+    }
+    
+    func createRestaurantAnnotation(entity: RestaurantFeatureEntity) -> MGLPointAnnotation {
+        let annotation = MGLPointAnnotation()
+        annotation.title = entity.title
+        annotation.subtitle = entity.subtitle
+        annotation.coordinate = entity.coordinate
+        
+        return annotation
     }
 }
