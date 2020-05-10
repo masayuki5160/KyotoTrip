@@ -25,8 +25,8 @@ class MapViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
-    private var tappedAnnotationCategory: VisibleFeatureCategory = .None
     private var currentVisibleRestaurantAnnotations: [MGLPointAnnotation] = []
+    private var currentVisibleLayer: VisibleFeatureCategory = .None
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,23 +64,10 @@ private extension MapViewController {
             features: visibleFeaturesBehaviorRelay.asDriver())
         )
 
-        dependency.presenter.visibleLayerDriver.drive(onNext: { [weak self] (visibleLayer) in
-            guard let self = self else { return }
-
-            self.updateBusstopLayer(visibleLayer.busstop)
-            self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
-            
-            // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.updateVisibleFeatures()
-            }
-
-        }).disposed(by: disposeBag)
-        
         Driver.combineLatest(
             dependency.presenter.visibleLayerDriver,
             dependency.presenter.visibleFeatureRestaurantDriver
-        ) { ($0, $1) }.map { (visibleLayer, features) -> (VisibleLayerEntity, [MGLPointAnnotation]) in
+        ){($0, $1)}.map { (visibleLayer, features) -> (VisibleLayerEntity, [MGLPointAnnotation]) in
                 var annotations: [MGLPointAnnotation] = []
                 for feature in features {
                     let annotation = self.dependency.presenter.createRestaurantAnnotation(
@@ -91,6 +78,17 @@ private extension MapViewController {
                 return (visibleLayer, annotations)
         }.drive(onNext: { [weak self] (visibleLayer, annotations) in
             guard let self = self else { return }
+            
+            self.currentVisibleLayer = visibleLayer.currentVisibleLayer()
+            
+            self.updateBusstopLayer(visibleLayer.busstop)
+            self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
+            
+            // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.updateVisibleFeatures()
+            }
+            
             self.updateRestaurantLayer(visibleStatus:visibleLayer.restaurant, annotations: annotations)
         }).disposed(by: disposeBag)
         
@@ -103,7 +101,6 @@ private extension MapViewController {
         dependency.presenter.didSelectCellDriver.drive(onNext: { [weak self] feature in
             // FIXME: 初回起動時なイベントを購読する不具合回避
             if feature.title.isEmpty {
-                print("TEST \(feature.title), \(feature.coordinate)")
                 return
             }
 
@@ -152,17 +149,17 @@ private extension MapViewController {
 
     // FIXME: 2回同時にコールされる不具合がある
     private func updateRestaurantLayer(visibleStatus: VisibleLayerEntity.Status, annotations: [MGLPointAnnotation]) {
-        // TODO: レストランのAnnotationを消すタイミングの修正
+        // Remove current annotations, and add annotations again
         mapView.removeAnnotations(currentVisibleRestaurantAnnotations)
-        self.currentVisibleRestaurantAnnotations = []
+        currentVisibleRestaurantAnnotations = []
 
         switch visibleStatus {
         case .hidden:
             print("Restaurant layer is hidden")
         case .visible:
             print("Restaurant layer is visible")
-            self.currentVisibleRestaurantAnnotations = annotations
-            self.mapView.addAnnotations(annotations)
+            currentVisibleRestaurantAnnotations = annotations
+            mapView.addAnnotations(annotations)
         }
     }
     
@@ -177,7 +174,7 @@ private extension MapViewController {
             layers.insert(CulturalPropertyFeatureEntity.layerId)
         }
                 
-        let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
+        let features = mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
         visibleFeaturesBehaviorRelay.accept(features)
     }
     
@@ -188,9 +185,9 @@ private extension MapViewController {
         
         switch compassButtonStatus {
         case .kyotoCity:
-            self.mapView.setCenter(clLocationCoordinate2D, animated: true)
+            mapView.setCenter(clLocationCoordinate2D, animated: true)
         case .currentLocation:
-            self.mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+            mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
         }
     }
     
@@ -245,7 +242,6 @@ private extension MapViewController {
         selectedAnnotation.subtitle = visibleFeature.subtitle
         selectedAnnotation.coordinate = visibleFeature.coordinate
         
-        tappedAnnotationCategory = visibleFeature.type
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }
 }
@@ -282,13 +278,12 @@ extension MapViewController: MGLMapViewDelegate {
 
     func mapView(_ mapView: MGLMapView, didDeselect annotation: MGLAnnotation) {
         mapView.removeAnnotations([annotation])
-        tappedAnnotationCategory = .None
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
         let viewController: UIViewController
 
-        switch tappedAnnotationCategory {
+        switch currentVisibleLayer {
         case .Busstop:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule()
         case .CulturalProperty:

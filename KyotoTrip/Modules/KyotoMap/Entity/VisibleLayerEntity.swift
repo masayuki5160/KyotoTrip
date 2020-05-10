@@ -31,21 +31,47 @@ struct VisibleLayerEntity {
         self.restaurant = restaurant
     }
     
-    mutating func update(layer: VisibleFeatureCategory) -> VisibleLayerEntity {
+    func update(layer: VisibleFeatureCategory) -> VisibleLayerEntity {
+        var nextStatus: VisibleLayerEntity = VisibleLayerEntity()
         switch layer {
         case .Busstop:
             let nextStatusRawValue = self.busstop.rawValue + 1
-            self.busstop = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            nextStatus.busstop = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .CulturalProperty:
             let nextStatusRawValue = self.culturalProperty.rawValue + 1
-            self.culturalProperty = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            nextStatus.culturalProperty = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .Restaurant:
             let nextStatusRawValue = self.restaurant.rawValue + 1
-            self.restaurant = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            nextStatus.restaurant = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         default:
             break
         }
+
+        return nextStatus
+    }
+    
+    func currentVisibleLayer() -> [VisibleFeatureCategory] {
+        return findVisibleLayer()
+    }
+    
+    func currentVisibleLayer() -> VisibleFeatureCategory {
+        return findVisibleLayer()[0]
+    }
+    
+    private func findVisibleLayer() -> [VisibleFeatureCategory] {
+        var res: [VisibleFeatureCategory] = []
         
-        return self
+        // FIXME: 他に良い書き方があれば修正する
+        busstop == .visible ? res.append(.Busstop) : ()
+        culturalProperty == .visible ? res.append(.CulturalProperty) : ()
+        info == .visible ? res.append(.Event) : ()
+        restaurant == .visible ? res.append(.Restaurant) : ()
+        
+        if res.count > 0 {
+            return res
+        } else {
+            res.append(.None)
+            return res
+        }
     }
 }

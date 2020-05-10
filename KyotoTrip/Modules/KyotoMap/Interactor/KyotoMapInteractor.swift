@@ -18,8 +18,7 @@ protocol KyotoMapInteractorProtocol: AnyObject {
 
 final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayerEntity) -> VisibleLayerEntity {
-        var next = current
-        return next.update(layer: target)
+        return current.update(layer: target)
     }
     
     func updateUserPosition(_ position: UserPosition) -> UserPosition {
