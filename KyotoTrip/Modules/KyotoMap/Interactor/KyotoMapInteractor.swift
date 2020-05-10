@@ -43,7 +43,10 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
                 subtitle: "",
                 coordinate: coordinate,
                 type: .CulturalProperty,
-                address: attributes[CulturalPropertyFeatureEntity.addressId] as! String
+                address: attributes[CulturalPropertyFeatureEntity.addressId] as! String,
+                largeClassificationCode: attributes[CulturalPropertyFeatureEntity.largeClassificationCodeId] as! Int,
+                smallClassificationCode: attributes[CulturalPropertyFeatureEntity.smallClassificationCodeId] as! Int,
+                registerdDate: attributes[CulturalPropertyFeatureEntity.registerdDateId] as! Int
             )
         default:
             // TODO: Fix later

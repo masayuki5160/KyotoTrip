@@ -13,12 +13,18 @@ class CulturalPropertyDetailViewController: UIViewController, DetailViewProtocol
     var visibleFeatureEntity: VisibleFeatureProtocol!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var address: UILabel!
-
+    @IBOutlet weak var largeClassification: UILabel!
+    @IBOutlet weak var smallClassification: UILabel!
+    @IBOutlet weak var registerDate: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let entity = visibleFeatureEntity as! CulturalPropertyFeatureEntity
         name.text = entity.title
         address.text = entity.address
+        largeClassification.text = entity.largeClassification
+        smallClassification.text = entity.smallClassification
+        registerDate.text = entity.registerDateString
     }
 }
