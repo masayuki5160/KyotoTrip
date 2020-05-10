@@ -26,6 +26,7 @@ class MapViewController: UIViewController {
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
     private var tappedAnnotationCategory: VisibleFeatureCategory = .None
+    private var restaurantAnnotations: [MGLPointAnnotation] = []// TODO: Presenterで管理する
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,6 @@ private extension MapViewController {
 
             self.updateBusstopLayer(visibleLayer.busstop)
             self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
-            self.updateRestaurantLayer(visibleLayer.restaurant)
             
             // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -77,18 +77,13 @@ private extension MapViewController {
 
         }).disposed(by: disposeBag)
         
-        dependency.presenter.visibleFeatureRestaurantDriver.drive(onNext: { [weak self] features in
-            var annotations: [MGLPointAnnotation] = []
-            for feature in features {
-                let annotation = MGLPointAnnotation()
-                annotation.title = feature.title
-                annotation.subtitle = feature.subtitle
-                annotation.coordinate = feature.coordinate
-                
-                annotations.append(annotation)
-            }
-            
-            self?.mapView.addAnnotations(annotations)
+        let combineLatestVisibleLayer = Driver.combineLatest(
+            dependency.presenter.visibleLayerDriver,
+            dependency.presenter.visibleFeatureRestaurantDriver
+        ) { ($0, $1) }
+        combineLatestVisibleLayer.drive(onNext: { [weak self] (visibleLayer, features) in
+            guard let self = self else { return }
+            self.updateRestaurantLayer(visibleLayer.restaurant, features: features)
         }).disposed(by: disposeBag)
         
         dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
@@ -146,14 +141,26 @@ private extension MapViewController {
             self.mapView.culturalPropertyLayer?.isVisible = true
         }
     }
-    
-    private func updateRestaurantLayer(_ visibleStatus: VisibleLayerEntity.Status) {
-        // TODO: レストラン情報は個別にmarkerで管理をする必要があるため実装する
+
+    // FIXME: 2回同時にコールされる不具合がある
+    private func updateRestaurantLayer(_ visibleStatus: VisibleLayerEntity.Status, features: [VisibleFeatureProtocol]) {
+        mapView.removeAnnotations(restaurantAnnotations)// TODO: レストランのAnnotationを消すタイミングの修正
         switch visibleStatus {
         case .hidden:
             print("Restaurant layer is hidden")
         case .visible:
             print("Restaurant layer is visible")
+            
+            self.restaurantAnnotations = []
+            for feature in features {
+                let annotation = MGLPointAnnotation()
+                annotation.title = feature.title
+                annotation.subtitle = feature.subtitle
+                annotation.coordinate = feature.coordinate
+                
+                self.restaurantAnnotations.append(annotation)
+            }
+            self.mapView.addAnnotations(self.restaurantAnnotations)
         }
     }
     
