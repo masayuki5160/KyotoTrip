@@ -17,10 +17,11 @@ struct CulturalPropertyFeatureEntity: VisibleFeatureProtocol {
     /// 文化財の名称
     static var titleId = "P32_006"
     /// 文化財の住所
-    static var address = "P32_007"
+    static var addressId = "P32_007"
     
     var title = ""
     var subtitle = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     var type: VisibleFeatureCategory = .CulturalProperty
+    var address = ""
 }

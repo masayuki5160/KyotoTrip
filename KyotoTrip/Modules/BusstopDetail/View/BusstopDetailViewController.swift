@@ -8,9 +8,10 @@
 
 import UIKit
 
-class BusstopDetailViewController: UIViewController {
+class BusstopDetailViewController: UIViewController, DetailViewProtocol {
 
     @IBOutlet weak var tableView: UITableView!
+    var visibleFeatureEntity: VisibleFeatureProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()

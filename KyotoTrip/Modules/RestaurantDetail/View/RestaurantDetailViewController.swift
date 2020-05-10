@@ -8,7 +8,8 @@
 
 import UIKit
 
-class RestaurantDetailViewController: UIViewController {
+class RestaurantDetailViewController: UIViewController, DetailViewProtocol {
+    var visibleFeatureEntity: VisibleFeatureProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()

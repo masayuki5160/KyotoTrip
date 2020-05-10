@@ -42,7 +42,8 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
                 title: attributes[CulturalPropertyFeatureEntity.titleId] as! String,
                 subtitle: "",
                 coordinate: coordinate,
-                type: .CulturalProperty
+                type: .CulturalProperty,
+                address: attributes[CulturalPropertyFeatureEntity.addressId] as! String
             )
         default:
             // TODO: Fix later

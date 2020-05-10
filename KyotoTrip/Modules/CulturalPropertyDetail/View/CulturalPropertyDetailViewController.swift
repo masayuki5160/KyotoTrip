@@ -8,23 +8,17 @@
 
 import UIKit
 
-class CulturalPropertyDetailViewController: UIViewController {
+class CulturalPropertyDetailViewController: UIViewController, DetailViewProtocol {
+
+    var visibleFeatureEntity: VisibleFeatureProtocol!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var address: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let entity = visibleFeatureEntity as! CulturalPropertyFeatureEntity
+        name.text = entity.title
+        address.text = entity.address
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

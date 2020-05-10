@@ -27,6 +27,7 @@ class MapViewController: UIViewController {
     private var floatingPanelController: FloatingPanelController!
     private var currentVisibleRestaurantAnnotations: [MGLPointAnnotation] = []
     private var currentVisibleLayer: VisibleFeatureCategory = .None
+    private var visibleFeatureForTappedCalloutView: VisibleFeatureProtocol? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -236,6 +237,7 @@ private extension MapViewController {
     
     private func showCallout(feature: MGLPointFeature) {
         let visibleFeature = dependency.presenter.convertMGLFeatureToVisibleFeature(source: feature)
+        visibleFeatureForTappedCalloutView = visibleFeature
 
         let selectedAnnotation = MGLPointFeature()
         selectedAnnotation.title = visibleFeature.title
@@ -281,19 +283,20 @@ extension MapViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-        let viewController: UIViewController
+        var viewController: DetailViewProtocol
 
         switch currentVisibleLayer {
         case .Busstop:
-            viewController = AppDefaultDependencies().assembleBusstopDetailModule()
+            viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
         case .CulturalProperty:
-            viewController = AppDefaultDependencies().assembleCulturalPropertyDetailModule()
+            viewController = AppDefaultDependencies().assembleCulturalPropertyDetailModule() as! CulturalPropertyDetailViewController
         case .Restaurant:
-            viewController = AppDefaultDependencies().assembleRestaurantDetailModule()
+            viewController = AppDefaultDependencies().assembleRestaurantDetailModule() as! RestaurantDetailViewController
         default:
-            viewController = AppDefaultDependencies().assembleBusstopDetailModule()
+            viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
         }
 
-        self.navigationController?.pushViewController(viewController, animated: true)
+        viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
+        self.navigationController?.pushViewController(viewController as! UIViewController, animated: true)
     }
 }
