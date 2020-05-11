@@ -61,14 +61,14 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     ]
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
-    private let userPositionButtonStatusBehaviorRelay = BehaviorRelay<UserPosition>(value: .kyotoCity)
+    private let userPositionButtonStatus = BehaviorRelay<UserPosition>(value: .kyotoCity)
     private let visibleFeatureBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleFeatureRestaurantBehaviorRelay = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
     private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())// TODO: Fix later
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
-        return userPositionButtonStatusBehaviorRelay.asDriver()
+        return userPositionButtonStatus.asDriver()
     }
     var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> {
         return visibleFeatureBehaviorRelay.asDriver()
@@ -93,8 +93,8 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         input.compassButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let nextPosition = self.dependency.interactor.updateUserPosition(self.userPositionButtonStatusBehaviorRelay.value)
-            self.userPositionButtonStatusBehaviorRelay.accept(nextPosition)
+            let nextPosition = self.dependency.interactor.updateUserPosition(self.userPositionButtonStatus.value)
+            self.userPositionButtonStatus.accept(nextPosition)
         }).disposed(by: disposeBag)
         
         input.features.map({ [weak self] (features) -> [VisibleFeatureProtocol] in
