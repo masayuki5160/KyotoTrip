@@ -65,7 +65,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let visibleFeatureEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleFeatureRestaurantEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleLayerEntity = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
-    private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())// TODO: Fix later
+    private var didSelectCellEntity = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())// TODO: Fix later
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatus.asDriver()
@@ -80,7 +80,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         return visibleLayerEntity.asDriver()
     }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> {
-        return didSelectCellBehaviorRelay.asDriver()
+        return didSelectCellEntity.asDriver()
     }
     
     // MARK: - Public functions
@@ -157,7 +157,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         }).disposed(by: disposeBag)
         
         input.tableViewCell.drive(onNext: { [weak self] (feature) in
-            self?.didSelectCellBehaviorRelay.accept(feature)
+            self?.didSelectCellEntity.accept(feature)
         }).disposed(by: disposeBag)
     }
     
