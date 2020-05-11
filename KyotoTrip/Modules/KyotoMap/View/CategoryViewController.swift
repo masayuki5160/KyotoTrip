@@ -57,7 +57,7 @@ private extension CategoryViewController {
         )
         
         let combineLatestFeatures = Driver.combineLatest(
-            dependency.presenter.visibleFeatureDriver,
+            dependency.presenter.visibleFeatureEntityDriver,
             dependency.presenter.visibleFeatureRestaurantDriver
         ) { $0 + $1 }
 

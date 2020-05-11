@@ -38,7 +38,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var visibleLayerDriver: Driver<VisibleLayerEntity> { get }
-    var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> { get }
+    var visibleFeatureEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
     var visibleFeatureRestaurantDriver: Driver<[VisibleFeatureProtocol]> { get }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> { get }
     
@@ -70,7 +70,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatus.asDriver()
     }
-    var visibleFeatureDriver: Driver<[VisibleFeatureProtocol]> {
+    var visibleFeatureEntityDriver: Driver<[VisibleFeatureProtocol]> {
         return visibleFeatureEntity.asDriver()
     }
     var visibleFeatureRestaurantDriver: Driver<[VisibleFeatureProtocol]> {
