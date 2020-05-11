@@ -66,7 +66,7 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     
     func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void) {
         let restaurantInfoGateway = RestaurantInfoGateway()
-        let requestParam = RestaurantInfoRequestParam()
+        let requestParam = RestaurantInfoRequestParamEntity()
         restaurantInfoGateway.fetch(param: requestParam) { response in
             switch response {
             case .success(let data):

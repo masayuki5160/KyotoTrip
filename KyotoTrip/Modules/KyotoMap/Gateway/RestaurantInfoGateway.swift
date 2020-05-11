@@ -9,39 +9,7 @@
 import Alamofire
 
 protocol RestaurantInfoGatewayProtocol: AnyObject {
-    func fetch(param: RestaurantInfoRequestParam, complition: @escaping (Result<RestaurantSearchResultEntity>) -> Void)
-}
-
-struct RestaurantInfoRequestParam {
-    var latitude = ""
-    var longitude = ""
-    var range: SearchRange = .range500
-    var hitPerPage = 20
-    var englishSpeakingStaff: RequestFilterFlg = .off
-    var englishMenu: RequestFilterFlg = .off
-    var koreanSpeakingStaff: RequestFilterFlg = .off
-    var koreanMenu: RequestFilterFlg = .off
-    var chineseSpeakingStaff: RequestFilterFlg = .off
-    var simplifiedChineseMenu: RequestFilterFlg = .off
-    var traditionalChineseMenu: RequestFilterFlg = .off
-    var vegetarianMenuOptions: RequestFilterFlg = .off
-    var religiousMenuOptions: RequestFilterFlg = .off
-    var wifi: RequestFilterFlg = .off
-    var card: RequestFilterFlg = .off
-    var privateRoom: RequestFilterFlg = .off
-    var noSmoking: RequestFilterFlg = .off
-}
-
-enum SearchRange: Int {
-    case range300 = 1
-    case range500
-    case range1000
-    case range2000
-    case range3000
-}
-enum RequestFilterFlg: Int {
-    case off = 0
-    case on
+    func fetch(param: RestaurantInfoRequestParamEntity, complition: @escaping (Result<RestaurantSearchResultEntity>) -> Void)
 }
 
 /// - Note:
@@ -52,7 +20,7 @@ class RestaurantInfoGateway: RestaurantInfoGatewayProtocol {
     private var accessToken = "78a33f7ad28955fdaccc7c99e7ef6dc3"
     private var pref = "PREF26"
     
-    func fetch(param: RestaurantInfoRequestParam, complition: @escaping (Result<RestaurantSearchResultEntity>) -> Void) {
+    func fetch(param: RestaurantInfoRequestParamEntity, complition: @escaping (Result<RestaurantSearchResultEntity>) -> Void) {
         let url = buildUrl(param)
         Alamofire.request(url).responseJSON { response in
             if response.error != nil {
@@ -65,7 +33,7 @@ class RestaurantInfoGateway: RestaurantInfoGatewayProtocol {
         }
     }
     
-    private func buildUrl(_ param: RestaurantInfoRequestParam) -> String {
+    private func buildUrl(_ param: RestaurantInfoRequestParamEntity) -> String {
         let urlStr = "https://api.gnavi.co.jp/ForeignRestSearchAPI/v3/?"
             + "keyid=\(accessToken)&pref=\(pref)"
             + "&latitude=\(param.latitude)&longitude=\(param.longitude)"
