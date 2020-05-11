@@ -40,7 +40,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     var visibleLayerEntityDriver: Driver<VisibleLayerEntity> { get }
     var visibleFeatureEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
     var visibleFeatureRestaurantEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
-    var didSelectCellDriver: Driver<VisibleFeatureProtocol> { get }
+    var didSelectCellEntityDriver: Driver<VisibleFeatureProtocol> { get }
     
     // MARK: - Others
     
@@ -79,7 +79,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     var visibleLayerEntityDriver: Driver<VisibleLayerEntity> {
         return visibleLayerEntity.asDriver()
     }
-    var didSelectCellDriver: Driver<VisibleFeatureProtocol> {
+    var didSelectCellEntityDriver: Driver<VisibleFeatureProtocol> {
         return didSelectCellEntity.asDriver()
     }
     

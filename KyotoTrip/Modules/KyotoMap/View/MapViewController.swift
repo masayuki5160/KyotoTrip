@@ -99,7 +99,7 @@ private extension MapViewController {
             self.updateMapCenterPosition(compassButtonStatus)
         }).disposed(by: disposeBag)
         
-        dependency.presenter.didSelectCellDriver.drive(onNext: { [weak self] feature in
+        dependency.presenter.didSelectCellEntityDriver.drive(onNext: { [weak self] feature in
             // FIXME: 初回起動時なイベントを購読する不具合回避
             if feature.title.isEmpty {
                 return
