@@ -58,7 +58,7 @@ private extension CategoryViewController {
         
         let combineLatestFeatures = Driver.combineLatest(
             dependency.presenter.visibleFeatureEntityDriver,
-            dependency.presenter.visibleFeatureRestaurantDriver
+            dependency.presenter.visibleFeatureRestaurantEntityDriver
         ) { $0 + $1 }
 
         combineLatestFeatures.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in
