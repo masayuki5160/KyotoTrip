@@ -64,7 +64,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let userPositionButtonStatus = BehaviorRelay<UserPosition>(value: .kyotoCity)
     private let visibleFeatureEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleFeatureRestaurantEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
-    private let visibleLayerBehaviorRelay = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
+    private let visibleLayerEntity = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
     private var didSelectCellBehaviorRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())// TODO: Fix later
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
@@ -77,7 +77,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         return visibleFeatureRestaurantEntity.asDriver()
     }
     var visibleLayerDriver: Driver<VisibleLayerEntity> {
-        return visibleLayerBehaviorRelay.asDriver()
+        return visibleLayerEntity.asDriver()
     }
     var didSelectCellDriver: Driver<VisibleFeatureProtocol> {
         return didSelectCellBehaviorRelay.asDriver()
@@ -115,9 +115,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
 
             let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
                 target: .CulturalProperty,
-                current: self.visibleLayerBehaviorRelay.value
+                current: self.visibleLayerEntity.value
             )
-            self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
+            self.visibleLayerEntity.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
         input.busstopButton.drive(onNext: { [weak self] in
@@ -125,9 +125,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             
             let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
                 target: .Busstop,
-                current: self.visibleLayerBehaviorRelay.value
+                current: self.visibleLayerEntity.value
             )
-            self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
+            self.visibleLayerEntity.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
         input.restaurantButton.drive(onNext: { [weak self] in
@@ -151,9 +151,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
             
             let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
                 target: .Restaurant,
-                current: self.visibleLayerBehaviorRelay.value
+                current: self.visibleLayerEntity.value
             )
-            self.visibleLayerBehaviorRelay.accept(nextVisibleLayer)
+            self.visibleLayerEntity.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
         input.tableViewCell.drive(onNext: { [weak self] (feature) in
