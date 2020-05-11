@@ -66,7 +66,7 @@ private extension MapViewController {
         )
 
         Driver.combineLatest(
-            dependency.presenter.visibleLayerDriver,
+            dependency.presenter.visibleLayerEntityDriver,
             dependency.presenter.visibleFeatureRestaurantEntityDriver
         ){($0, $1)}.map { (visibleLayer, features) -> (VisibleLayerEntity, [RestaurantPointAnnotation]) in
                 var annotations: [RestaurantPointAnnotation] = []
