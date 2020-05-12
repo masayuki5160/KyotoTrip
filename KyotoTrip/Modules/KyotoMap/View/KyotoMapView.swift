@@ -21,5 +21,7 @@ class KyotoMapView: MGLMapView {
     func setup() {
         self.setCenter(CLLocationCoordinate2D(latitude: KyotoMapView.kyotoStationLat, longitude: KyotoMapView.kyotoStationLong), zoomLevel: KyotoMapView.defaultZoomLv, animated: false)
         self.showsUserLocation = true
+        self.userTrackingMode = .followWithHeading
+        self.showsUserHeadingIndicator = true
     }
 }

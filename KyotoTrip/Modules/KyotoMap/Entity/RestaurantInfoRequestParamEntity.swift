@@ -5,6 +5,7 @@
 //  Created by TANAKA MASAYUKI on 2020/05/11.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
+import Foundation
 
 struct RestaurantInfoRequestParamEntity {
     enum SearchRange: Int {
@@ -36,4 +37,20 @@ struct RestaurantInfoRequestParamEntity {
     var card: RequestFilterFlg = .off
     var privateRoom: RequestFilterFlg = .off
     var noSmoking: RequestFilterFlg = .off
+    private let userdefaultsKey = "RestaurantInfoRequestParam"
+    
+    func save() {
+        do {
+            let archiveData = try NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
+            UserDefaults.standard.set(archiveData, forKey: userdefaultsKey)
+            
+        } catch {
+            fatalError("Archive failed")
+        }
+    }
+    
+    func load() -> RestaurantInfoRequestParamEntity {
+        let param = UserDefaults.standard.object(forKey: userdefaultsKey) as? RestaurantInfoRequestParamEntity ?? RestaurantInfoRequestParamEntity()
+        return param
+    }
 }

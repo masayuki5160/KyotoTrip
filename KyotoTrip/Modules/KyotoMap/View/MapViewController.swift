@@ -28,11 +28,13 @@ class MapViewController: UIViewController {
     private var currentVisibleRestaurantAnnotations: [MGLPointAnnotation] = []
     private var currentVisibleLayer: VisibleFeatureCategory = .None
     private var visibleFeatureForTappedCalloutView: VisibleFeatureProtocol? = nil
+    private var currentLocation = BehaviorRelay<CLLocation>(value: CLLocation())
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+        setupMapView()
         bindPresenter()
         setupCategorySemiModalView()
     }
@@ -44,9 +46,18 @@ private extension MapViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "NavigationBarItemBack".localized, style: .plain, target: nil, action: nil)
 
         compassButton.layer.cornerRadius = 10.0
-        
+    }
+
+    private func setupMapView() {
         mapView.delegate = self
+        // mapView.locationManager = MGLLocationManager()
+        mapView.locationManager.delegate = self
         mapView.setup()
+        mapView.setCenter(CLLocationCoordinate2D(latitude: KyotoMapView.kyotoStationLat, longitude: KyotoMapView.kyotoStationLong), zoomLevel: KyotoMapView.defaultZoomLv, animated: false)
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .followWithHeading
+        mapView.showsUserHeadingIndicator = true
+
         
         // Add single tap gesture to mapView
         let singleTap = UITapGestureRecognizer()
@@ -62,7 +73,9 @@ private extension MapViewController {
     private func bindPresenter() {
         dependency.presenter.bindMapView(input: MapViewInput(
             compassButton: compassButton.rx.tap.asDriver(),
-            features: visibleFeatures.asDriver())
+            features: visibleFeatures.asDriver(),
+            location: currentLocation.asDriver()
+            )
         )
 
         Driver.combineLatest(
@@ -188,7 +201,7 @@ private extension MapViewController {
         case .kyotoCity:
             mapView.setCenter(clLocationCoordinate2D, animated: true)
         case .currentLocation:
-            mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+            mapView.setCenter(currentLocation.value.coordinate, animated: true)
         }
     }
     
@@ -277,6 +290,14 @@ extension MapViewController: MGLMapViewDelegate {
         // Always allow callouts to popup when annotations are tapped.
         return true
     }
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        // Substitute our custom view for the user location annotation.
+        if annotation is MGLUserLocation && mapView.userLocation != nil {
+            return CustomUserLocationAnnotationView()
+        }
+        return nil
+    }
 
     func mapView(_ mapView: MGLMapView, didDeselect annotation: MGLAnnotation) {
         mapView.removeAnnotations([annotation])
@@ -301,5 +322,21 @@ extension MapViewController: MGLMapViewDelegate {
             viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         }
         self.navigationController?.pushViewController(viewController as! UIViewController, animated: true)
+    }
+}
+
+extension MapViewController: MGLLocationManagerDelegate {
+    func locationManager(_ manager: MGLLocationManager, didUpdate locations: [CLLocation]) {
+        currentLocation.accept(locations[0])
+    }
+    
+    func locationManager(_ manager: MGLLocationManager, didUpdate newHeading: CLHeading) {
+    }
+    
+    func locationManagerShouldDisplayHeadingCalibration(_ manager: MGLLocationManager) -> Bool {
+        return true// TODO: trueでいいか確認する
+    }
+    
+    func locationManager(_ manager: MGLLocationManager, didFailWithError error: Error) {
     }
 }

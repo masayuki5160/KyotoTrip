@@ -12,7 +12,7 @@ protocol KyotoMapInteractorProtocol: AnyObject {
     func updateUserPosition(_ position: UserPosition) -> UserPosition
     func createVisibleFeature(category: VisibleFeatureCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol
     func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantFeatureEntity
-    func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void)
+    func fetchRestaurantData(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void)
     func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayerEntity) -> VisibleLayerEntity
 }
 
@@ -64,9 +64,9 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
         )
     }
     
-    func fetchRestaurantData(complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void) {
+    func fetchRestaurantData(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantSearchResultEntity, Error>) -> Void) {
         let restaurantInfoGateway = RestaurantInfoGateway()
-        let requestParam = RestaurantInfoRequestParamEntity()
+        let requestParam = createRestaurantInfoRequestParam(location: location)
         restaurantInfoGateway.fetch(param: requestParam) { response in
             switch response {
             case .success(let data):
@@ -75,5 +75,13 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
                 complition(.failure(error))
             }
         }
+    }
+    
+    private func createRestaurantInfoRequestParam(location: CLLocationCoordinate2D) -> RestaurantInfoRequestParamEntity {
+        var param = RestaurantInfoRequestParamEntity().load()
+        param.latitude = String(location.latitude)
+        param.longitude = String(location.longitude)
+
+        return param
     }
 }

@@ -14,6 +14,7 @@ import Mapbox
 struct MapViewInput {
     let compassButton: Driver<Void>
     let features: Driver<[MGLFeature]>
+    let location: Driver<CLLocation>// TODO: Driverで良いか？
 }
 
 struct CategoryViewInput {
@@ -66,6 +67,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     private let visibleFeatureRestaurantEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     private let visibleLayerEntity = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
     private var didSelectCellEntity = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())// TODO: Fix later
+    private var currentUserLocation = CLLocation()
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatus.asDriver()
@@ -107,6 +109,10 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         }).drive(onNext: { [weak self] (features) in
             self?.visibleFeatureEntity.accept(features)
         }).disposed(by: disposeBag)
+        
+        input.location.drive(onNext: { [weak self] location in
+            self?.currentUserLocation = location
+        }).disposed(by: disposeBag)
     }
     
     func bindCategoryView(input: CategoryViewInput) {
@@ -133,8 +139,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         input.restaurantButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
             
-            // TODO: アプリで設定された条件でレストラン検索(Gateway改修しInteractorからコール)
-            self.dependency.interactor.fetchRestaurantData { (response) in
+            self.dependency.interactor.fetchRestaurantData(location: self.currentUserLocation.coordinate) { (response) in
                 switch response {
                 case .success(let data):
                     var res: [RestaurantFeatureEntity] = []
