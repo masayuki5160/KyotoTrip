@@ -12,7 +12,11 @@ import RxSwift
 import RxCocoa
 import FloatingPanel
 
-class MapViewController: UIViewController {
+protocol MapViewProtocol {
+    var mapView: KyotoMapView! { get set }
+}
+
+class MapViewController: UIViewController, MapViewProtocol {
     
     struct Dependency {
         let presenter: KyotoMapPresenterProtocol

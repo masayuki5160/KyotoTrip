@@ -53,6 +53,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     // MARK: - Properties
     struct Dependency {
         let interactor: KyotoMapInteractorProtocol
+        let mapView: MapViewProtocol
     }
 
     static var layerIdentifiers: Set<String> = [
