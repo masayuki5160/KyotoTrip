@@ -76,7 +76,8 @@ extension AppDefaultDependencies: AppDependencies {
         let view = naviViewController.viewControllers[0] as! MapViewController
         let presenter = KyotoMapPresenter(
             dependency: .init(
-                interactor: interactor
+                interactor: interactor,
+                mapView: view
             )
         )
         view.inject(.init(presenter: presenter))

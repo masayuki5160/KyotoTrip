@@ -53,6 +53,7 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
     // MARK: - Properties
     struct Dependency {
         let interactor: KyotoMapInteractorProtocol
+        let mapView: MapViewProtocol
     }
 
     static var layerIdentifiers: Set<String> = [
@@ -133,17 +134,17 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         input.restaurantButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
             
-            // TODO: アプリで設定された条件でレストラン検索(Gateway改修しInteractorからコール)
-            self.dependency.interactor.fetchRestaurantData { (response) in
+            let mapView = self.dependency.mapView.mapView as MGLMapView
+            self.dependency.interactor.fetchRestaurants(location: mapView.centerCoordinate) { (response) in
                 switch response {
-                case .success(let data):
-                    var res: [RestaurantFeatureEntity] = []
-                    for restaurant in data.rest {
-                        let restaurant = self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant)
-                        res.append(restaurant)
+                case .success(let restaurantsSearchResultEntity):
+                    var restaurantFeatures: [RestaurantFeatureEntity] = []
+                    for restaurant in restaurantsSearchResultEntity.rest {
+                        let featureEntity = self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant)
+                        restaurantFeatures.append(featureEntity)
                     }
                     
-                    self.visibleFeatureRestaurantEntity.accept(res)
+                    self.visibleFeatureRestaurantEntity.accept(restaurantFeatures)
                 case .failure(let error):
                     print(error)
                 }
