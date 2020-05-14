@@ -32,7 +32,7 @@
 		4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */; };
 		4CA84B07246313C500DAC5F3 /* CulturalPropertyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */; };
 		4CA84B0B246398A400DAC5F3 /* CustomFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */; };
-		4CA84B0E2463C1B600DAC5F3 /* RestaurantsGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0D2463C1B600DAC5F3 /* RestaurantsGateway.swift */; };
+		4CA84B0E2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0D2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift */; };
 		4CA84B102463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0F2463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift */; };
 		4CA84B122464080A00DAC5F3 /* RestaurantEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */; };
 		4CA84B16246408DE00DAC5F3 /* RestaurantFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */; };
@@ -92,7 +92,7 @@
 		4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CulturalPropertyDetail.storyboard; sourceTree = "<group>"; };
 		4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingPanelLayout.swift; sourceTree = "<group>"; };
-		4CA84B0D2463C1B600DAC5F3 /* RestaurantsGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsGateway.swift; sourceTree = "<group>"; };
+		4CA84B0D2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchGateway.swift; sourceTree = "<group>"; };
 		4CA84B0F2463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchResultEntity.swift; sourceTree = "<group>"; };
 		4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantEntity.swift; sourceTree = "<group>"; };
 		4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFeatureEntity.swift; sourceTree = "<group>"; };
@@ -430,7 +430,7 @@
 		4CA84B0C2463C16500DAC5F3 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
-				4CA84B0D2463C1B600DAC5F3 /* RestaurantsGateway.swift */,
+				4CA84B0D2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift */,
 			);
 			path = Gateway;
 			sourceTree = "<group>";
@@ -720,7 +720,7 @@
 				4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
-				4CA84B0E2463C1B600DAC5F3 /* RestaurantsGateway.swift in Sources */,
+				4CA84B0E2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift in Sources */,
 				4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */,
 				4CA84B1C2464339A00DAC5F3 /* RestaurantDetailViewController.swift in Sources */,
 				4CF4AFD42468508800991B2C /* RestaurantPointAnnotation.swift in Sources */,

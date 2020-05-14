@@ -61,7 +61,7 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     }
     
     func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, Error>) -> Void) {
-        let gateway = RestaurantsGateway()
+        let gateway = RestaurantsSearchGateway()
         let requestParam = createRestaurantsRequestParam(location: location)
         gateway.fetch(param: requestParam) { response in
             switch response {

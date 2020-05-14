@@ -8,14 +8,14 @@
 
 import Alamofire
 
-protocol RestaurantsGatewayProtocol: AnyObject {
+protocol RestaurantsSearchGatewayProtocol: AnyObject {
     func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity>) -> Void)
 }
 
 /// - Note:
 ///   ForeignRestSearchAPI
 ///   request parameter details https://api.gnavi.co.jp/api/manual/foreignrestsearch/
-class RestaurantsGateway: RestaurantsGatewayProtocol {
+class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
     // TODO: Access token is too open. Use more secure ways.
     private var accessToken = "78a33f7ad28955fdaccc7c99e7ef6dc3"
     private var targetPrefecture = "PREF26"// Set Kyoto prefecture code
