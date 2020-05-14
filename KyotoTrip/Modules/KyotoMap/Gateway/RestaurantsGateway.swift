@@ -8,19 +8,19 @@
 
 import Alamofire
 
-protocol RestaurantInfoGatewayProtocol: AnyObject {
-    func fetch(param: RestaurantInfoRequestParamEntity, complition: @escaping (Result<RestaurantSearchResultEntity>) -> Void)
+protocol RestaurantsGatewayProtocol: AnyObject {
+    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity>) -> Void)
 }
 
 /// - Note:
 ///   ForeignRestSearchAPI
 ///   request parameter details https://api.gnavi.co.jp/api/manual/foreignrestsearch/
-class RestaurantInfoGateway: RestaurantInfoGatewayProtocol {
-    // TODO: accessTokenの管理方法を修正
+class RestaurantsGateway: RestaurantsGatewayProtocol {
+    // TODO: Access token is too open. Use more secure ways.
     private var accessToken = "78a33f7ad28955fdaccc7c99e7ef6dc3"
-    private var pref = "PREF26"
+    private var targetPrefecture = "PREF26"// Set Kyoto prefecture code
     
-    func fetch(param: RestaurantInfoRequestParamEntity, complition: @escaping (Result<RestaurantSearchResultEntity>) -> Void) {
+    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity>) -> Void) {
         let url = buildUrl(param)
         Alamofire.request(url).responseJSON { response in
             if response.error != nil {
@@ -28,14 +28,14 @@ class RestaurantInfoGateway: RestaurantInfoGatewayProtocol {
                 return
             }
             
-            let decodedJson = try! JSONDecoder().decode(RestaurantSearchResultEntity.self, from: response.data!)
-            complition(.success(decodedJson))
+            let resultEntity = try! JSONDecoder().decode(RestaurantsSearchResultEntity.self, from: response.data!)
+            complition(.success(resultEntity))
         }
     }
     
-    private func buildUrl(_ param: RestaurantInfoRequestParamEntity) -> String {
+    private func buildUrl(_ param: RestaurantsRequestParamEntity) -> String {
         let urlStr = "https://api.gnavi.co.jp/ForeignRestSearchAPI/v3/?"
-            + "keyid=\(accessToken)&pref=\(pref)"
+            + "keyid=\(accessToken)&pref=\(targetPrefecture)"
             + "&latitude=\(param.latitude)&longitude=\(param.longitude)"
             + "&range=\(param.range.rawValue)&hit_per_page=\(param.hitPerPage)"
             + "&english_speaking_staff=\(param.englishSpeakingStaff.rawValue)"
