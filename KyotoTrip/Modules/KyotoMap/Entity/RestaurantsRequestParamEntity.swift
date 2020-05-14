@@ -23,6 +23,20 @@ struct RestaurantsRequestParamEntity {
     var latitude = ""
     var longitude = ""
     var range: SearchRange = .range500
+    var rangeStr: String {
+        switch range {
+        case .range300:
+            return "300m"
+        case .range500:
+            return "500m"
+        case .range1000:
+            return "1000m"
+        case .range2000:
+            return "2000m"
+        case .range3000:
+            return "3000m"
+        }
+    }
     var hitPerPage = 20
     var englishSpeakingStaff: RequestFilterFlg = .off
     var englishMenu: RequestFilterFlg = .off

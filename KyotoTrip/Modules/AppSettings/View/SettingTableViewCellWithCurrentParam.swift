@@ -1,18 +1,19 @@
 //
-//  SettingsTableViewCell.swift
+//  SettingTableViewCellWithCurrentParam.swift
 //  KyotoTrip
 //
-//  Created by TANAKA MASAYUKI on 2020/03/16.
+//  Created by TANAKA MASAYUKI on 2020/05/14.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
 import UIKit
 
-class SettingsTableViewCell: UITableViewCell {
+class SettingTableViewCellWithCurrentParam: UITableViewCell {
     
-    static let id = "SettingsTableViewCell"
+    static let id = "SettingTableViewCellWithCurrentParam"
     @IBOutlet weak var title: UILabel!
-    
+    @IBOutlet weak var currentParam: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
