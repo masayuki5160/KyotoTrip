@@ -6,7 +6,6 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
 import Mapbox
@@ -47,6 +46,7 @@ protocol KyotoMapPresenterProtocol: AnyObject {
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol
     func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
     func createRestaurantAnnotation(entity: RestaurantFeatureEntity) -> RestaurantPointAnnotation
+    func categoryTableViewCellIconName(_ category: VisibleFeatureCategory) -> String
 }
 
 class KyotoMapPresenter: KyotoMapPresenterProtocol {
@@ -195,5 +195,22 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         annotation.coordinate = entity.coordinate
         
         return annotation
+    }
+    
+    func categoryTableViewCellIconName(_ category: VisibleFeatureCategory) -> String {
+        let iconName: String
+        switch category {
+        case .Busstop:
+            iconName = CategoryTableViewCell.IconName.busstop
+        case .CulturalProperty:
+            iconName = CategoryTableViewCell.IconName.culturalProperty
+        case .Restaurant:
+            iconName = CategoryTableViewCell.IconName.restaurant
+        default:
+            // TODO: Set default icon name
+            iconName = CategoryTableViewCell.IconName.busstop
+        }
+        
+        return iconName
     }
 }

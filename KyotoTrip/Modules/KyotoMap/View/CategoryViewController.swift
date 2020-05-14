@@ -43,7 +43,7 @@ private extension CategoryViewController {
     private func setuUI() {
         // TODO: アイコンが見えにくいためCategoryViewControllerについてはダークモードOFFとする
         self.overrideUserInterfaceStyle = .light
-        tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
+        tableView.register(UINib(nibName: CategoryTableViewCell.id, bundle: nil), forCellReuseIdentifier: CategoryTableViewCell.id)
     }
     
     private func bindPresenter() {
@@ -56,24 +56,18 @@ private extension CategoryViewController {
             )
         )
         
-        let combineLatestFeatures = Driver.combineLatest(
+        Driver.combineLatest(
             dependency.presenter.visibleFeatureEntityDriver,
             dependency.presenter.visibleFeatureRestaurantEntityDriver
-        ) { $0 + $1 }
+        ){ $0 + $1 }
+            .drive(tableView.rx.items(cellIdentifier: CategoryTableViewCell.id, cellType: CategoryTableViewCell.self)) { [weak self] row, element, cell in
+            guard let self = self else { return }
 
-        combineLatestFeatures.drive(tableView.rx.items(cellIdentifier: "CategoryTableViewCell", cellType: CategoryTableViewCell.self)) { row, element, cell in
-                cell.title.text = element.title
-                switch element.type {
-                case .Busstop:
-                    cell.icon.image = UIImage(named: "icons8-bus-80")
-                case .CulturalProperty:
-                    cell.icon.image = UIImage(named: "icons8-torii-48")
-                case .Restaurant:
-                    cell.icon.image = UIImage(named: "icons8-restaurant-100")
-                default:
-                    cell.icon.image = UIImage()
-                }
-            }.disposed(by: disposeBag)
+            cell.title.text = element.title
+
+            let iconName = self.dependency.presenter.categoryTableViewCellIconName(element.type)
+            cell.icon.image = UIImage(named: iconName)
+        }.disposed(by: disposeBag)
     }
 }
 

@@ -9,6 +9,13 @@
 import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
+    static let id = "CategoryTableViewCell"
+    
+    struct IconName {
+        static let busstop = "icons8-bus-80"
+        static let restaurant = "icons8-restaurant-100"
+        static let culturalProperty = "icons8-torii-48"
+    }
 
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
