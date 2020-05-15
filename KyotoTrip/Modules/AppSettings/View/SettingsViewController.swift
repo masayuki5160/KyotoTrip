@@ -87,6 +87,7 @@ extension SettingsViewController: UITableViewDataSource {
             } else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
                 cell.title.text = restaurantItems[indexPath.row]
+                
                 return cell
             }
         default:
