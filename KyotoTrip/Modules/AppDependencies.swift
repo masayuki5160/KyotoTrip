@@ -18,6 +18,8 @@ protocol AppDependencies {
     func assembleCulturalPropertyDetailModule() -> UIViewController
     func assembleRestaurantDetailModule() -> UIViewController
     func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController
+    func assembleSettingsLisenceModule() -> UIViewController
+    func assembleSettingsRestaurantsSearchModule() -> UIViewController
 }
 
 public struct AppDefaultDependencies {
@@ -45,7 +47,8 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
-        vc.inject(.init())
+        let presenter = AppSettingsPresenter(dependency: .init())
+        vc.inject(.init(presenter: presenter))
         
         return naviViewController
     }
@@ -118,6 +121,27 @@ extension AppDefaultDependencies: AppDependencies {
             let storyboard = UIStoryboard(name: "RestaurantDetail", bundle: nil)
             return storyboard.instantiateInitialViewController() as! RestaurantDetailViewController
         }()
+        
+        return view
+    }
+    
+    func assembleSettingsLisenceModule() -> UIViewController {
+        let view = { () -> SettingsLicenseViewController in
+            let storyboard = UIStoryboard(name: "SettingsLicense", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! SettingsLicenseViewController
+        }()
+        
+        return view
+    }
+
+    func assembleSettingsRestaurantsSearchModule() -> UIViewController {
+        let view = { () -> SettingsRestaurantsSearchViewController in
+            let storyboard = UIStoryboard(name: "SettingsRestaurantsSearch", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchViewController
+        }()
+
+        let presenter = AppSettingsPresenter(dependency: .init())
+        view.inject(.init(presenter: presenter))
         
         return view
     }

@@ -16,6 +16,8 @@ class SettingTableViewCellWithCurrentParam: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

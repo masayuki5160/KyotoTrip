@@ -32,9 +32,6 @@
                             <constraint firstAttribute="width" constant="49" id="0fv-P1-Uft"/>
                             <constraint firstAttribute="height" constant="31" id="iJS-PM-0Gx"/>
                         </constraints>
-                        <connections>
-                            <action selector="tappedSwitch:" destination="KGk-i7-Jjw" eventType="valueChanged" id="5dW-O6-W3V"/>
-                        </connections>
                     </switch>
                 </subviews>
                 <constraints>
