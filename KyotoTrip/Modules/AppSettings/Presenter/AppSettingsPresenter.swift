@@ -10,7 +10,7 @@ import UIKit
 protocol AppSettingsPresenterProtocol {
     func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
     func cellForRestaurantsSearchSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
-    func saveRestaurantsSettings(cells: [UITableViewCell])    
+    func saveRestaurantsSettings(cells: [UITableViewCell])
     var settingsTableSectionTitle: [String] { get }
     var settingsTableData: [[String]] { get }
     var restaurantsSearchSettingsTableData: [String] { get }
@@ -103,49 +103,49 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
             return cell
 
         case 1:// 英語スタッフ
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.englishSpeakingStaff == .on ? true : false
 
             return cell
         case 2:// 韓国語スタッフ
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.koreanSpeakingStaff == .on ? true : false
 
             return cell
         case 3:// 中国語スタッフ
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.chineseSpeakingStaff == .on ? true : false
 
             return cell
         case 4:// ベジタリアンメニュー
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.vegetarianMenuOptions == .on ? true : false
 
             return cell
         case 5:// クレジットカード
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.card == .on ? true : false
 
             return cell
         case 6:// 個室
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.privateRoom == .on ? true : false
 
             return cell
         case 7:// Wifi
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.wifi == .on ? true : false
 
             return cell
         case 8:// 禁煙
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithSwitch.id, for: indexPath) as! SettingTableViewCellWithSwitch
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithSwitch.id, for: indexPath) as! SettingsTableViewCellWithSwitch
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.statusSwitch.isOn = restaurantSearchSettings.noSmoking == .on ? true : false
 
@@ -179,7 +179,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
                     break
                 }
             } else {
-                let castCell = cell as! SettingTableViewCellWithSwitch
+                let castCell = cell as! SettingsTableViewCellWithSwitch
 
                 switch castCell.title.text {
                 case restaurantsSearchSettingsTableData[1]:// 英語スタッフ

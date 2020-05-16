@@ -25,7 +25,7 @@ class SettingsRestaurantsSearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(UINib(nibName: SettingTableViewCellWithSwitch.id, bundle: nil), forCellReuseIdentifier: SettingTableViewCellWithSwitch.id)
+        tableView.register(UINib(nibName: SettingsTableViewCellWithSwitch.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithSwitch.id)
         tableView.register(UINib(nibName: SettingTableViewCellWithCurrentParam.id, bundle: nil), forCellReuseIdentifier: SettingTableViewCellWithCurrentParam.id)
         
         navigationItem.title = "飲食店検索設定"

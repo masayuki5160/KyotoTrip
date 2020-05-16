@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingTableViewCellWithSwitch: UITableViewCell {
+class SettingsTableViewCellWithSwitch: UITableViewCell {
 
     static let id = "SettingTableViewCellWithSwitch"
     @IBOutlet weak var title: UILabel!

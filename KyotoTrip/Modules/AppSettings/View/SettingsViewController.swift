@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController {
         tableView.dataSource = self
 
         tableView.register(UINib(nibName: SettingsTableViewCell.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCell.id)
-        tableView.register(UINib(nibName: SettingTableViewCellWithSwitch.id, bundle: nil), forCellReuseIdentifier: SettingTableViewCellWithSwitch.id)
+        tableView.register(UINib(nibName: SettingsTableViewCellWithSwitch.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithSwitch.id)
         tableView.register(UINib(nibName: SettingTableViewCellWithCurrentParam.id, bundle: nil), forCellReuseIdentifier: SettingTableViewCellWithCurrentParam.id)
     }
 }
