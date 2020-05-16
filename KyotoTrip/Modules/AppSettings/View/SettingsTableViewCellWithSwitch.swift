@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsTableViewCellWithSwitch: UITableViewCell {
 
-    static let id = "SettingTableViewCellWithSwitch"
+    static let id = "SettingsTableViewCellWithSwitch"
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var statusSwitch: UISwitch!
     

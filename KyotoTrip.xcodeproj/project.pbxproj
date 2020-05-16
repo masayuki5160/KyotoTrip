@@ -54,7 +54,7 @@
 		4CF4AFD42468508800991B2C /* RestaurantPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFD32468508800991B2C /* RestaurantPointAnnotation.swift */; };
 		4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */; };
 		4CF4AFDF246D795700991B2C /* SettingsTableViewCellWithSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFDD246D795700991B2C /* SettingsTableViewCellWithSwitch.swift */; };
-		4CF4AFE0246D795700991B2C /* SettingTableViewCellWithSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFDE246D795700991B2C /* SettingTableViewCellWithSwitch.xib */; };
+		4CF4AFE0246D795700991B2C /* SettingsTableViewCellWithSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFDE246D795700991B2C /* SettingsTableViewCellWithSwitch.xib */; };
 		4CF4AFE3246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE1246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift */; };
 		4CF4AFE4246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE2246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib */; };
 		4CF4AFE6246E188800991B2C /* AppSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE5246E188800991B2C /* AppSettingsPresenter.swift */; };
@@ -124,7 +124,7 @@
 		4CF4AFD32468508800991B2C /* RestaurantPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPointAnnotation.swift; sourceTree = "<group>"; };
 		4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamEntity.swift; sourceTree = "<group>"; };
 		4CF4AFDD246D795700991B2C /* SettingsTableViewCellWithSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCellWithSwitch.swift; sourceTree = "<group>"; };
-		4CF4AFDE246D795700991B2C /* SettingTableViewCellWithSwitch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCellWithSwitch.xib; sourceTree = "<group>"; };
+		4CF4AFDE246D795700991B2C /* SettingsTableViewCellWithSwitch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCellWithSwitch.xib; sourceTree = "<group>"; };
 		4CF4AFE1246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCellWithCurrentParam.swift; sourceTree = "<group>"; };
 		4CF4AFE2246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCellWithCurrentParam.xib; sourceTree = "<group>"; };
 		4CF4AFE5246E188800991B2C /* AppSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsPresenter.swift; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 				4CC1ADF0241FA76800BF84B9 /* SettingsTableViewCell.swift */,
 				4CC1ADF1241FA76800BF84B9 /* SettingsTableViewCell.xib */,
 				4CF4AFDD246D795700991B2C /* SettingsTableViewCellWithSwitch.swift */,
-				4CF4AFDE246D795700991B2C /* SettingTableViewCellWithSwitch.xib */,
+				4CF4AFDE246D795700991B2C /* SettingsTableViewCellWithSwitch.xib */,
 				4CF4AFE1246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift */,
 				4CF4AFE2246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib */,
 				4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */,
@@ -618,7 +618,7 @@
 				4CA84AF1245AB37900DAC5F3 /* CategoryTableViewCell.xib in Resources */,
 				4CF773DE241B978B0032CC53 /* Main.storyboard in Resources */,
 				4CF4AFEA246EDACB00991B2C /* SettingsLicense.storyboard in Resources */,
-				4CF4AFE0246D795700991B2C /* SettingTableViewCellWithSwitch.xib in Resources */,
+				4CF4AFE0246D795700991B2C /* SettingsTableViewCellWithSwitch.xib in Resources */,
 				4CA84B1E246433B800DAC5F3 /* RestaurantDetail.storyboard in Resources */,
 				4CA84B07246313C500DAC5F3 /* CulturalPropertyDetail.storyboard in Resources */,
 				4C0CAEC72429735300EDCA82 /* GoogleService-Info.plist in Resources */,
