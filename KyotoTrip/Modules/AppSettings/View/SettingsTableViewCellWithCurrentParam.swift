@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SettingTableViewCellWithCurrentParam: UITableViewCell {
+class SettingsTableViewCellWithCurrentParam: UITableViewCell {
     
-    static let id = "SettingTableViewCellWithCurrentParam"
+    static let id = "SettingsTableViewCellWithCurrentParam"
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var currentParam: UILabel!
 

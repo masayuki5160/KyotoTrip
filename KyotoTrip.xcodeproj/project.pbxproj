@@ -55,8 +55,8 @@
 		4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */; };
 		4CF4AFDF246D795700991B2C /* SettingsTableViewCellWithSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFDD246D795700991B2C /* SettingsTableViewCellWithSwitch.swift */; };
 		4CF4AFE0246D795700991B2C /* SettingsTableViewCellWithSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFDE246D795700991B2C /* SettingsTableViewCellWithSwitch.xib */; };
-		4CF4AFE3246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE1246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift */; };
-		4CF4AFE4246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE2246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib */; };
+		4CF4AFE3246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE1246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.swift */; };
+		4CF4AFE4246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE2246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.xib */; };
 		4CF4AFE6246E188800991B2C /* AppSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE5246E188800991B2C /* AppSettingsPresenter.swift */; };
 		4CF4AFE8246EDAAC00991B2C /* SettingsLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */; };
 		4CF4AFEA246EDACB00991B2C /* SettingsLicense.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */; };
@@ -125,8 +125,8 @@
 		4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamEntity.swift; sourceTree = "<group>"; };
 		4CF4AFDD246D795700991B2C /* SettingsTableViewCellWithSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCellWithSwitch.swift; sourceTree = "<group>"; };
 		4CF4AFDE246D795700991B2C /* SettingsTableViewCellWithSwitch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCellWithSwitch.xib; sourceTree = "<group>"; };
-		4CF4AFE1246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCellWithCurrentParam.swift; sourceTree = "<group>"; };
-		4CF4AFE2246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCellWithCurrentParam.xib; sourceTree = "<group>"; };
+		4CF4AFE1246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCellWithCurrentParam.swift; sourceTree = "<group>"; };
+		4CF4AFE2246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCellWithCurrentParam.xib; sourceTree = "<group>"; };
 		4CF4AFE5246E188800991B2C /* AppSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsPresenter.swift; sourceTree = "<group>"; };
 		4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLicenseViewController.swift; sourceTree = "<group>"; };
 		4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsLicense.storyboard; sourceTree = "<group>"; };
@@ -285,8 +285,8 @@
 				4CC1ADF1241FA76800BF84B9 /* SettingsTableViewCell.xib */,
 				4CF4AFDD246D795700991B2C /* SettingsTableViewCellWithSwitch.swift */,
 				4CF4AFDE246D795700991B2C /* SettingsTableViewCellWithSwitch.xib */,
-				4CF4AFE1246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift */,
-				4CF4AFE2246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib */,
+				4CF4AFE1246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.swift */,
+				4CF4AFE2246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.xib */,
 				4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */,
 				4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */,
 				4CF4AFEB246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift */,
@@ -607,7 +607,7 @@
 			files = (
 				4CA84AEA2459247F00DAC5F3 /* Category.storyboard in Resources */,
 				4CF4AFEE246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard in Resources */,
-				4CF4AFE4246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.xib in Resources */,
+				4CF4AFE4246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.xib in Resources */,
 				4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */,
 				4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */,
 				4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */,
@@ -730,7 +730,7 @@
 				4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */,
 				4CA84B102463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift in Sources */,
 				4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */,
-				4CF4AFE3246D8D2700991B2C /* SettingTableViewCellWithCurrentParam.swift in Sources */,
+				4CF4AFE3246D8D2700991B2C /* SettingsTableViewCellWithCurrentParam.swift in Sources */,
 				4C0CAECB242B992800EDCA82 /* KyotoMapView.swift in Sources */,
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
 				4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */,

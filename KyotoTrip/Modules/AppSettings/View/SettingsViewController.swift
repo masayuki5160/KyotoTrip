@@ -33,7 +33,7 @@ class SettingsViewController: UIViewController {
 
         tableView.register(UINib(nibName: SettingsTableViewCell.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCell.id)
         tableView.register(UINib(nibName: SettingsTableViewCellWithSwitch.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithSwitch.id)
-        tableView.register(UINib(nibName: SettingTableViewCellWithCurrentParam.id, bundle: nil), forCellReuseIdentifier: SettingTableViewCellWithCurrentParam.id)
+        tableView.register(UINib(nibName: SettingsTableViewCellWithCurrentParam.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithCurrentParam.id)
     }
 }
 

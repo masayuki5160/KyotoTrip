@@ -64,7 +64,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithCurrentParam.id, for: indexPath) as! SettingTableViewCellWithCurrentParam
+                let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithCurrentParam.id, for: indexPath) as! SettingsTableViewCellWithCurrentParam
                 cell.title.text = items[indexPath.row]
                 cell.currentParam.text = "1.x.x"
                 cell.accessoryType = .none
@@ -96,7 +96,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithCurrentParam.id, for: indexPath) as! SettingTableViewCellWithCurrentParam
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithCurrentParam.id, for: indexPath) as! SettingsTableViewCellWithCurrentParam
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
             cell.currentParam.text = restaurantSearchSettings.rangeStr
 
@@ -151,7 +151,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
 
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellWithCurrentParam.id, for: indexPath) as! SettingTableViewCellWithCurrentParam
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithCurrentParam.id, for: indexPath) as! SettingsTableViewCellWithCurrentParam
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
 
             return cell
@@ -163,7 +163,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         var settings = RestaurantsRequestParamEntity().load()
         
         for cell in cells {
-            if let castCell = cell as? SettingTableViewCellWithCurrentParam {
+            if let castCell = cell as? SettingsTableViewCellWithCurrentParam {
                 switch castCell.currentParam.text {
                 case "300m":
                     settings.range = .range300
