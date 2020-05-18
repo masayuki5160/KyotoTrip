@@ -70,7 +70,7 @@ extension SettingsRestaurantsSearchRangeViewController: UITableViewDataSource {
         cell.textLabel?.text = dependency.presenter.restaurantsSearchRangeSettingsTableData[indexPath.row]
 
         let settings = RestaurantsRequestParamEntity().load()
-        if cell.textLabel?.text == settings.range.rawValue {
+        if cell.textLabel?.text == settings.rangeStr {
             cell.accessoryType = .checkmark
         }
         

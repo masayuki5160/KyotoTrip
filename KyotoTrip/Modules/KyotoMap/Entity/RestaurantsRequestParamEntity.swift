@@ -8,12 +8,12 @@
 import Foundation
 
 struct RestaurantsRequestParamEntity: Codable {
-    enum SearchRange: String, Codable {
-        case range300 = "300m"
-        case range500 = "500m"
-        case range1000 = "1000m"
-        case range2000 = "2000m"
-        case range3000 = "3000m"
+    enum SearchRange: Int, Codable {
+        case range300 = 1
+        case range500
+        case range1000
+        case range2000
+        case range3000
     }
     enum RequestFilterFlg: Int, Codable {
         case off = 0
@@ -24,7 +24,20 @@ struct RestaurantsRequestParamEntity: Codable {
     var longitude = ""
     var range: SearchRange = .range500
     var rangeStr: String {
-        return range.rawValue
+        let res: String
+        switch range {
+        case .range300:
+            res = "300m"
+        case .range500:
+            res = "500m"
+        case .range1000:
+            res = "1000m"
+        case .range2000:
+            res = "2000m"
+        case .range3000:
+            res = "3000m"
+        }
+        return res
     }
     var hitPerPage = 20
     var englishSpeakingStaff: RequestFilterFlg = .off
