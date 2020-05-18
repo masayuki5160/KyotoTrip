@@ -13,4 +13,8 @@ target 'KyotoTrip' do
   pod 'Alamofire', '~> 4.9'
   pod 'Firebase/MLNLTranslate'
   pod 'FloatingPanel', '~> 1.7.4'
+  target 'KyotoTripTests' do
+    inherit! :search_paths
+    pod 'Firebase/MLNLTranslate'
+  end
 end

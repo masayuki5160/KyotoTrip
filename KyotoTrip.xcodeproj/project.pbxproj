@@ -65,6 +65,7 @@
 		4CF4AFF02470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFEF2470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift */; };
 		4CF4AFF22470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */; };
 		4CF4AFF424716F8400991B2C /* AppSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFF324716F8400991B2C /* AppSettingsInteractor.swift */; };
+		4CF4B00A2472C9A600991B2C /* KyotoMapInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0092472C9A600991B2C /* KyotoMapInteractorTests.swift */; };
 		4CF668CE24336514006AB40C /* KyotoCityInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF668CD24336514006AB40C /* KyotoCityInfoInteractor.swift */; };
 		4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF668CF24336C14006AB40C /* KyotoCityInfoPresenter.swift */; };
 		4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D6241B978B0032CC53 /* AppDelegate.swift */; };
@@ -74,10 +75,23 @@
 		4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */; };
 		4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773EC241B9D910032CC53 /* MapViewController.swift */; };
 		8B7FB77CBB673EA6F6691891 /* Pods_KyotoTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */; };
+		C6A6AA505C55E1400F52D053 /* Pods_KyotoTripTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB67A8DF6CA67FB2B023127 /* Pods_KyotoTripTests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4CF4B00C2472C9A600991B2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CF773CB241B978B0032CC53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CF773D2241B978B0032CC53;
+			remoteInfo = KyotoTrip;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		204C325FD10BE0F143E5B29D /* Pods-KyotoTrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip.release.xcconfig"; sourceTree = "<group>"; };
+		20FFEE00A95D9C9A5DE9EED9 /* Pods-KyotoTripTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTripTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2EB67A8DF6CA67FB2B023127 /* Pods_KyotoTripTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTripTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C0CAECA242B992800EDCA82 /* KyotoMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapView.swift; sourceTree = "<group>"; };
@@ -138,6 +152,9 @@
 		4CF4AFEF2470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRestaurantsSearchRangeViewController.swift; sourceTree = "<group>"; };
 		4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsRestaurantsSearchRange.storyboard; sourceTree = "<group>"; };
 		4CF4AFF324716F8400991B2C /* AppSettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsInteractor.swift; sourceTree = "<group>"; };
+		4CF4B0072472C9A600991B2C /* KyotoTripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KyotoTripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CF4B0092472C9A600991B2C /* KyotoMapInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoMapInteractorTests.swift; sourceTree = "<group>"; };
+		4CF4B00B2472C9A600991B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CF668CD24336514006AB40C /* KyotoCityInfoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoInteractor.swift; sourceTree = "<group>"; };
 		4CF668CF24336C14006AB40C /* KyotoCityInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoPresenter.swift; sourceTree = "<group>"; };
 		4CF773D3241B978B0032CC53 /* KyotoTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotoTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,9 +166,18 @@
 		4CF773E4241B97900032CC53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CF773EC241B9D910032CC53 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		BB09C1A28A717DE8ACC178D9 /* Pods-KyotoTrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip.debug.xcconfig"; sourceTree = "<group>"; };
+		E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTripTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4CF4B0042472C9A600991B2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A6AA505C55E1400F52D053 /* Pods_KyotoTripTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4CF773D0241B978B0032CC53 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,10 +530,20 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		4CF4B0082472C9A600991B2C /* KyotoTripTests */ = {
+			isa = PBXGroup;
+			children = (
+				4CF4B0092472C9A600991B2C /* KyotoMapInteractorTests.swift */,
+				4CF4B00B2472C9A600991B2C /* Info.plist */,
+			);
+			path = KyotoTripTests;
+			sourceTree = "<group>";
+		};
 		4CF773CA241B978B0032CC53 = {
 			isa = PBXGroup;
 			children = (
 				4CF773D5241B978B0032CC53 /* KyotoTrip */,
+				4CF4B0082472C9A600991B2C /* KyotoTripTests */,
 				4CF773D4241B978B0032CC53 /* Products */,
 				B6ED623E472FE8ADDCD2DB69 /* Pods */,
 				5357FEEC9C8658B26DD5AC66 /* Frameworks */,
@@ -518,6 +554,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF773D3241B978B0032CC53 /* KyotoTrip.app */,
+				4CF4B0072472C9A600991B2C /* KyotoTripTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -539,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */,
+				2EB67A8DF6CA67FB2B023127 /* Pods_KyotoTripTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -548,6 +586,8 @@
 			children = (
 				BB09C1A28A717DE8ACC178D9 /* Pods-KyotoTrip.debug.xcconfig */,
 				204C325FD10BE0F143E5B29D /* Pods-KyotoTrip.release.xcconfig */,
+				20FFEE00A95D9C9A5DE9EED9 /* Pods-KyotoTripTests.debug.xcconfig */,
+				E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -555,6 +595,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4CF4B0062472C9A600991B2C /* KyotoTripTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CF4B0102472C9A600991B2C /* Build configuration list for PBXNativeTarget "KyotoTripTests" */;
+			buildPhases = (
+				617BF220473C6E5BF80804EC /* [CP] Check Pods Manifest.lock */,
+				4CF4B0032472C9A600991B2C /* Sources */,
+				4CF4B0042472C9A600991B2C /* Frameworks */,
+				4CF4B0052472C9A600991B2C /* Resources */,
+				40EDC8767A6B091657663780 /* [CP] Embed Pods Frameworks */,
+				BBADA29C740E25BFA3E7B5F4 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CF4B00D2472C9A600991B2C /* PBXTargetDependency */,
+			);
+			name = KyotoTripTests;
+			productName = KyotoTripTests;
+			productReference = 4CF4B0072472C9A600991B2C /* KyotoTripTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4CF773D2241B978B0032CC53 /* KyotoTrip */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CF773E7241B97900032CC53 /* Build configuration list for PBXNativeTarget "KyotoTrip" */;
@@ -581,10 +642,14 @@
 		4CF773CB241B978B0032CC53 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "TANAKA MASAYUKI";
 				TargetAttributes = {
+					4CF4B0062472C9A600991B2C = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 4CF773D2241B978B0032CC53;
+					};
 					4CF773D2241B978B0032CC53 = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -605,11 +670,19 @@
 			projectRoot = "";
 			targets = (
 				4CF773D2241B978B0032CC53 /* KyotoTrip */,
+				4CF4B0062472C9A600991B2C /* KyotoTripTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4CF4B0052472C9A600991B2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4CF773D1241B978B0032CC53 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -656,6 +729,52 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40EDC8767A6B091657663780 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		617BF220473C6E5BF80804EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KyotoTripTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		80F3E6275C18DC8CFF9E753A /* [CP] Embed Pods Frameworks */ = {
@@ -720,9 +839,35 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BBADA29C740E25BFA3E7B5F4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMLNLTranslate/FirebaseMLNLTranslate_resource.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseMLNLTranslate_resource.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4CF4B0032472C9A600991B2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CF4B00A2472C9A600991B2C /* KyotoMapInteractorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4CF773CF241B978B0032CC53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -778,6 +923,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4CF4B00D2472C9A600991B2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CF773D2241B978B0032CC53 /* KyotoTrip */;
+			targetProxy = 4CF4B00C2472C9A600991B2C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		4CC1AE0F2424615D00BF84B9 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -807,6 +960,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4CF4B00E2472C9A600991B2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20FFEE00A95D9C9A5DE9EED9 /* Pods-KyotoTripTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L8ZGX2885D;
+				INFOPLIST_FILE = KyotoTripTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTripTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KyotoTrip.app/KyotoTrip";
+			};
+			name = Debug;
+		};
+		4CF4B00F2472C9A600991B2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L8ZGX2885D;
+				INFOPLIST_FILE = KyotoTripTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTripTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KyotoTrip.app/KyotoTrip";
+			};
+			name = Release;
+		};
 		4CF773E5241B97900032CC53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -964,6 +1161,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4CF4B0102472C9A600991B2C /* Build configuration list for PBXNativeTarget "KyotoTripTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CF4B00E2472C9A600991B2C /* Debug */,
+				4CF4B00F2472C9A600991B2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4CF773CE241B978B0032CC53 /* Build configuration list for PBXProject "KyotoTrip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
