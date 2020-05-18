@@ -74,7 +74,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithCurrentParam.id, for: indexPath) as! SettingsTableViewCellWithCurrentParam
                 cell.title.text = items[indexPath.row]
-                cell.currentParam.text = "1.x.x"
+                cell.currentParam.text = appVersionString()
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
                 
@@ -183,5 +183,11 @@ private extension AppSettingsPresenter {
         }
         
         return cell
+    }
+    
+    private func appVersionString() -> String {
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        return "\(version).\(build)"
     }
 }
