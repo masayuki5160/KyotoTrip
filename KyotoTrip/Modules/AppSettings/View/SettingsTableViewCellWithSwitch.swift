@@ -1,26 +1,26 @@
 //
-//  SettingsTableViewCell.swift
+//  SettingTableViewCellWithSwitch.swift
 //  KyotoTrip
 //
-//  Created by TANAKA MASAYUKI on 2020/03/16.
+//  Created by TANAKA MASAYUKI on 2020/05/14.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
 import UIKit
 
-class SettingsTableViewCell: UITableViewCell {
-    
-    static let id = "SettingsTableViewCell"
+class SettingsTableViewCellWithSwitch: UITableViewCell {
+
+    static let id = "SettingsTableViewCellWithSwitch"
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var statusSwitch: UISwitch!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }

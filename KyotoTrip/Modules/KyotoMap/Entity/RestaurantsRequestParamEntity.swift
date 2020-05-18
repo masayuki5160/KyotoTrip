@@ -7,15 +7,15 @@
 //
 import Foundation
 
-struct RestaurantsRequestParamEntity {
-    enum SearchRange: Int {
-        case range300 = 1
-        case range500
-        case range1000
-        case range2000
-        case range3000
+struct RestaurantsRequestParamEntity: Codable {
+    enum SearchRange: String, Codable {
+        case range300 = "300m"
+        case range500 = "500m"
+        case range1000 = "1000m"
+        case range2000 = "2000m"
+        case range3000 = "3000m"
     }
-    enum RequestFilterFlg: Int {
+    enum RequestFilterFlg: Int, Codable {
         case off = 0
         case on
     }
@@ -23,6 +23,9 @@ struct RestaurantsRequestParamEntity {
     var latitude = ""
     var longitude = ""
     var range: SearchRange = .range500
+    var rangeStr: String {
+        return range.rawValue
+    }
     var hitPerPage = 20
     var englishSpeakingStaff: RequestFilterFlg = .off
     var englishMenu: RequestFilterFlg = .off
@@ -41,16 +44,23 @@ struct RestaurantsRequestParamEntity {
 
     func save() {
         do {
-            let archiveData = try NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
-            UserDefaults.standard.set(archiveData, forKey: userdefaultsKey)
-
+            let encodedData = try JSONEncoder().encode(self)
+            UserDefaults.standard.set(encodedData, forKey: userdefaultsKey)
         } catch {
-            fatalError("Archive failed")
+            fatalError("Encode failed")
         }
     }
 
     func load() -> RestaurantsRequestParamEntity {
-        let param = UserDefaults.standard.object(forKey: userdefaultsKey) as? RestaurantsRequestParamEntity ?? RestaurantsRequestParamEntity()
-        return param
+        guard let data = UserDefaults.standard.data(forKey: userdefaultsKey) else {
+            return RestaurantsRequestParamEntity()
+        }
+
+        do {
+            let decodedData = try JSONDecoder().decode(RestaurantsRequestParamEntity.self, from: data)
+            return decodedData
+        } catch {
+            fatalError("Decode failed")
+        }
     }
 }

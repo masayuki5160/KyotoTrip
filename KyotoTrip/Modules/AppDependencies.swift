@@ -18,6 +18,9 @@ protocol AppDependencies {
     func assembleCulturalPropertyDetailModule() -> UIViewController
     func assembleRestaurantDetailModule() -> UIViewController
     func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController
+    func assembleSettingsLisenceModule() -> UIViewController
+    func assembleSettingsRestaurantsSearchModule() -> UIViewController
+    func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController
 }
 
 public struct AppDefaultDependencies {
@@ -45,7 +48,9 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
-        vc.inject(.init())
+        let interactor = AppSettingsInteractor()
+        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        vc.inject(.init(presenter: presenter))
         
         return naviViewController
     }
@@ -118,6 +123,41 @@ extension AppDefaultDependencies: AppDependencies {
             let storyboard = UIStoryboard(name: "RestaurantDetail", bundle: nil)
             return storyboard.instantiateInitialViewController() as! RestaurantDetailViewController
         }()
+        
+        return view
+    }
+    
+    func assembleSettingsLisenceModule() -> UIViewController {
+        let view = { () -> SettingsLicenseViewController in
+            let storyboard = UIStoryboard(name: "SettingsLicense", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! SettingsLicenseViewController
+        }()
+        
+        return view
+    }
+
+    func assembleSettingsRestaurantsSearchModule() -> UIViewController {
+        let view = { () -> SettingsRestaurantsSearchViewController in
+            let storyboard = UIStoryboard(name: "SettingsRestaurantsSearch", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchViewController
+        }()
+
+        let interactor = AppSettingsInteractor()
+        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        view.inject(.init(presenter: presenter))
+        
+        return view
+    }
+    
+    func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController {
+        let view = { () -> SettingsRestaurantsSearchRangeViewController in
+            let storyboard = UIStoryboard(name: "SettingsRestaurantsSearchRange", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchRangeViewController
+        }()
+
+        let interactor = AppSettingsInteractor()
+        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        view.inject(.init(presenter: presenter))
         
         return view
     }
