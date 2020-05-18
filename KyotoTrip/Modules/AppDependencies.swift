@@ -20,6 +20,7 @@ protocol AppDependencies {
     func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController
     func assembleSettingsLisenceModule() -> UIViewController
     func assembleSettingsRestaurantsSearchModule() -> UIViewController
+    func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController
 }
 
 public struct AppDefaultDependencies {
@@ -47,7 +48,8 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
-        let presenter = AppSettingsPresenter(dependency: .init())
+        let interactor = AppSettingsInteractor()
+        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
         vc.inject(.init(presenter: presenter))
         
         return naviViewController
@@ -140,7 +142,21 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchViewController
         }()
 
-        let presenter = AppSettingsPresenter(dependency: .init())
+        let interactor = AppSettingsInteractor()
+        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        view.inject(.init(presenter: presenter))
+        
+        return view
+    }
+    
+    func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController {
+        let view = { () -> SettingsRestaurantsSearchRangeViewController in
+            let storyboard = UIStoryboard(name: "SettingsRestaurantsSearchRange", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchRangeViewController
+        }()
+
+        let interactor = AppSettingsInteractor()
+        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
         view.inject(.init(presenter: presenter))
         
         return view

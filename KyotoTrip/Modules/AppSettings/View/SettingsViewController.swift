@@ -73,7 +73,7 @@ extension SettingsViewController: UITableViewDataSource {
                 navigationController?.pushViewController(vc, animated: true)
             }
         default:
-            print("default")
+            break
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

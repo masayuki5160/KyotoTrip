@@ -17,8 +17,6 @@ class SettingsRestaurantsSearchViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    // TODO: 設定のパーツを個別に用意する
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,9 +29,16 @@ class SettingsRestaurantsSearchViewController: UIViewController {
         navigationItem.title = "飲食店検索設定"
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        let cells = tableView.visibleCells
-        dependency.presenter.saveRestaurantsSettings(cells: cells)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let indexPaths = tableView.indexPathsForVisibleRows ?? []
+        dependency.presenter.saveRestaurantsSettings(tableView, indexPaths)
     }
 }
 
@@ -55,6 +60,14 @@ extension SettingsRestaurantsSearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:// Search range setting cell
+            let vc = AppDefaultDependencies().assembleSettingsRestaurantsSearchRangeModule()
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
