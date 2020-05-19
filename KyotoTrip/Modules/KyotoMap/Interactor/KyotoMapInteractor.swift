@@ -49,8 +49,8 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     }
     
     func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantFeatureEntity {
-        let latitude = atof(source.location.latitude)
-        let longitude = atof(source.location.longitude)
+        let latitude = atof(source.location.latitudeWgs84)
+        let longitude = atof(source.location.longitudeWgs84)
         return RestaurantFeatureEntity(
             title: source.name.name,
             subtitle: source.categories.category,
