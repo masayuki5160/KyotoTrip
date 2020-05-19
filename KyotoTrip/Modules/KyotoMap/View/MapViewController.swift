@@ -139,6 +139,7 @@ private extension MapViewController {
         case .hidden:
             self.mapView.busstopLayer?.isVisible = false
         case .visible:
+            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
             self.mapView.busstopLayer?.isVisible = true
         }
     }
@@ -148,21 +149,22 @@ private extension MapViewController {
         case .hidden:
             self.mapView.culturalPropertyLayer?.isVisible = false
         case .visible:
+            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
             self.mapView.culturalPropertyLayer?.isVisible = true
         }
     }
 
-    // FIXME: 2回同時にコールされる不具合がある
     private func updateRestaurantLayer(visibleStatus: VisibleLayerEntity.Status, annotations: [MGLPointAnnotation]) {
-        // Remove current annotations, and add annotations again
-        mapView.removeAnnotations(currentVisibleRestaurantAnnotations)
-        currentVisibleRestaurantAnnotations = []
-
         switch visibleStatus {
         case .hidden:
-            print("Restaurant layer is hidden")
+            if let selectedAnnotation = mapView.selectedAnnotations.first {
+                mapView.deselectAnnotation(selectedAnnotation, animated: true)
+            }
+            
+            mapView.removeAnnotations(currentVisibleRestaurantAnnotations)
+            currentVisibleRestaurantAnnotations = []
         case .visible:
-            print("Restaurant layer is visible")
+            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
             currentVisibleRestaurantAnnotations = annotations
             mapView.addAnnotations(annotations)
         }

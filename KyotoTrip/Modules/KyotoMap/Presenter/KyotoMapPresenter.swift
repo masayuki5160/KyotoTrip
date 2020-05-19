@@ -133,26 +133,15 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         input.restaurantButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let mapView = self.dependency.mapView.mapView as MGLMapView
-            self.dependency.interactor.fetchRestaurants(location: mapView.centerCoordinate) { (response) in
-                switch response {
-                case .success(let restaurantsSearchResultEntity):
-                    var restaurantFeatures: [RestaurantFeatureEntity] = []
-                    for restaurant in restaurantsSearchResultEntity.rest {
-                        let featureEntity = self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant)
-                        restaurantFeatures.append(featureEntity)
-                    }
-                    
-                    self.visibleFeatureRestaurantEntity.accept(restaurantFeatures)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-            
             let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
                 target: .Restaurant,
                 current: self.visibleLayerEntity.value
             )
+            
+            if nextVisibleLayer.restaurant == .visible {
+                self.fetchRestaurantsEntity()
+            }
+            
             self.visibleLayerEntity.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
@@ -211,5 +200,28 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
         }
         
         return iconName
+    }
+}
+
+private extension KyotoMapPresenter {
+    func fetchRestaurantsEntity() {
+        let mapView = dependency.mapView.mapView as MGLMapView
+
+        dependency.interactor.fetchRestaurants(location: mapView.centerCoordinate) { [weak self] (response) in
+            guard let self = self else { return }
+
+            switch response {
+            case .success(let restaurantsSearchResultEntity):
+                var restaurantFeatures: [RestaurantFeatureEntity] = []
+                for restaurant in restaurantsSearchResultEntity.rest {
+                    let featureEntity = self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant)
+                    restaurantFeatures.append(featureEntity)
+                }
+                
+                self.visibleFeatureRestaurantEntity.accept(restaurantFeatures)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

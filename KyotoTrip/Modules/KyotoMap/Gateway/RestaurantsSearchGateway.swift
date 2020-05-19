@@ -30,6 +30,7 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
             
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
+            // TODO: do catchで例外処理を実装する(Swift.DecodingError.keyNotFound)
             let resultEntity = try! decoder.decode(RestaurantsSearchResultEntity.self, from: response.data!)
             complition(.success(resultEntity))
         }
