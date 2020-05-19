@@ -9,47 +9,47 @@
 struct RestaurantEntity: Codable {
     var id: String = ""
     var name: NameEntity = NameEntity()
-    var business_hour: String = ""
+    var businessHour: String = ""
     var holiday: String = ""
     var contacts: ContactsEntity = ContactsEntity()
-    var sales_points: SalesPointsEntity = SalesPointsEntity()
+    var salesPoints: SalesPointsEntity = SalesPointsEntity()
     var access: String = ""
     var budget: Int = 0
-    var credit_card: String = ""
+    var creditCard: String = ""
     var categories: CategoriesEntity = CategoriesEntity()
     var location: LocationEntity = LocationEntity()
     var url: String = ""
-    var url_mobile: String = ""
-    var image_url: ImageUrlEntity = ImageUrlEntity()
+    var urlMobile: String = ""
+    var imageUrl: ImageUrlEntity = ImageUrlEntity()
     
     struct NameEntity: Codable {
         var name: String = ""
-        var name_kana: String = ""
+        var nameKana: String = ""
     }
     struct ContactsEntity: Codable {
         var address: String = ""
         var tel: String = ""
     }
     struct SalesPointsEntity: Codable {
-        var pr_short: String = ""
-        var pr_long: String = ""
+        var prShort: String = ""
+        var prLong: String = ""
     }
     struct CategoriesEntity: Codable {
         var category: String = ""
-        var category_name_l: [String] = []
-        var category_name_s: [String] = []
+        var categoryNameL: [String] = []
+        var categoryNameS: [String] = []
     }
     struct LocationEntity: Codable {
         var latitude: String = ""
         var longitude: String = ""
-        var latitude_wgs84: String = ""
-        var longitude_wgs84: String = ""
+        var latitudeWgs84: String = ""
+        var longitudeWgs84: String = ""
         var area: AreaEntity = AreaEntity()
         
         struct AreaEntity: Codable {
             var district: String = ""
             var prefname: String = ""
-            var areaname_s: String = ""
+            var areanameS: String = ""
         }
     }
     struct ImageUrlEntity: Codable {

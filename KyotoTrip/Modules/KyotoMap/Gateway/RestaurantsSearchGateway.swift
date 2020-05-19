@@ -28,7 +28,9 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
                 return
             }
             
-            let resultEntity = try! JSONDecoder().decode(RestaurantsSearchResultEntity.self, from: response.data!)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let resultEntity = try! decoder.decode(RestaurantsSearchResultEntity.self, from: response.data!)
             complition(.success(resultEntity))
         }
     }

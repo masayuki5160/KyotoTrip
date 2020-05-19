@@ -21,9 +21,9 @@ class RestaurantDetailViewController: UIViewController, DetailViewProtocol {
         
         let entity = visibleFeatureEntity as! RestaurantFeatureEntity
         restaurantName.text = entity.detail?.name.name
-        restaurantKanaName.text = entity.detail?.name.name_kana
+        restaurantKanaName.text = entity.detail?.name.nameKana
         address.text = entity.detail?.contacts.address
-        buisinessHour.text = entity.detail?.business_hour
+        buisinessHour.text = entity.detail?.businessHour
         holiday.text = entity.detail?.holiday
     }
 }
