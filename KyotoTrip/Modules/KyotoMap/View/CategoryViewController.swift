@@ -17,7 +17,6 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var culturalPropertyButton: UIButton!
     @IBOutlet weak var busstopButton: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var restaurantButton: UIButton!
     
     struct Dependency {
@@ -49,7 +48,6 @@ private extension CategoryViewController {
     private func bindPresenter() {
         dependency.presenter.bindCategoryView(input: CategoryViewInput(
             culturalPropertyButton: culturalPropertyButton.rx.tap.asDriver(),
-            infoButton: infoButton.rx.tap.asDriver(),
             busstopButton: busstopButton.rx.tap.asDriver(),
             restaurantButton: restaurantButton.rx.tap.asDriver(),
             tableViewCell: tableView.rx.modelSelected(VisibleFeatureProtocol.self).asDriver()

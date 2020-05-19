@@ -17,7 +17,6 @@ struct MapViewInput {
 
 struct CategoryViewInput {
     let culturalPropertyButton: Driver<Void>
-    let infoButton: Driver<Void>
     let busstopButton: Driver<Void>
     let restaurantButton: Driver<Void>
     let tableViewCell: Driver<VisibleFeatureProtocol>
