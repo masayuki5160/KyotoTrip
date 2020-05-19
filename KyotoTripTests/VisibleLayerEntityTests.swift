@@ -31,7 +31,7 @@ class VisibleLayerEntityTests: XCTestCase {
         .Busstop,
         .Restaurant
         ]
-        let actual: [VisibleFeatureCategory] = mockVisibleLayers.currentVisibleLayer()
+        let actual: [VisibleFeatureCategory] = mockVisibleLayers.currentVisibleLayers()
         
         XCTAssert(actual.contains(expected[0]))
         XCTAssert(actual.contains(expected[1]))

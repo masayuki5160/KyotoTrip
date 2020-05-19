@@ -50,7 +50,7 @@ struct VisibleLayerEntity {
         return nextStatus
     }
     
-    func currentVisibleLayer() -> [VisibleFeatureCategory] {
+    func currentVisibleLayers() -> [VisibleFeatureCategory] {
         return findVisibleLayer()
     }
     
