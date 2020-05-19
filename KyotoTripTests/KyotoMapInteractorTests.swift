@@ -58,4 +58,40 @@ class KyotoMapInteractorTests: XCTestCase {
         XCTAssertEqual(expected.title, actual.title)
         XCTAssertEqual(expected.type, actual.type)
     }
+    
+    func testCreateVisibleFeatureForCulturalProperty() {
+        let mockAttributes: [String: Any] = [
+            "P32_002": 26,
+            "P32_009": 4,
+            "P32_005": 21,
+            "P32_008": 20110325,
+            "P32_007": "京都市下京区",
+            "P32_003": 26106,
+            "P32_001": 34601,
+            "P32_004": 2,
+            "P32_006": "鍛金"
+        ]
+        let mockCoordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        
+        let actual = interactor.createVisibleFeature(
+            category: .CulturalProperty,
+            coordinate: mockCoordinate,
+            attributes: mockAttributes
+        ) as! CulturalPropertyFeatureEntity
+        let expected = CulturalPropertyFeatureEntity(
+            title: mockAttributes["P32_006"] as! String,
+            coordinate: mockCoordinate,
+            address: mockAttributes["P32_007"] as! String,
+            largeClassificationCode: mockAttributes["P32_004"] as! Int,
+            smallClassificationCode: mockAttributes["P32_005"] as! Int,
+            registerdDate: mockAttributes["P32_008"] as! Int
+        )
+
+        XCTAssert(String(describing: type(of: expected)) == String(describing: type(of: actual)))
+        XCTAssertEqual(expected.title, actual.title)
+        XCTAssertEqual(expected.address, actual.address)
+        XCTAssertEqual(expected.largeClassificationCode, actual.largeClassificationCode)
+        XCTAssertEqual(expected.smallClassificationCode, actual.smallClassificationCode)
+        XCTAssertEqual(expected.registerdDate, actual.registerdDate)
+    }
 }
