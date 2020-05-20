@@ -103,7 +103,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
     }
     
     func saveRestaurantsSettings(_ tableView: UITableView, _ indexPaths: [IndexPath]) {
-        var settings = RestaurantsRequestParamEntity().load()
+        var settings = dependency.interactor.fetchRestaurantsRequestParam()
         
         for cursorIndexPath in indexPaths {
             if cursorIndexPath.row == 0 {
@@ -135,7 +135,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
             }
         }
         
-        settings.save()
+        dependency.interactor.saveRestaurantsRequestParam(entity: settings)
     }
 
 }
@@ -143,10 +143,10 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
 private extension AppSettingsPresenter {
     private func createRestaurantsSearchSettingsCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {// For restaurants search range setting cell
-            let restaurantSearchSettings = RestaurantsRequestParamEntity().load()
+            let searchSettings = dependency.interactor.fetchRestaurantsRequestParam()
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCellWithCurrentParam.id, for: indexPath) as! SettingsTableViewCellWithCurrentParam
             cell.title.text = restaurantsSearchSettingsTableData[indexPath.row]
-            cell.currentParam.text = restaurantSearchSettings.rangeStr
+            cell.currentParam.text = searchSettings.rangeStr
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
             return cell
@@ -159,25 +159,25 @@ private extension AppSettingsPresenter {
     }
     
     private func loadAndSetSavedStatusToUISwitchStatus(_ cell: SettingsTableViewCellWithSwitch, indexPath: IndexPath) -> SettingsTableViewCellWithSwitch {
-        let restaurantSearchSettings = RestaurantsRequestParamEntity().load()
+        let searchSettings = dependency.interactor.fetchRestaurantsRequestParam()
         
         switch indexPath.row {
         case 1:// 英語スタッフ
-            cell.statusSwitch.isOn = restaurantSearchSettings.englishSpeakingStaff == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.englishSpeakingStaff == .on ? true : false
         case 2:// 韓国語スタッフ
-            cell.statusSwitch.isOn = restaurantSearchSettings.koreanSpeakingStaff == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.koreanSpeakingStaff == .on ? true : false
         case 3:// 中国語スタッフ
-            cell.statusSwitch.isOn = restaurantSearchSettings.chineseSpeakingStaff == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.chineseSpeakingStaff == .on ? true : false
         case 4:// ベジタリアンメニュー
-            cell.statusSwitch.isOn = restaurantSearchSettings.vegetarianMenuOptions == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.vegetarianMenuOptions == .on ? true : false
         case 5:// クレジットカード
-            cell.statusSwitch.isOn = restaurantSearchSettings.card == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.card == .on ? true : false
         case 6:// 個室
-            cell.statusSwitch.isOn = restaurantSearchSettings.privateRoom == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.privateRoom == .on ? true : false
         case 7:// Wifi
-            cell.statusSwitch.isOn = restaurantSearchSettings.wifi == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.wifi == .on ? true : false
         case 8:// 禁煙
-            cell.statusSwitch.isOn = restaurantSearchSettings.noSmoking == .on ? true : false
+            cell.statusSwitch.isOn = searchSettings.noSmoking == .on ? true : false
         default:
             break
         }

@@ -81,7 +81,8 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
 
 private extension KyotoMapInteractor {
     private func createRestaurantsRequestParam(location: CLLocationCoordinate2D) -> RestaurantsRequestParamEntity {
-        var param = RestaurantsRequestParamEntity().load()
+        let requestParamGateway = RestaurantsRequestParamGateway()
+        var param = requestParamGateway.fetch()
         param.latitude = String(location.latitude)
         param.longitude = String(location.longitude)
 

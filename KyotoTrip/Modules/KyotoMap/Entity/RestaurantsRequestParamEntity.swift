@@ -53,27 +53,4 @@ struct RestaurantsRequestParamEntity: Codable {
     var card: RequestFilterFlg = .off
     var privateRoom: RequestFilterFlg = .off
     var noSmoking: RequestFilterFlg = .off
-    private let userdefaultsKey = "RestaurantsRequestParam"
-
-    func save() {
-        do {
-            let encodedData = try JSONEncoder().encode(self)
-            UserDefaults.standard.set(encodedData, forKey: userdefaultsKey)
-        } catch {
-            fatalError("Encode failed")
-        }
-    }
-
-    func load() -> RestaurantsRequestParamEntity {
-        guard let data = UserDefaults.standard.data(forKey: userdefaultsKey) else {
-            return RestaurantsRequestParamEntity()
-        }
-
-        do {
-            let decodedData = try JSONDecoder().decode(RestaurantsRequestParamEntity.self, from: data)
-            return decodedData
-        } catch {
-            fatalError("Decode failed")
-        }
-    }
 }

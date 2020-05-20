@@ -29,7 +29,9 @@ class SettingsRestaurantsSearchRangeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        var settings = RestaurantsRequestParamEntity().load()
+        // TODO: Move to Presenter and do not call gateway in View
+        let requestParamGateway = RestaurantsRequestParamGateway()
+        var settings = requestParamGateway.fetch()
         for cell in tableView.visibleCells {
             if cell.accessoryType == .checkmark {
                 switch cell.textLabel?.text {
@@ -49,7 +51,7 @@ class SettingsRestaurantsSearchRangeViewController: UIViewController {
             }
         }
         
-        settings.save()
+        requestParamGateway.save(entity: settings)
     }
 }
 
@@ -69,7 +71,9 @@ extension SettingsRestaurantsSearchRangeViewController: UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "restaurantsSearchRange")
         cell.textLabel?.text = dependency.presenter.restaurantsSearchRangeSettingsTableData[indexPath.row]
 
-        let settings = RestaurantsRequestParamEntity().load()
+        // TODO: Move to Presenter and do not call gateway in View
+        let requestParamGateway = RestaurantsRequestParamGateway()
+        let settings = requestParamGateway.fetch()
         if cell.textLabel?.text == settings.rangeStr {
             cell.accessoryType = .checkmark
         }

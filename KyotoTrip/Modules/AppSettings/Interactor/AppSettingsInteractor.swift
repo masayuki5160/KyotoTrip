@@ -8,6 +8,8 @@
 
 protocol AppSettingsInteractorProtocol: AnyObject {
     func uiSwitchStatusToRequestFlg(_ status: Bool) -> RestaurantsRequestParamEntity.RequestFilterFlg
+    func fetchRestaurantsRequestParam() -> RestaurantsRequestParamEntity
+    func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity)
 }
 
 final class AppSettingsInteractor: AppSettingsInteractorProtocol {
@@ -20,5 +22,15 @@ final class AppSettingsInteractor: AppSettingsInteractorProtocol {
         }
 
         return res
+    }
+    
+    func fetchRestaurantsRequestParam() -> RestaurantsRequestParamEntity {
+        let gateway = RestaurantsRequestParamGateway()
+        return gateway.fetch()
+    }
+    
+    func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity) {
+        let gateway = RestaurantsRequestParamGateway()
+        gateway.save(entity: entity)
     }
 }
