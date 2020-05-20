@@ -117,7 +117,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 target: .CulturalProperty,
                 current: self.visibleLayerEntity.value
             )
+            
             self.visibleLayerEntity.accept(nextVisibleLayer)
+            self.visibleFeatureRestaurantEntity.accept([])
         }).disposed(by: disposeBag)
         
         input.busstopButton.drive(onNext: { [weak self] in
@@ -127,7 +129,9 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 target: .Busstop,
                 current: self.visibleLayerEntity.value
             )
+
             self.visibleLayerEntity.accept(nextVisibleLayer)
+            self.visibleFeatureRestaurantEntity.accept([])
         }).disposed(by: disposeBag)
         
         input.restaurantButton.drive(onNext: { [weak self] in
