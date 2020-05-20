@@ -5,7 +5,6 @@
 //  Created by TANAKA MASAYUKI on 2020/05/11.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
-import Foundation
 
 struct RestaurantsRequestParamEntity: Codable {
     enum SearchRange: Int, Codable {
