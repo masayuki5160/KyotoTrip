@@ -220,12 +220,12 @@ private extension KyotoMapPresenter {
                 
                 self.visibleFeatureRestaurantEntity.accept(restaurantFeatures)
             case .failure(let error):
-                let networkError = error as! RestaurantsSearchGateway.ResponseError
-                switch networkError {
+                switch error {
                 case .entryNotFound:
-                    print("No restaurants here")
+                    // TODO: View側にレストラン検索結果が0件だったことを通知
+                    print("Error: No entry found")
                 case .otherError:
-                    break
+                    print("Error: some error occured")
                 }
             }
         }

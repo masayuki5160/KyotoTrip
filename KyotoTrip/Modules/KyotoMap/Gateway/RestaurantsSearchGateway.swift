@@ -9,7 +9,12 @@
 import Alamofire
 
 protocol RestaurantsSearchGatewayProtocol: AnyObject {
-    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, Error>) -> Void)
+    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void)
+}
+
+enum RestaurantsSearchResponseError: Error {
+    case entryNotFound
+    case otherError(detail: String)
 }
 
 /// - Note:
@@ -20,22 +25,18 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
     private var accessToken = "78a33f7ad28955fdaccc7c99e7ef6dc3"
     private var targetPrefecture = "PREF26"// Set Kyoto prefecture code
     
-    enum ResponseError: Error {
-        case entryNotFound
-        case otherError
-    }
-    
-    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, Error>) -> Void) {
+    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
         let url = buildUrl(param)
         Alamofire.request(url).responseJSON { response in
             if response.error != nil {
-                complition(.failure(response.error!))
+                let errorDetail = response.error!.localizedDescription
+                complition(.failure(RestaurantsSearchResponseError.otherError(detail: errorDetail)))
                 return
             }
             
             switch response.response?.statusCode {
             case 404:// 検索結果の件数が0
-                complition(.failure(ResponseError.entryNotFound))
+                complition(.failure(RestaurantsSearchResponseError.entryNotFound))
             case 200:// 検索結果の件数が1以上
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -43,10 +44,12 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
                     let resultEntity = try decoder.decode(RestaurantsSearchResultEntity.self, from: response.data!)
                     complition(.success(resultEntity))
                 } catch let error {
-                    complition(.failure(error))
+                    let errorDetail = error.localizedDescription
+                    complition(.failure(RestaurantsSearchResponseError.otherError(detail: errorDetail)))
                 }
             default:
-                complition(.failure(ResponseError.otherError))
+                let errorDetail = "Unknown Error"
+                complition(.failure(RestaurantsSearchResponseError.otherError(detail: errorDetail)))
                 break
             }
         }

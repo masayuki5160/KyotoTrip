@@ -12,7 +12,7 @@ protocol KyotoMapInteractorProtocol: AnyObject {
     func updateUserPosition(_ position: UserPosition) -> UserPosition
     func createVisibleFeature(category: VisibleFeatureCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> VisibleFeatureProtocol
     func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantFeatureEntity
-    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, Error>) -> Void)
+    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void)
     func nextVisibleLayer(target: VisibleFeatureCategory, current: VisibleLayerEntity) -> VisibleLayerEntity
 }
 
@@ -60,13 +60,14 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
         )
     }
     
-    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, Error>) -> Void) {
+    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
         let gateway = RestaurantsSearchGateway()
         let requestParam = createRestaurantsRequestParam(location: location)
+
         gateway.fetch(param: requestParam) { response in
             switch response {
-            case .success(let data):
-                complition(.success(data))
+            case .success(let restaurants):
+                complition(.success(restaurants))
             case .failure(let error):
                 complition(.failure(error))
             }
