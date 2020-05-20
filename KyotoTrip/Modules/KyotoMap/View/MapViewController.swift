@@ -29,7 +29,6 @@ class MapViewController: UIViewController, MapViewProtocol {
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
-    private var currentVisibleRestaurantAnnotations: [MGLPointAnnotation] = []
     private var currentVisibleLayer: VisibleFeatureCategory = .None
     private var visibleFeatureForTappedCalloutView: VisibleFeatureProtocol? = nil
 
@@ -160,12 +159,12 @@ private extension MapViewController {
             if let selectedAnnotation = mapView.selectedAnnotations.first {
                 mapView.deselectAnnotation(selectedAnnotation, animated: true)
             }
-            
-            mapView.removeAnnotations(currentVisibleRestaurantAnnotations)
-            currentVisibleRestaurantAnnotations = []
+
+            if let visibleAnnotations = mapView.visibleAnnotations {
+                mapView.removeAnnotations(visibleAnnotations)
+            }
         case .visible:
             mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
-            currentVisibleRestaurantAnnotations = annotations
             mapView.addAnnotations(annotations)
         }
     }

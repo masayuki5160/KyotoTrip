@@ -138,7 +138,10 @@ class KyotoMapPresenter: KyotoMapPresenterProtocol {
                 current: self.visibleLayerEntity.value
             )
             
-            if nextVisibleLayer.restaurant == .visible {
+            switch nextVisibleLayer.restaurant {
+            case .hidden:
+                self.visibleFeatureRestaurantEntity.accept([])
+            case .visible:
                 self.fetchRestaurantsEntity()
             }
             
@@ -223,10 +226,12 @@ private extension KyotoMapPresenter {
                 switch error {
                 case .entryNotFound:
                     // TODO: View側にレストラン検索結果が0件だったことを通知
-                    print("Error: No entry found")
+                    print("Error: No entory found")
                 case .otherError:
                     print("Error: some error occured")
                 }
+                
+                self.visibleFeatureRestaurantEntity.accept([])
             }
         }
     }
