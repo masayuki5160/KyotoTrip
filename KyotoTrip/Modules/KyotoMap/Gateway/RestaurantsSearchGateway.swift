@@ -9,7 +9,7 @@
 import Alamofire
 
 protocol RestaurantsSearchGatewayProtocol: AnyObject {
-    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity>) -> Void)
+    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, Error>) -> Void)
 }
 
 /// - Note:
@@ -20,7 +20,12 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
     private var accessToken = "78a33f7ad28955fdaccc7c99e7ef6dc3"
     private var targetPrefecture = "PREF26"// Set Kyoto prefecture code
     
-    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity>) -> Void) {
+    enum ResponseError: Error {
+        case entryNotFound
+        case otherError
+    }
+    
+    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, Error>) -> Void) {
         let url = buildUrl(param)
         Alamofire.request(url).responseJSON { response in
             if response.error != nil {
@@ -28,13 +33,21 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
                 return
             }
             
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            do {
-                let resultEntity = try decoder.decode(RestaurantsSearchResultEntity.self, from: response.data!)
-                complition(.success(resultEntity))
-            } catch let error {
-                complition(.failure(error))
+            switch response.response?.statusCode {
+            case 404:// 検索結果の件数が0
+                complition(.failure(ResponseError.entryNotFound))
+            case 200:// 検索結果の件数が1以上
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                do {
+                    let resultEntity = try decoder.decode(RestaurantsSearchResultEntity.self, from: response.data!)
+                    complition(.success(resultEntity))
+                } catch let error {
+                    complition(.failure(error))
+                }
+            default:
+                complition(.failure(ResponseError.otherError))
+                break
             }
         }
     }
