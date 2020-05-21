@@ -11,6 +11,8 @@ protocol AppSettingsPresenterProtocol {
     func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
     func cellForRestaurantsSearchSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
     func saveRestaurantsSettings(_ tableView: UITableView, _ indexPaths: [IndexPath])
+    func saveRestaurantsSearchRangeSetting()
+    func didSelectRangeSetting(cell: UITableViewCell)
     var settingsTableSectionTitle: [String] { get }
     var settingsTableData: [[String]] { get }
     var restaurantsSearchSettingsTableData: [String] { get }
@@ -18,7 +20,6 @@ protocol AppSettingsPresenterProtocol {
 }
 
 class AppSettingsPresenter: AppSettingsPresenterProtocol {
-        
     struct Dependency {
         let interactor: AppSettingsInteractorProtocol
     }
@@ -56,6 +57,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         "言語設定",
         "飲食店検索設定"
     ]
+    private var updatedSearchRange: RestaurantsRequestParamEntity.SearchRange? = nil
 
     init(dependency: Dependency) {
         self.dependency = dependency
@@ -137,7 +139,21 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         
         dependency.interactor.saveRestaurantsRequestParam(entity: settings)
     }
-
+    
+    func saveRestaurantsSearchRangeSetting() {
+        guard let newSearchRange = updatedSearchRange else { return }
+        
+        var settings = dependency.interactor.fetchRestaurantsRequestParam()
+        settings.range = newSearchRange
+        dependency.interactor.saveRestaurantsRequestParam(entity: settings)
+    }
+    
+    func didSelectRangeSetting(cell: UITableViewCell) {
+        guard let textLabel = cell.textLabel, let text = textLabel.text else {
+            return
+        }
+        updatedSearchRange = dependency.interactor.convertToRestaurantsSearchRange(from: text)
+    }
 }
 
 private extension AppSettingsPresenter {

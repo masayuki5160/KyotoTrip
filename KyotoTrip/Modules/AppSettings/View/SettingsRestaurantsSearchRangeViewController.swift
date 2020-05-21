@@ -28,30 +28,7 @@ class SettingsRestaurantsSearchRangeViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // TODO: Move to Presenter and do not call gateway in View
-        let requestParamGateway = RestaurantsRequestParamGateway()
-        var settings = requestParamGateway.fetch()
-        for cell in tableView.visibleCells {
-            if cell.accessoryType == .checkmark {
-                switch cell.textLabel?.text {
-                case "300m":
-                    settings.range = .range300
-                case "500m":
-                    settings.range = .range500
-                case "1000m":
-                    settings.range = .range1000
-                case "2000m":
-                    settings.range = .range2000
-                case "3000m":
-                    settings.range = .range3000
-                default:
-                    break
-                }
-            }
-        }
-        
-        requestParamGateway.save(entity: settings)
+        dependency.presenter.saveRestaurantsSearchRangeSetting()
     }
 }
 
@@ -82,10 +59,14 @@ extension SettingsRestaurantsSearchRangeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        if let selectedCell = tableView.cellForRow(at: indexPath) {
+            selectedCell.accessoryType = .checkmark
+            dependency.presenter.didSelectRangeSetting(cell: selectedCell)
+        }
         
+        // Update accessoryType for not selected cells
         if let indexPaths = tableView.indexPathsForVisibleRows {
-            for cursorIndexPath in indexPaths {// TODO: 変数名を修正する
+            for cursorIndexPath in indexPaths {
                 if cursorIndexPath.row == indexPath.row {
                     continue
                 }
@@ -93,7 +74,7 @@ extension SettingsRestaurantsSearchRangeViewController: UITableViewDataSource {
                 tableView.cellForRow(at: cursorIndexPath)?.accessoryType = .none
             }
         }
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

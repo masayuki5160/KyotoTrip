@@ -52,4 +52,24 @@ struct RestaurantsRequestParamEntity: Codable {
     var card: RequestFilterFlg = .off
     var privateRoom: RequestFilterFlg = .off
     var noSmoking: RequestFilterFlg = .off
+    
+    func convertToSearchRange(rangeString: String) -> SearchRange {
+        let res: SearchRange
+        switch rangeString {
+        case "300m":
+            res = .range300
+        case "500m":
+            res = .range500
+        case "1000m":
+            res = .range1000
+        case "2000m":
+            res = .range2000
+        case "3000m":
+            res = .range3000
+        default:
+            res = .range500
+        }
+        
+        return res
+    }
 }
