@@ -213,6 +213,9 @@
 				4CF4AFD22468232D00991B2C /* Common */,
 				4C41664B24361C3B005EF1C2 /* MainTab */,
 				4C3F0952243020E500FAEDC2 /* AppSettings */,
+				4CF4B02524788FEE00991B2C /* License */,
+				4CF4B01D24788F4A00991B2C /* RestaurantsSearchSettings */,
+				4CF4B02124788F9500991B2C /* RestaurantsSearchRangeSetting */,
 				4C3F094B24301C3700FAEDC2 /* KyotoInfoTop */,
 				4CA84ACD2450365700DAC5F3 /* BusstopDetail */,
 				4CA84B192464335A00DAC5F3 /* RestaurantDetail */,
@@ -311,8 +314,6 @@
 			children = (
 				4CC1ADEE241FA55F00BF84B9 /* SettingsViewController.swift */,
 				4CC1ADEC241FA3F500BF84B9 /* Settings.storyboard */,
-				4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */,
-				4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */,
 				4CF4AFEB246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift */,
 				4CF4AFED246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard */,
 				4CF4AFEF2470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift */,
@@ -539,6 +540,85 @@
 				4CF4B0182477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		4CF4B01D24788F4A00991B2C /* RestaurantsSearchSettings */ = {
+			isa = PBXGroup;
+			children = (
+				4CF4B01F24788F7000991B2C /* Interactor */,
+				4CF4B02024788F7C00991B2C /* Presenter */,
+				4CF4B01E24788F6700991B2C /* View */,
+			);
+			path = RestaurantsSearchSettings;
+			sourceTree = "<group>";
+		};
+		4CF4B01E24788F6700991B2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4CF4B01F24788F7000991B2C /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4CF4B02024788F7C00991B2C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4CF4B02124788F9500991B2C /* RestaurantsSearchRangeSetting */ = {
+			isa = PBXGroup;
+			children = (
+				4CF4B02424788FBF00991B2C /* Interactor */,
+				4CF4B02324788FB900991B2C /* Presenter */,
+				4CF4B02224788FB200991B2C /* View */,
+			);
+			path = RestaurantsSearchRangeSetting;
+			sourceTree = "<group>";
+		};
+		4CF4B02224788FB200991B2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4CF4B02324788FB900991B2C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4CF4B02424788FBF00991B2C /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4CF4B02524788FEE00991B2C /* License */ = {
+			isa = PBXGroup;
+			children = (
+				4CF4B0262478900500991B2C /* View */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		4CF4B0262478900500991B2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */,
+				4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		4CF773CA241B978B0032CC53 = {
