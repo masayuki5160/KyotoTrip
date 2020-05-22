@@ -132,6 +132,8 @@ extension AppDefaultDependencies: AppDependencies {
             let storyboard = UIStoryboard(name: "SettingsLicense", bundle: nil)
             return storyboard.instantiateInitialViewController() as! SettingsLicenseViewController
         }()
+        let router = LicenseRouter(viewController: view)
+        view.inject(.init(router: router))
         
         return view
     }

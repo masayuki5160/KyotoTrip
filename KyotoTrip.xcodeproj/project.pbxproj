@@ -64,6 +64,7 @@
 		4CF4B0142475735C00991B2C /* RestaurantsRequestParamGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0132475735B00991B2C /* RestaurantsRequestParamGateway.swift */; };
 		4CF4B01724776C0800991B2C /* RestaurantsSearchRangeCellEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B01624776C0800991B2C /* RestaurantsSearchRangeCellEntity.swift */; };
 		4CF4B0192477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0182477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift */; };
+		4CF4B029247893A400991B2C /* LicenseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B028247893A400991B2C /* LicenseRouter.swift */; };
 		4CF668CE24336514006AB40C /* KyotoCityInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF668CD24336514006AB40C /* KyotoCityInfoInteractor.swift */; };
 		4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF668CF24336C14006AB40C /* KyotoCityInfoPresenter.swift */; };
 		4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D6241B978B0032CC53 /* AppDelegate.swift */; };
@@ -151,6 +152,7 @@
 		4CF4B0132475735B00991B2C /* RestaurantsRequestParamGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantsRequestParamGateway.swift; path = KyotoTrip/Modules/Common/RestaurantsRequestParamGateway.swift; sourceTree = SOURCE_ROOT; };
 		4CF4B01624776C0800991B2C /* RestaurantsSearchRangeCellEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchRangeCellEntity.swift; sourceTree = "<group>"; };
 		4CF4B0182477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSettingCellEntity.swift; sourceTree = "<group>"; };
+		4CF4B028247893A400991B2C /* LicenseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseRouter.swift; sourceTree = "<group>"; };
 		4CF668CD24336514006AB40C /* KyotoCityInfoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoInteractor.swift; sourceTree = "<group>"; };
 		4CF668CF24336C14006AB40C /* KyotoCityInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoPresenter.swift; sourceTree = "<group>"; };
 		4CF773D3241B978B0032CC53 /* KyotoTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotoTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -607,6 +609,7 @@
 		4CF4B02524788FEE00991B2C /* License */ = {
 			isa = PBXGroup;
 			children = (
+				4CF4B027247892F600991B2C /* Router */,
 				4CF4B0262478900500991B2C /* View */,
 			);
 			path = License;
@@ -619,6 +622,14 @@
 				4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4CF4B027247892F600991B2C /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4CF4B028247893A400991B2C /* LicenseRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		4CF773CA241B978B0032CC53 = {
@@ -992,6 +1003,7 @@
 				4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
+				4CF4B029247893A400991B2C /* LicenseRouter.swift in Sources */,
 				4CA84B0E2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift in Sources */,
 				4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */,
 				4CA84B1C2464339A00DAC5F3 /* RestaurantDetailViewController.swift in Sources */,

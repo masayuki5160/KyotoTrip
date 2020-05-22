@@ -10,6 +10,11 @@ import UIKit
 
 class SettingsLicenseViewController: UIViewController {
 
+    struct Dependency {
+        let router: LicenseRouterProtocol
+    }
+    private var dependency: Dependency!
+
     @IBOutlet weak var textView: UITextView!
 
     override func viewDidLoad() {
@@ -26,5 +31,11 @@ class SettingsLicenseViewController: UIViewController {
         
         ■hoge
         """
+    }
+}
+
+extension SettingsLicenseViewController: DependencyInjectable {
+    func inject(_ dependency: SettingsLicenseViewController.Dependency) {
+        self.dependency = dependency
     }
 }
