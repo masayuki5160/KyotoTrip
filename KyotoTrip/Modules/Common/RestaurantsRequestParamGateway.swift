@@ -8,24 +8,29 @@
 import Foundation
 
 protocol RestaurantsRequestParamGatewayProtocol {
-    func fetch() -> RestaurantsRequestParamEntity
+    func fetch(complition: (Result<RestaurantsRequestParamEntity, RestaurantsRequestParamGatewayError>) -> Void)
     func save(entity: RestaurantsRequestParamEntity)
 }
 
-class RestaurantsRequestParamGateway: RestaurantsRequestParamGatewayProtocol {
+enum RestaurantsRequestParamGatewayError: Error {
+    case entryNotFound
+    case decodeError
+}
+
+struct RestaurantsRequestParamGateway: RestaurantsRequestParamGatewayProtocol {
     private let userdefaultsKey = "RestaurantsRequestParam"
     
-    func fetch() -> RestaurantsRequestParamEntity {
+    func fetch(complition: (Result<RestaurantsRequestParamEntity, RestaurantsRequestParamGatewayError>) -> Void) {
         guard let data = UserDefaults.standard.data(forKey: userdefaultsKey) else {
-            return RestaurantsRequestParamEntity()
+            complition(.failure(.entryNotFound))
+            return
         }
 
         do {
             let decodedData = try JSONDecoder().decode(RestaurantsRequestParamEntity.self, from: data)
-            return decodedData
-        } catch let error {
-            print(error)
-            return RestaurantsRequestParamEntity()
+            complition(.success(decodedData))
+        } catch _ {
+            complition(.failure(.decodeError))
         }
     }
     

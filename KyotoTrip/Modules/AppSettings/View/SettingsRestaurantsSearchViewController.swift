@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SettingsRestaurantsSearchViewController: UIViewController {
 
@@ -16,59 +18,41 @@ class SettingsRestaurantsSearchViewController: UIViewController {
     private var dependency: Dependency!
 
     @IBOutlet weak var tableView: UITableView!
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        dependency.presenter.restaurantsSearchSettingsRowsDriver
+            .drive(tableView.rx.items) { tableView, row, element in
+                let cell = UITableViewCell(style: .value1, reuseIdentifier: "RestaurantsSearchSettingCell")
+                cell.textLabel?.text = element.title
+                if row == 0 {// For restaurants search range setting cell
+                    cell.detailTextLabel?.text = element.detail
+                    cell.accessoryType = .disclosureIndicator
+                } else {// Other cells
+                    cell.accessoryType = element.isSelected ? .checkmark : .none
+                }
+
+                return cell
+        }.disposed(by: disposeBag)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.register(UINib(nibName: SettingsTableViewCellWithSwitch.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithSwitch.id)
-        tableView.register(UINib(nibName: SettingsTableViewCellWithCurrentParam.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithCurrentParam.id)
+        dependency.presenter.bindRestauransSearchSettingsView(
+            input: RestauransSearchSettingsView(selectedCellEntity: tableView.rx.modelSelected(RestaurantsSearchSettingCellEntity.self).asDriver()
+            )
+        )
         
         navigationItem.title = "飲食店検索設定"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let indexPaths = tableView.indexPathsForVisibleRows ?? []
-        dependency.presenter.saveRestaurantsSettings(tableView, indexPaths)
-    }
-}
-
-extension SettingsRestaurantsSearchViewController: UITableViewDelegate {
-}
-
-extension SettingsRestaurantsSearchViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dependency.presenter.restaurantsSearchSettingsTableData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = dependency.presenter.cellForRestaurantsSearchSettings(tableView, indexPath)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:// Search range setting cell
-            let vc = AppDefaultDependencies().assembleSettingsRestaurantsSearchRangeModule()
-            navigationController?.pushViewController(vc, animated: true)
-        default:
-            break
-        }
-
-        tableView.deselectRow(at: indexPath, animated: true)
+        dependency.presenter.saveRestaurantsSettings()
     }
 }
 

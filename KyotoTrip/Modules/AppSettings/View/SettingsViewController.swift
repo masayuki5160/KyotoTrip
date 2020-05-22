@@ -30,10 +30,6 @@ class SettingsViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-
-        tableView.register(UINib(nibName: SettingsTableViewCell.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCell.id)
-        tableView.register(UINib(nibName: SettingsTableViewCellWithSwitch.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithSwitch.id)
-        tableView.register(UINib(nibName: SettingsTableViewCellWithCurrentParam.id, bundle: nil), forCellReuseIdentifier: SettingsTableViewCellWithCurrentParam.id)
     }
 }
 

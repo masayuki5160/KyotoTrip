@@ -61,15 +61,14 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
     }
     
     func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
-        let gateway = RestaurantsSearchGateway()
-        let requestParam = createRestaurantsRequestParam(location: location)
-
-        gateway.fetch(param: requestParam) { response in
-            switch response {
-            case .success(let restaurants):
-                complition(.success(restaurants))
-            case .failure(let error):
-                complition(.failure(error))
+        createRestaurantsRequestParam(location: location) { requestParam in
+            RestaurantsSearchGateway().fetch(param: requestParam) { response in
+                switch response {
+                case .success(let restaurants):
+                    complition(.success(restaurants))
+                case .failure(let error):
+                    complition(.failure(error))
+                }
             }
         }
     }
@@ -80,12 +79,20 @@ final class KyotoMapInteractor: KyotoMapInteractorProtocol {
 }
 
 private extension KyotoMapInteractor {
-    private func createRestaurantsRequestParam(location: CLLocationCoordinate2D) -> RestaurantsRequestParamEntity {
-        let requestParamGateway = RestaurantsRequestParamGateway()
-        var param = requestParamGateway.fetch()
-        param.latitude = String(location.latitude)
-        param.longitude = String(location.longitude)
+    private func createRestaurantsRequestParam(location: CLLocationCoordinate2D, compliton: (RestaurantsRequestParamEntity) -> Void) {
+        RestaurantsRequestParamGateway().fetch { response in
+            var settings:RestaurantsRequestParamEntity
 
-        return param
+            switch response {
+            case .failure(_):
+                settings = RestaurantsRequestParamEntity()
+            case .success(let savedSettings):
+                settings = savedSettings
+                settings.latitude = String(location.latitude)
+                settings.longitude = String(location.longitude)
+            }
+            
+            compliton(settings)
+        }
     }
 }

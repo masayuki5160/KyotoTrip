@@ -22,22 +22,6 @@ struct RestaurantsRequestParamEntity: Codable {
     var latitude = ""
     var longitude = ""
     var range: SearchRange = .range500
-    var rangeStr: String {
-        let res: String
-        switch range {
-        case .range300:
-            res = "300m"
-        case .range500:
-            res = "500m"
-        case .range1000:
-            res = "1000m"
-        case .range2000:
-            res = "2000m"
-        case .range3000:
-            res = "3000m"
-        }
-        return res
-    }
     var hitPerPage = 20
     var englishSpeakingStaff: RequestFilterFlg = .off
     var englishMenu: RequestFilterFlg = .off
@@ -52,24 +36,4 @@ struct RestaurantsRequestParamEntity: Codable {
     var card: RequestFilterFlg = .off
     var privateRoom: RequestFilterFlg = .off
     var noSmoking: RequestFilterFlg = .off
-    
-    func convertToSearchRange(rangeString: String) -> SearchRange {
-        let res: SearchRange
-        switch rangeString {
-        case "300m":
-            res = .range300
-        case "500m":
-            res = .range500
-        case "1000m":
-            res = .range1000
-        case "2000m":
-            res = .range2000
-        case "3000m":
-            res = .range3000
-        default:
-            res = .range500
-        }
-        
-        return res
-    }
 }

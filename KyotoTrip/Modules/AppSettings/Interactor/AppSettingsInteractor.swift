@@ -7,35 +7,24 @@
 //
 
 protocol AppSettingsInteractorProtocol: AnyObject {
-    func uiSwitchStatusToRequestFlg(_ status: Bool) -> RestaurantsRequestParamEntity.RequestFilterFlg
-    func fetchRestaurantsRequestParam() -> RestaurantsRequestParamEntity
+    func fetchRestaurantsRequestParam(complition: (RestaurantsRequestParamEntity) -> Void)
     func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity)
-    func convertToRestaurantsSearchRange(from: String) -> RestaurantsRequestParamEntity.SearchRange
 }
 
 final class AppSettingsInteractor: AppSettingsInteractorProtocol {
-    func uiSwitchStatusToRequestFlg(_ status: Bool) -> RestaurantsRequestParamEntity.RequestFilterFlg {
-        let res: RestaurantsRequestParamEntity.RequestFilterFlg
-        if status {
-            res = RestaurantsRequestParamEntity.RequestFilterFlg.on
-        } else {
-            res = RestaurantsRequestParamEntity.RequestFilterFlg.off
-        }
-
-        return res
-    }
     
-    func fetchRestaurantsRequestParam() -> RestaurantsRequestParamEntity {
-        let gateway = RestaurantsRequestParamGateway()
-        return gateway.fetch()
+    func fetchRestaurantsRequestParam(complition: (RestaurantsRequestParamEntity) -> Void) {
+        RestaurantsRequestParamGateway().fetch { response in
+            switch response {
+            case .failure(_):
+                complition(RestaurantsRequestParamEntity())
+            case .success(let entity):
+                complition(entity)
+            }
+        }
     }
     
     func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity) {
-        let gateway = RestaurantsRequestParamGateway()
-        gateway.save(entity: entity)
-    }
-    
-    func convertToRestaurantsSearchRange(from: String) -> RestaurantsRequestParamEntity.SearchRange {
-        return RestaurantsRequestParamEntity().convertToSearchRange(rangeString: from)
+        RestaurantsRequestParamGateway().save(entity: entity)
     }
 }
