@@ -35,7 +35,7 @@ class KyotoCityInfoPresenter: KyotoCityInfoPresenterProtocol {
             guard let self = self else { return }
 
             switch result {
-            case .failure(let error):
+            case .failure(_):
                 self.modelListPublishRelay.accept([])
             case .success(let data):
                 self.modelListPublishRelay.accept(data)
