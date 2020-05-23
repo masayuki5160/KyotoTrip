@@ -54,7 +54,7 @@
 		4CF4AFE6246E188800991B2C /* AppSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE5246E188800991B2C /* AppSettingsPresenter.swift */; };
 		4CF4AFE8246EDAAC00991B2C /* SettingsLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */; };
 		4CF4AFEA246EDACB00991B2C /* SettingsLicense.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */; };
-		4CF4AFEC246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFEB246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift */; };
+		4CF4AFEC246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFEB246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift */; };
 		4CF4AFEE246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFED246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard */; };
 		4CF4AFF02470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFEF2470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift */; };
 		4CF4AFF22470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */; };
@@ -147,7 +147,7 @@
 		4CF4AFE5246E188800991B2C /* AppSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsPresenter.swift; sourceTree = "<group>"; };
 		4CF4AFE7246EDAAC00991B2C /* SettingsLicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLicenseViewController.swift; sourceTree = "<group>"; };
 		4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsLicense.storyboard; sourceTree = "<group>"; };
-		4CF4AFEB246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRestaurantsSearchViewController.swift; sourceTree = "<group>"; };
+		4CF4AFEB246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSettingsViewController.swift; sourceTree = "<group>"; };
 		4CF4AFED246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsRestaurantsSearch.storyboard; sourceTree = "<group>"; };
 		4CF4AFEF2470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchRangeSettingsViewController.swift; sourceTree = "<group>"; };
 		4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsRestaurantsSearchRange.storyboard; sourceTree = "<group>"; };
@@ -569,7 +569,7 @@
 		4CF4B01E24788F6700991B2C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4CF4AFEB246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift */,
+				4CF4AFEB246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift */,
 				4CF4AFED246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard */,
 			);
 			path = View;
@@ -1035,7 +1035,7 @@
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,
 				4CA84AFD246284EB00DAC5F3 /* VisibleFeatureCategory.swift in Sources */,
 				4C4CA0C224258EC400C7AEAE /* KyotoMapPresenter.swift in Sources */,
-				4CF4AFEC246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift in Sources */,
+				4CF4AFEC246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift in Sources */,
 				4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */,
 				4C416667244495C2005EF1C2 /* DependencyInjectable.swift in Sources */,
 				4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */,

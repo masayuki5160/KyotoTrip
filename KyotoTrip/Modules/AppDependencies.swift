@@ -137,9 +137,9 @@ extension AppDefaultDependencies: AppDependencies {
     }
 
     func assembleSettingsRestaurantsSearchModule() -> UIViewController {
-        let view = { () -> SettingsRestaurantsSearchViewController in
+        let view = { () -> RestaurantsSearchSettingsViewController in
             let storyboard = UIStoryboard(name: "SettingsRestaurantsSearch", bundle: nil)
-            return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchViewController
+            return storyboard.instantiateInitialViewController() as! RestaurantsSearchSettingsViewController
         }()
 
         let interactor = RestaurantsSearchSettingsInteractor()

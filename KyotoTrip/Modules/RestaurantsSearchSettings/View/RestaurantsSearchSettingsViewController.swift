@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SettingsRestaurantsSearchViewController: UIViewController, TransitionerProtocol {
+class RestaurantsSearchSettingsViewController: UIViewController, TransitionerProtocol {
 
     struct Dependency {
         let presenter: RestaurantsSearchSettingsPresenterProtocol
@@ -57,8 +57,8 @@ class SettingsRestaurantsSearchViewController: UIViewController, TransitionerPro
     }
 }
 
-extension SettingsRestaurantsSearchViewController: DependencyInjectable {
-    func inject(_ dependency: SettingsRestaurantsSearchViewController.Dependency) {
+extension RestaurantsSearchSettingsViewController: DependencyInjectable {
+    func inject(_ dependency: RestaurantsSearchSettingsViewController.Dependency) {
         self.dependency = dependency
     }
 }
