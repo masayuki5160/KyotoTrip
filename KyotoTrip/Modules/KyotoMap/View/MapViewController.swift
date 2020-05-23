@@ -108,18 +108,13 @@ private extension MapViewController {
                 return
             }
 
-            // Add annotation to mapview
-            let annotation = MGLPointAnnotation()
-            annotation.coordinate = feature.coordinate
-            annotation.title = feature.title
-            annotation.subtitle = "This is subtitle"
-            self?.mapView.addAnnotation(annotation)
-
             // move camera position to the annotation position
             let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 0, heading: 0)
             self?.mapView.fly(to: camera, withDuration: 3, completionHandler: { [weak self] in
                 self?.updateVisibleFeatures()
             })
+            
+            self?.showCallout(from: feature)
         }).disposed(by: disposeBag)
     }
     
@@ -242,6 +237,10 @@ private extension MapViewController {
     
     private func showCallout(feature: MGLPointFeature) {
         let visibleFeature = dependency.presenter.convertMGLFeatureToVisibleFeature(source: feature)
+        showCallout(from: visibleFeature)
+    }
+    
+    private func showCallout(from visibleFeature: VisibleFeatureProtocol) {
         visibleFeatureForTappedCalloutView = visibleFeature
 
         let selectedAnnotation = MGLPointFeature()
