@@ -16,11 +16,9 @@ protocol AppSettingsPresenterProtocol {
     var settingsTableData: [[String]] { get }/// TODO: SettingViewControllerをリファクタしたら削除
     
     // MARK: Function to bind views
-    func bindRestauransSearchSettingsView(input: RestauransSearchSettingsView)
     func bindRestauransSearchRangeSettingView(input: RestauransSearchRangeSettingView)
     
     // MARK: Output from Presenter
-    var restaurantsSearchSettingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]>{ get }
     var restaurantsSearchRangeSettingRowsDriver: Driver<[RestaurantsSearchRangeCellEntity]>{ get }
 }
 
@@ -33,10 +31,12 @@ struct RestauransSearchRangeSettingView {
 }
 
 class AppSettingsPresenter: AppSettingsPresenterProtocol {
+
     // MARK: Properties
 
     struct Dependency {
         let interactor: AppSettingsInteractorProtocol
+        let commonPresenter: CommonSettingsPresenter
     }
     
     let settingsTableSectionTitle = [
@@ -46,9 +46,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
     let settingsTableData: [[String]]
     var restaurantsSearchRangeSettingRowsDriver: Driver<[RestaurantsSearchRangeCellEntity]> {
         return restaurantsSearchRangeSettingsRows.asDriver()
-    }
-    var restaurantsSearchSettingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]> {
-        return restaurantsSearchSettingsRows.asDriver()
     }
     
     private let dependency: Dependency
@@ -60,28 +57,12 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         "言語設定",
         "飲食店検索設定"
     ]
-    private let restaurantsSearchSettingsTableData: [String] = [
-        "検索範囲",
-        "英語スタッフ",
-        "韓国語スタッフ",
-        "中国語スタッフ",
-        "ベジタリアンメニュー",
-        "クレジットカード",
-        "個室",
-        "Wifi",
-        "禁煙"
-    ]
-    private let restaurantsSearchRangeDictionary: [RestaurantsRequestParamEntity.SearchRange:String] = [
-            RestaurantsRequestParamEntity.SearchRange.range300:  "300m",
-            RestaurantsRequestParamEntity.SearchRange.range500:  "500m",
-            RestaurantsRequestParamEntity.SearchRange.range1000: "1000m",
-            RestaurantsRequestParamEntity.SearchRange.range2000: "2000m",
-            RestaurantsRequestParamEntity.SearchRange.range3000: "3000m"
-    ]
+    private var restaurantsSearchRangeDictionary: [RestaurantsRequestParamEntity.SearchRange:String] {
+        return dependency.commonPresenter.restaurantsSearchRangeDictionary
+    }
     private var restaurantsRequestParam = RestaurantsRequestParamEntity()
-    private let restaurantsSearchRangeSettingsRows = BehaviorRelay<[RestaurantsSearchRangeCellEntity]>(value: [])
-    private let restaurantsSearchSettingsRows =
-        BehaviorRelay<[RestaurantsSearchSettingCellEntity]>(value: [])
+    private let restaurantsSearchRangeSettingsRows =
+        BehaviorRelay<[RestaurantsSearchRangeCellEntity]>(value: [])
     private let disposeBag = DisposeBag()
 
     // MARK: Public functions
@@ -96,12 +77,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         
         dependency.interactor.fetchRestaurantsRequestParam { [weak self] savedSettings in
             self?.restaurantsRequestParam = savedSettings
-
-            let searchRangeRows = self?.buildSearchRangeRows(settings: savedSettings)
-            restaurantsSearchRangeSettingsRows.accept(searchRangeRows ?? [])
-            
-            let searchSettings = self?.buildRestaurantsSettingRows(settings: savedSettings)
-            restaurantsSearchSettingsRows.accept(searchSettings ?? [])
         }
     }
     
@@ -146,73 +121,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
             self.restaurantsSearchRangeSettingsRows.accept(searchRangeRows)
         }).disposed(by: disposeBag)
     }
-    
-    func bindRestauransSearchSettingsView(input: RestauransSearchSettingsView) {
-        input.selectedCellEntity.drive(onNext: { [weak self] entity in
-            guard let self = self else { return }
-            /// FIXME: Change to other good code
-            switch entity.title {
-            case self.restaurantsSearchSettingsTableData[0]:// 検索範囲
-                let vc = AppDefaultDependencies().assembleSettingsRestaurantsSearchRangeModule()
-                /// TODO: Routeを導入する
-                // navigationController?.pushViewController(vc, animated: true)
-            case self.restaurantsSearchSettingsTableData[1]:// 英語スタッフ
-                if entity.isSelected {
-                    self.restaurantsRequestParam.englishSpeakingStaff = .off
-                } else {
-                    self.restaurantsRequestParam.englishSpeakingStaff = .on
-                }
-            case self.restaurantsSearchSettingsTableData[2]:// 韓国語スタッフ
-                if entity.isSelected {
-                    self.restaurantsRequestParam.koreanSpeakingStaff = .off
-                } else {
-                    self.restaurantsRequestParam.koreanSpeakingStaff = .on
-                }
-            case self.restaurantsSearchSettingsTableData[3]:// 中国語スタッフ
-                if entity.isSelected {
-                    self.restaurantsRequestParam.chineseSpeakingStaff = .off
-                } else {
-                    self.restaurantsRequestParam.chineseSpeakingStaff = .on
-                }
-            case self.restaurantsSearchSettingsTableData[4]:// ベジタリアンメニュー
-                if entity.isSelected {
-                    self.restaurantsRequestParam.vegetarianMenuOptions = .off
-                } else {
-                    self.restaurantsRequestParam.vegetarianMenuOptions = .on
-                }
-            case self.restaurantsSearchSettingsTableData[5]:// クレジットカード
-                if entity.isSelected {
-                    self.restaurantsRequestParam.card = .off
-                } else {
-                    self.restaurantsRequestParam.card = .on
-                }
-            case self.restaurantsSearchSettingsTableData[6]:// 個室
-                if entity.isSelected {
-                    self.restaurantsRequestParam.privateRoom = .off
-                } else {
-                    self.restaurantsRequestParam.privateRoom = .on
-                }
-            case self.restaurantsSearchSettingsTableData[7]:// Wifi
-                if entity.isSelected {
-                    self.restaurantsRequestParam.wifi = .off
-                } else {
-                    self.restaurantsRequestParam.wifi = .on
-                }
-            case self.restaurantsSearchSettingsTableData[8]:// 禁煙
-                if entity.isSelected {
-                    self.restaurantsRequestParam.noSmoking = .off
-                } else {
-                    self.restaurantsRequestParam.noSmoking = .on
-                }
-            default:
-                break
-            }
-                        
-            let searchSettings =
-                self.buildRestaurantsSettingRows(settings: self.restaurantsRequestParam)
-            self.restaurantsSearchSettingsRows.accept(searchSettings)
-        }).disposed(by: disposeBag)
-    }
 }
 
 private extension AppSettingsPresenter {
@@ -228,7 +136,7 @@ private extension AppSettingsPresenter {
         for (_, val) in restaurantsSearchRangeDictionary {
             var model = RestaurantsSearchRangeCellEntity()
             model.range = val
-            let rangeString = convertToRangeString(from: settings.range)
+            let rangeString = dependency.commonPresenter.convertToRangeString(from: settings.range)
             if rangeString == val {
                 model.isSelected = true
             } else {
@@ -240,48 +148,7 @@ private extension AppSettingsPresenter {
 
         return searchRangeRows
     }
-    
-    private func buildRestaurantsSettingRows(settings: RestaurantsRequestParamEntity) -> [RestaurantsSearchSettingCellEntity] {
-        var searchSettingRows: [RestaurantsSearchSettingCellEntity] = []
-        
-        /// FIXME: Change to other good code
-        for index in 0..<restaurantsSearchSettingsTableData.count {
-            var model = RestaurantsSearchSettingCellEntity()
 
-            model.title = restaurantsSearchSettingsTableData[index]
-            switch index {
-            case 0:// 検索範囲
-                model.detail = convertToRangeString(from: settings.range)
-            case 1:// 英語スタッフ
-                model.isSelected = settings.englishSpeakingStaff == .on ? true : false
-            case 2:// 韓国語スタッフ
-                model.isSelected = settings.koreanSpeakingStaff == .on ? true : false
-            case 3:// 中国語スタッフ
-                model.isSelected = settings.chineseSpeakingStaff == .on ? true : false
-            case 4:// ベジタリアンメニュー
-                model.isSelected = settings.vegetarianMenuOptions == .on ? true : false
-            case 5:// クレジットカード
-                model.isSelected = settings.card == .on ? true : false
-            case 6:// 個室
-                model.isSelected = settings.privateRoom == .on ? true : false
-            case 7:// Wifi
-                model.isSelected = settings.wifi == .on ? true : false
-            case 8:// 禁煙
-                model.isSelected = settings.noSmoking == .on ? true : false
-            default:
-                break
-            }
-            
-            searchSettingRows.append(model)
-        }
-
-        return searchSettingRows
-    }
-    
-    private func convertToRangeString(from: RestaurantsRequestParamEntity.SearchRange) -> String {
-        return restaurantsSearchRangeDictionary[from] ?? restaurantsSearchRangeDictionary[.range500]!
-    }
-    
     private func convertToSearchRange(rangeString: String) -> RestaurantsRequestParamEntity.SearchRange {
         let keys = restaurantsSearchRangeDictionary.filter{ $1 == rangeString }.keys
         return keys.first ?? RestaurantsRequestParamEntity.SearchRange.range500

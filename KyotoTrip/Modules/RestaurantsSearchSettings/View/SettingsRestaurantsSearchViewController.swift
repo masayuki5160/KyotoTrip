@@ -13,7 +13,7 @@ import RxCocoa
 class SettingsRestaurantsSearchViewController: UIViewController {
 
     struct Dependency {
-        let presenter: AppSettingsPresenterProtocol
+        let presenter: RestaurantsSearchSettingsPresenterProtocol
     }
     private var dependency: Dependency!
 

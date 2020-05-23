@@ -49,7 +49,9 @@ extension AppDefaultDependencies: AppDependencies {
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
         let interactor = AppSettingsInteractor()
-        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        let commonPresenter = CommonSettingsPresenter()
+        let presenter = AppSettingsPresenter(
+            dependency: .init(interactor: interactor, commonPresenter: commonPresenter))
         vc.inject(.init(presenter: presenter))
         
         return naviViewController
@@ -144,8 +146,14 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchViewController
         }()
 
-        let interactor = AppSettingsInteractor()
-        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        let interactor = RestaurantsSearchSettingsInteractor()
+        let router = RestaurantsSearchSettingsRouter(view: view)
+        let commonPresenter = CommonSettingsPresenter()
+        let presenter = RestaurantsSearchSettingsPresenter(dependency: .init(
+            interactor: interactor,
+            router: router,
+            commonPresenter: commonPresenter)
+        )
         view.inject(.init(presenter: presenter))
         
         return view
@@ -157,8 +165,12 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchRangeViewController
         }()
 
-        let interactor = AppSettingsInteractor()
-        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        let presenter = AppSettingsPresenter(
+            dependency: .init(
+                interactor: AppSettingsInteractor(),
+                commonPresenter: CommonSettingsPresenter()
+            )
+        )
         view.inject(.init(presenter: presenter))
         
         return view
