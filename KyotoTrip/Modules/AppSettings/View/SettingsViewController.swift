@@ -50,8 +50,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = dependency.presenter.cellForSettings(tableView, indexPath)
-        return cell
+        return dependency.presenter.cellForSettings(tableView, indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -8,9 +8,9 @@
 import UIKit
 
 protocol AppSettingsPresenterProtocol {
-    func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell/// TODO: SettingViewControllerをリファクタしたら削除?
-    var settingsTableSectionTitle: [String] { get }/// TODO: SettingViewControllerをリファクタしたら削除?
-    var settingsTableData: [[String]] { get }/// TODO: SettingViewControllerをリファクタしたら削除
+    func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
+    var settingsTableSectionTitle: [String] { get }
+    var settingsTableData: [[String]] { get }
 }
 
 class AppSettingsPresenter: AppSettingsPresenterProtocol {
