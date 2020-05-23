@@ -22,10 +22,6 @@ protocol AppSettingsPresenterProtocol {
     var restaurantsSearchRangeSettingRowsDriver: Driver<[RestaurantsSearchRangeCellEntity]>{ get }
 }
 
-struct RestauransSearchSettingsView {
-    let selectedCellEntity: Driver<RestaurantsSearchSettingCellEntity>
-}
-
 struct RestauransSearchRangeSettingView {
     let selectedCellEntity: Driver<RestaurantsSearchRangeCellEntity>
 }
@@ -77,6 +73,9 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         
         dependency.interactor.fetchRestaurantsRequestParam { [weak self] savedSettings in
             self?.restaurantsRequestParam = savedSettings
+            
+            let searchRangeRows = self?.buildSearchRangeRows(settings: savedSettings)
+            restaurantsSearchRangeSettingsRows.accept(searchRangeRows ?? [])
         }
     }
     
@@ -115,7 +114,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
             guard let self = self else { return }
 
             self.restaurantsRequestParam.range =
-                self.convertToSearchRange(rangeString: entity.range)
+                self.dependency.commonPresenter.convertToSearchRange(rangeString: entity.range)
             
             let searchRangeRows = self.buildSearchRangeRows(settings: self.restaurantsRequestParam)
             self.restaurantsSearchRangeSettingsRows.accept(searchRangeRows)
@@ -147,10 +146,5 @@ private extension AppSettingsPresenter {
         }
 
         return searchRangeRows
-    }
-
-    private func convertToSearchRange(rangeString: String) -> RestaurantsRequestParamEntity.SearchRange {
-        let keys = restaurantsSearchRangeDictionary.filter{ $1 == rangeString }.keys
-        return keys.first ?? RestaurantsRequestParamEntity.SearchRange.range500
     }
 }

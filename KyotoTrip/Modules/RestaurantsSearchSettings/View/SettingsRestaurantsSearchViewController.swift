@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SettingsRestaurantsSearchViewController: UIViewController {
+class SettingsRestaurantsSearchViewController: UIViewController, TransitionerProtocol {
 
     struct Dependency {
         let presenter: RestaurantsSearchSettingsPresenterProtocol
@@ -23,7 +23,7 @@ class SettingsRestaurantsSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        dependency.presenter.restaurantsSearchSettingsRowsDriver
+        dependency.presenter.settingsRowsDriver
             .drive(tableView.rx.items) { tableView, row, element in
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "RestaurantsSearchSettingCell")
                 cell.textLabel?.text = element.title
@@ -37,7 +37,7 @@ class SettingsRestaurantsSearchViewController: UIViewController {
                 return cell
         }.disposed(by: disposeBag)
         
-        dependency.presenter.bindRestauransSearchSettingsView(
+        dependency.presenter.bindView(
             input: RestauransSearchSettingsView(selectedCellEntity: tableView.rx.modelSelected(RestaurantsSearchSettingCellEntity.self).asDriver()
             )
         )
@@ -47,12 +47,13 @@ class SettingsRestaurantsSearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        dependency.presenter.reloadSettings()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        dependency.presenter.saveRestaurantsSettings()
+        dependency.presenter.saveSettings()
     }
 }
 

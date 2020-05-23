@@ -69,6 +69,7 @@
 		4CF4B02D24789A2700991B2C /* RestaurantsSearchSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B02C24789A2700991B2C /* RestaurantsSearchSettingsInteractor.swift */; };
 		4CF4B03024789A4700991B2C /* RestaurantsSearchSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B02F24789A4700991B2C /* RestaurantsSearchSettingsRouter.swift */; };
 		4CF4B0322478A14D00991B2C /* CommonSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0312478A14D00991B2C /* CommonSettingsPresenter.swift */; };
+		4CF4B0342478AB8F00991B2C /* TransitionerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0332478AB8F00991B2C /* TransitionerProtocol.swift */; };
 		4CF668CE24336514006AB40C /* KyotoCityInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF668CD24336514006AB40C /* KyotoCityInfoInteractor.swift */; };
 		4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF668CF24336C14006AB40C /* KyotoCityInfoPresenter.swift */; };
 		4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773D6241B978B0032CC53 /* AppDelegate.swift */; };
@@ -161,6 +162,7 @@
 		4CF4B02C24789A2700991B2C /* RestaurantsSearchSettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSettingsInteractor.swift; sourceTree = "<group>"; };
 		4CF4B02F24789A4700991B2C /* RestaurantsSearchSettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSettingsRouter.swift; sourceTree = "<group>"; };
 		4CF4B0312478A14D00991B2C /* CommonSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSettingsPresenter.swift; sourceTree = "<group>"; };
+		4CF4B0332478AB8F00991B2C /* TransitionerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionerProtocol.swift; sourceTree = "<group>"; };
 		4CF668CD24336514006AB40C /* KyotoCityInfoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoInteractor.swift; sourceTree = "<group>"; };
 		4CF668CF24336C14006AB40C /* KyotoCityInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoPresenter.swift; sourceTree = "<group>"; };
 		4CF773D3241B978B0032CC53 /* KyotoTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KyotoTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,7 +203,6 @@
 				4CF773DF241B97900032CC53 /* Assets.xcassets */,
 				4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */,
 				4C41666924473E8F005EF1C2 /* Localize */,
-				4C416665244495A6005EF1C2 /* Protocol */,
 				4CC1ADFB242459C900BF84B9 /* Extension */,
 				4C4166512439D229005EF1C2 /* Interactor */,
 				4C3F094524301B0800FAEDC2 /* Entity */,
@@ -409,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				4C416666244495C2005EF1C2 /* DependencyInjectable.swift */,
+				4CF4B0332478AB8F00991B2C /* TransitionerProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -525,6 +527,7 @@
 		4CF4AFD22468232D00991B2C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4C416665244495A6005EF1C2 /* Protocol */,
 				4CF4AFD02468227800991B2C /* DetailViewProtocol.swift */,
 				4CF4B0132475735B00991B2C /* RestaurantsRequestParamGateway.swift */,
 				4CF4B0312478A14D00991B2C /* CommonSettingsPresenter.swift */,
@@ -1024,6 +1027,7 @@
 				4CA84B122464080A00DAC5F3 /* RestaurantEntity.swift in Sources */,
 				4CF4B0142475735C00991B2C /* RestaurantsRequestParamGateway.swift in Sources */,
 				4CF4AFE6246E188800991B2C /* AppSettingsPresenter.swift in Sources */,
+				4CF4B0342478AB8F00991B2C /* TransitionerProtocol.swift in Sources */,
 				4C416655243FFA38005EF1C2 /* KyotoMapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,

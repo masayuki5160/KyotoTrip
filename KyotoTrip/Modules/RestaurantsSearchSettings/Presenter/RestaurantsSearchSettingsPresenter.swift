@@ -9,9 +9,14 @@ import RxSwift
 import RxCocoa
 
 protocol RestaurantsSearchSettingsPresenterProtocol {
-    var restaurantsSearchSettingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]>{ get }
-    func bindRestauransSearchSettingsView(input: RestauransSearchSettingsView)
-    func saveRestaurantsSettings()
+    var settingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]>{ get }
+    func bindView(input: RestauransSearchSettingsView)
+    func saveSettings()
+    func reloadSettings()
+}
+
+struct RestauransSearchSettingsView {
+    let selectedCellEntity: Driver<RestaurantsSearchSettingCellEntity>
 }
 
 class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProtocol {
@@ -22,7 +27,7 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
         let commonPresenter: CommonSettingsPresenterProtocol
     }
     
-    var restaurantsSearchSettingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]> {
+    var settingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]> {
         return restaurantsSearchSettingsRows.asDriver()
     }
     
@@ -48,23 +53,16 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
     init(dependency: Dependency) {
         self.dependency = dependency
         
-        dependency.interactor.fetchRestaurantsRequestParam { [weak self] savedSettings in
-            self?.restaurantsRequestParam = savedSettings
-
-            let searchSettings = self?.buildRestaurantsSettingRows(settings: savedSettings)
-            restaurantsSearchSettingsRows.accept(searchSettings ?? [])
-        }
+        loadSettings()
     }
     
-    func bindRestauransSearchSettingsView(input: RestauransSearchSettingsView) {
+    func bindView(input: RestauransSearchSettingsView) {
         input.selectedCellEntity.drive(onNext: { [weak self] entity in
             guard let self = self else { return }
             /// FIXME: Change to other good code
             switch entity.title {
             case self.restaurantsSearchSettingsTableData[0]:// 検索範囲
-                let vc = AppDefaultDependencies().assembleSettingsRestaurantsSearchRangeModule()
-                /// TODO: Routeを導入する
-                // navigationController?.pushViewController(vc, animated: true)
+                self.dependency.router.transitionToRestaurantsSearchRangeSettingView()
             case self.restaurantsSearchSettingsTableData[1]:// 英語スタッフ
                 if entity.isSelected {
                     self.restaurantsRequestParam.englishSpeakingStaff = .off
@@ -123,8 +121,12 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
         }).disposed(by: disposeBag)
     }
     
-    func saveRestaurantsSettings() {
+    func saveSettings() {
         dependency.interactor.saveRestaurantsRequestParam(entity: restaurantsRequestParam)
+    }
+    
+    func reloadSettings() {
+        loadSettings()
     }
 }
 
@@ -164,5 +166,14 @@ private extension RestaurantsSearchSettingsPresenter {
         }
 
         return searchSettingRows
+    }
+    
+    private func loadSettings() {
+        dependency.interactor.fetchRestaurantsRequestParam { [weak self] savedSettings in
+            self?.restaurantsRequestParam = savedSettings
+
+            let searchSettings = self?.buildRestaurantsSettingRows(settings: savedSettings)
+            restaurantsSearchSettingsRows.accept(searchSettings ?? [])
+        }
     }
 }
