@@ -227,7 +227,7 @@
 				4C41666224434E07005EF1C2 /* AppDependencies.swift */,
 				4CF4AFD22468232D00991B2C /* Common */,
 				4C41664B24361C3B005EF1C2 /* MainTab */,
-				4C3F0952243020E500FAEDC2 /* AppSettings */,
+				4C3F0952243020E500FAEDC2 /* Settings */,
 				4CF4B02524788FEE00991B2C /* License */,
 				4CF4B01D24788F4A00991B2C /* RestaurantsSearchSettings */,
 				4CF4B02124788F9500991B2C /* RestaurantsSearchRangeSetting */,
@@ -297,7 +297,7 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		4C3F0952243020E500FAEDC2 /* AppSettings */ = {
+		4C3F0952243020E500FAEDC2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				4CF4B01524776BCA00991B2C /* Entity */,
@@ -305,7 +305,7 @@
 				4C3F0953243020F200FAEDC2 /* Presenter */,
 				4C3F09552430210800FAEDC2 /* View */,
 			);
-			path = AppSettings;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		4C3F0953243020F200FAEDC2 /* Presenter */ = {
