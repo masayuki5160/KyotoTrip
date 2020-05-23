@@ -17,6 +17,7 @@ final class AppSettingsInteractor: AppSettingsInteractorProtocol {
         RestaurantsRequestParamGateway().fetch { response in
             switch response {
             case .failure(_):
+                /// Return default settings when failed fetching data
                 complition(RestaurantsRequestParamEntity())
             case .success(let entity):
                 complition(entity)
