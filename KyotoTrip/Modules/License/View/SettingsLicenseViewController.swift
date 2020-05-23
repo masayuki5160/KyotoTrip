@@ -11,7 +11,6 @@ import UIKit
 class SettingsLicenseViewController: UIViewController {
 
     struct Dependency {
-        let router: LicenseRouterProtocol
     }
     private var dependency: Dependency!
 

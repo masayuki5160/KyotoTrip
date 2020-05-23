@@ -10,10 +10,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SettingsRestaurantsSearchRangeViewController: UIViewController {
+class SettingsRestaurantsSearchRangeViewController: UIViewController, TransitionerProtocol {
 
     struct Dependency {
-        let presenter: AppSettingsPresenterProtocol
+        let presenter: RestaurantsSearchRangeSettingPresenterProtocol
     }
     private var dependency: Dependency!
     
@@ -25,13 +25,13 @@ class SettingsRestaurantsSearchRangeViewController: UIViewController {
         
         navigationItem.title = "飲食店検索範囲設定"
         
-        dependency.presenter.bindRestauransSearchRangeSettingView(input:
+        dependency.presenter.bindView(input:
             RestauransSearchRangeSettingView(
                 selectedCellEntity: tableView.rx.modelSelected(RestaurantsSearchRangeCellEntity.self).asDriver()
             )
         )
         
-        dependency.presenter.restaurantsSearchRangeSettingRowsDriver
+        dependency.presenter.searchRangeRowsDriver
             .drive(tableView.rx.items) { tableView, row, element in
                 let cell = UITableViewCell(style: .default, reuseIdentifier: "restaurantsSearchRange")
                 cell.textLabel?.text = element.range
@@ -39,6 +39,11 @@ class SettingsRestaurantsSearchRangeViewController: UIViewController {
 
                 return cell
         }.disposed(by: disposeBag)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dependency.presenter.reloadSettings()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

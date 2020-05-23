@@ -49,9 +49,7 @@ extension AppDefaultDependencies: AppDependencies {
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
         let interactor = AppSettingsInteractor()
-        let commonPresenter = CommonSettingsPresenter()
-        let presenter = AppSettingsPresenter(
-            dependency: .init(interactor: interactor, commonPresenter: commonPresenter))
+        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
         vc.inject(.init(presenter: presenter))
         
         return naviViewController
@@ -134,8 +132,6 @@ extension AppDefaultDependencies: AppDependencies {
             let storyboard = UIStoryboard(name: "SettingsLicense", bundle: nil)
             return storyboard.instantiateInitialViewController() as! SettingsLicenseViewController
         }()
-        let router = LicenseRouter(viewController: view)
-        view.inject(.init(router: router))
         
         return view
     }
@@ -165,11 +161,13 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchRangeViewController
         }()
 
-        let presenter = AppSettingsPresenter(
-            dependency: .init(
-                interactor: AppSettingsInteractor(),
-                commonPresenter: CommonSettingsPresenter()
-            )
+        let interactor = RestaurantsSearchRangeSettingInteractor()
+        let router = RestaurantsSearchRangeSettingRouter(view: view)
+        let commonPresenter = CommonSettingsPresenter()
+        let presenter = RestaurantsSearchRangeSettingPresenter(dependency: .init(
+            interactor: interactor,
+            router: router,
+            commonPresenter: commonPresenter)
         )
         view.inject(.init(presenter: presenter))
         

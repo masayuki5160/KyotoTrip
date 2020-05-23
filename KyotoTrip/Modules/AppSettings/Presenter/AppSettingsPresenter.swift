@@ -6,24 +6,11 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 import UIKit
-import RxSwift
-import RxCocoa
 
 protocol AppSettingsPresenterProtocol {
     func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell/// TODO: SettingViewControllerをリファクタしたら削除?
-    func saveRestaurantsSettings()
     var settingsTableSectionTitle: [String] { get }/// TODO: SettingViewControllerをリファクタしたら削除?
     var settingsTableData: [[String]] { get }/// TODO: SettingViewControllerをリファクタしたら削除
-    
-    // MARK: Function to bind views
-    func bindRestauransSearchRangeSettingView(input: RestauransSearchRangeSettingView)
-    
-    // MARK: Output from Presenter
-    var restaurantsSearchRangeSettingRowsDriver: Driver<[RestaurantsSearchRangeCellEntity]>{ get }
-}
-
-struct RestauransSearchRangeSettingView {
-    let selectedCellEntity: Driver<RestaurantsSearchRangeCellEntity>
 }
 
 class AppSettingsPresenter: AppSettingsPresenterProtocol {
@@ -32,7 +19,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
 
     struct Dependency {
         let interactor: AppSettingsInteractorProtocol
-        let commonPresenter: CommonSettingsPresenter
     }
     
     let settingsTableSectionTitle = [
@@ -40,9 +26,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         "アプリ設定"
     ]
     let settingsTableData: [[String]]
-    var restaurantsSearchRangeSettingRowsDriver: Driver<[RestaurantsSearchRangeCellEntity]> {
-        return restaurantsSearchRangeSettingsRows.asDriver()
-    }
     
     private let dependency: Dependency
     private let basicItems: [String] = [
@@ -53,13 +36,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         "言語設定",
         "飲食店検索設定"
     ]
-    private var restaurantsSearchRangeDictionary: [RestaurantsRequestParamEntity.SearchRange:String] {
-        return dependency.commonPresenter.restaurantsSearchRangeDictionary
-    }
-    private var restaurantsRequestParam = RestaurantsRequestParamEntity()
-    private let restaurantsSearchRangeSettingsRows =
-        BehaviorRelay<[RestaurantsSearchRangeCellEntity]>(value: [])
-    private let disposeBag = DisposeBag()
 
     // MARK: Public functions
     
@@ -70,13 +46,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
             basicItems,
             settingItems
         ]
-        
-        dependency.interactor.fetchRestaurantsRequestParam { [weak self] savedSettings in
-            self?.restaurantsRequestParam = savedSettings
-            
-            let searchRangeRows = self?.buildSearchRangeRows(settings: savedSettings)
-            restaurantsSearchRangeSettingsRows.accept(searchRangeRows ?? [])
-        }
     }
     
     func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
@@ -104,22 +73,6 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
         
         return cell
     }
-    
-    func saveRestaurantsSettings() {
-        dependency.interactor.saveRestaurantsRequestParam(entity: restaurantsRequestParam)
-    }
-    
-    func bindRestauransSearchRangeSettingView(input: RestauransSearchRangeSettingView) {
-        input.selectedCellEntity.drive(onNext: { [weak self] entity in
-            guard let self = self else { return }
-
-            self.restaurantsRequestParam.range =
-                self.dependency.commonPresenter.convertToSearchRange(rangeString: entity.range)
-            
-            let searchRangeRows = self.buildSearchRangeRows(settings: self.restaurantsRequestParam)
-            self.restaurantsSearchRangeSettingsRows.accept(searchRangeRows)
-        }).disposed(by: disposeBag)
-    }
 }
 
 private extension AppSettingsPresenter {
@@ -128,23 +81,5 @@ private extension AppSettingsPresenter {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         return "\(version).\(build)"
-    }
-    
-    private func buildSearchRangeRows(settings: RestaurantsRequestParamEntity) -> [RestaurantsSearchRangeCellEntity] {
-        var searchRangeRows: [RestaurantsSearchRangeCellEntity] = []
-        for (_, val) in restaurantsSearchRangeDictionary {
-            var model = RestaurantsSearchRangeCellEntity()
-            model.range = val
-            let rangeString = dependency.commonPresenter.convertToRangeString(from: settings.range)
-            if rangeString == val {
-                model.isSelected = true
-            } else {
-                model.isSelected = false
-            }
-            
-            searchRangeRows.append(model)
-        }
-
-        return searchRangeRows
     }
 }

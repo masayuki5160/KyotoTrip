@@ -7,25 +7,7 @@
 //
 
 protocol AppSettingsInteractorProtocol: AnyObject {
-    func fetchRestaurantsRequestParam(complition: (RestaurantsRequestParamEntity) -> Void)
-    func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity)
 }
 
 final class AppSettingsInteractor: AppSettingsInteractorProtocol {
-    
-    func fetchRestaurantsRequestParam(complition: (RestaurantsRequestParamEntity) -> Void) {
-        RestaurantsRequestParamGateway().fetch { response in
-            switch response {
-            case .failure(_):
-                /// Return default settings when failed fetching data
-                complition(RestaurantsRequestParamEntity())
-            case .success(let entity):
-                complition(entity)
-            }
-        }
-    }
-    
-    func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity) {
-        RestaurantsRequestParamGateway().save(entity: entity)
-    }
 }
