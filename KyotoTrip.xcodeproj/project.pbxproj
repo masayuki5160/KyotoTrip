@@ -235,12 +235,12 @@
 				4CA84ACD2450365700DAC5F3 /* BusstopDetail */,
 				4CA84B192464335A00DAC5F3 /* RestaurantDetail */,
 				4CA84B022463132A00DAC5F3 /* CulturalPropertyDetail */,
-				4C3F094A24301C0000FAEDC2 /* KyotoMap */,
+				4C3F094A24301C0000FAEDC2 /* Map */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		4C3F094A24301C0000FAEDC2 /* KyotoMap */ = {
+		4C3F094A24301C0000FAEDC2 /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				4CA84AEB24597FC600DAC5F3 /* Entity */,
@@ -249,7 +249,7 @@
 				4C3F095124301F8000FAEDC2 /* Presenter */,
 				4C3F094D24301E4F00FAEDC2 /* View */,
 			);
-			path = KyotoMap;
+			path = Map;
 			sourceTree = "<group>";
 		};
 		4C3F094B24301C3700FAEDC2 /* KyotoInfoTop */ = {
