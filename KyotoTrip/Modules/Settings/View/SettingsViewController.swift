@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     struct Dependency {
-        let presenter: AppSettingsPresenterProtocol
+        let presenter: SettingsPresenterProtocol
     }
     private var dependency: Dependency!
 

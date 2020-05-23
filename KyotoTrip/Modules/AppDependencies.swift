@@ -48,8 +48,8 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
-        let interactor = AppSettingsInteractor()
-        let presenter = AppSettingsPresenter(dependency: .init(interactor: interactor))
+        let interactor = SettingsInteractor()
+        let presenter = SettingsPresenter(dependency: .init(interactor: interactor))
         vc.inject(.init(presenter: presenter))
         
         return naviViewController

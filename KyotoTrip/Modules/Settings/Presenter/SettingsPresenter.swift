@@ -7,18 +7,18 @@
 //
 import UIKit
 
-protocol AppSettingsPresenterProtocol {
+protocol SettingsPresenterProtocol {
     func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
     var settingsTableSectionTitle: [String] { get }
     var settingsTableData: [[String]] { get }
 }
 
-class AppSettingsPresenter: AppSettingsPresenterProtocol {
+class SettingsPresenter: SettingsPresenterProtocol {
 
     // MARK: Properties
 
     struct Dependency {
-        let interactor: AppSettingsInteractorProtocol
+        let interactor: SettingsInteractorProtocol
     }
     
     let settingsTableSectionTitle = [
@@ -75,7 +75,7 @@ class AppSettingsPresenter: AppSettingsPresenterProtocol {
     }
 }
 
-private extension AppSettingsPresenter {
+private extension SettingsPresenter {
     // MARK: Private functions
     private func appVersionString() -> String {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String

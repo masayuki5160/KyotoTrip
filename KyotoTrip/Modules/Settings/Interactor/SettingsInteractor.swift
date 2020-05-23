@@ -6,8 +6,8 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-protocol AppSettingsInteractorProtocol: AnyObject {
+protocol SettingsInteractorProtocol: AnyObject {
 }
 
-final class AppSettingsInteractor: AppSettingsInteractorProtocol {
+final class SettingsInteractor: SettingsInteractorProtocol {
 }
