@@ -34,12 +34,7 @@ public struct AppDefaultDependencies {
 
 extension AppDefaultDependencies: AppDependencies {
     func assembleMainTabModule() -> UIViewController {
-        let viewController = {() -> TabBarController in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            return storyboard.instantiateInitialViewController() as! TabBarController
-        }()
-        
-        return viewController
+        return TabBarController()
     }
     
     func assembleSettingsModule() -> UINavigationController {
