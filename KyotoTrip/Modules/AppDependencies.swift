@@ -156,9 +156,9 @@ extension AppDefaultDependencies: AppDependencies {
     }
     
     func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController {
-        let view = { () -> SettingsRestaurantsSearchRangeViewController in
+        let view = { () -> RestaurantsSearchRangeSettingsViewController in
             let storyboard = UIStoryboard(name: "SettingsRestaurantsSearchRange", bundle: nil)
-            return storyboard.instantiateInitialViewController() as! SettingsRestaurantsSearchRangeViewController
+            return storyboard.instantiateInitialViewController() as! RestaurantsSearchRangeSettingsViewController
         }()
 
         let interactor = RestaurantsSearchRangeSettingInteractor()

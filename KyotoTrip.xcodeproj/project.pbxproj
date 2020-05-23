@@ -56,7 +56,7 @@
 		4CF4AFEA246EDACB00991B2C /* SettingsLicense.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */; };
 		4CF4AFEC246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFEB246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift */; };
 		4CF4AFEE246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFED246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard */; };
-		4CF4AFF02470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFEF2470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift */; };
+		4CF4AFF02470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFEF2470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift */; };
 		4CF4AFF22470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */; };
 		4CF4AFF424716F8400991B2C /* AppSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFF324716F8400991B2C /* AppSettingsInteractor.swift */; };
 		4CF4B00A2472C9A600991B2C /* KyotoMapInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0092472C9A600991B2C /* KyotoMapInteractorTests.swift */; };
@@ -149,7 +149,7 @@
 		4CF4AFE9246EDACB00991B2C /* SettingsLicense.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsLicense.storyboard; sourceTree = "<group>"; };
 		4CF4AFEB246EE17800991B2C /* SettingsRestaurantsSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRestaurantsSearchViewController.swift; sourceTree = "<group>"; };
 		4CF4AFED246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsRestaurantsSearch.storyboard; sourceTree = "<group>"; };
-		4CF4AFEF2470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRestaurantsSearchRangeViewController.swift; sourceTree = "<group>"; };
+		4CF4AFEF2470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchRangeSettingsViewController.swift; sourceTree = "<group>"; };
 		4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsRestaurantsSearchRange.storyboard; sourceTree = "<group>"; };
 		4CF4AFF324716F8400991B2C /* AppSettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsInteractor.swift; sourceTree = "<group>"; };
 		4CF4B0072472C9A600991B2C /* KyotoTripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KyotoTripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -606,7 +606,7 @@
 		4CF4B02224788FB200991B2C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4CF4AFEF2470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift */,
+				4CF4AFEF2470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift */,
 				4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */,
 			);
 			path = View;
@@ -1043,7 +1043,7 @@
 				4CF4AFF424716F8400991B2C /* AppSettingsInteractor.swift in Sources */,
 				4CF668D024336C14006AB40C /* KyotoCityInfoPresenter.swift in Sources */,
 				4CF4B0362478CD8000991B2C /* RestaurantsSearchRangeSettingPresenter.swift in Sources */,
-				4CF4AFF02470AC4700991B2C /* SettingsRestaurantsSearchRangeViewController.swift in Sources */,
+				4CF4AFF02470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift in Sources */,
 				4C416650243964A4005EF1C2 /* KyotoCityInfoGateway.swift in Sources */,
 				4CF4B0382478CDD700991B2C /* RestaurantsSearchRangeSettingInteractor.swift in Sources */,
 				4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */,

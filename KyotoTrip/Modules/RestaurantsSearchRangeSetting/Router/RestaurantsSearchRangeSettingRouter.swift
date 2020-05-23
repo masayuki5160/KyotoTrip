@@ -7,9 +7,9 @@
 //
 
 protocol RestaurantsSearchRangeSettingRouterProtocol {
-    var view: SettingsRestaurantsSearchRangeViewController { get }
+    var view: RestaurantsSearchRangeSettingsViewController { get }
 }
 
 struct RestaurantsSearchRangeSettingRouter: RestaurantsSearchRangeSettingRouterProtocol {
-    var view: SettingsRestaurantsSearchRangeViewController
+    var view: RestaurantsSearchRangeSettingsViewController
 }
