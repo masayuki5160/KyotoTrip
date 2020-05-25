@@ -1,5 +1,5 @@
 //
-//  RestaurantFeatureEntity.swift
+//  RestaurantMarkerEntity.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/05/07.
