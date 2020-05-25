@@ -77,8 +77,8 @@ class KyotoMapInteractorTests: XCTestCase {
             category: .CulturalProperty,
             coordinate: mockCoordinate,
             attributes: mockAttributes
-        ) as! CulturalPropertyFeatureEntity
-        let expected = CulturalPropertyFeatureEntity(
+        ) as! CulturalPropertyMarkerEntity
+        let expected = CulturalPropertyMarkerEntity(
             title: mockAttributes["P32_006"] as! String,
             coordinate: mockCoordinate,
             address: mockAttributes["P32_007"] as! String,

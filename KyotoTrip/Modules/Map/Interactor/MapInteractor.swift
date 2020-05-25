@@ -32,13 +32,13 @@ final class MapInteractor: MapInteractorProtocol {
                 type: .Busstop
             )
         case .CulturalProperty:
-            return CulturalPropertyFeatureEntity(
-                title: attributes[CulturalPropertyFeatureEntity.titleId] as! String,
+            return CulturalPropertyMarkerEntity(
+                title: attributes[CulturalPropertyMarkerEntity.titleId] as! String,
                 coordinate: coordinate,
-                address: attributes[CulturalPropertyFeatureEntity.addressId] as! String,
-                largeClassificationCode: attributes[CulturalPropertyFeatureEntity.largeClassificationCodeId] as! Int,
-                smallClassificationCode: attributes[CulturalPropertyFeatureEntity.smallClassificationCodeId] as! Int,
-                registerdDate: attributes[CulturalPropertyFeatureEntity.registerdDateId] as! Int
+                address: attributes[CulturalPropertyMarkerEntity.addressId] as! String,
+                largeClassificationCode: attributes[CulturalPropertyMarkerEntity.largeClassificationCodeId] as! Int,
+                smallClassificationCode: attributes[CulturalPropertyMarkerEntity.smallClassificationCodeId] as! Int,
+                registerdDate: attributes[CulturalPropertyMarkerEntity.registerdDateId] as! Int
             )
         default:
             // TODO: Fix later

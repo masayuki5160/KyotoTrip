@@ -1,5 +1,5 @@
 //
-//  CulturalPropertyFeature.swift
+//  CulturalPropertyMarkerEntity.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/05/06.
@@ -12,7 +12,7 @@ import CoreLocation
 ///   Using Shapefile from MLIT(Ministry of Land, Infrastructure and Transport)
 ///    Japanese version http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P32.html
 ///    English version http://nlftp.mlit.go.jp/ksj-e/gml/datalist/KsjTmplt-P32.html
-struct CulturalPropertyFeatureEntity: MarkerEntityProtocol {
+struct CulturalPropertyMarkerEntity: MarkerEntityProtocol {
     static var layerId = "kyoto-cultural-property"
     /// 文化財の名称
     static var titleId = "P32_006"

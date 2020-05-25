@@ -48,7 +48,7 @@ class MapPresenter: MapPresenterProtocol {
 
     static var layerIdentifiers: Set<String> = [
         BusstopMarkerEntity.layerId,
-        CulturalPropertyFeatureEntity.layerId
+        CulturalPropertyMarkerEntity.layerId
     ]
     
     var userPositionButtonStatusDriver: Driver<UserPosition> {
@@ -113,7 +113,7 @@ class MapPresenter: MapPresenterProtocol {
         var category: MarkerCategory {
             if let _ = source.attribute(forKey: BusstopMarkerEntity.titleId) as? String {
                 return .Busstop
-            } else if let _ = source.attribute(forKey: CulturalPropertyFeatureEntity.titleId) as? String {
+            } else if let _ = source.attribute(forKey: CulturalPropertyMarkerEntity.titleId) as? String {
                 return .CulturalProperty
             }
             return .None

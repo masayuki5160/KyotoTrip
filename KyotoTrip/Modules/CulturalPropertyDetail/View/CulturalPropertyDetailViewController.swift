@@ -20,7 +20,7 @@ class CulturalPropertyDetailViewController: UIViewController, DetailViewProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let entity = visibleFeatureEntity as! CulturalPropertyFeatureEntity
+        let entity = visibleFeatureEntity as! CulturalPropertyMarkerEntity
         name.text = entity.title
         address.text = entity.address
         largeClassification.text = entity.largeClassification

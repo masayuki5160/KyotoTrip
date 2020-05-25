@@ -166,7 +166,7 @@ private extension MapViewController {
             layers.insert(BusstopMarkerEntity.layerId)
         }
         if let culturalPropertyLayer = mapView.culturalPropertyLayer, culturalPropertyLayer.isVisible {
-            layers.insert(CulturalPropertyFeatureEntity.layerId)
+            layers.insert(CulturalPropertyMarkerEntity.layerId)
         }
                 
         let features = mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
@@ -263,7 +263,7 @@ extension MapViewController: MGLMapViewDelegate {
         let kyotoMapView = mapView as! MapView
         kyotoMapView.busstopLayer = style.layer(withIdentifier: BusstopMarkerEntity.layerId)
         kyotoMapView.busRouteLayer = style.layer(withIdentifier: BusRouteFeatureEntity.layerId)
-        kyotoMapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyFeatureEntity.layerId)
+        kyotoMapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyMarkerEntity.layerId)
         
         // Init visible layers
         kyotoMapView.busstopLayer?.isVisible = false
