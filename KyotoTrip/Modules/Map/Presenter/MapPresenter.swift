@@ -110,7 +110,7 @@ class MapPresenter: MapPresenterProtocol {
     }
     
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
-        var category: VisibleFeatureCategory {
+        var category: MarkerCategory {
             if let _ = source.attribute(forKey: BusstopFeatureEntity.titleId) as? String {
                 return .Busstop
             } else if let _ = source.attribute(forKey: CulturalPropertyFeatureEntity.titleId) as? String {

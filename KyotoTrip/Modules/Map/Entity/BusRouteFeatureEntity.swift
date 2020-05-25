@@ -40,5 +40,5 @@ struct BusRouteFeatureEntity: VisibleFeatureProtocol {
     var title = ""
     var subtitle = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    var type: VisibleFeatureCategory = .BusRoute
+    var type: MarkerCategory = .BusRoute
 }

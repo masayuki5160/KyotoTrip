@@ -30,7 +30,7 @@
 		4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */; };
 		4CA84AF92462817C00DAC5F3 /* BusstopFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */; };
 		4CA84AFB246281F600DAC5F3 /* VisibleFeatureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */; };
-		4CA84AFD246284EB00DAC5F3 /* VisibleFeatureCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */; };
+		4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */; };
 		4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */; };
 		4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */; };
 		4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */; };
@@ -126,7 +126,7 @@
 		4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosition.swift; sourceTree = "<group>"; };
 		4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopFeatureEntity.swift; sourceTree = "<group>"; };
 		4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeatureProtocol.swift; sourceTree = "<group>"; };
-		4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeatureCategory.swift; sourceTree = "<group>"; };
+		4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerCategory.swift; sourceTree = "<group>"; };
 		4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyFeatureEntity.swift; sourceTree = "<group>"; };
 		4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteFeatureEntity.swift; sourceTree = "<group>"; };
 		4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailViewController.swift; sourceTree = "<group>"; };
@@ -508,7 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */,
-				4CA84AFC246284EB00DAC5F3 /* VisibleFeatureCategory.swift */,
+				4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */,
 				4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */,
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */,
 				4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */,
@@ -1085,7 +1085,7 @@
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
 				4CF4B02D24789A2700991B2C /* RestaurantsSearchSettingsInteractor.swift in Sources */,
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,
-				4CA84AFD246284EB00DAC5F3 /* VisibleFeatureCategory.swift in Sources */,
+				4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */,
 				4CB8CCD1247BF25300B69BB2 /* CategoryRouter.swift in Sources */,
 				4C4CA0C224258EC400C7AEAE /* MapPresenter.swift in Sources */,
 				4CF4AFEC246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift in Sources */,

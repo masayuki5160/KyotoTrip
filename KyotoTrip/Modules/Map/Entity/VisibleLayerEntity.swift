@@ -31,7 +31,7 @@ struct VisibleLayerEntity {
         self.restaurant = restaurant
     }
     
-    func update(layer: VisibleFeatureCategory) -> VisibleLayerEntity {
+    func update(layer: MarkerCategory) -> VisibleLayerEntity {
         var nextStatus: VisibleLayerEntity = VisibleLayerEntity()
         switch layer {
         case .Busstop:
@@ -50,16 +50,16 @@ struct VisibleLayerEntity {
         return nextStatus
     }
     
-    func currentVisibleLayers() -> [VisibleFeatureCategory] {
+    func currentVisibleLayers() -> [MarkerCategory] {
         return findVisibleLayer()
     }
     
-    func currentVisibleLayer() -> VisibleFeatureCategory {
+    func currentVisibleLayer() -> MarkerCategory {
         return findVisibleLayer()[0]
     }
     
-    private func findVisibleLayer() -> [VisibleFeatureCategory] {
-        var res: [VisibleFeatureCategory] = []
+    private func findVisibleLayer() -> [MarkerCategory] {
+        var res: [MarkerCategory] = []
         
         // FIXME: 他に良い書き方があれば修正する
         busstop == .visible ? res.append(.Busstop) : ()

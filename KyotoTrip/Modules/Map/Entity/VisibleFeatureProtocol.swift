@@ -14,5 +14,5 @@ protocol VisibleFeatureProtocol {
     var title: String { get }
     var subtitle: String { get }
     var coordinate: CLLocationCoordinate2D { get }
-    var type: VisibleFeatureCategory { get }
+    var type: MarkerCategory { get }
 }

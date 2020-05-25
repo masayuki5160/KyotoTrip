@@ -28,7 +28,7 @@ struct CulturalPropertyFeatureEntity: VisibleFeatureProtocol {
     var title = ""
     var subtitle = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    var type: VisibleFeatureCategory = .CulturalProperty
+    var type: MarkerCategory = .CulturalProperty
     var address = ""
     var largeClassificationCode = 0
     var smallClassificationCode = 0

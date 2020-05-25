@@ -25,7 +25,7 @@ class MapViewController: UIViewController, TransitionerProtocol {
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
-    private var currentVisibleLayer: VisibleFeatureCategory = .None
+    private var currentVisibleLayer: MarkerCategory = .None
     private var visibleFeatureForTappedCalloutView: VisibleFeatureProtocol? = nil
 
     override func viewDidLoad() {

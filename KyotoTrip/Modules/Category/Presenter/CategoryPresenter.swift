@@ -14,7 +14,7 @@ protocol CategoryPresenterProtocol {
     var visibleFeatureEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
     var visibleFeatureRestaurantEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
     func bindCategoryView(input: CategoryViewInput)
-    func categoryTableViewCellIconName(_ category: VisibleFeatureCategory) -> String
+    func categoryTableViewCellIconName(_ category: MarkerCategory) -> String
 }
 
 struct CategoryViewInput {
@@ -95,7 +95,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
         }).disposed(by: disposeBag)
     }
     
-    func categoryTableViewCellIconName(_ category: VisibleFeatureCategory) -> String {
+    func categoryTableViewCellIconName(_ category: MarkerCategory) -> String {
         let iconName: String
         switch category {
         case .Busstop:

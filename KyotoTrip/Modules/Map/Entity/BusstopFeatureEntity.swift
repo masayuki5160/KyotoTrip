@@ -28,5 +28,5 @@ struct BusstopFeatureEntity: VisibleFeatureProtocol {
     var title = ""
     var subtitle = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    var type: VisibleFeatureCategory = .Busstop
+    var type: MarkerCategory = .Busstop
 }
