@@ -1,5 +1,5 @@
 //
-//  VisibleFeatureProtocol.swift
+//  MarkerEntityProtocol.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/05/06.
@@ -8,7 +8,7 @@
 
 import CoreLocation
 
-protocol VisibleFeatureProtocol {
+protocol MarkerEntityProtocol {
     static var layerId: String { get }
     static var titleId: String { get }
     var title: String { get }

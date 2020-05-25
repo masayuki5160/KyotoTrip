@@ -29,7 +29,7 @@
 		4CA84AF324618C4E00DAC5F3 /* VisibleLayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF224618C4E00DAC5F3 /* VisibleLayerEntity.swift */; };
 		4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */; };
 		4CA84AF92462817C00DAC5F3 /* BusstopFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */; };
-		4CA84AFB246281F600DAC5F3 /* VisibleFeatureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */; };
+		4CA84AFB246281F600DAC5F3 /* MarkerEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */; };
 		4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */; };
 		4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */; };
 		4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */; };
@@ -125,7 +125,7 @@
 		4CA84AF224618C4E00DAC5F3 /* VisibleLayerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleLayerEntity.swift; sourceTree = "<group>"; };
 		4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosition.swift; sourceTree = "<group>"; };
 		4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopFeatureEntity.swift; sourceTree = "<group>"; };
-		4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleFeatureProtocol.swift; sourceTree = "<group>"; };
+		4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerEntityProtocol.swift; sourceTree = "<group>"; };
 		4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerCategory.swift; sourceTree = "<group>"; };
 		4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyFeatureEntity.swift; sourceTree = "<group>"; };
 		4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteFeatureEntity.swift; sourceTree = "<group>"; };
@@ -507,7 +507,7 @@
 		4CA84AEB24597FC600DAC5F3 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				4CA84AFA246281F600DAC5F3 /* VisibleFeatureProtocol.swift */,
+				4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */,
 				4CA84AF82462817C00DAC5F3 /* BusstopFeatureEntity.swift */,
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift */,
 				4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */,
@@ -1077,7 +1077,7 @@
 				4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyFeatureEntity.swift in Sources */,
 				4CA84B16246408DE00DAC5F3 /* RestaurantFeatureEntity.swift in Sources */,
 				4CF4AFD12468227800991B2C /* DetailViewProtocol.swift in Sources */,
-				4CA84AFB246281F600DAC5F3 /* VisibleFeatureProtocol.swift in Sources */,
+				4CA84AFB246281F600DAC5F3 /* MarkerEntityProtocol.swift in Sources */,
 				4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */,
 				4CA84B102463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift in Sources */,
 				4C3652422479070800F53C52 /* CategoryPresenter.swift in Sources */,

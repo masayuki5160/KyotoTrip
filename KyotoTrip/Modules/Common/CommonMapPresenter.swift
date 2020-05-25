@@ -14,11 +14,11 @@ protocol CommonMapPresenterProtocol {
     /// Visible layer status entity
     var visibleLayerEntity: BehaviorRelay<VisibleLayerEntity> { get }
     /// Restaurants data from GNavi API
-    var visibleFeatureRestaurantEntity: BehaviorRelay<[VisibleFeatureProtocol]> { get }
+    var visibleFeatureRestaurantEntity: BehaviorRelay<[MarkerEntityProtocol]> { get }
     /// Selected cell at category view
-    var selectedCategoryViewCellRelay: BehaviorRelay<VisibleFeatureProtocol> { get }
+    var selectedCategoryViewCellRelay: BehaviorRelay<MarkerEntityProtocol> { get }
     /// Datas from mapview through Mapbox server
-    var visibleFeatureEntity: BehaviorRelay<[VisibleFeatureProtocol]> { get }
+    var visibleFeatureEntity: BehaviorRelay<[MarkerEntityProtocol]> { get }
     
     func centerCoordinate(complition: (CLLocationCoordinate2D) -> (Void))
     func inject(mapView: MGLMapView)
@@ -29,9 +29,9 @@ class CommonMapPresenter: CommonMapPresenterProtocol {
     static let shared = CommonMapPresenter()
     
     let visibleLayerEntity = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
-    let visibleFeatureRestaurantEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
-    let selectedCategoryViewCellRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())
-    let visibleFeatureEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
+    let visibleFeatureRestaurantEntity = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
+    let selectedCategoryViewCellRelay = BehaviorRelay<MarkerEntityProtocol>(value: BusstopFeatureEntity())
+    let visibleFeatureEntity = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
     
     private var mapView: MGLMapView? = nil
     

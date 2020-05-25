@@ -50,7 +50,7 @@ private extension CategoryViewController {
             culturalPropertyButton: culturalPropertyButton.rx.tap.asDriver(),
             busstopButton: busstopButton.rx.tap.asDriver(),
             restaurantButton: restaurantButton.rx.tap.asDriver(),
-            tableViewCell: tableView.rx.modelSelected(VisibleFeatureProtocol.self).asDriver()
+            tableViewCell: tableView.rx.modelSelected(MarkerEntityProtocol.self).asDriver()
             )
         )
         

@@ -10,7 +10,7 @@ import UIKit
 
 class CulturalPropertyDetailViewController: UIViewController, DetailViewProtocol {
 
-    var visibleFeatureEntity: VisibleFeatureProtocol!
+    var visibleFeatureEntity: MarkerEntityProtocol!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var largeClassification: UILabel!

@@ -9,7 +9,7 @@
 import UIKit
 
 class RestaurantDetailViewController: UIViewController, DetailViewProtocol {
-    var visibleFeatureEntity: VisibleFeatureProtocol!
+    var visibleFeatureEntity: MarkerEntityProtocol!
     @IBOutlet weak var restaurantName: UILabel!
     @IBOutlet weak var restaurantKanaName: UILabel!
     @IBOutlet weak var address: UILabel!

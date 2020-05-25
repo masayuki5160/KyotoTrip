@@ -12,7 +12,7 @@ import CoreLocation
 ///   Using Shapefile from MLIT(Ministry of Land, Infrastructure and Transport)
 ///    Japanese version http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P32.html
 ///    English version http://nlftp.mlit.go.jp/ksj-e/gml/datalist/KsjTmplt-P32.html
-struct CulturalPropertyFeatureEntity: VisibleFeatureProtocol {
+struct CulturalPropertyFeatureEntity: MarkerEntityProtocol {
     static var layerId = "kyoto-cultural-property"
     /// 文化財の名称
     static var titleId = "P32_006"

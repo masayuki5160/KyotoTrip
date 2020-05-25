@@ -7,5 +7,5 @@
 //
 
 protocol DetailViewProtocol {
-    var visibleFeatureEntity: VisibleFeatureProtocol! { get set }
+    var visibleFeatureEntity: MarkerEntityProtocol! { get set }
 }

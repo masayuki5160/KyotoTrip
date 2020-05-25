@@ -28,12 +28,12 @@ protocol MapPresenterProtocol: AnyObject {
     // MARK: - Output from Presenter
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
-    var selectedCategoryViewCellDriver: Driver<VisibleFeatureProtocol> { get }
+    var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> { get }
     var markersDriver: Driver<(VisibleLayerEntity, [MGLPointAnnotation])> { get }
     
     // MARK: - Others
     
-    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol
+    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> MarkerEntityProtocol
     func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
 }
 
@@ -54,7 +54,7 @@ class MapPresenter: MapPresenterProtocol {
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatus.asDriver()
     }
-    var selectedCategoryViewCellDriver: Driver<VisibleFeatureProtocol> {
+    var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> {
         return dependency.commonPresenter.selectedCategoryViewCellRelay.asDriver()
     }
     var markersDriver: Driver<(VisibleLayerEntity, [MGLPointAnnotation])>
@@ -93,8 +93,8 @@ class MapPresenter: MapPresenterProtocol {
             self.userPositionButtonStatus.accept(nextPosition)
         }).disposed(by: disposeBag)
         
-        input.features.map({ [weak self] (features) -> [VisibleFeatureProtocol] in
-            var res: [VisibleFeatureProtocol] = []
+        input.features.map({ [weak self] (features) -> [MarkerEntityProtocol] in
+            var res: [MarkerEntityProtocol] = []
             for feature in features {
                 let visibleFeature = self?.convertMGLFeatureToVisibleFeature(source: feature)
                 res.append(visibleFeature ?? BusstopFeatureEntity())// TODO: Fix later
@@ -109,7 +109,7 @@ class MapPresenter: MapPresenterProtocol {
         dependency.commonPresenter.inject(mapView: input.mapView)
     }
     
-    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {
+    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> MarkerEntityProtocol {
         var category: MarkerCategory {
             if let _ = source.attribute(forKey: BusstopFeatureEntity.titleId) as? String {
                 return .Busstop

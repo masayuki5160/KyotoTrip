@@ -26,7 +26,7 @@ class MapViewController: UIViewController, TransitionerProtocol {
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
     private var currentVisibleLayer: MarkerCategory = .None
-    private var visibleFeatureForTappedCalloutView: VisibleFeatureProtocol? = nil
+    private var visibleFeatureForTappedCalloutView: MarkerEntityProtocol? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -234,7 +234,7 @@ private extension MapViewController {
         showCallout(from: visibleFeature)
     }
     
-    private func showCallout(from visibleFeature: VisibleFeatureProtocol) {
+    private func showCallout(from visibleFeature: MarkerEntityProtocol) {
         visibleFeatureForTappedCalloutView = visibleFeature
 
         let selectedAnnotation = MGLPointFeature()

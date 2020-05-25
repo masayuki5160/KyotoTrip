@@ -11,8 +11,8 @@ import RxCocoa
 import Mapbox
 
 protocol CategoryPresenterProtocol {
-    var visibleFeatureEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
-    var visibleFeatureRestaurantEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
+    var visibleFeatureEntityDriver: Driver<[MarkerEntityProtocol]> { get }
+    var visibleFeatureRestaurantEntityDriver: Driver<[MarkerEntityProtocol]> { get }
     func bindCategoryView(input: CategoryViewInput)
     func categoryTableViewCellIconName(_ category: MarkerCategory) -> String
 }
@@ -21,7 +21,7 @@ struct CategoryViewInput {
     let culturalPropertyButton: Driver<Void>
     let busstopButton: Driver<Void>
     let restaurantButton: Driver<Void>
-    let tableViewCell: Driver<VisibleFeatureProtocol>
+    let tableViewCell: Driver<MarkerEntityProtocol>
 }
 
 class CategoryPresenter: CategoryPresenterProtocol {
@@ -35,8 +35,8 @@ class CategoryPresenter: CategoryPresenterProtocol {
     private let dependency: Dependency
     private let disposeBag = DisposeBag()
     
-    var visibleFeatureEntityDriver: Driver<[VisibleFeatureProtocol]>
-    var visibleFeatureRestaurantEntityDriver: Driver<[VisibleFeatureProtocol]>
+    var visibleFeatureEntityDriver: Driver<[MarkerEntityProtocol]>
+    var visibleFeatureRestaurantEntityDriver: Driver<[MarkerEntityProtocol]>
     
     init(dependency: Dependency) {
         self.dependency = dependency

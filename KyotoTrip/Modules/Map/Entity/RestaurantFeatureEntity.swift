@@ -8,7 +8,7 @@
 
 import CoreLocation
 
-struct RestaurantFeatureEntity: VisibleFeatureProtocol {
+struct RestaurantFeatureEntity: MarkerEntityProtocol {
     static var layerId = ""
     static var titleId = ""
     
