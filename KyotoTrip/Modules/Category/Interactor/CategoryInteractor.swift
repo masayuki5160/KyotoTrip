@@ -10,7 +10,7 @@ import CoreLocation
 protocol CategoryInteractorProtocol {
     func nextVisibleLayer(target: MarkerCategory, current: VisibleLayerEntity) -> VisibleLayerEntity
     func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void)
-    func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantFeatureEntity
+    func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantMarkerEntity
 }
 
 class CategoryInteractor: CategoryInteractorProtocol {
@@ -31,10 +31,10 @@ class CategoryInteractor: CategoryInteractorProtocol {
         }
     }
     
-    func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantFeatureEntity {
+    func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantMarkerEntity {
         let latitude = atof(source.location.latitudeWgs84)
         let longitude = atof(source.location.longitudeWgs84)
-        return RestaurantFeatureEntity(
+        return RestaurantMarkerEntity(
             title: source.name.name,
             subtitle: source.categories.category,
             coordinate: CLLocationCoordinate2DMake(latitude, longitude),

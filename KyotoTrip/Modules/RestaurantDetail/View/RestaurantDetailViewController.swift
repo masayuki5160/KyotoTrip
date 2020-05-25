@@ -19,7 +19,7 @@ class RestaurantDetailViewController: UIViewController, DetailViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let entity = visibleFeatureEntity as! RestaurantFeatureEntity
+        let entity = visibleFeatureEntity as! RestaurantMarkerEntity
         restaurantName.text = entity.detail?.name.name
         restaurantKanaName.text = entity.detail?.name.nameKana
         address.text = entity.detail?.contacts.address

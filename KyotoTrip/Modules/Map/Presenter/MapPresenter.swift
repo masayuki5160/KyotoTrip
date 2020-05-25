@@ -75,7 +75,7 @@ class MapPresenter: MapPresenterProtocol {
             .map({ (visibleLayer, features) -> (VisibleLayerEntity, [MGLPointAnnotation]) in
                 var annotations: [RestaurantPointAnnotation] = []
                 for feature in features {
-                    let annotation = RestaurantPointAnnotation(entity: feature as! RestaurantFeatureEntity)
+                    let annotation = RestaurantPointAnnotation(entity: feature as! RestaurantMarkerEntity)
                     annotations.append(annotation)
                 }
                 return (visibleLayer, annotations)

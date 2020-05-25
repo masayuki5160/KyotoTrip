@@ -119,7 +119,7 @@ private extension CategoryPresenter {
             dependency.interactor.fetchRestaurants(location: centerCoordinate) { [weak self] (response) in
                 guard let self = self else { return }
 
-                var restaurantFeatures: [RestaurantFeatureEntity] = []
+                var restaurantFeatures: [RestaurantMarkerEntity] = []
                 switch response {
                 case .success(let restaurantsSearchResultEntity):
                     for restaurant in restaurantsSearchResultEntity.rest {

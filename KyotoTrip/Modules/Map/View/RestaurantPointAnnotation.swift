@@ -8,12 +8,12 @@
 import Mapbox
 
 class RestaurantPointAnnotation: MGLPointAnnotation {
-    var entity: RestaurantFeatureEntity?
+    var entity: RestaurantMarkerEntity?
     override init() {
         super.init()
     }
     
-    init(entity: RestaurantFeatureEntity) {
+    init(entity: RestaurantMarkerEntity) {
         super.init()
 
         title = entity.title
