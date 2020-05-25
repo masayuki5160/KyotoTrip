@@ -14,6 +14,7 @@ protocol RestaurantsSearchGatewayProtocol: AnyObject {
 
 enum RestaurantsSearchResponseError: Error {
     case entryNotFound
+    case jsonDecodeError(detail: String)
     case unkownError(detail: String)
 }
 
@@ -45,7 +46,7 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
                     complition(.success(resultEntity))
                 } catch let error {
                     let errorDetail = error.localizedDescription
-                    complition(.failure(RestaurantsSearchResponseError.unkownError(detail: errorDetail)))
+                    complition(.failure(RestaurantsSearchResponseError.jsonDecodeError(detail: errorDetail)))
                 }
             default:
                 let errorDetail = "Unknown Error"

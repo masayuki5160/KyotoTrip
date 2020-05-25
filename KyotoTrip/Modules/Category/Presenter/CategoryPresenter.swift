@@ -130,7 +130,7 @@ private extension CategoryPresenter {
                     switch error {
                     case .entryNotFound:
                         self.dependency.router.showNoEntoryAlert()
-                    case .unkownError:
+                    default:
                         self.dependency.router.showUnknownErrorAlert()
                     }
                 }
