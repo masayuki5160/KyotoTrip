@@ -27,15 +27,13 @@ protocol MapPresenterProtocol: AnyObject {
     // MARK: - Output from Presenter
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
-    var visibleLayerEntityDriver: Driver<VisibleLayerEntity> { get }
     var selectedCategoryViewCellDriver: Driver<VisibleFeatureProtocol> { get }
-    var visibleFeatureRestaurantEntityDriver: Driver<[VisibleFeatureProtocol]> { get }
+    var markersDriver: Driver<(VisibleLayerEntity, [MGLPointAnnotation])> { get }
     
     // MARK: - Others
     
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol
     func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
-    func createRestaurantAnnotation(entity: RestaurantFeatureEntity) -> RestaurantPointAnnotation
 }
 
 class MapPresenter: MapPresenterProtocol {
@@ -54,15 +52,10 @@ class MapPresenter: MapPresenterProtocol {
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatus.asDriver()
     }
-    var visibleLayerEntityDriver: Driver<VisibleLayerEntity> {
-        return dependency.commonPresenter.visibleLayerEntity.asDriver()
-    }
     var selectedCategoryViewCellDriver: Driver<VisibleFeatureProtocol> {
         return dependency.commonPresenter.selectedCategoryViewCellRelay.asDriver()
     }
-    var visibleFeatureRestaurantEntityDriver: Driver<[VisibleFeatureProtocol]> {
-        return dependency.commonPresenter.visibleFeatureRestaurantEntity.asDriver()
-    }
+    var markersDriver: Driver<(VisibleLayerEntity, [MGLPointAnnotation])>
     
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
@@ -72,6 +65,19 @@ class MapPresenter: MapPresenterProtocol {
     
     init(dependency: Dependency) {
         self.dependency = dependency
+        
+        markersDriver = Driver.combineLatest(
+            dependency.commonPresenter.visibleLayerEntity.asDriver(),
+            dependency.commonPresenter.visibleFeatureRestaurantEntity.asDriver()
+        ){($0, $1)}
+            .map({ (visibleLayer, features) -> (VisibleLayerEntity, [MGLPointAnnotation]) in
+                var annotations: [RestaurantPointAnnotation] = []
+                for feature in features {
+                    let annotation = RestaurantPointAnnotation(entity: feature as! RestaurantFeatureEntity)
+                    annotations.append(annotation)
+                }
+                return (visibleLayer, annotations)
+            })
     }
     
     func bindMapView(input: MapViewInput) {        
@@ -118,14 +124,5 @@ class MapPresenter: MapPresenterProtocol {
             
             return distanceFromLocationA < distanceFromLocationB
         })
-    }
-    
-    func createRestaurantAnnotation(entity: RestaurantFeatureEntity) -> RestaurantPointAnnotation {
-        let annotation = RestaurantPointAnnotation(entity: entity)
-        annotation.title = entity.title
-        annotation.subtitle = entity.subtitle
-        annotation.coordinate = entity.coordinate
-        
-        return annotation
     }
 }

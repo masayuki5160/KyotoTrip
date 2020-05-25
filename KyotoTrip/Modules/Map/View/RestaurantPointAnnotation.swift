@@ -15,6 +15,10 @@ class RestaurantPointAnnotation: MGLPointAnnotation {
     
     init(entity: RestaurantFeatureEntity) {
         super.init()
+
+        title = entity.title
+        subtitle = entity.subtitle
+        coordinate = entity.coordinate
         self.entity = entity
     }
     

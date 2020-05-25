@@ -64,55 +64,45 @@ private extension MapViewController {
             features: visibleFeatures.asDriver())
         )
 
-        // TODO: presenter側でcombineして渡すようにする
-        Driver.combineLatest(
-            dependency.presenter.visibleLayerEntityDriver,
-            dependency.presenter.visibleFeatureRestaurantEntityDriver
-        ){($0, $1)}.map { (visibleLayer, features) -> (VisibleLayerEntity, [RestaurantPointAnnotation]) in
-                var annotations: [RestaurantPointAnnotation] = []
-                for feature in features {
-                    let annotation = self.dependency.presenter.createRestaurantAnnotation(
-                        entity: feature as! RestaurantFeatureEntity
-                    )
-                    annotations.append(annotation)
+        dependency.presenter.markersDriver
+            .drive(onNext: { [weak self] (visibleLayer, annotations) in
+                guard let self = self else { return }
+            
+                self.currentVisibleLayer = visibleLayer.currentVisibleLayer()
+            
+                self.updateBusstopLayer(visibleLayer.busstop)
+                self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
+            
+                // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.updateVisibleFeatures()
                 }
-                return (visibleLayer, annotations)
-        }.drive(onNext: { [weak self] (visibleLayer, annotations) in
-            guard let self = self else { return }
-            
-            self.currentVisibleLayer = visibleLayer.currentVisibleLayer()
-            
-            self.updateBusstopLayer(visibleLayer.busstop)
-            self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
-            
-            // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.updateVisibleFeatures()
-            }
-            
-            self.updateRestaurantLayer(visibleStatus:visibleLayer.restaurant, annotations: annotations)
-        }).disposed(by: disposeBag)
+                
+                self.updateRestaurantLayer(visibleStatus:visibleLayer.restaurant, annotations: annotations)
+            }).disposed(by: disposeBag)
         
-        dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] (compassButtonStatus) in
+        dependency.presenter.userPositionButtonStatusDriver
+            .drive(onNext: { [weak self] (compassButtonStatus) in
             guard let self = self else { return }
 
             self.updateMapCenterPosition(compassButtonStatus)
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
-        dependency.presenter.selectedCategoryViewCellDriver.drive(onNext: { [weak self] feature in
-            // FIXME: 初回起動時なイベントを購読する不具合回避
-            if feature.title.isEmpty {
-                return
-            }
+        dependency.presenter.selectedCategoryViewCellDriver
+            .drive(onNext: { [weak self] feature in
+                // FIXME: 初回起動時なイベントを購読する不具合回避
+                if feature.title.isEmpty {
+                    return
+                }
 
-            // move camera position to the annotation position
-            let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 0, heading: 0)
-            self?.mapView.fly(to: camera, withDuration: 3, completionHandler: { [weak self] in
-                self?.updateVisibleFeatures()
-            })
-            
-            self?.showCallout(from: feature)
-        }).disposed(by: disposeBag)
+                // move camera position to the annotation position
+                let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 0, heading: 0)
+                self?.mapView.fly(to: camera, withDuration: 3, completionHandler: { [weak self] in
+                    self?.updateVisibleFeatures()
+                })
+
+                self?.showCallout(from: feature)
+            }).disposed(by: disposeBag)
     }
     
     private func setupCategorySemiModalView() {
