@@ -262,7 +262,7 @@ extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         let kyotoMapView = mapView as! MapView
         kyotoMapView.busstopLayer = style.layer(withIdentifier: BusstopMarkerEntity.layerId)
-        kyotoMapView.busRouteLayer = style.layer(withIdentifier: BusRouteFeatureEntity.layerId)
+        kyotoMapView.busRouteLayer = style.layer(withIdentifier: BusRouteMarkerEntity.layerId)
         kyotoMapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyMarkerEntity.layerId)
         
         // Init visible layers

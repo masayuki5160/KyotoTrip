@@ -32,7 +32,7 @@
 		4CA84AFB246281F600DAC5F3 /* MarkerEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */; };
 		4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */; };
 		4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift */; };
-		4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */; };
+		4CA84B012462FDC900DAC5F3 /* BusRouteMarkerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B002462FDC900DAC5F3 /* BusRouteMarkerEntity.swift */; };
 		4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */; };
 		4CA84B07246313C500DAC5F3 /* CulturalPropertyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */; };
 		4CA84B0B246398A400DAC5F3 /* CustomFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */; };
@@ -128,7 +128,7 @@
 		4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerEntityProtocol.swift; sourceTree = "<group>"; };
 		4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerCategory.swift; sourceTree = "<group>"; };
 		4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyMarkerEntity.swift; sourceTree = "<group>"; };
-		4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteFeatureEntity.swift; sourceTree = "<group>"; };
+		4CA84B002462FDC900DAC5F3 /* BusRouteMarkerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusRouteMarkerEntity.swift; sourceTree = "<group>"; };
 		4CA84B04246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84B06246313C500DAC5F3 /* CulturalPropertyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CulturalPropertyDetail.storyboard; sourceTree = "<group>"; };
 		4CA84B0A246398A400DAC5F3 /* CustomFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingPanelLayout.swift; sourceTree = "<group>"; };
@@ -510,7 +510,7 @@
 				4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */,
 				4CA84AF82462817C00DAC5F3 /* BusstopMarkerEntity.swift */,
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift */,
-				4CA84B002462FDC900DAC5F3 /* BusRouteFeatureEntity.swift */,
+				4CA84B002462FDC900DAC5F3 /* BusRouteMarkerEntity.swift */,
 				4CA84B15246408DE00DAC5F3 /* RestaurantFeatureEntity.swift */,
 				4CA84AF224618C4E00DAC5F3 /* VisibleLayerEntity.swift */,
 				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
@@ -1078,7 +1078,7 @@
 				4CA84B16246408DE00DAC5F3 /* RestaurantFeatureEntity.swift in Sources */,
 				4CF4AFD12468227800991B2C /* DetailViewProtocol.swift in Sources */,
 				4CA84AFB246281F600DAC5F3 /* MarkerEntityProtocol.swift in Sources */,
-				4CA84B012462FDC900DAC5F3 /* BusRouteFeatureEntity.swift in Sources */,
+				4CA84B012462FDC900DAC5F3 /* BusRouteMarkerEntity.swift in Sources */,
 				4CA84B102463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift in Sources */,
 				4C3652422479070800F53C52 /* CategoryPresenter.swift in Sources */,
 				4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */,
