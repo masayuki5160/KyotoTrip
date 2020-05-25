@@ -8,6 +8,9 @@
 
 import CoreLocation
 
+/// Note
+/// RestaurantMarkerEntity is for adding  restaurant markers using Annotations, not using style layers.
+/// That's why no need to define layerId.
 struct RestaurantMarkerEntity: MarkerEntityProtocol {
     static var layerId = ""
     static var titleId = ""
