@@ -12,17 +12,13 @@ import RxSwift
 import RxCocoa
 import FloatingPanel
 
-protocol MapViewProtocol {
-    var mapView: KyotoMapView! { get set }
-}
-
-class MapViewController: UIViewController, MapViewProtocol {
+class MapViewController: UIViewController {
     
     struct Dependency {
-        let presenter: KyotoMapPresenterProtocol
+        let presenter: MapPresenterProtocol
     }
     
-    @IBOutlet weak var mapView: KyotoMapView!
+    @IBOutlet weak var mapView: MapView!
     @IBOutlet weak var compassButton: UIButton!
 
     private let visibleFeatures = BehaviorRelay<[MGLFeature]>(value: [])
@@ -68,6 +64,7 @@ private extension MapViewController {
             features: visibleFeatures.asDriver())
         )
 
+        // TODO: presenter側でcombineして渡すようにする
         Driver.combineLatest(
             dependency.presenter.visibleLayerEntityDriver,
             dependency.presenter.visibleFeatureRestaurantEntityDriver
@@ -102,7 +99,7 @@ private extension MapViewController {
             self.updateMapCenterPosition(compassButtonStatus)
         }).disposed(by: disposeBag)
         
-        dependency.presenter.didSelectCellEntityDriver.drive(onNext: { [weak self] feature in
+        dependency.presenter.selectedCategoryViewCellDriver.drive(onNext: { [weak self] feature in
             // FIXME: 初回起動時なイベントを購読する不具合回避
             if feature.title.isEmpty {
                 return
@@ -119,7 +116,7 @@ private extension MapViewController {
     }
     
     private func setupCategorySemiModalView() {
-        let categoryViewController = AppDefaultDependencies().assembleCategoryModule(presenter: dependency.presenter)
+        let categoryViewController = AppDefaultDependencies().assembleCategoryModule()
 
         floatingPanelController = FloatingPanelController()
         floatingPanelController.delegate = self
@@ -181,8 +178,8 @@ private extension MapViewController {
     
     private func updateMapCenterPosition(_ compassButtonStatus: UserPosition) {
         let clLocationCoordinate2D = CLLocationCoordinate2DMake(
-            KyotoMapView.kyotoStationLat,
-            KyotoMapView.kyotoStationLong)
+            MapView.kyotoStationLat,
+            MapView.kyotoStationLong)
         
         switch compassButtonStatus {
         case .kyotoCity:
@@ -196,7 +193,7 @@ private extension MapViewController {
         if sender.state == .ended {
             // Try matching the exact point first.
             let point = sender.location(in: sender.view!)
-            for feature in mapView.visibleFeatures(at: point, styleLayerIdentifiers: KyotoMapPresenter.layerIdentifiers) where feature is MGLPointFeature {
+            for feature in mapView.visibleFeatures(at: point, styleLayerIdentifiers: MapPresenter.layerIdentifiers) where feature is MGLPointFeature {
                 guard let selectedFeature = feature as? MGLPointFeature else {
                     fatalError("Failed to cast selected feature as MGLPointFeature")
                 }
@@ -227,7 +224,7 @@ private extension MapViewController {
         
         // Get all features within a rect the size of a touch (44x44).
         let touchRect = CGRect(origin: point, size: .zero).insetBy(dx: -22.0, dy: -22.0)
-        let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(KyotoMapPresenter.layerIdentifiers)).filter { $0 is MGLPointFeature }
+        let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(MapPresenter.layerIdentifiers)).filter { $0 is MGLPointFeature }
         
         // Select the closest feature to the touch center.
         let closestFeatures = dependency.presenter.sorteFeatures(features: possibleFeatures, center: touchLocation)
@@ -266,7 +263,7 @@ extension MapViewController: FloatingPanelControllerDelegate {
 
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        let kyotoMapView = mapView as! KyotoMapView
+        let kyotoMapView = mapView as! MapView
         kyotoMapView.busstopLayer = style.layer(withIdentifier: BusstopFeatureEntity.layerId)
         kyotoMapView.busRouteLayer = style.layer(withIdentifier: BusRouteFeatureEntity.layerId)
         kyotoMapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyFeatureEntity.layerId)

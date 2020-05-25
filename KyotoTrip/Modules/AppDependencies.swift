@@ -17,7 +17,7 @@ protocol AppDependencies {
     func assembleBusstopDetailModule() -> UIViewController
     func assembleCulturalPropertyDetailModule() -> UIViewController
     func assembleRestaurantDetailModule() -> UIViewController
-    func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController
+    func assembleCategoryModule() -> UIViewController
     func assembleSettingsLisenceModule() -> UIViewController
     func assembleSettingsRestaurantsSearchModule() -> UIViewController
     func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController
@@ -68,16 +68,19 @@ extension AppDefaultDependencies: AppDependencies {
     }
     
     func assembleKyotoMapModule() -> UINavigationController {
-        let interactor = KyotoMapInteractor()
+        
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Map", bundle: nil)
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let view = naviViewController.viewControllers[0] as! MapViewController
-        let presenter = KyotoMapPresenter(
+        
+        let interactor = MapInteractor()
+        let commonPresenter = CommonMapPresenter.shared
+        let presenter = MapPresenter(
             dependency: .init(
                 interactor: interactor,
-                mapView: view
+                commonPresenter: commonPresenter
             )
         )
         view.inject(.init(presenter: presenter))
@@ -103,11 +106,18 @@ extension AppDefaultDependencies: AppDependencies {
         return view
     }
     
-    func assembleCategoryModule(presenter: KyotoMapPresenterProtocol) -> UIViewController {
+    func assembleCategoryModule() -> UIViewController {
         let view = { () -> CategoryViewController in
             let storyboard = UIStoryboard(name: "Category", bundle: nil)
             return storyboard.instantiateInitialViewController() as! CategoryViewController
         }()
+        
+        let interactor = CategoryInteractor()
+        let commonPresenter = CommonMapPresenter.shared
+        let presenter = CategoryPresenter(dependency: .init(
+            interactor: interactor,
+            commonPresenter: commonPresenter)
+        )
         view.inject(.init(presenter: presenter))
         
         return view

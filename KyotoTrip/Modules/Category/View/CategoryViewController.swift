@@ -20,7 +20,7 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var restaurantButton: UIButton!
     
     struct Dependency {
-        let presenter: KyotoMapPresenterProtocol
+        let presenter: CategoryPresenterProtocol
     }
     
     private var dependency: Dependency!

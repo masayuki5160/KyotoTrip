@@ -12,7 +12,7 @@ import CoreLocation
 
 class KyotoMapInteractorTests: XCTestCase {
     
-    let interactor = KyotoMapInteractor()
+    let interactor = MapInteractor()
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -93,71 +93,5 @@ class KyotoMapInteractorTests: XCTestCase {
         XCTAssertEqual(expected.largeClassificationCode, actual.largeClassificationCode)
         XCTAssertEqual(expected.smallClassificationCode, actual.smallClassificationCode)
         XCTAssertEqual(expected.registerdDate, actual.registerdDate)
-    }
-    
-    func testNextVisibleLayerForBusstop() {
-        let current = VisibleLayerEntity(
-            busstop: .hidden,
-            culturalProperty: .hidden,
-            info: .hidden,
-            restaurant: .hidden
-        )
-
-        let expected = VisibleLayerEntity(
-            busstop: .visible,
-            culturalProperty: .hidden,
-            info: .hidden,
-            restaurant: .hidden
-        )
-        let actual = interactor.nextVisibleLayer(target: .Busstop, current: current)
-        
-        XCTAssertEqual(expected.busstop, actual.busstop)
-        XCTAssertEqual(expected.culturalProperty, actual.culturalProperty)
-        XCTAssertEqual(expected.info, actual.info)
-        XCTAssertEqual(expected.restaurant, actual.restaurant)
-    }
-    
-    func testNextVisibleLayerForCulturalProperty() {
-        let current = VisibleLayerEntity(
-            busstop: .hidden,
-            culturalProperty: .hidden,
-            info: .hidden,
-            restaurant: .hidden
-        )
-
-        let expected = VisibleLayerEntity(
-            busstop: .hidden,
-            culturalProperty: .visible,
-            info: .hidden,
-            restaurant: .hidden
-        )
-        let actual = interactor.nextVisibleLayer(target: .CulturalProperty, current: current)
-        
-        XCTAssertEqual(expected.busstop, actual.busstop)
-        XCTAssertEqual(expected.culturalProperty, actual.culturalProperty)
-        XCTAssertEqual(expected.info, actual.info)
-        XCTAssertEqual(expected.restaurant, actual.restaurant)
-    }
-    
-    func testNextVisibleLayerForCulturalRestaurant() {
-        let current = VisibleLayerEntity(
-            busstop: .hidden,
-            culturalProperty: .hidden,
-            info: .hidden,
-            restaurant: .hidden
-        )
-
-        let expected = VisibleLayerEntity(
-            busstop: .hidden,
-            culturalProperty: .hidden,
-            info: .hidden,
-            restaurant: .visible
-        )
-        let actual = interactor.nextVisibleLayer(target: .Restaurant, current: current)
-        
-        XCTAssertEqual(expected.busstop, actual.busstop)
-        XCTAssertEqual(expected.culturalProperty, actual.culturalProperty)
-        XCTAssertEqual(expected.info, actual.info)
-        XCTAssertEqual(expected.restaurant, actual.restaurant)
     }
 }

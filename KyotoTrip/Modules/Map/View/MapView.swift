@@ -9,7 +9,7 @@
 import Foundation
 import Mapbox
 
-class KyotoMapView: MGLMapView {
+class MapView: MGLMapView {
     
     static let kyotoStationLat = 34.9857083
     static let kyotoStationLong = 135.7560416
@@ -19,7 +19,7 @@ class KyotoMapView: MGLMapView {
     var culturalPropertyLayer: MGLStyleLayer?
     
     func setup() {
-        self.setCenter(CLLocationCoordinate2D(latitude: KyotoMapView.kyotoStationLat, longitude: KyotoMapView.kyotoStationLong), zoomLevel: KyotoMapView.defaultZoomLv, animated: false)
+        self.setCenter(CLLocationCoordinate2D(latitude: MapView.kyotoStationLat, longitude: MapView.kyotoStationLong), zoomLevel: MapView.defaultZoomLv, animated: false)
         self.showsUserLocation = true
         self.compassView.compassVisibility = .visible
         self.compassViewPosition = .topLeft
