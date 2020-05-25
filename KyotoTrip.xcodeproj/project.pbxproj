@@ -459,6 +459,7 @@
 			children = (
 				4C416666244495C2005EF1C2 /* DependencyInjectable.swift */,
 				4CF4B0332478AB8F00991B2C /* TransitionerProtocol.swift */,
+				4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -507,7 +508,6 @@
 		4CA84AEB24597FC600DAC5F3 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */,
 				4CA84AF82462817C00DAC5F3 /* BusstopMarkerEntity.swift */,
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift */,
 				4CA84B002462FDC900DAC5F3 /* BusRouteMarkerEntity.swift */,

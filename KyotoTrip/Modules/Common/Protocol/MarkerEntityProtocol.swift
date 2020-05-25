@@ -8,6 +8,10 @@
 
 import CoreLocation
 
+/// Note
+/// There are several approaches that can be used to add markers.
+/// MarkerEntityProtocol is entity protocol for both using style layer and annotations.
+/// More details: https://docs.mapbox.com/ios/maps/overview/markers-and-annotations/
 protocol MarkerEntityProtocol {
     static var layerId: String { get }
     static var titleId: String { get }
