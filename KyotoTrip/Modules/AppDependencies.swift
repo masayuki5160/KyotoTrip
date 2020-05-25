@@ -77,10 +77,12 @@ extension AppDefaultDependencies: AppDependencies {
         
         let interactor = MapInteractor()
         let commonPresenter = CommonMapPresenter.shared
+        let router = MapViewRouter(view: view)
         let presenter = MapPresenter(
             dependency: .init(
                 interactor: interactor,
-                commonPresenter: commonPresenter
+                commonPresenter: commonPresenter,
+                router: router
             )
         )
         view.inject(.init(presenter: presenter))

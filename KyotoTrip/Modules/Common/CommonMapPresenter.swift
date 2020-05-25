@@ -8,6 +8,7 @@
 import RxSwift
 import RxCocoa
 import CoreLocation
+import Mapbox
 
 protocol CommonMapPresenterProtocol {
     /// Visible layer status entity
@@ -18,6 +19,9 @@ protocol CommonMapPresenterProtocol {
     var selectedCategoryViewCellRelay: BehaviorRelay<VisibleFeatureProtocol> { get }
     /// Datas from mapview through Mapbox server
     var visibleFeatureEntity: BehaviorRelay<[VisibleFeatureProtocol]> { get }
+    
+    func centerCoordinate(complition: (CLLocationCoordinate2D) -> (Void))
+    func inject(mapView: MGLMapView)
 }
 
 class CommonMapPresenter: CommonMapPresenterProtocol {
@@ -28,6 +32,18 @@ class CommonMapPresenter: CommonMapPresenterProtocol {
     let visibleFeatureRestaurantEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
     let selectedCategoryViewCellRelay = BehaviorRelay<VisibleFeatureProtocol>(value: BusstopFeatureEntity())
     let visibleFeatureEntity = BehaviorRelay<[VisibleFeatureProtocol]>(value: [])
-
+    
+    private var mapView: MGLMapView? = nil
+    
     init() {}
+    
+    func centerCoordinate(complition: (CLLocationCoordinate2D) -> (Void)) {
+        if let mapView = mapView {
+            complition(mapView.centerCoordinate)
+        }
+    }
+    
+    func inject(mapView: MGLMapView) {
+        self.mapView = mapView
+    }
 }

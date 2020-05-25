@@ -114,29 +114,29 @@ class CategoryPresenter: CategoryPresenterProtocol {
 
 private extension CategoryPresenter {
     func fetchRestaurantsEntity() {
-        // TODO: 画面の中央のcoordinateを取得する
-        let location = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-        dependency.interactor.fetchRestaurants(location: location) { [weak self] (response) in
-            guard let self = self else { return }
+        self.dependency.commonPresenter.centerCoordinate { centerCoordinate in
+            dependency.interactor.fetchRestaurants(location: centerCoordinate) { [weak self] (response) in
+                guard let self = self else { return }
 
-            var restaurantFeatures: [RestaurantFeatureEntity] = []
-            switch response {
-            case .success(let restaurantsSearchResultEntity):
-                for restaurant in restaurantsSearchResultEntity.rest {
-                    let featureEntity = self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant)
-                    restaurantFeatures.append(featureEntity)
+                var restaurantFeatures: [RestaurantFeatureEntity] = []
+                switch response {
+                case .success(let restaurantsSearchResultEntity):
+                    for restaurant in restaurantsSearchResultEntity.rest {
+                        let featureEntity = self.dependency.interactor.createRestaurantVisibleFeature(source: restaurant)
+                        restaurantFeatures.append(featureEntity)
+                    }
+                case .failure(let error):
+                    switch error {
+                    case .entryNotFound:
+                        // TODO: View側にレストラン検索結果が0件だったことを通知
+                        print("Error: No entory found")
+                    case .otherError:
+                        print("Error: some error occured")
+                    }
                 }
-            case .failure(let error):
-                switch error {
-                case .entryNotFound:
-                    // TODO: View側にレストラン検索結果が0件だったことを通知
-                    print("Error: No entory found")
-                case .otherError:
-                    print("Error: some error occured")
-                }
+                
+                self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept(restaurantFeatures)
             }
-            
-            self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept(restaurantFeatures)
         }
     }
 }

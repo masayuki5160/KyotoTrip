@@ -13,6 +13,7 @@ import Mapbox
 struct MapViewInput {
     let compassButton: Driver<Void>
     let features: Driver<[MGLFeature]>
+    let mapView: MGLMapView
 }
 
 protocol MapPresenterProtocol: AnyObject {
@@ -42,6 +43,7 @@ class MapPresenter: MapPresenterProtocol {
     struct Dependency {
         let interactor: MapInteractorProtocol
         let commonPresenter: CommonMapPresenterProtocol
+        let router: MapViewRouterProtocol
     }
 
     static var layerIdentifiers: Set<String> = [
@@ -80,7 +82,10 @@ class MapPresenter: MapPresenterProtocol {
             })
     }
     
-    func bindMapView(input: MapViewInput) {        
+    func bindMapView(input: MapViewInput) {
+
+        /// Subscribe from MapView
+        
         input.compassButton.drive(onNext: { [weak self] in
             guard let self = self else { return }
             
@@ -98,6 +103,10 @@ class MapPresenter: MapPresenterProtocol {
         }).drive(onNext: { [weak self] (features) in
             self?.dependency.commonPresenter.visibleFeatureEntity.accept(features)
         }).disposed(by: disposeBag)
+        
+        /// Dependency injection to CommonPresenter
+
+        dependency.commonPresenter.inject(mapView: input.mapView)
     }
     
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> VisibleFeatureProtocol {

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import FloatingPanel
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, TransitionerProtocol {
     
     struct Dependency {
         let presenter: MapPresenterProtocol
@@ -59,11 +59,18 @@ private extension MapViewController {
     }
     
     private func bindPresenter() {
+        
+        // MARK: Bind to Presenter
+        
         dependency.presenter.bindMapView(input: MapViewInput(
             compassButton: compassButton.rx.tap.asDriver(),
-            features: visibleFeatures.asDriver())
+            features: visibleFeatures.asDriver(),
+            mapView: mapView
+            )
         )
 
+        // MARK: Subscribe from Presenter
+        
         dependency.presenter.markersDriver
             .drive(onNext: { [weak self] (visibleLayer, annotations) in
                 guard let self = self else { return }
