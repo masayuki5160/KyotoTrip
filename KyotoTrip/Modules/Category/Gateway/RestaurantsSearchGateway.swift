@@ -14,7 +14,7 @@ protocol RestaurantsSearchGatewayProtocol: AnyObject {
 
 enum RestaurantsSearchResponseError: Error {
     case entryNotFound
-    case otherError(detail: String)
+    case unkownError(detail: String)
 }
 
 /// - Note:
@@ -30,7 +30,7 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
         Alamofire.request(url).responseJSON { response in
             if response.error != nil {
                 let errorDetail = response.error!.localizedDescription
-                complition(.failure(RestaurantsSearchResponseError.otherError(detail: errorDetail)))
+                complition(.failure(RestaurantsSearchResponseError.unkownError(detail: errorDetail)))
                 return
             }
             
@@ -45,11 +45,11 @@ class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
                     complition(.success(resultEntity))
                 } catch let error {
                     let errorDetail = error.localizedDescription
-                    complition(.failure(RestaurantsSearchResponseError.otherError(detail: errorDetail)))
+                    complition(.failure(RestaurantsSearchResponseError.unkownError(detail: errorDetail)))
                 }
             default:
                 let errorDetail = "Unknown Error"
-                complition(.failure(RestaurantsSearchResponseError.otherError(detail: errorDetail)))
+                complition(.failure(RestaurantsSearchResponseError.unkownError(detail: errorDetail)))
                 break
             }
         }

@@ -116,9 +116,12 @@ extension AppDefaultDependencies: AppDependencies {
         
         let interactor = CategoryInteractor()
         let commonPresenter = CommonMapPresenter.shared
+        let router = CategoryRouter(view: view)
         let presenter = CategoryPresenter(dependency: .init(
             interactor: interactor,
-            commonPresenter: commonPresenter)
+            commonPresenter: commonPresenter,
+            router: router
+            )
         )
         view.inject(.init(presenter: presenter))
         

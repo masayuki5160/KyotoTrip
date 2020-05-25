@@ -29,6 +29,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
     struct Dependency {
         let interactor: CategoryInteractorProtocol
         let commonPresenter: CommonMapPresenterProtocol
+        let router: CategoryRouterProtocol
     }
     
     private let dependency: Dependency
@@ -128,10 +129,9 @@ private extension CategoryPresenter {
                 case .failure(let error):
                     switch error {
                     case .entryNotFound:
-                        // TODO: View側にレストラン検索結果が0件だったことを通知
-                        print("Error: No entory found")
-                    case .otherError:
-                        print("Error: some error occured")
+                        self.dependency.router.showNoEntoryAlert()
+                    case .unkownError:
+                        self.dependency.router.showUnknownErrorAlert()
                     }
                 }
                 

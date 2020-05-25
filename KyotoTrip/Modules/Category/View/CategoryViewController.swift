@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CategoryViewController: UIViewController {
+class CategoryViewController: UIViewController, TransitionerProtocol {
     
     // MARK: - Properties
 
