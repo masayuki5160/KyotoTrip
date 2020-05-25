@@ -25,8 +25,8 @@ final class MapInteractor: MapInteractorProtocol {
     func createVisibleFeature(category: MarkerCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol {
         switch category {
         case .Busstop:
-            return BusstopFeatureEntity(
-                title: attributes[BusstopFeatureEntity.titleId] as! String,
+            return BusstopMarkerEntity(
+                title: attributes[BusstopMarkerEntity.titleId] as! String,
                 subtitle: "",
                 coordinate: coordinate,
                 type: .Busstop
@@ -42,7 +42,7 @@ final class MapInteractor: MapInteractorProtocol {
             )
         default:
             // TODO: Fix later
-            return BusstopFeatureEntity(title: "", subtitle: "", coordinate: coordinate, type: .Busstop)
+            return BusstopMarkerEntity(title: "", subtitle: "", coordinate: coordinate, type: .Busstop)
         }
     }
 }

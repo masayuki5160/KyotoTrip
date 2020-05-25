@@ -30,7 +30,7 @@ class CommonMapPresenter: CommonMapPresenterProtocol {
     
     let visibleLayerEntity = BehaviorRelay<VisibleLayerEntity>(value: VisibleLayerEntity())
     let visibleFeatureRestaurantEntity = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
-    let selectedCategoryViewCellRelay = BehaviorRelay<MarkerEntityProtocol>(value: BusstopFeatureEntity())
+    let selectedCategoryViewCellRelay = BehaviorRelay<MarkerEntityProtocol>(value: BusstopMarkerEntity())
     let visibleFeatureEntity = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
     
     private var mapView: MGLMapView? = nil

@@ -47,7 +47,7 @@ class MapPresenter: MapPresenterProtocol {
     }
 
     static var layerIdentifiers: Set<String> = [
-        BusstopFeatureEntity.layerId,
+        BusstopMarkerEntity.layerId,
         CulturalPropertyFeatureEntity.layerId
     ]
     
@@ -97,7 +97,7 @@ class MapPresenter: MapPresenterProtocol {
             var res: [MarkerEntityProtocol] = []
             for feature in features {
                 let visibleFeature = self?.convertMGLFeatureToVisibleFeature(source: feature)
-                res.append(visibleFeature ?? BusstopFeatureEntity())// TODO: Fix later
+                res.append(visibleFeature ?? BusstopMarkerEntity())// TODO: Fix later
             }
             return res
         }).drive(onNext: { [weak self] (features) in
@@ -111,7 +111,7 @@ class MapPresenter: MapPresenterProtocol {
     
     func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> MarkerEntityProtocol {
         var category: MarkerCategory {
-            if let _ = source.attribute(forKey: BusstopFeatureEntity.titleId) as? String {
+            if let _ = source.attribute(forKey: BusstopMarkerEntity.titleId) as? String {
                 return .Busstop
             } else if let _ = source.attribute(forKey: CulturalPropertyFeatureEntity.titleId) as? String {
                 return .CulturalProperty

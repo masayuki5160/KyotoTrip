@@ -47,7 +47,7 @@ class KyotoMapInteractorTests: XCTestCase {
             coordinate: mockCoordinate,
             attributes: mockAttributes
         )
-        let expected = BusstopFeatureEntity(
+        let expected = BusstopMarkerEntity(
             title: mockAttributes["P11_001"]!,
             subtitle: "",
             coordinate: mockCoordinate,

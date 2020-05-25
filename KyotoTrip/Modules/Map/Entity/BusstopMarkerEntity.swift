@@ -1,5 +1,5 @@
 //
-//  BusstopFeature.swift
+//  BusstopMarkerEntity.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/05/06.
@@ -12,7 +12,7 @@ import CoreLocation
 ///   Using Shapefile from MLIT(Ministry of Land, Infrastructure and Transport)
 ///    Japanese version http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P11.html
 ///    English version http://nlftp.mlit.go.jp/ksj-e/gml/datalist/KsjTmplt-P11.html
-struct BusstopFeatureEntity: MarkerEntityProtocol {
+struct BusstopMarkerEntity: MarkerEntityProtocol {
     static var layerId = "kyoto-busstop"
     
     /// バス停名
