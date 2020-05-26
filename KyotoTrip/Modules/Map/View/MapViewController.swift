@@ -230,8 +230,8 @@ private extension MapViewController {
     }
     
     private func showCallout(feature: MGLPointFeature) {
-        let visibleFeature = dependency.presenter.convertMGLFeatureToVisibleFeature(source: feature)
-        showCallout(from: visibleFeature)
+        let markerEntity = dependency.presenter.convertMGLFeatureToMarkerEntity(source: feature)
+        showCallout(from: markerEntity)
     }
     
     private func showCallout(from visibleFeature: MarkerEntityProtocol) {

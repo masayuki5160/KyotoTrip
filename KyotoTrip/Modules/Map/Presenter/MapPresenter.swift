@@ -33,7 +33,7 @@ protocol MapPresenterProtocol: AnyObject {
     
     // MARK: - Others
     
-    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> MarkerEntityProtocol
+    func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol
     func sorteFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
 }
 
@@ -96,8 +96,8 @@ class MapPresenter: MapPresenterProtocol {
         input.features.map({ [weak self] (features) -> [MarkerEntityProtocol] in
             var res: [MarkerEntityProtocol] = []
             for feature in features {
-                let visibleFeature = self?.convertMGLFeatureToVisibleFeature(source: feature)
-                res.append(visibleFeature ?? BusstopMarkerEntity())// TODO: Fix later
+                let marker = self?.convertMGLFeatureToMarkerEntity(source: feature)
+                res.append(marker ?? BusstopMarkerEntity())// TODO: Fix later
             }
             return res
         }).drive(onNext: { [weak self] (features) in
@@ -109,16 +109,8 @@ class MapPresenter: MapPresenterProtocol {
         dependency.commonPresenter.inject(mapView: input.mapView)
     }
     
-    func convertMGLFeatureToVisibleFeature(source: MGLFeature) -> MarkerEntityProtocol {
-        var category: MarkerCategory {
-            if let _ = source.attribute(forKey: BusstopMarkerEntity.titleId) as? String {
-                return .Busstop
-            } else if let _ = source.attribute(forKey: CulturalPropertyMarkerEntity.titleId) as? String {
-                return .CulturalProperty
-            }
-            return .None
-        }
-        
+    func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
+        let category = dependency.commonPresenter.visibleLayerEntity.value.visibleCategory()        
         return dependency.interactor.createMarkerEntity(
             category: category,
             coordinate: source.coordinate,
