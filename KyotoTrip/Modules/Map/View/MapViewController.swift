@@ -51,14 +51,14 @@ private extension MapViewController {
             singleTap.require(toFail: recognizer)
         }
         mapView.addGestureRecognizer(singleTap)
-        singleTap.rx.event.asDriver().drive(onNext: { [weak self] (gesture) in
+        singleTap.rx.event.asDriver().drive(onNext: { [weak self] gesture in
             self?.handleMapTap(sender: gesture)
         }).disposed(by: disposeBag)
     }
     
     private func bindPresenter() {
         
-        // MARK: Bind to Presenter
+        /// Bind to Presenter
         
         dependency.presenter.bindMapView(input: MapViewInput(
             compassButton: compassButton.rx.tap.asDriver(),
@@ -67,7 +67,7 @@ private extension MapViewController {
             )
         )
 
-        // MARK: Subscribe from Presenter
+        /// Subscribe from Presenter
         
         dependency.presenter.markersDriver
             .drive(onNext: { [weak self] (markerCategory, restaurantAnnotations) in
@@ -80,7 +80,7 @@ private extension MapViewController {
             }).disposed(by: disposeBag)
         
         dependency.presenter.userPositionButtonStatusDriver
-            .drive(onNext: { [weak self] (compassButtonStatus) in
+            .drive(onNext: { [weak self] compassButtonStatus in
             guard let self = self else { return }
 
             self.updateMapCenterPosition(compassButtonStatus)
@@ -184,13 +184,12 @@ private extension MapViewController {
                 guard let selectedFeature = feature as? MGLPointFeature else {
                     fatalError("Failed to cast selected feature as MGLPointFeature")
                 }
-                
                 showCallout(feature: selectedFeature)
                 return
             }
 
             // Select the closest feature to the touch center.
-            let closestFeatures = searchClosestFeature(sender)
+            let closestFeatures = searchClosestFeatures(sender)
             if let feature = closestFeatures.first {
                 guard let closestFeature = feature as? MGLPointFeature else {
                     fatalError("Failed to cast selected feature as MGLPointFeature")
@@ -199,22 +198,26 @@ private extension MapViewController {
                 return
             }
             
-            // If no features were found, deselect the selected annotation, if any.
+            // If no features were found, deselect the selected annotation
             mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
         }
     }
     
-    private func searchClosestFeature(_ sender: UITapGestureRecognizer) -> [MGLFeature] {
+    private func searchClosestFeatures(_ sender: UITapGestureRecognizer) -> [MGLFeature] {
         let point = sender.location(in: sender.view!)
         let touchCoordinate = mapView.convert(point, toCoordinateFrom: sender.view!)
         let touchLocation = CLLocation(latitude: touchCoordinate.latitude, longitude: touchCoordinate.longitude)
         
         // Get all features within a rect the size of a touch (44x44).
         let touchRect = CGRect(origin: point, size: .zero).insetBy(dx: -22.0, dy: -22.0)
-        let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(MapPresenter.layerIdentifiers)).filter { $0 is MGLPointFeature }
+        let possibleFeatures = mapView.visibleFeatures(
+            in: touchRect,
+            styleLayerIdentifiers: Set(MapPresenter.layerIdentifiers)
+        ).filter { $0 is MGLPointFeature }
         
         // Select the closest feature to the touch center.
-        let closestFeatures = dependency.presenter.sorteMGLFeatures(features: possibleFeatures, center: touchLocation)
+        let closestFeatures = dependency.presenter
+            .sorteMGLFeatures(features: possibleFeatures, center: touchLocation)
 
         return closestFeatures
     }
