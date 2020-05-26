@@ -20,12 +20,9 @@ class VisibleLayerEntityTests: XCTestCase {
     }
     
     func testGetCurrentVisibleLayers() {
-        let mockVisibleLayers = MarkerCategoryEntity(
-            busstop: .visible,
-            culturalProperty: .hidden,
-            info: .hidden,
-            restaurant: .visible
-        )
+        var mockVisibleLayers = MarkerCategoryEntity()
+        mockVisibleLayers.busstop = .visible
+        mockVisibleLayers.restaurant = .visible
         
         let expected: [MarkerCategory] = [
         .Busstop,
@@ -38,14 +35,10 @@ class VisibleLayerEntityTests: XCTestCase {
     }
     
     func testGetCurrentVisibleLayer() {
-        let mockVisibleLayers = MarkerCategoryEntity(
-            busstop: .visible,
-            culturalProperty: .hidden,
-            info: .hidden,
-            restaurant: .visible
-        )
+        var mockVisibleLayers = MarkerCategoryEntity()
+        mockVisibleLayers.culturalProperty = .visible
         
-        let expected = MarkerCategory.Busstop
+        let expected = MarkerCategory.CulturalProperty
         let actual: MarkerCategory = mockVisibleLayers.visibleCategory()
         
         XCTAssertEqual(expected, actual)

@@ -24,13 +24,6 @@ struct MarkerCategoryEntity {
         restaurant = .hidden
     }
     
-    init(busstop: Status, culturalProperty: Status, info: Status, restaurant: Status) {
-        self.busstop = busstop
-        self.culturalProperty = culturalProperty
-        self.info = info
-        self.restaurant = restaurant
-    }
-    
     func update(category: MarkerCategory) -> MarkerCategoryEntity {
         // Initialize status to show only one category markers
         var nextStatus: MarkerCategoryEntity = MarkerCategoryEntity()
