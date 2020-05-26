@@ -7,13 +7,14 @@
 //
 import Mapbox
 
-class RestaurantPointAnnotation: MGLPointAnnotation {
-    var entity: RestaurantMarkerEntity?
+class CustomMGLPointAnnotation: MGLPointAnnotation {
+    var entity: MarkerEntityProtocol?
+
     override init() {
         super.init()
     }
     
-    init(entity: RestaurantMarkerEntity) {
+    init(entity: MarkerEntityProtocol) {
         super.init()
 
         title = entity.title
@@ -23,6 +24,6 @@ class RestaurantPointAnnotation: MGLPointAnnotation {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init()
     }
 }

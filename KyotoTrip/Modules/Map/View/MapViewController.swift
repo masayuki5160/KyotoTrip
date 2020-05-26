@@ -25,7 +25,6 @@ class MapViewController: UIViewController, TransitionerProtocol {
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
-    private var visibleFeatureForTappedCalloutView: MarkerEntityProtocol? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -226,9 +225,7 @@ private extension MapViewController {
     }
     
     private func showCallout(from entity: MarkerEntityProtocol) {
-        visibleFeatureForTappedCalloutView = entity
-
-        let selectedAnnotation = MGLPointFeature()
+        let selectedAnnotation = CustomMGLPointAnnotation(entity: entity)
         selectedAnnotation.title = entity.title
         selectedAnnotation.subtitle = entity.subtitle
         selectedAnnotation.coordinate = entity.coordinate
@@ -275,28 +272,21 @@ extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
         var viewController: DetailViewProtocol
         let tappedCalloutCategory = (mapView as! MapView).visibleMarkerCategory
+        let entity = (annotation as! CustomMGLPointAnnotation).entity
 
+        // TODO: Move to MapPresenter
         switch tappedCalloutCategory {
         case .Busstop:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
-            viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         case .CulturalProperty:
             viewController = AppDefaultDependencies().assembleCulturalPropertyDetailModule() as! CulturalPropertyDetailViewController
-            viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         case .Restaurant:
             viewController = AppDefaultDependencies().assembleRestaurantDetailModule() as! RestaurantDetailViewController
-            
-            if let restaurantAnnotation = annotation as? RestaurantPointAnnotation {
-                viewController.visibleFeatureEntity = restaurantAnnotation.entity
-            } else {
-                let entity = visibleFeatureForTappedCalloutView as! RestaurantMarkerEntity
-                viewController.visibleFeatureEntity = entity
-            }
-
         default:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
-            viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         }
+        
+        viewController.visibleFeatureEntity = entity
         self.navigationController?.pushViewController(viewController as! UIViewController, animated: true)
     }
 }

@@ -29,7 +29,7 @@ protocol MapPresenterProtocol: AnyObject {
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> { get }
-    var markersDriver: Driver<(MarkerCategoryEntity, [RestaurantPointAnnotation])> { get }
+    var markersDriver: Driver<(MarkerCategoryEntity, [CustomMGLPointAnnotation])> { get }
     
     // MARK: - Others
     
@@ -57,7 +57,7 @@ class MapPresenter: MapPresenterProtocol {
     var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> {
         return dependency.commonPresenter.selectedCategoryViewCellRelay.asDriver()
     }
-    var markersDriver: Driver<(MarkerCategoryEntity, [RestaurantPointAnnotation])>
+    var markersDriver: Driver<(MarkerCategoryEntity, [CustomMGLPointAnnotation])>
     
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
@@ -72,10 +72,10 @@ class MapPresenter: MapPresenterProtocol {
             dependency.commonPresenter.markerCategoryRelay.asDriver(),
             dependency.commonPresenter.restaurantMarkersRelay.asDriver()
         ){($0, $1)}
-            .map({ (markerCategory, restaurantMarkers) -> (MarkerCategoryEntity, [RestaurantPointAnnotation]) in
-                var annotations: [RestaurantPointAnnotation] = []
+            .map({ (markerCategory, restaurantMarkers) -> (MarkerCategoryEntity, [CustomMGLPointAnnotation]) in
+                var annotations: [CustomMGLPointAnnotation] = []
                 for marker in restaurantMarkers {
-                    let annotation = RestaurantPointAnnotation(entity: marker)
+                    let annotation = CustomMGLPointAnnotation(entity: marker)
                     annotations.append(annotation)
                 }
                 return (markerCategory, annotations)
