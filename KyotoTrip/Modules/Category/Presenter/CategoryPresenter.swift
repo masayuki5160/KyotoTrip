@@ -53,10 +53,10 @@ class CategoryPresenter: CategoryPresenterProtocol {
 
             let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
                 target: .CulturalProperty,
-                current: self.dependency.commonPresenter.visibleLayerEntity.value
+                current: self.dependency.commonPresenter.markerCategoryRelay.value
             )
             
-            self.dependency.commonPresenter.visibleLayerEntity.accept(nextVisibleLayer)
+            self.dependency.commonPresenter.markerCategoryRelay.accept(nextVisibleLayer)
             self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept([])
         }).disposed(by: disposeBag)
         
@@ -65,10 +65,10 @@ class CategoryPresenter: CategoryPresenterProtocol {
             
             let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
                 target: .Busstop,
-                current: self.dependency.commonPresenter.visibleLayerEntity.value
+                current: self.dependency.commonPresenter.markerCategoryRelay.value
             )
             
-            self.dependency.commonPresenter.visibleLayerEntity.accept(nextVisibleLayer)
+            self.dependency.commonPresenter.markerCategoryRelay.accept(nextVisibleLayer)
             self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept([])
         }).disposed(by: disposeBag)
         
@@ -77,7 +77,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             
             let nextVisibleLayer = self.dependency.interactor.nextVisibleLayer(
                 target: .Restaurant,
-                current: self.dependency.commonPresenter.visibleLayerEntity.value
+                current: self.dependency.commonPresenter.markerCategoryRelay.value
             )
             
             switch nextVisibleLayer.restaurant {
@@ -87,7 +87,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
                 self.fetchRestaurantsEntity()
             }
             
-            self.dependency.commonPresenter.visibleLayerEntity.accept(nextVisibleLayer)
+            self.dependency.commonPresenter.markerCategoryRelay.accept(nextVisibleLayer)
         }).disposed(by: disposeBag)
         
         input.tableViewCell.drive(onNext: { [weak self] (feature) in

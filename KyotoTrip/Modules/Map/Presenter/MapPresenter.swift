@@ -69,16 +69,16 @@ class MapPresenter: MapPresenterProtocol {
         self.dependency = dependency
         
         markersDriver = Driver.combineLatest(
-            dependency.commonPresenter.visibleLayerEntity.asDriver(),
+            dependency.commonPresenter.markerCategoryRelay.asDriver(),
             dependency.commonPresenter.visibleFeatureRestaurantEntity.asDriver()
         ){($0, $1)}
-            .map({ (visibleLayer, features) -> (MarkerCategoryEntity, [MGLPointAnnotation]) in
+            .map({ (markerCategory, features) -> (MarkerCategoryEntity, [MGLPointAnnotation]) in
                 var annotations: [RestaurantPointAnnotation] = []
                 for feature in features {
                     let annotation = RestaurantPointAnnotation(entity: feature as! RestaurantMarkerEntity)
                     annotations.append(annotation)
                 }
-                return (visibleLayer, annotations)
+                return (markerCategory, annotations)
             })
     }
     
@@ -111,7 +111,7 @@ class MapPresenter: MapPresenterProtocol {
     }
     
     func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
-        let category = dependency.commonPresenter.visibleLayerEntity.value.visibleCategory()        
+        let category = dependency.commonPresenter.markerCategoryRelay.value.visibleCategory()        
         return dependency.interactor.createMarkerEntity(
             category: category,
             coordinate: source.coordinate,
