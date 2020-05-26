@@ -15,7 +15,7 @@ protocol CategoryInteractorProtocol {
 
 class CategoryInteractor: CategoryInteractorProtocol {
     func nextVisibleLayer(target: MarkerCategory, current: VisibleLayerEntity) -> VisibleLayerEntity {
-        return current.update(layer: target)
+        return current.update(category: target)
     }
     
     func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {

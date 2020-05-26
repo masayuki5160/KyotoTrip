@@ -31,9 +31,11 @@ struct VisibleLayerEntity {
         self.restaurant = restaurant
     }
     
-    func update(layer: MarkerCategory) -> VisibleLayerEntity {
+    func update(category: MarkerCategory) -> VisibleLayerEntity {
+        // Initialize status to show only one category markers
         var nextStatus: VisibleLayerEntity = VisibleLayerEntity()
-        switch layer {
+
+        switch category {
         case .Busstop:
             let nextStatusRawValue = self.busstop.rawValue + 1
             nextStatus.busstop = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
