@@ -224,7 +224,7 @@ private extension MapViewController {
         let possibleFeatures = mapView.visibleFeatures(in: touchRect, styleLayerIdentifiers: Set(MapPresenter.layerIdentifiers)).filter { $0 is MGLPointFeature }
         
         // Select the closest feature to the touch center.
-        let closestFeatures = dependency.presenter.sorteFeatures(features: possibleFeatures, center: touchLocation)
+        let closestFeatures = dependency.presenter.sorteMGLFeatures(features: possibleFeatures, center: touchLocation)
 
         return closestFeatures
     }
