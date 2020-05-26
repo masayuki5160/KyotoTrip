@@ -52,15 +52,15 @@ struct MarkerCategoryEntity {
         return nextStatus
     }
     
-    func currentVisibleLayers() -> [MarkerCategory] {
-        return findVisibleLayer()
+    func visibleCategories() -> [MarkerCategory] {
+        return findVisibleCategories()
     }
     
-    func currentVisibleLayer() -> MarkerCategory {
-        return findVisibleLayer()[0]
+    func visibleCategory() -> MarkerCategory {
+        return findVisibleCategories()[0]
     }
     
-    private func findVisibleLayer() -> [MarkerCategory] {
+    private func findVisibleCategories() -> [MarkerCategory] {
         var res: [MarkerCategory] = []
         
         // FIXME: 他に良い書き方があれば修正する

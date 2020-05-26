@@ -75,7 +75,7 @@ private extension MapViewController {
             .drive(onNext: { [weak self] (visibleLayer, annotations) in
                 guard let self = self else { return }
             
-                self.currentVisibleLayer = visibleLayer.currentVisibleLayer()
+                self.currentVisibleLayer = visibleLayer.visibleCategory()
             
                 self.updateBusstopLayer(visibleLayer.busstop)
                 self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
