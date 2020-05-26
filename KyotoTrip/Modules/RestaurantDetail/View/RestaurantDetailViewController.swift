@@ -9,7 +9,7 @@
 import UIKit
 
 class RestaurantDetailViewController: UIViewController, DetailViewProtocol {
-    var visibleFeatureEntity: MarkerEntityProtocol!
+    var markerEntity: MarkerEntityProtocol!
     @IBOutlet weak var restaurantName: UILabel!
     @IBOutlet weak var restaurantKanaName: UILabel!
     @IBOutlet weak var address: UILabel!
@@ -19,7 +19,7 @@ class RestaurantDetailViewController: UIViewController, DetailViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let entity = visibleFeatureEntity as! RestaurantMarkerEntity
+        let entity = markerEntity as! RestaurantMarkerEntity
         restaurantName.text = entity.detail?.name.name
         restaurantKanaName.text = entity.detail?.name.nameKana
         address.text = entity.detail?.contacts.address

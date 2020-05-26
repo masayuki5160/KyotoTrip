@@ -19,21 +19,21 @@ struct MapViewRouter: MapViewRouterProtocol {
     func transitionToBusstopDetailViewController(markerEntity: MarkerEntityProtocol) {
         let targetVC = AppDefaultDependencies()
             .assembleBusstopDetailModule() as! BusstopDetailViewController
-        targetVC.visibleFeatureEntity = markerEntity
+        targetVC.markerEntity = markerEntity
         view.pushViewController(targetVC, animated: true)
     }
     
     func transitionToCulturalPropertyDetailViewController(markerEntity: MarkerEntityProtocol) {
         let targetVC = AppDefaultDependencies()
             .assembleCulturalPropertyDetailModule() as! CulturalPropertyDetailViewController
-        targetVC.visibleFeatureEntity = markerEntity
+        targetVC.markerEntity = markerEntity
         view.pushViewController(targetVC, animated: true)
     }
     
     func transitionToRestaurantDetailViewController(markerEntity: MarkerEntityProtocol) {
         let targetVC = AppDefaultDependencies()
             .assembleRestaurantDetailModule() as! RestaurantDetailViewController
-        targetVC.visibleFeatureEntity = markerEntity
+        targetVC.markerEntity = markerEntity
         view.pushViewController(targetVC, animated: true)
     }
 }

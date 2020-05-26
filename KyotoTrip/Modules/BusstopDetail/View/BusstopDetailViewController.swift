@@ -11,7 +11,7 @@ import UIKit
 class BusstopDetailViewController: UIViewController, DetailViewProtocol {
 
     @IBOutlet weak var tableView: UITableView!
-    var visibleFeatureEntity: MarkerEntityProtocol!
+    var markerEntity: MarkerEntityProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()

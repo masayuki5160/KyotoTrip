@@ -10,7 +10,7 @@ import UIKit
 
 class CulturalPropertyDetailViewController: UIViewController, DetailViewProtocol {
 
-    var visibleFeatureEntity: MarkerEntityProtocol!
+    var markerEntity: MarkerEntityProtocol!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var largeClassification: UILabel!
@@ -20,7 +20,7 @@ class CulturalPropertyDetailViewController: UIViewController, DetailViewProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let entity = visibleFeatureEntity as! CulturalPropertyMarkerEntity
+        let entity = markerEntity as! CulturalPropertyMarkerEntity
         name.text = entity.title
         address.text = entity.address
         largeClassification.text = entity.largeClassification
