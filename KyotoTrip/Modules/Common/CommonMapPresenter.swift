@@ -14,7 +14,7 @@ protocol CommonMapPresenterProtocol {
     /// Visible layer status entity
     var markerCategoryRelay: BehaviorRelay<MarkerCategoryEntity> { get }
     /// Restaurants data from GNavi API
-    var visibleFeatureRestaurantEntity: BehaviorRelay<[MarkerEntityProtocol]> { get }
+    var restaurantMarkersRelay: BehaviorRelay<[RestaurantMarkerEntity]> { get }
     /// Selected cell at category view
     var selectedCategoryViewCellRelay: BehaviorRelay<MarkerEntityProtocol> { get }
     /// Datas from mapview through Mapbox server
@@ -29,7 +29,7 @@ class CommonMapPresenter: CommonMapPresenterProtocol {
     static let shared = CommonMapPresenter()
     
     let markerCategoryRelay = BehaviorRelay<MarkerCategoryEntity>(value: MarkerCategoryEntity())
-    let visibleFeatureRestaurantEntity = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
+    let restaurantMarkersRelay = BehaviorRelay<[RestaurantMarkerEntity]>(value: [])
     let selectedCategoryViewCellRelay = BehaviorRelay<MarkerEntityProtocol>(value: BusstopMarkerEntity())
     let visibleFeatureEntity = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
     

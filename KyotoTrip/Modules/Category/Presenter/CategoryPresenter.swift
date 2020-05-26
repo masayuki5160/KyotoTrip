@@ -12,7 +12,7 @@ import Mapbox
 
 protocol CategoryPresenterProtocol {
     var visibleFeatureEntityDriver: Driver<[MarkerEntityProtocol]> { get }
-    var visibleFeatureRestaurantEntityDriver: Driver<[MarkerEntityProtocol]> { get }
+    var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> { get }
     func bindCategoryView(input: CategoryViewInput)
     func categoryTableViewCellIconName(_ category: MarkerCategory) -> String
 }
@@ -36,13 +36,13 @@ class CategoryPresenter: CategoryPresenterProtocol {
     private let disposeBag = DisposeBag()
     
     var visibleFeatureEntityDriver: Driver<[MarkerEntityProtocol]>
-    var visibleFeatureRestaurantEntityDriver: Driver<[MarkerEntityProtocol]>
+    var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]>
     
     init(dependency: Dependency) {
         self.dependency = dependency
         
-        visibleFeatureRestaurantEntityDriver =
-            dependency.commonPresenter.visibleFeatureRestaurantEntity.asDriver()
+        restaurantMarkersDriver =
+            dependency.commonPresenter.restaurantMarkersRelay.asDriver()
         visibleFeatureEntityDriver =
             dependency.commonPresenter.visibleFeatureEntity.asDriver()
     }
@@ -57,7 +57,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             )
             
             self.dependency.commonPresenter.markerCategoryRelay.accept(nextVisibleLayer)
-            self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept([])
+            self.dependency.commonPresenter.restaurantMarkersRelay.accept([])
         }).disposed(by: disposeBag)
         
         input.busstopButton.drive(onNext: { [weak self] in
@@ -69,7 +69,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             )
             
             self.dependency.commonPresenter.markerCategoryRelay.accept(nextVisibleLayer)
-            self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept([])
+            self.dependency.commonPresenter.restaurantMarkersRelay.accept([])
         }).disposed(by: disposeBag)
         
         input.restaurantButton.drive(onNext: { [weak self] in
@@ -82,7 +82,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             
             switch nextVisibleLayer.restaurant {
             case .hidden:
-                self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept([])
+                self.dependency.commonPresenter.restaurantMarkersRelay.accept([])
             case .visible:
                 self.fetchRestaurantsEntity()
             }
@@ -135,7 +135,7 @@ private extension CategoryPresenter {
                     }
                 }
                 
-                self.dependency.commonPresenter.visibleFeatureRestaurantEntity.accept(restaurantFeatures)
+                self.dependency.commonPresenter.restaurantMarkersRelay.accept(restaurantFeatures)
             }
         }
     }

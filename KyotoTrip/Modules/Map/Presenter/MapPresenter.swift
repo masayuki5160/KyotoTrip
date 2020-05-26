@@ -29,7 +29,7 @@ protocol MapPresenterProtocol: AnyObject {
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> { get }
-    var markersDriver: Driver<(MarkerCategoryEntity, [MGLPointAnnotation])> { get }
+    var markersDriver: Driver<(MarkerCategoryEntity, [RestaurantPointAnnotation])> { get }
     
     // MARK: - Others
     
@@ -57,7 +57,7 @@ class MapPresenter: MapPresenterProtocol {
     var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> {
         return dependency.commonPresenter.selectedCategoryViewCellRelay.asDriver()
     }
-    var markersDriver: Driver<(MarkerCategoryEntity, [MGLPointAnnotation])>
+    var markersDriver: Driver<(MarkerCategoryEntity, [RestaurantPointAnnotation])>
     
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
@@ -70,12 +70,12 @@ class MapPresenter: MapPresenterProtocol {
         
         markersDriver = Driver.combineLatest(
             dependency.commonPresenter.markerCategoryRelay.asDriver(),
-            dependency.commonPresenter.visibleFeatureRestaurantEntity.asDriver()
+            dependency.commonPresenter.restaurantMarkersRelay.asDriver()
         ){($0, $1)}
-            .map({ (markerCategory, features) -> (MarkerCategoryEntity, [MGLPointAnnotation]) in
+            .map({ (markerCategory, restaurantMarkers) -> (MarkerCategoryEntity, [RestaurantPointAnnotation]) in
                 var annotations: [RestaurantPointAnnotation] = []
-                for feature in features {
-                    let annotation = RestaurantPointAnnotation(entity: feature as! RestaurantMarkerEntity)
+                for marker in restaurantMarkers {
+                    let annotation = RestaurantPointAnnotation(entity: marker)
                     annotations.append(annotation)
                 }
                 return (markerCategory, annotations)
