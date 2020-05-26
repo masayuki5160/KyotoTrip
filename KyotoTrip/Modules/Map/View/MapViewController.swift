@@ -21,11 +21,10 @@ class MapViewController: UIViewController, TransitionerProtocol {
     @IBOutlet weak var mapView: MapView!
     @IBOutlet weak var compassButton: UIButton!
 
-    private let visibleFeatures = BehaviorRelay<[MGLFeature]>(value: [])
+    private let mglFeatures = BehaviorRelay<[MGLFeature]>(value: [])
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
-    private var currentVisibleLayer: MarkerCategory = .None
     private var visibleFeatureForTappedCalloutView: MarkerEntityProtocol? = nil
 
     override func viewDidLoad() {
@@ -64,7 +63,7 @@ private extension MapViewController {
         
         dependency.presenter.bindMapView(input: MapViewInput(
             compassButton: compassButton.rx.tap.asDriver(),
-            mglFeatures: visibleFeatures.asDriver(),
+            mglFeatures: mglFeatures.asDriver(),
             mapView: mapView
             )
         )
@@ -72,20 +71,13 @@ private extension MapViewController {
         // MARK: Subscribe from Presenter
         
         dependency.presenter.markersDriver
-            .drive(onNext: { [weak self] (visibleLayer, annotations) in
+            .drive(onNext: { [weak self] (visibleLayer, restaurantMarkers) in
                 guard let self = self else { return }
             
-                self.currentVisibleLayer = visibleLayer.visibleCategory()
+                self.mapView.visibleMarkerCategory = visibleLayer.visibleCategory()
             
-                self.updateBusstopLayer(visibleLayer.busstop)
-                self.updateCulturalPropertyLayer(visibleLayer.culturalProperty)
-            
-                // FIXME: This is temporaly implementation. If there is a delegate method that is telling when the mapview layer visibility property was changed, use it.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    self.updateVisibleFeatures()
-                }
-                
-                self.updateRestaurantLayer(visibleStatus:visibleLayer.restaurant, annotations: annotations)
+                self.updateMarkersOnStyleLayers()
+                self.updateRestaurantMarkers(annotations: restaurantMarkers)
             }).disposed(by: disposeBag)
         
         dependency.presenter.userPositionButtonStatusDriver
@@ -104,9 +96,7 @@ private extension MapViewController {
 
                 // move camera position to the annotation position
                 let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 0, heading: 0)
-                self?.mapView.fly(to: camera, withDuration: 3, completionHandler: { [weak self] in
-                    self?.updateVisibleFeatures()
-                })
+                self?.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
 
                 self?.showCallout(from: feature)
             }).disposed(by: disposeBag)
@@ -121,30 +111,12 @@ private extension MapViewController {
         floatingPanelController.set(contentViewController: categoryViewController)
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
-    
-    private func updateBusstopLayer(_ visibleStatus: MarkerCategoryEntity.Status) {
-        switch visibleStatus {
-        case .hidden:
-            self.mapView.busstopLayer?.isVisible = false
-        case .visible:
-            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
-            self.mapView.busstopLayer?.isVisible = true
-        }
-    }
-    
-    private func updateCulturalPropertyLayer(_ visibleStatus: MarkerCategoryEntity.Status) {
-        switch visibleStatus {
-        case .hidden:
-            self.mapView.culturalPropertyLayer?.isVisible = false
-        case .visible:
-            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
-            self.mapView.culturalPropertyLayer?.isVisible = true
-        }
-    }
 
-    private func updateRestaurantLayer(visibleStatus: MarkerCategoryEntity.Status, annotations: [MGLPointAnnotation]) {
-        switch visibleStatus {
-        case .hidden:
+    private func updateRestaurantMarkers(annotations: [MGLPointAnnotation]) {
+        if mapView.visibleMarkerCategory == .Restaurant {
+            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
+            mapView.addAnnotations(annotations)
+        } else {
             if let selectedAnnotation = mapView.selectedAnnotations.first {
                 mapView.deselectAnnotation(selectedAnnotation, animated: true)
             }
@@ -152,25 +124,48 @@ private extension MapViewController {
             if let visibleAnnotations = mapView.visibleAnnotations {
                 mapView.removeAnnotations(visibleAnnotations)
             }
-        case .visible:
-            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
-            mapView.addAnnotations(annotations)
         }
     }
     
-    private func updateVisibleFeatures() {
-        let rect = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        var layers: Set<String> = []
-        
-        if let busstopLayer = mapView.busstopLayer, busstopLayer.isVisible {
-            layers.insert(BusstopMarkerEntity.layerId)
+    private func updateMarkersOnStyleLayers() {
+        updateBusstopLayer()
+        updateCulturalPropertyLayer()
+
+        // Note:
+        // Wait for updating Style Layers, then fetch the MGLFeatures from Style Layers and relay to other modules
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let rect = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+            var layers: Set<String> = []
+            
+            if let busstopLayer = self.mapView.busstopLayer, busstopLayer.isVisible {
+                layers.insert(BusstopMarkerEntity.layerId)
+            }
+            if let culturalPropertyLayer = self.mapView.culturalPropertyLayer, culturalPropertyLayer.isVisible {
+                layers.insert(CulturalPropertyMarkerEntity.layerId)
+            }
+            
+            /// Get features from Style Layers which is defined in Mapbox Studio
+            let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
+            self.mglFeatures.accept(features)
         }
-        if let culturalPropertyLayer = mapView.culturalPropertyLayer, culturalPropertyLayer.isVisible {
-            layers.insert(CulturalPropertyMarkerEntity.layerId)
+    }
+    
+    private func updateBusstopLayer() {
+        if mapView.visibleMarkerCategory == .Busstop {
+            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
+            self.mapView.busstopLayer?.isVisible = true
+        } else {
+            self.mapView.busstopLayer?.isVisible = false
         }
-                
-        let features = mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
-        visibleFeatures.accept(features)
+    }
+    
+    private func updateCulturalPropertyLayer() {
+        if mapView.visibleMarkerCategory == .CulturalProperty {
+            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
+            self.mapView.culturalPropertyLayer?.isVisible = true
+        } else {
+            self.mapView.culturalPropertyLayer?.isVisible = false
+        }
     }
     
     private func updateMapCenterPosition(_ compassButtonStatus: UserPosition) {
@@ -282,8 +277,9 @@ extension MapViewController: MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
         var viewController: DetailViewProtocol
+        let tappedCalloutCategory = (mapView as! MapView).visibleMarkerCategory
 
-        switch currentVisibleLayer {
+        switch tappedCalloutCategory {
         case .Busstop:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
             viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
