@@ -64,7 +64,7 @@ private extension MapViewController {
         
         dependency.presenter.bindMapView(input: MapViewInput(
             compassButton: compassButton.rx.tap.asDriver(),
-            features: visibleFeatures.asDriver(),
+            mglFeatures: visibleFeatures.asDriver(),
             mapView: mapView
             )
         )

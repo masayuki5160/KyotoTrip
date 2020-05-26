@@ -12,7 +12,7 @@ import Mapbox
 
 struct MapViewInput {
     let compassButton: Driver<Void>
-    let features: Driver<[MGLFeature]>
+    let mglFeatures: Driver<[MGLFeature]>
     let mapView: MGLMapView
 }
 
@@ -93,15 +93,16 @@ class MapPresenter: MapPresenterProtocol {
             self.userPositionButtonStatus.accept(nextPosition)
         }).disposed(by: disposeBag)
         
-        input.features.map({ [weak self] (features) -> [MarkerEntityProtocol] in
-            var res: [MarkerEntityProtocol] = []
+        input.mglFeatures.map({ [weak self] (features) -> [MarkerEntityProtocol] in
+            var markers: [MarkerEntityProtocol] = []
             for feature in features {
                 let marker = self?.convertMGLFeatureToMarkerEntity(source: feature)
-                res.append(marker ?? BusstopMarkerEntity())// TODO: Fix later
+                markers.append(marker ?? BusstopMarkerEntity())
             }
-            return res
-        }).drive(onNext: { [weak self] (features) in
-            self?.dependency.commonPresenter.visibleFeatureEntity.accept(features)
+            
+            return markers
+        }).drive(onNext: { [weak self] (markers) in
+            self?.dependency.commonPresenter.visibleFeatureEntity.accept(markers)
         }).disposed(by: disposeBag)
         
         /// Dependency injection to CommonPresenter
