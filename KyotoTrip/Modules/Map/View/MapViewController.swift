@@ -241,12 +241,6 @@ extension MapViewController: DependencyInjectable {
     }
 }
 
-extension MapViewController: FloatingPanelControllerDelegate {
-    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
-        return CustomFloatingPanelLayout()
-    }
-}
-
 extension MapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
         let kyotoMapView = mapView as! MapView

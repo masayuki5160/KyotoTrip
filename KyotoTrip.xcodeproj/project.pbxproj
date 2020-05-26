@@ -13,6 +13,7 @@
 		4C36523E2479069D00F53C52 /* CommonMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36523D2479069D00F53C52 /* CommonMapPresenter.swift */; };
 		4C365240247906F500F53C52 /* CategoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36523F247906F500F53C52 /* CategoryInteractor.swift */; };
 		4C3652422479070800F53C52 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3652412479070800F53C52 /* CategoryPresenter.swift */; };
+		4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */; };
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
 		4C416650243964A4005EF1C2 /* KyotoCityInfoGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41664F243964A4005EF1C2 /* KyotoCityInfoGateway.swift */; };
 		4C4166532439D2DA005EF1C2 /* TranslatorInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166522439D2DA005EF1C2 /* TranslatorInteractor.swift */; };
@@ -109,6 +110,7 @@
 		4C36523D2479069D00F53C52 /* CommonMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMapPresenter.swift; sourceTree = "<group>"; };
 		4C36523F247906F500F53C52 /* CategoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryInteractor.swift; sourceTree = "<group>"; };
 		4C3652412479070800F53C52 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
+		4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+FloatingPanelControllerDelegate.swift"; sourceTree = "<group>"; };
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		4C41664F243964A4005EF1C2 /* KyotoCityInfoGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoGateway.swift; sourceTree = "<group>"; };
 		4C4166522439D2DA005EF1C2 /* TranslatorInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorInteractor.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				4CC1ADD6241BB13700BF84B9 /* Map.storyboard */,
 				4CF773EC241B9D910032CC53 /* MapViewController.swift */,
 				4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */,
+				4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				4C4166532439D2DA005EF1C2 /* TranslatorInteractor.swift in Sources */,
 				4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */,
 				4CF4AFE8246EDAAC00991B2C /* SettingsLicenseViewController.swift in Sources */,
+				4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */,
 				4CA84AF92462817C00DAC5F3 /* BusstopMarkerEntity.swift in Sources */,
 				4CA84AF0245AB37900DAC5F3 /* CategoryTableViewCell.swift in Sources */,
 				4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift in Sources */,
