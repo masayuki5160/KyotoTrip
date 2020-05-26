@@ -75,11 +75,11 @@ private extension RestaurantsSearchRangeSettingPresenter {
         var searchRangeRows: [RestaurantsSearchRangeCellEntity] = []
         let searchRangeDictionary = dependency.commonPresenter.restaurantsSearchRangeDictionary
         
-        for (_, val) in searchRangeDictionary {
+        for (key, _) in searchRangeDictionary {
             var model = RestaurantsSearchRangeCellEntity()
-            model.range = val
+            model.range = key
             let rangeString = dependency.commonPresenter.convertToRangeString(from: settings.range)
-            if rangeString == val {
+            if rangeString == key {
                 model.isSelected = true
             } else {
                 model.isSelected = false

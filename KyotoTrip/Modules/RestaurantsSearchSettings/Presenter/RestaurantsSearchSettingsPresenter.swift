@@ -44,9 +44,6 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
         "Wifi",
         "禁煙"
     ]
-    private var restaurantsSearchRangeDictionary: [RestaurantsRequestParamEntity.SearchRange:String] {
-        return dependency.commonPresenter.restaurantsSearchRangeDictionary
-    }
     private let restaurantsSearchSettingsRows = BehaviorRelay<[RestaurantsSearchSettingCellEntity]>(value: [])
     private let disposeBag = DisposeBag()
     
