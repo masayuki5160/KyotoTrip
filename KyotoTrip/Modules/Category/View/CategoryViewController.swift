@@ -54,15 +54,11 @@ private extension CategoryViewController {
             )
         )
         
-        Driver.combineLatest(
-            dependency.presenter.visibleFeatureEntityDriver,
-            dependency.presenter.restaurantMarkersDriver
-        ){ $0 + $1 }
-            .drive(tableView.rx.items(cellIdentifier: CategoryTableViewCell.id, cellType: CategoryTableViewCell.self)) { [weak self] row, element, cell in
+        dependency.presenter.markersDriver.drive(tableView.rx.items(cellIdentifier: CategoryTableViewCell.id, cellType: CategoryTableViewCell.self))
+        { [weak self] row, element, cell in
             guard let self = self else { return }
 
             cell.title.text = element.title
-
             let iconName = self.dependency.presenter.categoryTableViewCellIconName(element.type)
             cell.icon.image = UIImage(named: iconName)
         }.disposed(by: disposeBag)

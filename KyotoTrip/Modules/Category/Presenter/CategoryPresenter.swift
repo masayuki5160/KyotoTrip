@@ -11,8 +11,7 @@ import RxCocoa
 import Mapbox
 
 protocol CategoryPresenterProtocol {
-    var visibleFeatureEntityDriver: Driver<[MarkerEntityProtocol]> { get }
-    var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> { get }
+    var markersDriver: Driver<[MarkerEntityProtocol]> { get }
     func bindCategoryView(input: CategoryViewInput)
     func categoryTableViewCellIconName(_ category: MarkerCategory) -> String
 }
@@ -25,7 +24,7 @@ struct CategoryViewInput {
 }
 
 class CategoryPresenter: CategoryPresenterProtocol {
-    
+
     struct Dependency {
         let interactor: CategoryInteractorProtocol
         let commonPresenter: CommonMapPresenterProtocol
@@ -35,16 +34,15 @@ class CategoryPresenter: CategoryPresenterProtocol {
     private let dependency: Dependency
     private let disposeBag = DisposeBag()
     
-    var visibleFeatureEntityDriver: Driver<[MarkerEntityProtocol]>
-    var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]>
+    var markersDriver: Driver<[MarkerEntityProtocol]>
     
     init(dependency: Dependency) {
         self.dependency = dependency
         
-        restaurantMarkersDriver =
-            dependency.commonPresenter.restaurantMarkersRelay.asDriver()
-        visibleFeatureEntityDriver =
-            dependency.commonPresenter.visibleFeatureEntity.asDriver()
+        markersDriver = Driver.combineLatest(
+            dependency.commonPresenter.restaurantMarkersRelay.asDriver(),
+            dependency.commonPresenter.markersFromStyleLayersRelay.asDriver()
+        ){$0 + $1}
     }
     
     func bindCategoryView(input: CategoryViewInput) {

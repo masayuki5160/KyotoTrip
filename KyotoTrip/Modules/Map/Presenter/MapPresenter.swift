@@ -102,7 +102,7 @@ class MapPresenter: MapPresenterProtocol {
             
             return markers
         }).drive(onNext: { [weak self] (markers) in
-            self?.dependency.commonPresenter.visibleFeatureEntity.accept(markers)
+            self?.dependency.commonPresenter.markersFromStyleLayersRelay.accept(markers)
         }).disposed(by: disposeBag)
         
         /// Dependency injection to CommonPresenter
