@@ -42,7 +42,7 @@ class KyotoMapInteractorTests: XCTestCase {
         ]
         let mockCoordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
         
-        let actual = interactor.createVisibleFeature(
+        let actual = interactor.createMarkerEntity(
             category: .Busstop,
             coordinate: mockCoordinate,
             attributes: mockAttributes
@@ -73,7 +73,7 @@ class KyotoMapInteractorTests: XCTestCase {
         ]
         let mockCoordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
         
-        let actual = interactor.createVisibleFeature(
+        let actual = interactor.createMarkerEntity(
             category: .CulturalProperty,
             coordinate: mockCoordinate,
             attributes: mockAttributes

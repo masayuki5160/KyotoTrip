@@ -10,7 +10,7 @@ import CoreLocation
 
 protocol MapInteractorProtocol: AnyObject {
     func updateUserPosition(_ position: UserPosition) -> UserPosition
-    func createVisibleFeature(category: MarkerCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol
+    func createMarkerEntity(category: MarkerCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol
 }
 
 final class MapInteractor: MapInteractorProtocol {
@@ -22,7 +22,7 @@ final class MapInteractor: MapInteractorProtocol {
         return nextStatus
     }
     
-    func createVisibleFeature(category: MarkerCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol {
+    func createMarkerEntity(category: MarkerCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol {
         switch category {
         case .Busstop:
             return BusstopMarkerEntity(

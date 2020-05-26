@@ -119,7 +119,7 @@ class MapPresenter: MapPresenterProtocol {
             return .None
         }
         
-        return dependency.interactor.createVisibleFeature(
+        return dependency.interactor.createMarkerEntity(
             category: category,
             coordinate: source.coordinate,
             attributes: source.attributes
