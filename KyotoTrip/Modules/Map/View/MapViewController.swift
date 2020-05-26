@@ -75,6 +75,9 @@ private extension MapViewController {
             
                 self.mapView.visibleMarkerCategory = markerCategory.visibleCategory()
             
+                /// Deselect markers
+                self.mapView.deselectAnnotation(self.mapView.selectedAnnotations.first, animated: true)
+                /// Update Markers
                 self.updateMarkersOnStyleLayers()
                 self.updateRestaurantMarkers(annotations: restaurantAnnotations)
             }).disposed(by: disposeBag)
@@ -109,13 +112,11 @@ private extension MapViewController {
 
     private func updateRestaurantMarkers(annotations: [MGLPointAnnotation]) {
         if mapView.visibleMarkerCategory == .Restaurant {
-            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
             mapView.addAnnotations(annotations)
         } else {
             if let selectedAnnotation = mapView.selectedAnnotations.first {
                 mapView.deselectAnnotation(selectedAnnotation, animated: true)
             }
-
             if let visibleAnnotations = mapView.visibleAnnotations {
                 mapView.removeAnnotations(visibleAnnotations)
             }
@@ -147,7 +148,6 @@ private extension MapViewController {
     
     private func updateBusstopLayer() {
         if mapView.visibleMarkerCategory == .Busstop {
-            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
             self.mapView.busstopLayer?.isVisible = true
         } else {
             self.mapView.busstopLayer?.isVisible = false
@@ -156,7 +156,6 @@ private extension MapViewController {
     
     private func updateCulturalPropertyLayer() {
         if mapView.visibleMarkerCategory == .CulturalProperty {
-            mapView.deselectAnnotation(mapView.selectedAnnotations.first, animated: true)
             self.mapView.culturalPropertyLayer?.isVisible = true
         } else {
             self.mapView.culturalPropertyLayer?.isVisible = false
@@ -184,7 +183,7 @@ private extension MapViewController {
                 guard let selectedFeature = feature as? MGLPointFeature else {
                     fatalError("Failed to cast selected feature as MGLPointFeature")
                 }
-                showCallout(feature: selectedFeature)
+                showCallout(from: selectedFeature)
                 return
             }
 
@@ -194,7 +193,7 @@ private extension MapViewController {
                 guard let closestFeature = feature as? MGLPointFeature else {
                     fatalError("Failed to cast selected feature as MGLPointFeature")
                 }
-                showCallout(feature: closestFeature)
+                showCallout(from: closestFeature)
                 return
             }
             
@@ -222,8 +221,8 @@ private extension MapViewController {
         return closestFeatures
     }
     
-    private func showCallout(feature: MGLPointFeature) {
-        let markerEntity = dependency.presenter.convertMGLFeatureToMarkerEntity(source: feature)
+    private func showCallout(from mglFeature: MGLPointFeature) {
+        let markerEntity = dependency.presenter.convertMGLFeatureToMarkerEntity(source: mglFeature)
         showCallout(from: markerEntity)
     }
     
