@@ -6,7 +6,7 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-struct VisibleLayerEntity {
+struct MarkerCategoryEntity {
     enum Status: Int {
         case hidden = 0
         case visible
@@ -31,20 +31,20 @@ struct VisibleLayerEntity {
         self.restaurant = restaurant
     }
     
-    func update(category: MarkerCategory) -> VisibleLayerEntity {
+    func update(category: MarkerCategory) -> MarkerCategoryEntity {
         // Initialize status to show only one category markers
-        var nextStatus: VisibleLayerEntity = VisibleLayerEntity()
+        var nextStatus: MarkerCategoryEntity = MarkerCategoryEntity()
 
         switch category {
         case .Busstop:
             let nextStatusRawValue = self.busstop.rawValue + 1
-            nextStatus.busstop = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            nextStatus.busstop = MarkerCategoryEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .CulturalProperty:
             let nextStatusRawValue = self.culturalProperty.rawValue + 1
-            nextStatus.culturalProperty = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            nextStatus.culturalProperty = MarkerCategoryEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         case .Restaurant:
             let nextStatusRawValue = self.restaurant.rawValue + 1
-            nextStatus.restaurant = VisibleLayerEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
+            nextStatus.restaurant = MarkerCategoryEntity.Status(rawValue: nextStatusRawValue) ?? Status.hidden
         default:
             break
         }

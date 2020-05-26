@@ -20,7 +20,7 @@ class VisibleLayerEntityTests: XCTestCase {
     }
     
     func testGetCurrentVisibleLayers() {
-        let mockVisibleLayers = VisibleLayerEntity(
+        let mockVisibleLayers = MarkerCategoryEntity(
             busstop: .visible,
             culturalProperty: .hidden,
             info: .hidden,
@@ -38,7 +38,7 @@ class VisibleLayerEntityTests: XCTestCase {
     }
     
     func testGetCurrentVisibleLayer() {
-        let mockVisibleLayers = VisibleLayerEntity(
+        let mockVisibleLayers = MarkerCategoryEntity(
             busstop: .visible,
             culturalProperty: .hidden,
             info: .hidden,

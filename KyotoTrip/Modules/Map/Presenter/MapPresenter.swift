@@ -29,7 +29,7 @@ protocol MapPresenterProtocol: AnyObject {
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> { get }
-    var markersDriver: Driver<(VisibleLayerEntity, [MGLPointAnnotation])> { get }
+    var markersDriver: Driver<(MarkerCategoryEntity, [MGLPointAnnotation])> { get }
     
     // MARK: - Others
     
@@ -57,7 +57,7 @@ class MapPresenter: MapPresenterProtocol {
     var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> {
         return dependency.commonPresenter.selectedCategoryViewCellRelay.asDriver()
     }
-    var markersDriver: Driver<(VisibleLayerEntity, [MGLPointAnnotation])>
+    var markersDriver: Driver<(MarkerCategoryEntity, [MGLPointAnnotation])>
     
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
@@ -72,7 +72,7 @@ class MapPresenter: MapPresenterProtocol {
             dependency.commonPresenter.visibleLayerEntity.asDriver(),
             dependency.commonPresenter.visibleFeatureRestaurantEntity.asDriver()
         ){($0, $1)}
-            .map({ (visibleLayer, features) -> (VisibleLayerEntity, [MGLPointAnnotation]) in
+            .map({ (visibleLayer, features) -> (MarkerCategoryEntity, [MGLPointAnnotation]) in
                 var annotations: [RestaurantPointAnnotation] = []
                 for feature in features {
                     let annotation = RestaurantPointAnnotation(entity: feature as! RestaurantMarkerEntity)

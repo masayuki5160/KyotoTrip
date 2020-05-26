@@ -122,7 +122,7 @@ private extension MapViewController {
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
     
-    private func updateBusstopLayer(_ visibleStatus: VisibleLayerEntity.Status) {
+    private func updateBusstopLayer(_ visibleStatus: MarkerCategoryEntity.Status) {
         switch visibleStatus {
         case .hidden:
             self.mapView.busstopLayer?.isVisible = false
@@ -132,7 +132,7 @@ private extension MapViewController {
         }
     }
     
-    private func updateCulturalPropertyLayer(_ visibleStatus: VisibleLayerEntity.Status) {
+    private func updateCulturalPropertyLayer(_ visibleStatus: MarkerCategoryEntity.Status) {
         switch visibleStatus {
         case .hidden:
             self.mapView.culturalPropertyLayer?.isVisible = false
@@ -142,7 +142,7 @@ private extension MapViewController {
         }
     }
 
-    private func updateRestaurantLayer(visibleStatus: VisibleLayerEntity.Status, annotations: [MGLPointAnnotation]) {
+    private func updateRestaurantLayer(visibleStatus: MarkerCategoryEntity.Status, annotations: [MGLPointAnnotation]) {
         switch visibleStatus {
         case .hidden:
             if let selectedAnnotation = mapView.selectedAnnotations.first {

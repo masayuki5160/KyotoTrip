@@ -8,13 +8,13 @@
 import CoreLocation
 
 protocol CategoryInteractorProtocol {
-    func nextVisibleLayer(target: MarkerCategory, current: VisibleLayerEntity) -> VisibleLayerEntity
+    func nextVisibleLayer(target: MarkerCategory, current: MarkerCategoryEntity) -> MarkerCategoryEntity
     func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void)
     func createRestaurantVisibleFeature(source: RestaurantEntity) -> RestaurantMarkerEntity
 }
 
 class CategoryInteractor: CategoryInteractorProtocol {
-    func nextVisibleLayer(target: MarkerCategory, current: VisibleLayerEntity) -> VisibleLayerEntity {
+    func nextVisibleLayer(target: MarkerCategory, current: MarkerCategoryEntity) -> MarkerCategoryEntity {
         return current.update(category: target)
     }
     
