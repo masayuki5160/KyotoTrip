@@ -90,7 +90,7 @@ private extension MapViewController {
             .drive(onNext: { [weak self] markerEntity in
                 if markerEntity.title.isEmpty { return }
 
-                // move camera position to the annotation position
+                // Move camera position to the annotation position
                 let camera = MGLMapCamera(lookingAtCenter: markerEntity.coordinate, altitude: 4500, pitch: 0, heading: 0)
                 self?.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
                 self?.showCallout(from: markerEntity)
@@ -264,23 +264,8 @@ extension MapViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-        var viewController: DetailViewProtocol
         let tappedCalloutCategory = (mapView as! MapView).visibleMarkerCategory
-        let entity = (annotation as! CustomMGLPointAnnotation).entity
-
-        // TODO: Move to MapPresenter
-        switch tappedCalloutCategory {
-        case .Busstop:
-            viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
-        case .CulturalProperty:
-            viewController = AppDefaultDependencies().assembleCulturalPropertyDetailModule() as! CulturalPropertyDetailViewController
-        case .Restaurant:
-            viewController = AppDefaultDependencies().assembleRestaurantDetailModule() as! RestaurantDetailViewController
-        default:
-            viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
-        }
-        
-        viewController.visibleFeatureEntity = entity
-        self.navigationController?.pushViewController(viewController as! UIViewController, animated: true)
+        let markerEntity = (annotation as! CustomMGLPointAnnotation).entity
+        dependency.presenter.tapOnCallout(marker: markerEntity!, category: tappedCalloutCategory)
     }
 }

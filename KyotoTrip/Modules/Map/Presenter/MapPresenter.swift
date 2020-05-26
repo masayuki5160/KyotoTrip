@@ -35,6 +35,7 @@ protocol MapPresenterProtocol: AnyObject {
     
     func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol
     func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
+    func tapOnCallout(marker: MarkerEntityProtocol, category: MarkerCategory)
 }
 
 class MapPresenter: MapPresenterProtocol {
@@ -130,5 +131,21 @@ class MapPresenter: MapPresenterProtocol {
             
             return distanceFromLocationA < distanceFromLocationB
         })
+    }
+    
+    func tapOnCallout(marker: MarkerEntityProtocol, category: MarkerCategory) {
+        switch category {
+        case .Busstop:
+            dependency.router
+                .transitionToBusstopDetailViewController(markerEntity: marker)
+        case .CulturalProperty:
+            dependency.router
+                .transitionToCulturalPropertyDetailViewController(markerEntity: marker)
+        case .Restaurant:
+            dependency.router
+                .transitionToRestaurantDetailViewController(markerEntity: marker)
+        default:
+            break
+        }
     }
 }
