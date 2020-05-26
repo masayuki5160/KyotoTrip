@@ -71,13 +71,13 @@ private extension MapViewController {
         // MARK: Subscribe from Presenter
         
         dependency.presenter.markersDriver
-            .drive(onNext: { [weak self] (visibleLayer, restaurantMarkers) in
+            .drive(onNext: { [weak self] (markerCategory, restaurantAnnotations) in
                 guard let self = self else { return }
             
-                self.mapView.visibleMarkerCategory = visibleLayer.visibleCategory()
+                self.mapView.visibleMarkerCategory = markerCategory.visibleCategory()
             
                 self.updateMarkersOnStyleLayers()
-                self.updateRestaurantMarkers(annotations: restaurantMarkers)
+                self.updateRestaurantMarkers(annotations: restaurantAnnotations)
             }).disposed(by: disposeBag)
         
         dependency.presenter.userPositionButtonStatusDriver
@@ -88,17 +88,13 @@ private extension MapViewController {
             }).disposed(by: disposeBag)
         
         dependency.presenter.selectedCategoryViewCellDriver
-            .drive(onNext: { [weak self] feature in
-                // FIXME: 初回起動時なイベントを購読する不具合回避
-                if feature.title.isEmpty {
-                    return
-                }
+            .drive(onNext: { [weak self] markerEntity in
+                if markerEntity.title.isEmpty { return }
 
                 // move camera position to the annotation position
-                let camera = MGLMapCamera(lookingAtCenter: feature.coordinate, altitude: 4500, pitch: 0, heading: 0)
+                let camera = MGLMapCamera(lookingAtCenter: markerEntity.coordinate, altitude: 4500, pitch: 0, heading: 0)
                 self?.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
-
-                self?.showCallout(from: feature)
+                self?.showCallout(from: markerEntity)
             }).disposed(by: disposeBag)
     }
     
@@ -229,14 +225,15 @@ private extension MapViewController {
         showCallout(from: markerEntity)
     }
     
-    private func showCallout(from visibleFeature: MarkerEntityProtocol) {
-        visibleFeatureForTappedCalloutView = visibleFeature
+    private func showCallout(from entity: MarkerEntityProtocol) {
+        visibleFeatureForTappedCalloutView = entity
 
         let selectedAnnotation = MGLPointFeature()
-        selectedAnnotation.title = visibleFeature.title
-        selectedAnnotation.subtitle = visibleFeature.subtitle
-        selectedAnnotation.coordinate = visibleFeature.coordinate
+        selectedAnnotation.title = entity.title
+        selectedAnnotation.subtitle = entity.subtitle
+        selectedAnnotation.coordinate = entity.coordinate
         
+        // Show callout
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }
 }
@@ -288,8 +285,14 @@ extension MapViewController: MGLMapViewDelegate {
             viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView
         case .Restaurant:
             viewController = AppDefaultDependencies().assembleRestaurantDetailModule() as! RestaurantDetailViewController
-            let restaurantAnnotation = annotation as! RestaurantPointAnnotation
-            viewController.visibleFeatureEntity = restaurantAnnotation.entity
+            
+            if let restaurantAnnotation = annotation as? RestaurantPointAnnotation {
+                viewController.visibleFeatureEntity = restaurantAnnotation.entity
+            } else {
+                let entity = visibleFeatureForTappedCalloutView as! RestaurantMarkerEntity
+                viewController.visibleFeatureEntity = entity
+            }
+
         default:
             viewController = AppDefaultDependencies().assembleBusstopDetailModule() as! BusstopDetailViewController
             viewController.visibleFeatureEntity = visibleFeatureForTappedCalloutView

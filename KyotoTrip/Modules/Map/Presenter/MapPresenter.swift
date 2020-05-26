@@ -1,5 +1,5 @@
 //
-//  MapViewModel.swift
+//  MapPresenter.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/03/21.
