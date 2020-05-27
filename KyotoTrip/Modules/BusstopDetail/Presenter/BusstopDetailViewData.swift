@@ -10,13 +10,4 @@ struct BusstopDetailViewData {
     var name = ""
     var routes: [String] = []
     var organizations: [String] = []
-    var routesDictionary: [String:String] {
-        var dictionary: [String:String] = [:]
-        
-        for i in 0..<routes.count {
-            dictionary[routes[i]] = organizations[i]
-        }
-        
-        return dictionary
-    }
 }
