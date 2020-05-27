@@ -1,6 +1,6 @@
 //
-//  KyotoMapInteractorTests.swift
-//  KyotoMapInteractorTests
+//  MapInteractorTests.swift
+//  MapInteractorTests
 //
 //  Created by TANAKA MASAYUKI on 2020/05/18.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
@@ -10,7 +10,7 @@ import XCTest
 @testable import KyotoTrip
 import CoreLocation
 
-class KyotoMapInteractorTests: XCTestCase {
+class MapInteractorTests: XCTestCase {
     
     let interactor = MapInteractor()
 
