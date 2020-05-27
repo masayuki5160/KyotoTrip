@@ -8,7 +8,7 @@
 
 protocol MapViewRouterProtocol {
     var view: MapViewController { get }
-    func transitionToBusstopDetailViewController(markerEntity: MarkerEntityProtocol)
+    func transitionToBusstopDetailViewController(inject viewData: BusstopDetailViewData)
     func transitionToCulturalPropertyDetailViewController(markerEntity: MarkerEntityProtocol)
     func transitionToRestaurantDetailViewController(markerEntity: MarkerEntityProtocol)
 }
@@ -16,10 +16,9 @@ protocol MapViewRouterProtocol {
 struct MapViewRouter: MapViewRouterProtocol {
     var view: MapViewController
     
-    func transitionToBusstopDetailViewController(markerEntity: MarkerEntityProtocol) {
+    func transitionToBusstopDetailViewController(inject viewData: BusstopDetailViewData) {
         let targetVC = AppDefaultDependencies()
-            .assembleBusstopDetailModule() as! BusstopDetailViewController
-        targetVC.markerEntity = markerEntity
+            .assembleBusstopDetailModule(inject: viewData) as! BusstopDetailViewController
         view.pushViewController(targetVC, animated: true)
     }
     

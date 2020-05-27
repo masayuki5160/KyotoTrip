@@ -8,14 +8,51 @@
 
 import UIKit
 
-class BusstopDetailViewController: UIViewController, DetailViewProtocol {
+class BusstopDetailViewController: UIViewController, TransitionerProtocol {
+    
+    struct Dependency {
+        let presenter: BusstopDetailPresenterProtocol
+    }
 
     @IBOutlet weak var tableView: UITableView!
-    var markerEntity: MarkerEntityProtocol!
+    private var dependency: Dependency!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = "BusstopDetailTitle".localized
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+}
+
+extension BusstopDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dependency.presenter.sectionTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dependency.presenter.sectionTitles[section]
+    }
+        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dependency.presenter.numberOfRowsInSection(section: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return dependency.presenter.createCellForRowAt(indexPath: indexPath)
+    }
+}
+
+extension BusstopDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dependency.presenter.didSelectRowAt(indexPath: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension BusstopDetailViewController: DependencyInjectable {
+    func inject(_ dependency: BusstopDetailViewController.Dependency) {
+        self.dependency = dependency
     }
 }

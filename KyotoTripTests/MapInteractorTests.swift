@@ -35,7 +35,7 @@ class MapInteractorTests: XCTestCase {
         let mockAttributes = [
             "path": "pathto/Documents/KyotoMapData/busstop/P11-10_26_GML/P11-10_26-jgd-g_BusStop.shp",
             "P11_001": "五条千本",
-            "P11_003_1": "京都バス（株）,京都バス（株）",
+            "P11_003_1": "京都バス（株）,京阪バス（株）",
             "P11_002": "1,1",
             "P11_004_1": "81,83",
             "layer": "P11-10_26-jgd-g_BusStop"
@@ -46,17 +46,24 @@ class MapInteractorTests: XCTestCase {
             category: .Busstop,
             coordinate: mockCoordinate,
             attributes: mockAttributes
-        )
+        ) as! BusstopMarkerEntity
         let expected = BusstopMarkerEntity(
             title: mockAttributes["P11_001"]!,
-            subtitle: "",
             coordinate: mockCoordinate,
-            type: .Busstop
+            type: .Busstop,
+            routeNameString: mockAttributes["P11_004_1"]!,
+            organizationNameString: mockAttributes["P11_003_1"]!
         )
 
         XCTAssert(String(describing: type(of: expected)) == String(describing: type(of: actual)))
         XCTAssertEqual(expected.title, actual.title)
         XCTAssertEqual(expected.type, actual.type)
+        XCTAssertEqual(expected.routeNameString, actual.routeNameString)
+        XCTAssertEqual(expected.organizationNameString, actual.organizationNameString)
+        XCTAssertEqual(2, actual.routes.count)
+        XCTAssertEqual(2, actual.organizations.count)
+        XCTAssertEqual("京都バス（株）", actual.routesDictionary["81"])
+        XCTAssertEqual("京阪バス（株）", actual.routesDictionary["83"])
     }
     
     func testCreateVisibleFeatureForCulturalProperty() {

@@ -14,7 +14,7 @@ protocol AppDependencies {
     func assembleSettingsModule() -> UINavigationController
     func assembleKyotoInfoTopModule() -> UINavigationController
     func assembleKyotoMapModule() -> UINavigationController
-    func assembleBusstopDetailModule() -> UIViewController
+    func assembleBusstopDetailModule(inject viewData: BusstopDetailViewData) -> UIViewController
     func assembleCulturalPropertyDetailModule() -> UIViewController
     func assembleRestaurantDetailModule() -> UIViewController
     func assembleCategoryModule() -> UIViewController
@@ -90,11 +90,19 @@ extension AppDefaultDependencies: AppDependencies {
         return naviViewController
     }
     
-    func assembleBusstopDetailModule() -> UIViewController {
+    func assembleBusstopDetailModule(inject viewData: BusstopDetailViewData) -> UIViewController {
         let view = { () -> BusstopDetailViewController in
             let storyboard = UIStoryboard(name: "BusstopDetail", bundle: nil)
             return storyboard.instantiateInitialViewController() as! BusstopDetailViewController
         }()
+        let router = BusstopDetailRouter(view: view)
+        let presenter = BusstopDetailPresenter(
+            dependency: .init(
+                viewData: viewData,
+                router: router
+            )
+        )
+        view.inject(.init(presenter: presenter))
         
         return view
     }

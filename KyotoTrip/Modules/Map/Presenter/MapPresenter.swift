@@ -136,8 +136,10 @@ class MapPresenter: MapPresenterProtocol {
     func tapOnCallout(marker: MarkerEntityProtocol, category: MarkerCategory) {
         switch category {
         case .Busstop:
+            let busstopMarker = marker as! BusstopMarkerEntity
+            let busstopDetailViewData = dependency.interactor.createBusstopDetailViewData(marker: busstopMarker)
             dependency.router
-                .transitionToBusstopDetailViewController(markerEntity: marker)
+                .transitionToBusstopDetailViewController(inject: busstopDetailViewData)
         case .CulturalProperty:
             dependency.router
                 .transitionToCulturalPropertyDetailViewController(markerEntity: marker)

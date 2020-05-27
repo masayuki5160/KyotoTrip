@@ -44,6 +44,9 @@
 		4CA84B1C2464339A00DAC5F3 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B1B2464339A00DAC5F3 /* RestaurantDetailViewController.swift */; };
 		4CA84B1E246433B800DAC5F3 /* RestaurantDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84B1D246433B800DAC5F3 /* RestaurantDetail.storyboard */; };
 		4CB8CCD1247BF25300B69BB2 /* CategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8CCD0247BF25300B69BB2 /* CategoryRouter.swift */; };
+		4CB9EFEC247E4E6700B7398D /* BusstopDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9EFEB247E4E6700B7398D /* BusstopDetailPresenter.swift */; };
+		4CB9EFEF247E8C2D00B7398D /* BusstopDetailViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9EFEE247E8C2D00B7398D /* BusstopDetailViewData.swift */; };
+		4CB9EFF2247EA59A00B7398D /* BusstopDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9EFF1247EA59A00B7398D /* BusstopDetailRouter.swift */; };
 		4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */; };
 		4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CC1ADD6241BB13700BF84B9 /* Map.storyboard */; };
 		4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */; };
@@ -141,6 +144,9 @@
 		4CA84B1B2464339A00DAC5F3 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84B1D246433B800DAC5F3 /* RestaurantDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RestaurantDetail.storyboard; sourceTree = "<group>"; };
 		4CB8CCD0247BF25300B69BB2 /* CategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRouter.swift; sourceTree = "<group>"; };
+		4CB9EFEB247E4E6700B7398D /* BusstopDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailPresenter.swift; sourceTree = "<group>"; };
+		4CB9EFEE247E8C2D00B7398D /* BusstopDetailViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailViewData.swift; sourceTree = "<group>"; };
+		4CB9EFF1247EA59A00B7398D /* BusstopDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailRouter.swift; sourceTree = "<group>"; };
 		4CC1ADD4241BAFCC00BF84B9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		4CC1ADD6241BB13700BF84B9 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		4CC1ADDC241BC68100BF84B9 /* InfoTopPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTopPageViewController.swift; sourceTree = "<group>"; };
@@ -478,7 +484,7 @@
 		4CA84ACD2450365700DAC5F3 /* BusstopDetail */ = {
 			isa = PBXGroup;
 			children = (
-				4CA84ACF2450368100DAC5F3 /* Interactor */,
+				4CB9EFF0247EA56300B7398D /* Router */,
 				4CA84AD02450368900DAC5F3 /* Presenter */,
 				4CA84ACE2450367800DAC5F3 /* View */,
 			);
@@ -494,16 +500,11 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4CA84ACF2450368100DAC5F3 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
 		4CA84AD02450368900DAC5F3 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				4CB9EFEB247E4E6700B7398D /* BusstopDetailPresenter.swift */,
+				4CB9EFEE247E8C2D00B7398D /* BusstopDetailViewData.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -566,6 +567,14 @@
 			isa = PBXGroup;
 			children = (
 				4CB8CCD0247BF25300B69BB2 /* CategoryRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4CB9EFF0247EA56300B7398D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4CB9EFF1247EA59A00B7398D /* BusstopDetailRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1078,6 +1087,7 @@
 				4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */,
 				4CA84AF92462817C00DAC5F3 /* BusstopMarkerEntity.swift in Sources */,
 				4CA84AF0245AB37900DAC5F3 /* CategoryTableViewCell.swift in Sources */,
+				4CB9EFEF247E8C2D00B7398D /* BusstopDetailViewData.swift in Sources */,
 				4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift in Sources */,
 				4CA84B16246408DE00DAC5F3 /* RestaurantMarkerEntity.swift in Sources */,
 				4CF4AFD12468227800991B2C /* DetailViewProtocol.swift in Sources */,
@@ -1099,6 +1109,7 @@
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,
 				4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */,
 				4CB8CCD1247BF25300B69BB2 /* CategoryRouter.swift in Sources */,
+				4CB9EFEC247E4E6700B7398D /* BusstopDetailPresenter.swift in Sources */,
 				4C4CA0C224258EC400C7AEAE /* MapPresenter.swift in Sources */,
 				4CF4AFEC246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift in Sources */,
 				4CC1ADDD241BC68100BF84B9 /* InfoTopPageViewController.swift in Sources */,
@@ -1120,6 +1131,7 @@
 				4CF4B0142475735C00991B2C /* RestaurantsRequestParamGateway.swift in Sources */,
 				4CF4AFE6246E188800991B2C /* SettingsPresenter.swift in Sources */,
 				4CF4B0342478AB8F00991B2C /* TransitionerProtocol.swift in Sources */,
+				4CB9EFF2247EA59A00B7398D /* BusstopDetailRouter.swift in Sources */,
 				4C416655243FFA38005EF1C2 /* MapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
