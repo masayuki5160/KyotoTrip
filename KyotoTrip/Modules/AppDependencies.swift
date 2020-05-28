@@ -130,7 +130,13 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! CategoryViewController
         }()
         
-        let interactor = CategoryInteractor()
+        let restaurantsSearchGateway = RestaurantsSearchGateway()
+        let requestParamGateway = RestaurantsRequestParamGateway()
+        let interactor = CategoryInteractor(dependency: .init(
+            searchGateway: restaurantsSearchGateway,
+            requestParamGateway: requestParamGateway
+            )
+        )
         let commonPresenter = CommonMapPresenter.shared
         let router = CategoryRouter(view: view)
         let presenter = CategoryPresenter(dependency: .init(

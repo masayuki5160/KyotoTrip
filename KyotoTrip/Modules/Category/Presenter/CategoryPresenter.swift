@@ -20,7 +20,7 @@ struct CategoryViewInput {
     let culturalPropertyButton: Driver<Void>
     let busstopButton: Driver<Void>
     let restaurantButton: Driver<Void>
-    let tableViewCell: Driver<MarkerEntityProtocol>
+    let tableViewCell: Driver<MarkerEntityProtocol>// TODO: ViewDataに変更する
 }
 
 class CategoryPresenter: CategoryPresenterProtocol {
@@ -42,7 +42,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
         markersDriver = Driver.combineLatest(
             dependency.commonPresenter.restaurantMarkersRelay.asDriver(),
             dependency.commonPresenter.markersFromStyleLayersRelay.asDriver()
-        ){$0 + $1}
+        ){$0 + $1}// TODO: MarkerEntityをViewDataに変換する
     }
     
     func bindCategoryView(input: CategoryViewInput) {

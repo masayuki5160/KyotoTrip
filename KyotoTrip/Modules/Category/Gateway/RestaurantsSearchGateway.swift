@@ -8,7 +8,7 @@
 
 import Alamofire
 
-protocol RestaurantsSearchGatewayProtocol: AnyObject {
+protocol RestaurantsSearchGatewayProtocol {
     func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void)
 }
 
@@ -21,7 +21,7 @@ enum RestaurantsSearchResponseError: Error {
 /// - Note:
 ///   ForeignRestSearchAPI
 ///   request parameter details https://api.gnavi.co.jp/api/manual/foreignrestsearch/
-class RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
+struct RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
     // TODO: Access token is too open. Use more secure ways.
     private var accessToken = "78a33f7ad28955fdaccc7c99e7ef6dc3"
     private var targetPrefecture = "PREF26"// Set Kyoto prefecture code

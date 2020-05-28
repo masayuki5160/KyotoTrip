@@ -14,13 +14,25 @@ protocol CategoryInteractorProtocol {
 }
 
 class CategoryInteractor: CategoryInteractorProtocol {
+    
+    struct Dependency {
+        let searchGateway: RestaurantsSearchGatewayProtocol
+        let requestParamGateway: RestaurantsRequestParamGatewayProtocol
+    }
+    
+    private var dependency: Dependency!
+    
+    init(dependency: Dependency) {
+        self.dependency = dependency
+    }
+    
     func nextVisibleLayer(target: MarkerCategory, current: MarkerCategoryEntity) -> MarkerCategoryEntity {
         return current.update(category: target)
     }
     
     func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
-        createRestaurantsRequestParam(location: location) { requestParam in
-            RestaurantsSearchGateway().fetch(param: requestParam) { response in
+        createRestaurantsRequestParam(location: location) { [weak self] requestParam in
+            self?.dependency.searchGateway.fetch(param: requestParam) { response in
                 switch response {
                 case .success(let restaurants):
                     complition(.success(restaurants))
@@ -44,7 +56,7 @@ class CategoryInteractor: CategoryInteractorProtocol {
     }
     
     private func createRestaurantsRequestParam(location: CLLocationCoordinate2D, compliton: (RestaurantsRequestParamEntity) -> Void) {
-        RestaurantsRequestParamGateway().fetch { response in
+        dependency.requestParamGateway.fetch { response in
             var settings:RestaurantsRequestParamEntity
 
             switch response {
