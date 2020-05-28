@@ -16,7 +16,7 @@ protocol AppDependencies {
     func assembleKyotoMapModule() -> UINavigationController
     func assembleBusstopDetailModule(inject viewData: BusstopDetailViewData) -> UIViewController
     func assembleCulturalPropertyDetailModule(inject viewData: CulturalPropertyDetailViewData) -> UIViewController
-    func assembleRestaurantDetailModule() -> UIViewController
+    func assembleRestaurantDetailModule(inject viewData: RestaurantDetailViewData) -> UIViewController
     func assembleCategoryModule() -> UIViewController
     func assembleSettingsLisenceModule() -> UIViewController
     func assembleSettingsRestaurantsSearchModule() -> UIViewController
@@ -144,11 +144,19 @@ extension AppDefaultDependencies: AppDependencies {
         return view
     }
     
-    func assembleRestaurantDetailModule() -> UIViewController {
+    func assembleRestaurantDetailModule(inject viewData: RestaurantDetailViewData) -> UIViewController {
         let view = { () -> RestaurantDetailViewController in
             let storyboard = UIStoryboard(name: "RestaurantDetail", bundle: nil)
             return storyboard.instantiateInitialViewController() as! RestaurantDetailViewController
         }()
+        let router = RestaurantDetailRouter(view: view)
+        let presenter = RestaurantDetailPresenter(
+            dependency: .init(
+                router: router,
+                viewData: viewData
+            )
+        )
+        view.inject(.init(presenter: presenter))
         
         return view
     }

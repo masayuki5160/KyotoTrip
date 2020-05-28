@@ -8,22 +8,48 @@
 
 import UIKit
 
-class RestaurantDetailViewController: UIViewController, DetailViewProtocol {
-    var markerEntity: MarkerEntityProtocol!
-    @IBOutlet weak var restaurantName: UILabel!
-    @IBOutlet weak var restaurantKanaName: UILabel!
-    @IBOutlet weak var address: UILabel!
-    @IBOutlet weak var buisinessHour: UILabel!
-    @IBOutlet weak var holiday: UILabel!
+class RestaurantDetailViewController: UIViewController {
+    
+    struct Dependency {
+        let presenter: RestaurantDetailPresenterProtocol
+    }
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var dependency: Dependency!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let entity = markerEntity as! RestaurantMarkerEntity
-        restaurantName.text = entity.detail?.name.name
-        restaurantKanaName.text = entity.detail?.name.nameKana
-        address.text = entity.detail?.contacts.address
-        buisinessHour.text = entity.detail?.businessHour
-        holiday.text = entity.detail?.holiday
+        tableView.delegate = self
+        tableView.dataSource = self
     }
+}
+
+extension RestaurantDetailViewController: DependencyInjectable {
+    func inject(_ dependency: RestaurantDetailViewController.Dependency) {
+        self.dependency = dependency
+    }
+}
+
+extension RestaurantDetailViewController: UITableViewDelegate {
+}
+
+extension RestaurantDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dependency.presenter.sectionTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dependency.presenter.sectionTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dependency.presenter.numberOfRowsInSection(section: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return dependency.presenter.createCellForRowAt(indexPath: indexPath)
+    }
+
 }

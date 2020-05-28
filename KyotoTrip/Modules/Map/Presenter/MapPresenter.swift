@@ -148,8 +148,10 @@ class MapPresenter: MapPresenterProtocol {
             dependency.router
                 .transitionToCulturalPropertyDetailViewController(inject: culturalPropertyDetailViewData)
         case .Restaurant:
+            let restaurantMarker = marker as! RestaurantMarkerEntity
+            let restaurantDetailViewData = createRestaurantDetailViewData(marker: restaurantMarker)
             dependency.router
-                .transitionToRestaurantDetailViewController(markerEntity: marker)
+                .transitionToRestaurantDetailViewController(inject: restaurantDetailViewData)
         default:
             break
         }
@@ -174,6 +176,17 @@ private extension MapPresenter {
             largeClassification: marker.largeClassification,
             smallClassification: marker.smallClassification,
             registerdDate: marker.registerDateString
+        )
+        
+        return viewData
+    }
+    
+    private func createRestaurantDetailViewData(marker: RestaurantMarkerEntity) -> RestaurantDetailViewData {
+        let viewData = RestaurantDetailViewData(
+            name: marker.title,
+            address: marker.detail?.contacts.address ?? "",
+            businessHour: marker.detail?.businessHour ?? "",
+            holiday: marker.detail?.holiday ?? ""
         )
         
         return viewData
