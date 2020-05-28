@@ -137,17 +137,45 @@ class MapPresenter: MapPresenterProtocol {
         switch category {
         case .Busstop:
             let busstopMarker = marker as! BusstopMarkerEntity
-            let busstopDetailViewData = dependency.interactor.createBusstopDetailViewData(marker: busstopMarker)
+            let busstopDetailViewData = createBusstopDetailViewData(marker: busstopMarker)
+            
             dependency.router
                 .transitionToBusstopDetailViewController(inject: busstopDetailViewData)
         case .CulturalProperty:
+            let culturalPropertyMarker = marker as! CulturalPropertyMarkerEntity
+            let culturalPropertyDetailViewData = createCulturalPropertyDetailViewData(marker: culturalPropertyMarker)
+            
             dependency.router
-                .transitionToCulturalPropertyDetailViewController(markerEntity: marker)
+                .transitionToCulturalPropertyDetailViewController(inject: culturalPropertyDetailViewData)
         case .Restaurant:
             dependency.router
                 .transitionToRestaurantDetailViewController(markerEntity: marker)
         default:
             break
         }
+    }
+}
+
+private extension MapPresenter {
+    private func createBusstopDetailViewData(marker: BusstopMarkerEntity) -> BusstopDetailViewData {
+        let viewData = BusstopDetailViewData(
+            name: marker.title,
+            routes: marker.routes,
+            organizations: marker.organizations
+        )
+        
+        return viewData
+    }
+    
+    private func createCulturalPropertyDetailViewData(marker: CulturalPropertyMarkerEntity) -> CulturalPropertyDetailViewData {
+        let viewData = CulturalPropertyDetailViewData(
+            name: marker.title,
+            address: marker.address,
+            largeClassification: marker.largeClassification,
+            smallClassification: marker.smallClassification,
+            registerdDate: marker.registerDateString
+        )
+        
+        return viewData
     }
 }

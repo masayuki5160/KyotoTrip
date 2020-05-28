@@ -8,23 +8,46 @@
 
 import UIKit
 
-class CulturalPropertyDetailViewController: UIViewController, DetailViewProtocol {
-
-    var markerEntity: MarkerEntityProtocol!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var address: UILabel!
-    @IBOutlet weak var largeClassification: UILabel!
-    @IBOutlet weak var smallClassification: UILabel!
-    @IBOutlet weak var registerDate: UILabel!
+class CulturalPropertyDetailViewController: UIViewController {
+    
+    struct Dependency {
+        let presenter: CulturalPropertyDetailPresenterProtocol
+    }
+    
+    private var dependency: Dependency!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let entity = markerEntity as! CulturalPropertyMarkerEntity
-        name.text = entity.title
-        address.text = entity.address
-        largeClassification.text = entity.largeClassification
-        smallClassification.text = entity.smallClassification
-        registerDate.text = entity.registerDateString
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+}
+
+extension CulturalPropertyDetailViewController: DependencyInjectable {
+    func inject(_ dependency: CulturalPropertyDetailViewController.Dependency) {
+        self.dependency = dependency
+    }
+}
+
+extension CulturalPropertyDetailViewController: UITableViewDelegate {
+}
+
+extension CulturalPropertyDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dependency.presenter.sectionTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dependency.presenter.sectionTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dependency.presenter.numberOfRowsInSection(section: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return dependency.presenter.createCellForRowAt(indexPath: indexPath)
     }
 }

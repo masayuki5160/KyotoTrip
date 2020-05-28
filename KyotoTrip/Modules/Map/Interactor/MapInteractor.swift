@@ -11,7 +11,6 @@ import CoreLocation
 protocol MapInteractorProtocol: AnyObject {
     func updateUserPosition(_ position: UserPosition) -> UserPosition
     func createMarkerEntity(category: MarkerCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol
-    func createBusstopDetailViewData(marker: BusstopMarkerEntity) -> BusstopDetailViewData
 }
 
 final class MapInteractor: MapInteractorProtocol {
@@ -45,15 +44,5 @@ final class MapInteractor: MapInteractorProtocol {
             // TODO: Fix later
             return BusstopMarkerEntity(title: "", coordinate: coordinate)
         }
-    }
-    
-    func createBusstopDetailViewData(marker: BusstopMarkerEntity) -> BusstopDetailViewData {
-        let viewData = BusstopDetailViewData(
-            name: marker.title,
-            routes: marker.routes,
-            organizations: marker.organizations
-        )
-        
-        return viewData
     }
 }

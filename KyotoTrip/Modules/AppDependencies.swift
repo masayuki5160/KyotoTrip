@@ -15,7 +15,7 @@ protocol AppDependencies {
     func assembleKyotoInfoTopModule() -> UINavigationController
     func assembleKyotoMapModule() -> UINavigationController
     func assembleBusstopDetailModule(inject viewData: BusstopDetailViewData) -> UIViewController
-    func assembleCulturalPropertyDetailModule() -> UIViewController
+    func assembleCulturalPropertyDetailModule(inject viewData: CulturalPropertyDetailViewData) -> UIViewController
     func assembleRestaurantDetailModule() -> UIViewController
     func assembleCategoryModule() -> UIViewController
     func assembleSettingsLisenceModule() -> UIViewController
@@ -107,11 +107,19 @@ extension AppDefaultDependencies: AppDependencies {
         return view
     }
     
-    func assembleCulturalPropertyDetailModule() -> UIViewController {
+    func assembleCulturalPropertyDetailModule(inject viewData: CulturalPropertyDetailViewData) -> UIViewController {
         let view = { () -> CulturalPropertyDetailViewController in
             let storyboard = UIStoryboard(name: "CulturalPropertyDetail", bundle: nil)
             return storyboard.instantiateInitialViewController() as! CulturalPropertyDetailViewController
         }()
+        let router = CulturalPropertyDetailRouter(view: view)
+        let presenter = CulturalPropertyDetailPresenter(
+            dependency: .init(
+                router: router,
+                viewData: viewData
+            )
+        )
+        view.inject(.init(presenter: presenter))
         
         return view
     }
