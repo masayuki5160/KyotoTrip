@@ -8,7 +8,13 @@
 
 struct RestaurantDetailViewData {
     var name = ""
+    var nameKana = ""
     var address = ""
+    var access = ""
+    var tel = ""
     var businessHour = ""
     var holiday = ""
+    var salesPoint = ""
+    var url = ""
+    var imageUrl = ""
 }

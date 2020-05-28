@@ -12,7 +12,7 @@ protocol RestaurantDetailPresenterProtocol {
     var sectionTitles: [String] { get }
     func createCellForRowAt(indexPath: IndexPath) -> UITableViewCell
     func numberOfRowsInSection(section: Int) -> Int
-    func didSelectRowAt(indexPath: IndexPath)
+    func didSelectRowAt(tableView: UITableView, indexPath: IndexPath)
 }
 
 class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
@@ -26,7 +26,10 @@ class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
         "店舗名",
         "住所",
         "営業時間",
-        "休業日"
+        "休業日",
+        "TEL",
+        "ホームページ",
+        "その他"
     ]
     
     private var dependency: Dependency
@@ -38,22 +41,49 @@ class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
     }
     
     func createCellForRowAt(indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: reuseCellId)
-        cell.accessoryType = .none
-        cell.selectionStyle = .none
+        var cell = UITableViewCell(style: .default, reuseIdentifier: reuseCellId)
         
         switch indexPath.section {
         case 0:// 店舗名
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: reuseCellId)
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+
             cell.textLabel?.text = dependency.viewData.name
             cell.textLabel?.numberOfLines = 0
+            cell.detailTextLabel?.text = dependency.viewData.nameKana
+            cell.detailTextLabel?.numberOfLines = 0
         case 1:// 住所
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: reuseCellId)
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+            
             cell.textLabel?.text = dependency.viewData.address
             cell.textLabel?.numberOfLines = 0
+            cell.detailTextLabel?.text = dependency.viewData.access
+            cell.detailTextLabel?.numberOfLines = 0
         case 2:// 営業時間
             cell.textLabel?.text = dependency.viewData.businessHour
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
             cell.textLabel?.numberOfLines = 0
         case 3:// 休業日
             cell.textLabel?.text = dependency.viewData.holiday
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+            cell.textLabel?.numberOfLines = 0
+        case 4:// TEL
+            cell.textLabel?.text = dependency.viewData.tel
+            cell.textLabel?.numberOfLines = 0
+            cell.accessoryType = .none
+        case 5:// ホームページ
+            cell.textLabel?.text = dependency.viewData.url
+            cell.textLabel?.numberOfLines = 0
+            cell.accessoryType = .disclosureIndicator
+        case 6:// その他
+            cell.textLabel?.text = dependency.viewData.salesPoint
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
             cell.textLabel?.numberOfLines = 0
         default:
             break
@@ -66,7 +96,20 @@ class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
         return 1
     }
     
-    func didSelectRowAt(indexPath: IndexPath) {
+    func didSelectRowAt(tableView: UITableView, indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        switch indexPath.section {
+        case 4:// TELセクション
+            let phoneString = cell?.textLabel?.text ?? ""
+            dependency.router.openPhoneApp(phoneNumber: phoneString.replace(from: "-", to: ""))
+        case 5:// URLセクション
+            let urlString = cell?.textLabel?.text
+            if let urlString = urlString {
+                dependency.router.presentRestaurantWebsite(url: URL(string: urlString)!)
+            }
+        default:
+            break
+        }
     }
 
 }

@@ -33,6 +33,10 @@ extension RestaurantDetailViewController: DependencyInjectable {
 }
 
 extension RestaurantDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dependency.presenter.didSelectRowAt(tableView: tableView, indexPath: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension RestaurantDetailViewController: UITableViewDataSource {

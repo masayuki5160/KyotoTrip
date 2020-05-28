@@ -182,13 +182,21 @@ private extension MapPresenter {
     }
     
     private func createRestaurantDetailViewData(marker: RestaurantMarkerEntity) -> RestaurantDetailViewData {
-        let viewData = RestaurantDetailViewData(
-            name: marker.title,
-            address: marker.detail?.contacts.address ?? "",
-            businessHour: marker.detail?.businessHour ?? "",
-            holiday: marker.detail?.holiday ?? ""
-        )
-        
-        return viewData
+        if let detail = marker.detail {
+            return RestaurantDetailViewData(
+                name: detail.name.name,
+                nameKana: detail.name.nameKana,
+                address: detail.contacts.address,
+                access: detail.access,
+                tel: detail.contacts.tel,
+                businessHour: detail.businessHour,
+                holiday: detail.holiday,
+                salesPoint: detail.salesPoints.prLong,
+                url: detail.url,
+                imageUrl: detail.imageUrl.thumbnail
+            )
+        } else {
+            return RestaurantDetailViewData()
+        }
     }
 }
