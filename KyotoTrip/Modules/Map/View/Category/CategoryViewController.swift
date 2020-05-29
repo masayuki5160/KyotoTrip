@@ -50,16 +50,14 @@ private extension CategoryViewController {
             culturalPropertyButton: culturalPropertyButton.rx.tap.asDriver(),
             busstopButton: busstopButton.rx.tap.asDriver(),
             restaurantButton: restaurantButton.rx.tap.asDriver(),
-            tableViewCell: tableView.rx.modelSelected(MarkerEntityProtocol.self).asDriver()
+            selectedCell: tableView.rx.modelSelected(CategoryCellViewData.self).asDriver()
             )
         )
         
-        dependency.presenter.markersDriver.drive(tableView.rx.items(cellIdentifier: CategoryTableViewCell.id, cellType: CategoryTableViewCell.self))
-        { [weak self] row, element, cell in
-            guard let self = self else { return }
-
+        dependency.presenter.cellsDriver.drive(tableView.rx.items(cellIdentifier: CategoryTableViewCell.id, cellType: CategoryTableViewCell.self))
+        { row, element, cell in
             cell.title.text = element.title
-            let iconName = self.dependency.presenter.categoryTableViewCellIconName(element.type)
+            let iconName = element.iconName
             cell.icon.image = UIImage(named: iconName)
         }.disposed(by: disposeBag)
     }

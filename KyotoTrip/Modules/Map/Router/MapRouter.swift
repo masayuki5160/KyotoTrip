@@ -6,14 +6,14 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-protocol MapViewRouterProtocol {
+protocol MapRouterProtocol {
     var view: MapViewController { get }
     func transitionToBusstopDetailViewController(inject viewData: BusstopDetailViewData)
     func transitionToCulturalPropertyDetailViewController(inject viewData: CulturalPropertyDetailViewData)
     func transitionToRestaurantDetailViewController(inject viewData: RestaurantDetailViewData)
 }
 
-struct MapViewRouter: MapViewRouterProtocol {
+struct MapRouter: MapRouterProtocol {
     var view: MapViewController
     
     func transitionToBusstopDetailViewController(inject viewData: BusstopDetailViewData) {

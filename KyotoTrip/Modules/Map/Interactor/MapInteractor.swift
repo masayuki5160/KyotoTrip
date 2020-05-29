@@ -9,40 +9,71 @@
 import CoreLocation
 
 protocol MapInteractorProtocol: AnyObject {
-    func updateUserPosition(_ position: UserPosition) -> UserPosition
-    func createMarkerEntity(category: MarkerCategory, coordinate: CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol
+    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<[RestaurantMarkerEntity], RestaurantsSearchResponseError>) -> Void)
 }
 
-final class MapInteractor: MapInteractorProtocol {
-    
-    func updateUserPosition(_ position: UserPosition) -> UserPosition {
-        let nextStatusRawValue = position.rawValue + 1
-        let nextStatus = UserPosition(rawValue: nextStatusRawValue) ?? UserPosition.kyotoCity
-        
-        return nextStatus
+class MapInteractor: MapInteractorProtocol {
+    struct Dependency {
+        let searchGateway: RestaurantsSearchGatewayProtocol
+        let requestParamGateway: RestaurantsRequestParamGatewayProtocol
     }
     
-    func createMarkerEntity(category: MarkerCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol {
-        switch category {
-        case .Busstop:
-            return BusstopMarkerEntity(
-                title: attributes[BusstopMarkerEntity.titleId] as! String,
-                coordinate: coordinate,
-                routeNameString: attributes[BusstopMarkerEntity.busRouteId] as! String,
-                organizationNameString: attributes[BusstopMarkerEntity.organizationId] as! String
-            )
-        case .CulturalProperty:
-            return CulturalPropertyMarkerEntity(
-                title: attributes[CulturalPropertyMarkerEntity.titleId] as! String,
-                coordinate: coordinate,
-                address: attributes[CulturalPropertyMarkerEntity.addressId] as! String,
-                largeClassificationCode: attributes[CulturalPropertyMarkerEntity.largeClassificationCodeId] as! Int,
-                smallClassificationCode: attributes[CulturalPropertyMarkerEntity.smallClassificationCodeId] as! Int,
-                registerdDate: attributes[CulturalPropertyMarkerEntity.registerdDateId] as! Int
-            )
-        default:
-            // TODO: Fix later
-            return BusstopMarkerEntity(title: "", coordinate: coordinate)
+    private var dependency: Dependency!
+    
+    init(dependency: Dependency) {
+        self.dependency = dependency
+    }
+    
+    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<[RestaurantMarkerEntity], RestaurantsSearchResponseError>) -> Void) {
+        createRestaurantsRequestParam(location: location) { [weak self] requestParam in
+            self?.dependency.searchGateway.fetch(param: requestParam) { response in
+                guard let self = self else { return }
+
+                switch response {
+                case .success(let restaurants):
+                    var markers: [RestaurantMarkerEntity] = []
+                    for restaurant in restaurants.rest {
+                        let marker = self.createRestaurantMarker(source: restaurant)
+                        markers.append(marker)
+                    }
+                    
+                    complition(.success(markers))
+                case .failure(let error):
+                    complition(.failure(error))
+                }
+            }
+        }
+    }
+}
+
+private extension MapInteractor {
+    private func createRestaurantMarker(source: RestaurantEntity) -> RestaurantMarkerEntity {
+        let latitude = atof(source.location.latitudeWgs84)
+        let longitude = atof(source.location.longitudeWgs84)
+        return RestaurantMarkerEntity(
+            title: source.name.name,
+            subtitle: source.categories.category,
+            coordinate: CLLocationCoordinate2DMake(latitude, longitude),
+            type: .Restaurant,
+            detail: source
+        )
+    }
+    
+    private func createRestaurantsRequestParam(location: CLLocationCoordinate2D, compliton: (RestaurantsRequestParamEntity) -> Void) {
+        dependency.requestParamGateway.fetch { response in
+            var settings:RestaurantsRequestParamEntity
+
+            switch response {
+            case .failure(_):
+                // Set default settings
+                settings = RestaurantsRequestParamEntity()
+            case .success(let savedSettings):
+                settings = savedSettings
+                settings.latitude = String(location.latitude)
+                settings.longitude = String(location.longitude)
+            }
+            
+            compliton(settings)
         }
     }
 }

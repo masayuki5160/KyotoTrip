@@ -75,13 +75,19 @@ extension AppDefaultDependencies: AppDependencies {
         }()
         let view = naviViewController.viewControllers[0] as! MapViewController
         
-        let interactor = MapInteractor()
-        let commonPresenter = CommonMapPresenter.shared
-        let router = MapViewRouter(view: view)
+        let restaurantsSearchGateway = RestaurantsSearchGateway()
+        let requestParamGateway = RestaurantsRequestParamGateway()
+        let interactor = MapInteractor(dependency: .init(
+            searchGateway: restaurantsSearchGateway,
+            requestParamGateway: requestParamGateway
+            )
+        )
+        let sharedPresenter = SharedMapPresenter.shared
+        let router = MapRouter(view: view)
         let presenter = MapPresenter(
             dependency: .init(
                 interactor: interactor,
-                commonPresenter: commonPresenter,
+                sharedPresenter: sharedPresenter,
                 router: router
             )
         )
@@ -132,16 +138,16 @@ extension AppDefaultDependencies: AppDependencies {
         
         let restaurantsSearchGateway = RestaurantsSearchGateway()
         let requestParamGateway = RestaurantsRequestParamGateway()
-        let interactor = CategoryInteractor(dependency: .init(
+        let interactor = MapInteractor(dependency: .init(
             searchGateway: restaurantsSearchGateway,
             requestParamGateway: requestParamGateway
             )
         )
-        let commonPresenter = CommonMapPresenter.shared
+        let sharedPresenter = SharedMapPresenter.shared
         let router = CategoryRouter(view: view)
         let presenter = CategoryPresenter(dependency: .init(
             interactor: interactor,
-            commonPresenter: commonPresenter,
+            sharedPresenter: sharedPresenter,
             router: router
             )
         )

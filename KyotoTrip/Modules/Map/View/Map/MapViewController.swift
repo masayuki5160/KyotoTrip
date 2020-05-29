@@ -21,7 +21,6 @@ class MapViewController: UIViewController, TransitionerProtocol {
     @IBOutlet weak var mapView: MapView!
     @IBOutlet weak var compassButton: UIButton!
 
-    private let mglFeatures = BehaviorRelay<[MGLFeature]>(value: [])
     private let disposeBag = DisposeBag()
     private var dependency: Dependency!
     private var floatingPanelController: FloatingPanelController!
@@ -61,9 +60,7 @@ private extension MapViewController {
         /// Bind to Presenter
         
         dependency.presenter.bindMapView(input: MapViewInput(
-            compassButton: compassButton.rx.tap.asDriver(),
-            mglFeatures: mglFeatures.asDriver(),
-            mapView: mapView
+            compassButtonTapEvent: compassButton.rx.tap.asDriver()
             )
         )
 
@@ -142,7 +139,7 @@ private extension MapViewController {
             
             /// Get features from Style Layers which is defined in Mapbox Studio
             let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
-            self.mglFeatures.accept(features)
+            self.dependency.presenter.updateVisibleMGLFeatures(mglFeatures: features)
         }
     }
     
@@ -269,5 +266,9 @@ extension MapViewController: MGLMapViewDelegate {
         let tappedCalloutCategory = (mapView as! MapView).visibleMarkerCategory
         let markerEntity = (annotation as! CustomMGLPointAnnotation).entity
         dependency.presenter.tapOnCallout(marker: markerEntity!, category: tappedCalloutCategory)
+    }
+    
+    func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
+        dependency.presenter.updateViewpoint(centerCoordinate: mapView.centerCoordinate)
     }
 }

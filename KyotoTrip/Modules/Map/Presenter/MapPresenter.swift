@@ -8,12 +8,11 @@
 
 import RxSwift
 import RxCocoa
-import Mapbox
+import CoreLocation
+import Mapbox.MGLFeature
 
 struct MapViewInput {
-    let compassButton: Driver<Void>
-    let mglFeatures: Driver<[MGLFeature]>
-    let mapView: MGLMapView
+    let compassButtonTapEvent: Driver<Void>
 }
 
 protocol MapPresenterProtocol: AnyObject {
@@ -24,6 +23,8 @@ protocol MapPresenterProtocol: AnyObject {
     // MARK: - Input to Presenter
     
     func bindMapView(input: MapViewInput)
+    func updateVisibleMGLFeatures(mglFeatures: [MGLFeature])
+    func updateViewpoint(centerCoordinate: CLLocationCoordinate2D)
 
     // MARK: - Output from Presenter
 
@@ -43,8 +44,8 @@ class MapPresenter: MapPresenterProtocol {
     // MARK: - Properties
     struct Dependency {
         let interactor: MapInteractorProtocol
-        let commonPresenter: CommonMapPresenterProtocol
-        let router: MapViewRouterProtocol
+        let sharedPresenter: SharedMapPresenterProtocol
+        let router: MapRouterProtocol
     }
 
     static var layerIdentifiers: Set<String> = [
@@ -56,7 +57,7 @@ class MapPresenter: MapPresenterProtocol {
         return userPositionButtonStatus.asDriver()
     }
     var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> {
-        return dependency.commonPresenter.selectedCategoryViewCellRelay.asDriver()
+        return dependency.sharedPresenter.selectedCategoryViewCellRelay.asDriver()
     }
     var markersDriver: Driver<(MarkerCategoryEntity, [CustomMGLPointAnnotation])>
     
@@ -70,50 +71,37 @@ class MapPresenter: MapPresenterProtocol {
         self.dependency = dependency
         
         markersDriver = Driver.combineLatest(
-            dependency.commonPresenter.markerCategoryRelay.asDriver(),
-            dependency.commonPresenter.restaurantMarkersRelay.asDriver()
+            dependency.sharedPresenter.markerCategoryRelay.asDriver(),
+            dependency.sharedPresenter.restaurantMarkersRelay.asDriver()
         ){($0, $1)}
             .map({ (markerCategory, restaurantMarkers) -> (MarkerCategoryEntity, [CustomMGLPointAnnotation]) in
-                var annotations: [CustomMGLPointAnnotation] = []
-                for marker in restaurantMarkers {
-                    let annotation = CustomMGLPointAnnotation(entity: marker)
-                    annotations.append(annotation)
+                let annotations = restaurantMarkers.map { marker -> CustomMGLPointAnnotation in
+                    CustomMGLPointAnnotation(entity: marker)
                 }
                 return (markerCategory, annotations)
             })
     }
     
     func bindMapView(input: MapViewInput) {
-
-        /// Subscribe from MapView
-        
-        input.compassButton.drive(onNext: { [weak self] in
+        input.compassButtonTapEvent.drive(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let nextPosition = self.dependency.interactor.updateUserPosition(self.userPositionButtonStatus.value)
+            let nextPosition = self.updateUserPosition(self.userPositionButtonStatus.value)
             self.userPositionButtonStatus.accept(nextPosition)
         }).disposed(by: disposeBag)
+    }
+    
+    func updateVisibleMGLFeatures(mglFeatures: [MGLFeature]) {
+        let markers = mglFeatures.map { feature -> MarkerEntityProtocol in
+            convertMGLFeatureToMarkerEntity(source: feature)
+        }
         
-        input.mglFeatures.map({ [weak self] (features) -> [MarkerEntityProtocol] in
-            var markers: [MarkerEntityProtocol] = []
-            for feature in features {
-                let marker = self?.convertMGLFeatureToMarkerEntity(source: feature)
-                markers.append(marker ?? BusstopMarkerEntity())
-            }
-            
-            return markers
-        }).drive(onNext: { [weak self] (markers) in
-            self?.dependency.commonPresenter.markersFromStyleLayersRelay.accept(markers)
-        }).disposed(by: disposeBag)
-        
-        /// Dependency injection to CommonPresenter
-
-        dependency.commonPresenter.inject(mapView: input.mapView)
+        dependency.sharedPresenter.markersFromStyleLayersRelay.accept(markers)
     }
     
     func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
-        let category = dependency.commonPresenter.markerCategoryRelay.value.visibleCategory()        
-        return dependency.interactor.createMarkerEntity(
+        let category = dependency.sharedPresenter.markerCategoryRelay.value.visibleCategory()        
+        return createMarkerEntity(
             category: category,
             coordinate: source.coordinate,
             attributes: source.attributes
@@ -156,9 +144,16 @@ class MapPresenter: MapPresenterProtocol {
             break
         }
     }
+    
+    func updateViewpoint(centerCoordinate: CLLocationCoordinate2D) {
+        dependency.sharedPresenter.updateMapViewViewpoint(centerCoordinate: centerCoordinate)
+    }
 }
 
 private extension MapPresenter {
+    
+    // MARK: - Create entity/viewdata private methods
+    
     private func createBusstopDetailViewData(marker: BusstopMarkerEntity) -> BusstopDetailViewData {
         let viewData = BusstopDetailViewData(
             name: marker.title,
@@ -198,5 +193,38 @@ private extension MapPresenter {
         } else {
             return RestaurantDetailViewData()
         }
+    }
+    
+    private func createMarkerEntity(category: MarkerCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol {
+        switch category {
+        case .Busstop:
+            return BusstopMarkerEntity(
+                title: attributes[BusstopMarkerEntity.titleId] as! String,
+                coordinate: coordinate,
+                routeNameString: attributes[BusstopMarkerEntity.busRouteId] as! String,
+                organizationNameString: attributes[BusstopMarkerEntity.organizationId] as! String
+            )
+        case .CulturalProperty:
+            return CulturalPropertyMarkerEntity(
+                title: attributes[CulturalPropertyMarkerEntity.titleId] as! String,
+                coordinate: coordinate,
+                address: attributes[CulturalPropertyMarkerEntity.addressId] as! String,
+                largeClassificationCode: attributes[CulturalPropertyMarkerEntity.largeClassificationCodeId] as! Int,
+                smallClassificationCode: attributes[CulturalPropertyMarkerEntity.smallClassificationCodeId] as! Int,
+                registerdDate: attributes[CulturalPropertyMarkerEntity.registerdDateId] as! Int
+            )
+        default:
+            // TODO: Fix later
+            return BusstopMarkerEntity(title: "", coordinate: coordinate)
+        }
+    }
+    
+    // MARK: - Other private methods
+    
+    private func updateUserPosition(_ position: UserPosition) -> UserPosition {
+        let nextStatusRawValue = position.rawValue + 1
+        let nextStatus = UserPosition(rawValue: nextStatusRawValue) ?? UserPosition.kyotoCity
+        
+        return nextStatus
     }
 }
