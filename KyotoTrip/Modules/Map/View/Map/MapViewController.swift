@@ -260,9 +260,8 @@ extension MapViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-        let tappedCalloutCategory = (mapView as! MapView).visibleMarkerCategory
         let markerEntity = (annotation as! CustomMGLPointAnnotation).entity
-        dependency.presenter.tapOnCallout(marker: markerEntity!, category: tappedCalloutCategory)
+        dependency.presenter.tapOnCallout(marker: markerEntity!, category: markerEntity?.type ?? .None)
     }
     
     func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
