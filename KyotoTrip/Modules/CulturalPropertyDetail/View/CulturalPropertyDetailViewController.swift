@@ -20,6 +20,8 @@ class CulturalPropertyDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "都道府県指定文化財"
+        
         tableView.delegate = self
         tableView.dataSource = self
     }

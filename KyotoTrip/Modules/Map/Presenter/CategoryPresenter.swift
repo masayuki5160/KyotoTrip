@@ -18,17 +18,16 @@ protocol CategoryPresenterProtocol {
 }
 
 struct CategoryViewInput {
-    let culturalPropertyButton: Driver<Void>
-    let busstopButton: Driver<Void>
-    let restaurantButton: Driver<Void>
-    let selectedCell: Driver<CategoryCellViewData>
+    let culturalPropertyButton: Signal<Void>
+    let busstopButton: Signal<Void>
+    let restaurantButton: Signal<Void>
+    let selectedCell: Signal<CategoryCellViewData>
 }
 
 class CategoryPresenter: CategoryPresenterProtocol {
 
     struct Dependency {
         let interactor: MapInteractorProtocol
-        let sharedPresenter: SharedMapPresenterProtocol
         let router: CategoryRouterProtocol
     }
     
@@ -43,12 +42,9 @@ class CategoryPresenter: CategoryPresenterProtocol {
     init(dependency: Dependency) {
         self.dependency = dependency
         
-        Driver.combineLatest(
-            dependency.sharedPresenter.restaurantMarkersRelay.asDriver(),
-            dependency.sharedPresenter.markersFromStyleLayersRelay.asDriver()
-        ){$0 + $1}.map { markers -> [CategoryCellViewData] in
+        dependency.interactor.visibleMarkers.map { markers -> [CategoryCellViewData] in
             markers.map { [weak self] marker -> CategoryCellViewData in
-                return CategoryCellViewData(
+                CategoryCellViewData(
                     title: marker.title,
                     iconName: self?.categoryTableViewCellIconName(marker.type) ?? "",
                     detail: marker
@@ -60,58 +56,56 @@ class CategoryPresenter: CategoryPresenterProtocol {
     }
     
     func bindCategoryView(input: CategoryViewInput) {
-        input.culturalPropertyButton.drive(onNext: { [weak self] in
+        input.culturalPropertyButton.emit(onNext: { [weak self] in
             guard let self = self else { return }
-
+            
             let nextVisibleLayer = self.nextVisibleLayer(
                 target: .CulturalProperty,
-                current: self.dependency.sharedPresenter.markerCategoryRelay.value
+                current: self.dependency.interactor.markerCategory
             )
-            
-            self.dependency.sharedPresenter.markerCategoryRelay.accept(nextVisibleLayer)
-            self.dependency.sharedPresenter.restaurantMarkersRelay.accept([])
+            self.dependency.interactor.updateVisibleLayer(entity: nextVisibleLayer)
+            self.dependency.interactor.updateRestaurantMarkers(entity: [])
         }).disposed(by: disposeBag)
         
-        input.busstopButton.drive(onNext: { [weak self] in
+        input.busstopButton.emit(onNext: { [weak self] in
             guard let self = self else { return }
             
             let nextVisibleLayer = self.nextVisibleLayer(
                 target: .Busstop,
-                current: self.dependency.sharedPresenter.markerCategoryRelay.value
+                current: self.dependency.interactor.markerCategory
             )
-            
-            self.dependency.sharedPresenter.markerCategoryRelay.accept(nextVisibleLayer)
-            self.dependency.sharedPresenter.restaurantMarkersRelay.accept([])
+            self.dependency.interactor.updateVisibleLayer(entity: nextVisibleLayer)
+            self.dependency.interactor.updateRestaurantMarkers(entity: [])
         }).disposed(by: disposeBag)
         
-        input.restaurantButton.drive(onNext: { [weak self] in
+        input.restaurantButton.emit(onNext: { [weak self] in
             guard let self = self else { return }
             
             let nextVisibleLayer = self.nextVisibleLayer(
                 target: .Restaurant,
-                current: self.dependency.sharedPresenter.markerCategoryRelay.value
+                current: self.dependency.interactor.markerCategory
             )
             
             switch nextVisibleLayer.restaurant {
             case .hidden:
-                self.dependency.sharedPresenter.restaurantMarkersRelay.accept([])
+                self.dependency.interactor.updateRestaurantMarkers(entity: [])
             case .visible:
                 self.fetchRestaurantsEntity()
             }
             
-            self.dependency.sharedPresenter.markerCategoryRelay.accept(nextVisibleLayer)
+            self.dependency.interactor.updateVisibleLayer(entity: nextVisibleLayer)
         }).disposed(by: disposeBag)
         
-        input.selectedCell.drive(onNext: { [weak self] (cell) in
+        input.selectedCell.emit(onNext: { [weak self] (cell) in
             let markerEntity = cell.detail
-            self?.dependency.sharedPresenter.selectedCategoryViewCellRelay.accept(markerEntity)
+            self?.dependency.interactor.didSelectCategoryViewCell(entity: markerEntity)
         }).disposed(by: disposeBag)
     }
 }
 
 private extension CategoryPresenter {
     func fetchRestaurantsEntity() {
-        let centerCoordinate = dependency.sharedPresenter.mapViewCenterCoordinate
+        let centerCoordinate = dependency.interactor.mapViewCenterCoordinate
         dependency.interactor.fetchRestaurants(location: centerCoordinate) { [weak self] (response) in
             guard let self = self else { return }
 
@@ -128,7 +122,7 @@ private extension CategoryPresenter {
                 }
             }
             
-            self.dependency.sharedPresenter.restaurantMarkersRelay.accept(markers)
+            self.dependency.interactor.updateRestaurantMarkers(entity: markers)
         }
     }
     

@@ -47,10 +47,10 @@ private extension CategoryViewController {
     
     private func bindPresenter() {
         dependency.presenter.bindCategoryView(input: CategoryViewInput(
-            culturalPropertyButton: culturalPropertyButton.rx.tap.asDriver(),
-            busstopButton: busstopButton.rx.tap.asDriver(),
-            restaurantButton: restaurantButton.rx.tap.asDriver(),
-            selectedCell: tableView.rx.modelSelected(CategoryCellViewData.self).asDriver()
+            culturalPropertyButton: culturalPropertyButton.rx.tap.asSignal(),
+            busstopButton: busstopButton.rx.tap.asSignal(),
+            restaurantButton: restaurantButton.rx.tap.asSignal(),
+            selectedCell: tableView.rx.modelSelected(CategoryCellViewData.self).asSignal()
             )
         )
         

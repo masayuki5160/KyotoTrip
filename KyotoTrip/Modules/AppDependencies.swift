@@ -17,7 +17,7 @@ protocol AppDependencies {
     func assembleBusstopDetailModule(inject viewData: BusstopDetailViewData) -> UIViewController
     func assembleCulturalPropertyDetailModule(inject viewData: CulturalPropertyDetailViewData) -> UIViewController
     func assembleRestaurantDetailModule(inject viewData: RestaurantDetailViewData) -> UIViewController
-    func assembleCategoryModule() -> UIViewController
+    func assembleCategoryModule(inject interactor: MapInteractor) -> UIViewController
     func assembleSettingsLisenceModule() -> UIViewController
     func assembleSettingsRestaurantsSearchModule() -> UIViewController
     func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController
@@ -82,16 +82,21 @@ extension AppDefaultDependencies: AppDependencies {
             requestParamGateway: requestParamGateway
             )
         )
-        let sharedPresenter = SharedMapPresenter.shared
         let router = MapRouter(view: view)
         let presenter = MapPresenter(
             dependency: .init(
                 interactor: interactor,
-                sharedPresenter: sharedPresenter,
                 router: router
             )
         )
-        view.inject(.init(presenter: presenter))
+        
+        let categoryView = assembleCategoryModule(inject: interactor)
+        
+        view.inject(.init(
+            presenter: presenter,
+            categoryView: categoryView
+            )
+        )
         
         return naviViewController
     }
@@ -123,32 +128,6 @@ extension AppDefaultDependencies: AppDependencies {
             dependency: .init(
                 router: router,
                 viewData: viewData
-            )
-        )
-        view.inject(.init(presenter: presenter))
-        
-        return view
-    }
-    
-    func assembleCategoryModule() -> UIViewController {
-        let view = { () -> CategoryViewController in
-            let storyboard = UIStoryboard(name: "Category", bundle: nil)
-            return storyboard.instantiateInitialViewController() as! CategoryViewController
-        }()
-        
-        let restaurantsSearchGateway = RestaurantsSearchGateway()
-        let requestParamGateway = RestaurantsRequestParamGateway()
-        let interactor = MapInteractor(dependency: .init(
-            searchGateway: restaurantsSearchGateway,
-            requestParamGateway: requestParamGateway
-            )
-        )
-        let sharedPresenter = SharedMapPresenter.shared
-        let router = CategoryRouter(view: view)
-        let presenter = CategoryPresenter(dependency: .init(
-            interactor: interactor,
-            sharedPresenter: sharedPresenter,
-            router: router
             )
         )
         view.inject(.init(presenter: presenter))
@@ -214,6 +193,23 @@ extension AppDefaultDependencies: AppDependencies {
             interactor: interactor,
             router: router,
             commonPresenter: commonPresenter)
+        )
+        view.inject(.init(presenter: presenter))
+        
+        return view
+    }
+    
+    func assembleCategoryModule(inject interactor: MapInteractor) -> UIViewController {
+        let view = { () -> CategoryViewController in
+            let storyboard = UIStoryboard(name: "Category", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! CategoryViewController
+        }()
+        
+        let router = CategoryRouter(view: view)
+        let presenter = CategoryPresenter(dependency: .init(
+            interactor: interactor,
+            router: router
+            )
         )
         view.inject(.init(presenter: presenter))
         

@@ -21,6 +21,8 @@ class RestaurantDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "飲食店詳細"
+        
         tableView.delegate = self
         tableView.dataSource = self
     }

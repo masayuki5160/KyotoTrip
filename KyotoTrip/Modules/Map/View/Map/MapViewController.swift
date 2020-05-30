@@ -16,6 +16,7 @@ class MapViewController: UIViewController, TransitionerProtocol {
     
     struct Dependency {
         let presenter: MapPresenterProtocol
+        let categoryView: UIViewController
     }
     
     @IBOutlet weak var mapView: MapView!
@@ -60,7 +61,7 @@ private extension MapViewController {
         /// Bind to Presenter
         
         dependency.presenter.bindMapView(input: MapViewInput(
-            compassButtonTapEvent: compassButton.rx.tap.asDriver()
+            compassButtonTapEvent: compassButton.rx.tap.asSignal()
             )
         )
 
@@ -86,24 +87,20 @@ private extension MapViewController {
             self.updateMapCenterPosition(compassButtonStatus)
             }).disposed(by: disposeBag)
         
-        dependency.presenter.selectedCategoryViewCellDriver
-            .drive(onNext: { [weak self] markerEntity in
-                if markerEntity.title.isEmpty { return }
-
+        dependency.presenter.selectedCategoryViewCellSignal
+            .emit(onNext: {  [weak self] selectedCell in
                 // Move camera position to the annotation position
-                let camera = MGLMapCamera(lookingAtCenter: markerEntity.coordinate, altitude: 4500, pitch: 0, heading: 0)
+                let camera = MGLMapCamera(lookingAtCenter: selectedCell.coordinate, altitude: 4500, pitch: 0, heading: 0)
                 self?.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
-                self?.showCallout(from: markerEntity)
+                self?.showCallout(from: selectedCell)
             }).disposed(by: disposeBag)
     }
     
     private func setupCategorySemiModalView() {
-        let categoryViewController = AppDefaultDependencies().assembleCategoryModule()
-
         floatingPanelController = FloatingPanelController()
         floatingPanelController.delegate = self
         floatingPanelController.surfaceView.cornerRadius = 24.0
-        floatingPanelController.set(contentViewController: categoryViewController)
+        floatingPanelController.set(contentViewController: dependency.categoryView)
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
 

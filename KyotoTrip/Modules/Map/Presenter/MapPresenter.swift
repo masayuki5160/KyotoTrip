@@ -12,7 +12,7 @@ import CoreLocation
 import Mapbox.MGLFeature
 
 struct MapViewInput {
-    let compassButtonTapEvent: Driver<Void>
+    let compassButtonTapEvent: Signal<Void>
 }
 
 protocol MapPresenterProtocol: AnyObject {
@@ -29,7 +29,7 @@ protocol MapPresenterProtocol: AnyObject {
     // MARK: - Output from Presenter
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
-    var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> { get }
+    var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> { get }
     var markersDriver: Driver<(MarkerCategoryEntity, [CustomMGLPointAnnotation])> { get }
     
     // MARK: - Others
@@ -44,7 +44,6 @@ class MapPresenter: MapPresenterProtocol {
     // MARK: - Properties
     struct Dependency {
         let interactor: MapInteractorProtocol
-        let sharedPresenter: SharedMapPresenterProtocol
         let router: MapRouterProtocol
     }
 
@@ -56,8 +55,8 @@ class MapPresenter: MapPresenterProtocol {
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatus.asDriver()
     }
-    var selectedCategoryViewCellDriver: Driver<MarkerEntityProtocol> {
-        return dependency.sharedPresenter.selectedCategoryViewCellRelay.asDriver()
+    var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> {
+        return dependency.interactor.selectedCategoryViewCellSignal
     }
     var markersDriver: Driver<(MarkerCategoryEntity, [CustomMGLPointAnnotation])>
     
@@ -71,8 +70,8 @@ class MapPresenter: MapPresenterProtocol {
         self.dependency = dependency
         
         markersDriver = Driver.combineLatest(
-            dependency.sharedPresenter.markerCategoryRelay.asDriver(),
-            dependency.sharedPresenter.restaurantMarkersRelay.asDriver()
+            dependency.interactor.visibleMarkerCategoryDriver,
+            dependency.interactor.restaurantMarkersDriver
         ){($0, $1)}
             .map({ (markerCategory, restaurantMarkers) -> (MarkerCategoryEntity, [CustomMGLPointAnnotation]) in
                 let annotations = restaurantMarkers.map { marker -> CustomMGLPointAnnotation in
@@ -83,7 +82,7 @@ class MapPresenter: MapPresenterProtocol {
     }
     
     func bindMapView(input: MapViewInput) {
-        input.compassButtonTapEvent.drive(onNext: { [weak self] in
+        input.compassButtonTapEvent.emit(onNext: { [weak self] in
             guard let self = self else { return }
             
             let nextPosition = self.updateUserPosition(self.userPositionButtonStatus.value)
@@ -96,11 +95,11 @@ class MapPresenter: MapPresenterProtocol {
             convertMGLFeatureToMarkerEntity(source: feature)
         }
         
-        dependency.sharedPresenter.markersFromStyleLayersRelay.accept(markers)
+        dependency.interactor.updateMarkersFromStyleLayers(entity: markers)
     }
     
     func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
-        let category = dependency.sharedPresenter.markerCategoryRelay.value.visibleCategory()        
+        let category = dependency.interactor.markerCategory.visibleCategory()
         return createMarkerEntity(
             category: category,
             coordinate: source.coordinate,
@@ -146,7 +145,7 @@ class MapPresenter: MapPresenterProtocol {
     }
     
     func updateViewpoint(centerCoordinate: CLLocationCoordinate2D) {
-        dependency.sharedPresenter.updateMapViewViewpoint(centerCoordinate: centerCoordinate)
+        dependency.interactor.updateMapViewViewpoint(centerCoordinate: centerCoordinate)
     }
 }
 

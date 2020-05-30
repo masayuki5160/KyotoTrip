@@ -15,7 +15,6 @@
 		4C14D09E247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D09D247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift */; };
 		4C14D0A2247FA5A200A7DB2C /* StringExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D0A1247FA5A200A7DB2C /* StringExtensionTest.swift */; };
 		4C1D6A6C247BE15C0017BE19 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */; };
-		4C36523E2479069D00F53C52 /* SharedMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36523D2479069D00F53C52 /* SharedMapPresenter.swift */; };
 		4C3652422479070800F53C52 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3652412479070800F53C52 /* CategoryPresenter.swift */; };
 		4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */; };
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
@@ -123,7 +122,6 @@
 		4C14D09D247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPresenterTest.swift; sourceTree = "<group>"; };
 		4C14D0A1247FA5A200A7DB2C /* StringExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTest.swift; sourceTree = "<group>"; };
 		4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
-		4C36523D2479069D00F53C52 /* SharedMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedMapPresenter.swift; sourceTree = "<group>"; };
 		4C3652412479070800F53C52 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+FloatingPanelControllerDelegate.swift"; sourceTree = "<group>"; };
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -380,7 +378,6 @@
 			children = (
 				4C4CA0C124258EC400C7AEAE /* MapPresenter.swift */,
 				4C3652412479070800F53C52 /* CategoryPresenter.swift */,
-				4C36523D2479069D00F53C52 /* SharedMapPresenter.swift */,
 				4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */,
 			);
 			path = Presenter;
@@ -1197,7 +1194,6 @@
 				4C416655243FFA38005EF1C2 /* MapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
-				4C36523E2479069D00F53C52 /* SharedMapPresenter.swift in Sources */,
 				4CA84B0E2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift in Sources */,
 				4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */,
 				4CC77646247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift in Sources */,
