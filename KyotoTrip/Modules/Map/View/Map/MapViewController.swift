@@ -120,24 +120,6 @@ private extension MapViewController {
     private func updateMarkersOnStyleLayers() {
         updateBusstopLayer()
         updateCulturalPropertyLayer()
-
-        // Note:
-        // Wait for updating Style Layers, then fetch the MGLFeatures from Style Layers and relay to other modules
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let rect = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-            var layers: Set<String> = []
-            
-            if let busstopLayer = self.mapView.busstopLayer, busstopLayer.isVisible {
-                layers.insert(BusstopMarkerEntity.layerId)
-            }
-            if let culturalPropertyLayer = self.mapView.culturalPropertyLayer, culturalPropertyLayer.isVisible {
-                layers.insert(CulturalPropertyMarkerEntity.layerId)
-            }
-            
-            /// Get features from Style Layers which is defined in Mapbox Studio
-            let features = self.mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
-            self.dependency.presenter.updateVisibleMGLFeatures(mglFeatures: features)
-        }
     }
     
     private func updateBusstopLayer() {
@@ -248,6 +230,19 @@ extension MapViewController: MGLMapViewDelegate {
         kyotoMapView.busstopLayer?.isVisible = false
         kyotoMapView.busRouteLayer?.isVisible = false
         kyotoMapView.culturalPropertyLayer?.isVisible = false
+    }
+    
+    func mapViewDidFinishRenderingFrame(_ mapView: MGLMapView, fullyRendered: Bool) {
+        if fullyRendered {
+            let rect = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+            let layers: Set<String> = [
+                BusstopMarkerEntity.layerId,
+                CulturalPropertyMarkerEntity.layerId
+            ]
+            /// Get features from Style Layers which is defined in Mapbox Studio
+            let features = mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
+            self.dependency.presenter.updateVisibleMGLFeatures(mglFeatures: features)
+        }
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
