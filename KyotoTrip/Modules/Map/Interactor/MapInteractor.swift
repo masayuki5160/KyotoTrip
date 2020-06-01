@@ -16,11 +16,11 @@ protocol MapInteractorProtocol: AnyObject {
     var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> { get }
     var restaurantStatusDriver: Driver<CategoryButtonStatus> { get }
     var busstopStatusDriver: Driver<CategoryButtonStatus> { get }
-    var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> { get }
+    var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
     
     /// Input to Interactor
     func updateMarkersFromStyleLayers(entity: [MarkerEntityProtocol])
-    func didSelectCategoryViewCell(entity: MarkerEntityProtocol)
+    func didSelectCategoryViewCell(viewData: MarkerViewDataProtocol)
     func updateMapViewViewpoint(centerCoordinate: CLLocationCoordinate2D)
     func didSelectBusstopButton(nextStatus: CategoryButtonStatus)
     func didSelectCulturalPropertyButton(nextStatus: CategoryButtonStatus)
@@ -44,7 +44,7 @@ class MapInteractor: MapInteractorProtocol {
         ){ $0 + $1 }
         return driver
     }
-    var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> {
+    var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> {
         return selectedCategoryViewCellRelay.asSignal()
     }
     var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> {
@@ -59,7 +59,7 @@ class MapInteractor: MapInteractorProtocol {
     /// Relay vars using Rx
     private let restaurantMarkersRelay = BehaviorRelay<[RestaurantMarkerEntity]>(value: [])
     private let markersFromStyleLayersRelay = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
-    private let selectedCategoryViewCellRelay = PublishRelay<MarkerEntityProtocol>()
+    private let selectedCategoryViewCellRelay = PublishRelay<MarkerViewDataProtocol>()
     private let culturalPropertyStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private let restaurantStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private let busstopStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
@@ -80,8 +80,8 @@ class MapInteractor: MapInteractorProtocol {
         markersFromStyleLayersRelay.accept(entity)
     }
     
-    func didSelectCategoryViewCell(entity: MarkerEntityProtocol) {
-        selectedCategoryViewCellRelay.accept(entity)
+    func didSelectCategoryViewCell(viewData: MarkerViewDataProtocol) {
+        selectedCategoryViewCellRelay.accept(viewData)
     }
     
     func didSelectBusstopButton(nextStatus: CategoryButtonStatus) {

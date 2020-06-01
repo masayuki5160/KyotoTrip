@@ -8,27 +8,42 @@
 
 protocol MapRouterProtocol {
     var view: MapViewController { get }
-    func transitionToBusstopDetailViewController(inject viewData: BusstopDetailViewData)
-    func transitionToCulturalPropertyDetailViewController(inject viewData: CulturalPropertyDetailViewData)
-    func transitionToRestaurantDetailViewController(inject viewData: RestaurantDetailViewData)
+    func transitionToDetailViewController(inject viewData: MarkerViewDataProtocol)
 }
 
 struct MapRouter: MapRouterProtocol {
+    
     var view: MapViewController
     
-    func transitionToBusstopDetailViewController(inject viewData: BusstopDetailViewData) {
+    func transitionToDetailViewController(inject viewData: MarkerViewDataProtocol) {
+        switch viewData.type {
+        case .Busstop:
+            let busstopDetailViewData = (viewData as! BusstopMarkerViewData).detail
+            transitionToBusstopDetailViewController(inject: busstopDetailViewData)
+        case .CulturalProperty:
+            let culturalPropertyDetailViewData = (viewData as! CulturalPropertyMarkerViewData).detail
+            transitionToCulturalPropertyDetailViewController(inject: culturalPropertyDetailViewData)
+        case .Restaurant:
+            let restaurantDetailViewData = (viewData as! RestaurantMarkerViewData).detail
+            transitionToRestaurantDetailViewController(inject: restaurantDetailViewData)
+        default:
+            break
+        }
+    }
+    
+    private func transitionToBusstopDetailViewController(inject viewData: BusstopDetailViewData) {
         let targetVC = AppDefaultDependencies()
             .assembleBusstopDetailModule(inject: viewData) as! BusstopDetailViewController
         view.pushViewController(targetVC, animated: true)
     }
     
-    func transitionToCulturalPropertyDetailViewController(inject viewData: CulturalPropertyDetailViewData) {
+    private func transitionToCulturalPropertyDetailViewController(inject viewData: CulturalPropertyDetailViewData) {
         let targetVC = AppDefaultDependencies()
             .assembleCulturalPropertyDetailModule(inject: viewData) as! CulturalPropertyDetailViewController
         view.pushViewController(targetVC, animated: true)
     }
     
-    func transitionToRestaurantDetailViewController(inject viewData: RestaurantDetailViewData) {
+    private func transitionToRestaurantDetailViewController(inject viewData: RestaurantDetailViewData) {
         let targetVC = AppDefaultDependencies()
             .assembleRestaurantDetailModule(inject: viewData) as! RestaurantDetailViewController
         view.pushViewController(targetVC, animated: true)

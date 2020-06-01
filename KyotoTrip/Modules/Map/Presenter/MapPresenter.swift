@@ -29,15 +29,15 @@ protocol MapPresenterProtocol: AnyObject {
     // MARK: - Output from Presenter for MapView
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
-    var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> { get }
+    var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData> { get }
     var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])> { get }
     
     // MARK: - Others
     
-    func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol
+    func convertMGLFeatureToMarkerViewData(source: MGLFeature) -> MarkerViewDataProtocol
     func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
-    func tapOnCallout(marker: MarkerEntityProtocol, category: MarkerCategory)
+    func tapOnCallout(viewData: MarkerViewDataProtocol)
 }
 
 class MapPresenter: MapPresenterProtocol {
@@ -56,7 +56,7 @@ class MapPresenter: MapPresenterProtocol {
     var userPositionButtonStatusDriver: Driver<UserPosition> {
         return userPositionButtonStatus.asDriver()
     }
-    var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> {
+    var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> {
         return dependency.interactor.selectedCategoryViewCellSignal
     }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData>
@@ -89,7 +89,8 @@ class MapPresenter: MapPresenterProtocol {
             dependency.interactor.restaurantMarkersDriver
         ).map({ (status, markers) -> (CategoryButtonStatus, [CustomMGLPointAnnotation]) in
             let annotations = markers.map { marker -> CustomMGLPointAnnotation in
-                CustomMGLPointAnnotation(entity: marker)
+                let viewData = RestaurantMarkerViewData(entity: marker)
+                return CustomMGLPointAnnotation(viewData: viewData)
             }
             return (status, annotations)
         })
@@ -112,24 +113,6 @@ class MapPresenter: MapPresenterProtocol {
         dependency.interactor.updateMarkersFromStyleLayers(entity: markers)
     }
     
-    func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
-        let category: MarkerCategory
-        if (source.attribute(forKey: BusstopMarkerEntity.titleId) != nil) {
-            category = .Busstop
-        } else if ((source.attribute(forKey: CulturalPropertyMarkerEntity.titleId)) != nil) {
-            category = .CulturalProperty
-        } else {
-            // Fix me later
-            category = .Busstop
-        }
-        
-        return createMarkerEntity(
-            category: category,
-            coordinate: source.coordinate,
-            attributes: source.attributes
-        )
-    }
-    
     func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature] {
         return features.sorted(by: {
             let distanceFromLocationA =
@@ -143,32 +126,26 @@ class MapPresenter: MapPresenterProtocol {
         })
     }
     
-    func tapOnCallout(marker: MarkerEntityProtocol, category: MarkerCategory) {
-        switch category {
-        case .Busstop:
-            let busstopMarker = marker as! BusstopMarkerEntity
-            let busstopDetailViewData = createBusstopDetailViewData(marker: busstopMarker)
-            
-            dependency.router
-                .transitionToBusstopDetailViewController(inject: busstopDetailViewData)
-        case .CulturalProperty:
-            let culturalPropertyMarker = marker as! CulturalPropertyMarkerEntity
-            let culturalPropertyDetailViewData = createCulturalPropertyDetailViewData(marker: culturalPropertyMarker)
-            
-            dependency.router
-                .transitionToCulturalPropertyDetailViewController(inject: culturalPropertyDetailViewData)
-        case .Restaurant:
-            let restaurantMarker = marker as! RestaurantMarkerEntity
-            let restaurantDetailViewData = createRestaurantDetailViewData(marker: restaurantMarker)
-            dependency.router
-                .transitionToRestaurantDetailViewController(inject: restaurantDetailViewData)
-        default:
-            break
-        }
+    func tapOnCallout(viewData: MarkerViewDataProtocol) {
+        dependency.router.transitionToDetailViewController(inject: viewData)
     }
     
     func updateViewpoint(centerCoordinate: CLLocationCoordinate2D) {
         dependency.interactor.updateMapViewViewpoint(centerCoordinate: centerCoordinate)
+    }
+    
+    func convertMGLFeatureToMarkerViewData(source: MGLFeature) -> MarkerViewDataProtocol {
+        let markerEntity = convertMGLFeatureToMarkerEntity(source: source)
+        switch markerEntity.type {
+        case .Busstop:
+            return BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
+        case .CulturalProperty:
+            return CulturalPropertyMarkerViewData(entity: markerEntity as! CulturalPropertyMarkerEntity)
+        case .Restaurant:
+            return RestaurantMarkerViewData(entity: markerEntity as! RestaurantMarkerEntity)
+        default:
+            return BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
+        }
     }
 }
 
@@ -176,68 +153,37 @@ private extension MapPresenter {
     
     // MARK: - Create entity/viewdata private methods
     
-    private func createBusstopDetailViewData(marker: BusstopMarkerEntity) -> BusstopDetailViewData {
-        let viewData = BusstopDetailViewData(
-            name: marker.title,
-            routes: marker.routes,
-            organizations: marker.organizations
-        )
-        
-        return viewData
-    }
-    
-    private func createCulturalPropertyDetailViewData(marker: CulturalPropertyMarkerEntity) -> CulturalPropertyDetailViewData {
-        let viewData = CulturalPropertyDetailViewData(
-            name: marker.title,
-            address: marker.address,
-            largeClassification: marker.largeClassification,
-            smallClassification: marker.smallClassification,
-            registerdDate: marker.registerDateString
-        )
-        
-        return viewData
-    }
-    
-    private func createRestaurantDetailViewData(marker: RestaurantMarkerEntity) -> RestaurantDetailViewData {
-        if let detail = marker.detail {
-            return RestaurantDetailViewData(
-                name: detail.name.name,
-                nameKana: detail.name.nameKana,
-                address: detail.contacts.address,
-                access: detail.access,
-                tel: detail.contacts.tel,
-                businessHour: detail.businessHour,
-                holiday: detail.holiday,
-                salesPoint: detail.salesPoints.prLong,
-                url: detail.url,
-                imageUrl: detail.imageUrl.thumbnail
-            )
+    private func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
+        let category: MarkerCategory
+        if (source.attribute(forKey: BusstopMarkerEntity.titleId) != nil) {
+            category = .Busstop
+        } else if ((source.attribute(forKey: CulturalPropertyMarkerEntity.titleId)) != nil) {
+            category = .CulturalProperty
         } else {
-            return RestaurantDetailViewData()
+            // Fix me later
+            category = .Busstop
         }
-    }
-    
-    private func createMarkerEntity(category: MarkerCategory, coordinate:CLLocationCoordinate2D, attributes: [String: Any]) -> MarkerEntityProtocol {
+        
         switch category {
         case .Busstop:
             return BusstopMarkerEntity(
-                title: attributes[BusstopMarkerEntity.titleId] as! String,
-                coordinate: coordinate,
-                routeNameString: attributes[BusstopMarkerEntity.busRouteId] as! String,
-                organizationNameString: attributes[BusstopMarkerEntity.organizationId] as! String
+                title: source.attributes[BusstopMarkerEntity.titleId] as! String,
+                coordinate: source.coordinate,
+                routeNameString: source.attributes[BusstopMarkerEntity.busRouteId] as! String,
+                organizationNameString: source.attributes[BusstopMarkerEntity.organizationId] as! String
             )
         case .CulturalProperty:
             return CulturalPropertyMarkerEntity(
-                title: attributes[CulturalPropertyMarkerEntity.titleId] as! String,
-                coordinate: coordinate,
-                address: attributes[CulturalPropertyMarkerEntity.addressId] as! String,
-                largeClassificationCode: attributes[CulturalPropertyMarkerEntity.largeClassificationCodeId] as! Int,
-                smallClassificationCode: attributes[CulturalPropertyMarkerEntity.smallClassificationCodeId] as! Int,
-                registerdDate: attributes[CulturalPropertyMarkerEntity.registerdDateId] as! Int
+                title: source.attributes[CulturalPropertyMarkerEntity.titleId] as! String,
+                coordinate: source.coordinate,
+                address: source.attributes[CulturalPropertyMarkerEntity.addressId] as! String,
+                largeClassificationCode: source.attributes[CulturalPropertyMarkerEntity.largeClassificationCodeId] as! Int,
+                smallClassificationCode: source.attributes[CulturalPropertyMarkerEntity.smallClassificationCodeId] as! Int,
+                registerdDate: source.attributes[CulturalPropertyMarkerEntity.registerdDateId] as! Int
             )
         default:
             // TODO: Fix later
-            return BusstopMarkerEntity(title: "", coordinate: coordinate)
+            return BusstopMarkerEntity(title: "", coordinate: source.coordinate)
         }
     }
 }

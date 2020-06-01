@@ -198,17 +198,12 @@ private extension MapViewController {
     }
     
     private func showCallout(from mglFeature: MGLPointFeature) {
-        let markerEntity = dependency.presenter.convertMGLFeatureToMarkerEntity(source: mglFeature)
+        let markerEntity = dependency.presenter.convertMGLFeatureToMarkerViewData(source: mglFeature)
         showCallout(from: markerEntity)
     }
     
-    private func showCallout(from entity: MarkerEntityProtocol) {
-        let selectedAnnotation = CustomMGLPointAnnotation(entity: entity)
-        selectedAnnotation.title = entity.title
-        selectedAnnotation.subtitle = entity.subtitle
-        selectedAnnotation.coordinate = entity.coordinate
-        
-        // Show callout
+    private func showCallout(from viewData: MarkerViewDataProtocol) {
+        let selectedAnnotation = CustomMGLPointAnnotation(viewData: viewData)
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }
 }
@@ -255,8 +250,8 @@ extension MapViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
-        let markerEntity = (annotation as! CustomMGLPointAnnotation).entity
-        dependency.presenter.tapOnCallout(marker: markerEntity!, category: markerEntity?.type ?? .None)
+        let viewData = (annotation as! CustomMGLPointAnnotation).viewData
+        dependency.presenter.tapOnCallout(viewData: viewData!)
     }
     
     func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {

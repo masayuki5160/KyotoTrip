@@ -44,12 +44,8 @@ class CategoryPresenter: CategoryPresenterProtocol {
         self.dependency = dependency
         
         dependency.interactor.visibleMarkers.map { markers -> [CategoryCellViewData] in
-            markers.map { [weak self] marker -> CategoryCellViewData in
-                CategoryCellViewData(
-                    title: marker.title,
-                    iconName: self?.categoryTableViewCellIconName(marker.type) ?? "",
-                    detail: marker
-                )
+            markers.map { marker -> CategoryCellViewData in
+                CategoryCellViewData(entity: marker)
             }
         }.drive(onNext: { cells in
             self.cellsRelay.accept(cells)
@@ -82,27 +78,10 @@ class CategoryPresenter: CategoryPresenterProtocol {
         }).disposed(by: disposeBag)
         
         input.selectedCell.emit(onNext: { [weak self] (cell) in
-            let markerEntity = cell.detail
-            self?.dependency.interactor.didSelectCategoryViewCell(entity: markerEntity)
-        }).disposed(by: disposeBag)
-    }
-}
+            guard let self = self else { return }
 
-private extension CategoryPresenter {    
-    private func categoryTableViewCellIconName(_ category: MarkerCategory) -> String {
-        let iconName: String
-        switch category {
-        case .Busstop:
-            iconName = CategoryTableViewCell.IconName.busstop
-        case .CulturalProperty:
-            iconName = CategoryTableViewCell.IconName.culturalProperty
-        case .Restaurant:
-            iconName = CategoryTableViewCell.IconName.restaurant
-        default:
-            // TODO: Set default icon name
-            iconName = CategoryTableViewCell.IconName.busstop
-        }
-        
-        return iconName
+            self.dependency.interactor.didSelectCategoryViewCell(viewData: cell.viewData)
+            self.dependency.router.transitionToDetailViewController(inject: cell.viewData)
+        }).disposed(by: disposeBag)
     }
 }

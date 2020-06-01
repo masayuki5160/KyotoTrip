@@ -8,19 +8,19 @@
 import Mapbox
 
 class CustomMGLPointAnnotation: MGLPointAnnotation {
-    var entity: MarkerEntityProtocol?
+    var viewData: MarkerViewDataProtocol?
 
     override init() {
         super.init()
     }
     
-    init(entity: MarkerEntityProtocol) {
+    init(viewData: MarkerViewDataProtocol) {
         super.init()
 
-        title = entity.title
-        subtitle = entity.subtitle
-        coordinate = entity.coordinate
-        self.entity = entity
+        title = viewData.name
+        subtitle = viewData.subtitle
+        coordinate = viewData.coordinate
+        self.viewData = viewData
     }
     
     required init?(coder: NSCoder) {

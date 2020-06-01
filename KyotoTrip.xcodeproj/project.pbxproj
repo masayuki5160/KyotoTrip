@@ -53,6 +53,10 @@
 		4CA84B16246408DE00DAC5F3 /* RestaurantMarkerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B15246408DE00DAC5F3 /* RestaurantMarkerEntity.swift */; };
 		4CA84B1C2464339A00DAC5F3 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84B1B2464339A00DAC5F3 /* RestaurantDetailViewController.swift */; };
 		4CA84B1E246433B800DAC5F3 /* RestaurantDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84B1D246433B800DAC5F3 /* RestaurantDetail.storyboard */; };
+		4CB3CEB424852D1C0013DC3D /* MarkerViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3CEB324852D1C0013DC3D /* MarkerViewDataProtocol.swift */; };
+		4CB3CEB624852D920013DC3D /* BusstopMarkerViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3CEB524852D920013DC3D /* BusstopMarkerViewData.swift */; };
+		4CB3CEB824852E320013DC3D /* CulturalPropertyMarkerViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3CEB724852E320013DC3D /* CulturalPropertyMarkerViewData.swift */; };
+		4CB3CEBA24852E4A0013DC3D /* RestaurantMarkerViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3CEB924852E4A0013DC3D /* RestaurantMarkerViewData.swift */; };
 		4CB8CCD1247BF25300B69BB2 /* CategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8CCD0247BF25300B69BB2 /* CategoryRouter.swift */; };
 		4CB9EFEC247E4E6700B7398D /* BusstopDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9EFEB247E4E6700B7398D /* BusstopDetailPresenter.swift */; };
 		4CB9EFEF247E8C2D00B7398D /* BusstopDetailViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9EFEE247E8C2D00B7398D /* BusstopDetailViewData.swift */; };
@@ -167,6 +171,10 @@
 		4CA84B15246408DE00DAC5F3 /* RestaurantMarkerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMarkerEntity.swift; sourceTree = "<group>"; };
 		4CA84B1B2464339A00DAC5F3 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84B1D246433B800DAC5F3 /* RestaurantDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RestaurantDetail.storyboard; sourceTree = "<group>"; };
+		4CB3CEB324852D1C0013DC3D /* MarkerViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerViewDataProtocol.swift; sourceTree = "<group>"; };
+		4CB3CEB524852D920013DC3D /* BusstopMarkerViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopMarkerViewData.swift; sourceTree = "<group>"; };
+		4CB3CEB724852E320013DC3D /* CulturalPropertyMarkerViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyMarkerViewData.swift; sourceTree = "<group>"; };
+		4CB3CEB924852E4A0013DC3D /* RestaurantMarkerViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMarkerViewData.swift; sourceTree = "<group>"; };
 		4CB8CCD0247BF25300B69BB2 /* CategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRouter.swift; sourceTree = "<group>"; };
 		4CB9EFEB247E4E6700B7398D /* BusstopDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailPresenter.swift; sourceTree = "<group>"; };
 		4CB9EFEE247E8C2D00B7398D /* BusstopDetailViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailViewData.swift; sourceTree = "<group>"; };
@@ -251,6 +259,10 @@
 				4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */,
 				4CE4A0FE2483E72600E30B3A /* CategoryButtonsStatusViewData.swift */,
 				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
+				4CB3CEB324852D1C0013DC3D /* MarkerViewDataProtocol.swift */,
+				4CB3CEB524852D920013DC3D /* BusstopMarkerViewData.swift */,
+				4CB3CEB724852E320013DC3D /* CulturalPropertyMarkerViewData.swift */,
+				4CB3CEB924852E4A0013DC3D /* RestaurantMarkerViewData.swift */,
 			);
 			path = ViewData;
 			sourceTree = "<group>";
@@ -1182,8 +1194,10 @@
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
 				4C4166532439D2DA005EF1C2 /* TranslatorInteractor.swift in Sources */,
 				4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */,
+				4CB3CEB424852D1C0013DC3D /* MarkerViewDataProtocol.swift in Sources */,
 				4CF4AFE8246EDAAC00991B2C /* SettingsLicenseViewController.swift in Sources */,
 				4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */,
+				4CB3CEB624852D920013DC3D /* BusstopMarkerViewData.swift in Sources */,
 				4CA84AF92462817C00DAC5F3 /* BusstopMarkerEntity.swift in Sources */,
 				4CA84AF0245AB37900DAC5F3 /* CategoryTableViewCell.swift in Sources */,
 				4CB9EFEF247E8C2D00B7398D /* BusstopDetailViewData.swift in Sources */,
@@ -1200,6 +1214,7 @@
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
 				4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */,
 				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
+				4CB3CEB824852E320013DC3D /* CulturalPropertyMarkerViewData.swift in Sources */,
 				4CF4B0322478A14D00991B2C /* CommonSettingsPresenter.swift in Sources */,
 				4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */,
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
@@ -1208,6 +1223,7 @@
 				4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */,
 				4CB8CCD1247BF25300B69BB2 /* CategoryRouter.swift in Sources */,
 				4CB9EFEC247E4E6700B7398D /* BusstopDetailPresenter.swift in Sources */,
+				4CB3CEBA24852E4A0013DC3D /* RestaurantMarkerViewData.swift in Sources */,
 				4C4CA0C224258EC400C7AEAE /* MapPresenter.swift in Sources */,
 				4C14D097247F6BDE00A7DB2C /* RestaurantDetailPresenter.swift in Sources */,
 				4CF4AFEC246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift in Sources */,
