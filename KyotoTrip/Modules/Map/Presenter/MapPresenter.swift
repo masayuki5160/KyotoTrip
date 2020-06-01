@@ -20,17 +20,18 @@ protocol MapPresenterProtocol: AnyObject {
 
     static var layerIdentifiers: Set<String> { get }
 
-    // MARK: - Input to Presenter
+    // MARK: - Input to Presenter from MapView
     
     func bindMapView(input: MapViewInput)
     func updateVisibleMGLFeatures(mglFeatures: [MGLFeature])
     func updateViewpoint(centerCoordinate: CLLocationCoordinate2D)
 
-    // MARK: - Output from Presenter
+    // MARK: - Output from Presenter for MapView
 
     var userPositionButtonStatusDriver: Driver<UserPosition> { get }
     var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> { get }
-    var markersDriver: Driver<(MarkerCategoryEntity, [CustomMGLPointAnnotation])> { get }
+    var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData> { get }
+    var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])> { get }
     
     // MARK: - Others
     
@@ -58,7 +59,8 @@ class MapPresenter: MapPresenterProtocol {
     var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> {
         return dependency.interactor.selectedCategoryViewCellSignal
     }
-    var markersDriver: Driver<(MarkerCategoryEntity, [CustomMGLPointAnnotation])>
+    var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData>
+    var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])>
     
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
@@ -69,23 +71,35 @@ class MapPresenter: MapPresenterProtocol {
     init(dependency: Dependency) {
         self.dependency = dependency
         
-        markersDriver = Driver.combineLatest(
-            dependency.interactor.visibleMarkerCategoryDriver,
+        categoryButtonsStatusDriver = Driver.combineLatest(
+            dependency.interactor.busstopStatusDriver,
+            dependency.interactor.culturalPropertyStatusDriver,
+            dependency.interactor.restaurantStatusDriver
+        ).map({ (busstop, culturalProperty, restaurant) -> CategoryButtonsStatusViewData in
+            var buttonsStatus = CategoryButtonsStatusViewData()
+            buttonsStatus.busstop = busstop
+            buttonsStatus.culturalProperty = culturalProperty
+            buttonsStatus.restaurant = restaurant
+
+            return buttonsStatus
+        })
+        
+        restaurantMarkersDriver = Driver.combineLatest(
+            dependency.interactor.restaurantStatusDriver,
             dependency.interactor.restaurantMarkersDriver
-        ){($0, $1)}
-            .map({ (markerCategory, restaurantMarkers) -> (MarkerCategoryEntity, [CustomMGLPointAnnotation]) in
-                let annotations = restaurantMarkers.map { marker -> CustomMGLPointAnnotation in
-                    CustomMGLPointAnnotation(entity: marker)
-                }
-                return (markerCategory, annotations)
-            })
+        ).map({ (status, markers) -> (CategoryButtonStatus, [CustomMGLPointAnnotation]) in
+            let annotations = markers.map { marker -> CustomMGLPointAnnotation in
+                CustomMGLPointAnnotation(entity: marker)
+            }
+            return (status, annotations)
+        })
     }
     
     func bindMapView(input: MapViewInput) {
         input.compassButtonTapEvent.emit(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let nextPosition = self.updateUserPosition(self.userPositionButtonStatus.value)
+            let nextPosition = self.userPositionButtonStatus.value.next()
             self.userPositionButtonStatus.accept(nextPosition)
         }).disposed(by: disposeBag)
     }
@@ -99,7 +113,16 @@ class MapPresenter: MapPresenterProtocol {
     }
     
     func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
-        let category = dependency.interactor.markerCategory.visibleCategory()
+        let category: MarkerCategory
+        if (source.attribute(forKey: BusstopMarkerEntity.titleId) != nil) {
+            category = .Busstop
+        } else if ((source.attribute(forKey: CulturalPropertyMarkerEntity.titleId)) != nil) {
+            category = .CulturalProperty
+        } else {
+            // Fix me later
+            category = .Busstop
+        }
+        
         return createMarkerEntity(
             category: category,
             coordinate: source.coordinate,
@@ -216,14 +239,5 @@ private extension MapPresenter {
             // TODO: Fix later
             return BusstopMarkerEntity(title: "", coordinate: coordinate)
         }
-    }
-    
-    // MARK: - Other private methods
-    
-    private func updateUserPosition(_ position: UserPosition) -> UserPosition {
-        let nextStatusRawValue = position.rawValue + 1
-        let nextStatus = UserPosition(rawValue: nextStatusRawValue) ?? UserPosition.kyotoCity
-        
-        return nextStatus
     }
 }

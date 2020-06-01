@@ -38,6 +38,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
     var cellsDriver: Driver<[CategoryCellViewData]> {
         return cellsRelay.asDriver()
     }
+    private var categoryButtonsStatus = CategoryButtonsStatusViewData()
     
     init(dependency: Dependency) {
         self.dependency = dependency
@@ -59,41 +60,25 @@ class CategoryPresenter: CategoryPresenterProtocol {
         input.culturalPropertyButton.emit(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let nextVisibleLayer = self.nextVisibleLayer(
-                target: .CulturalProperty,
-                current: self.dependency.interactor.markerCategory
-            )
-            self.dependency.interactor.updateVisibleLayer(entity: nextVisibleLayer)
-            self.dependency.interactor.updateRestaurantMarkers(entity: [])
+            let nextStatus = self.categoryButtonsStatus.culturalProperty.next()
+            self.categoryButtonsStatus.culturalProperty = nextStatus
+            self.dependency.interactor.didSelectCulturalPropertyButton(nextStatus: nextStatus)
         }).disposed(by: disposeBag)
         
         input.busstopButton.emit(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let nextVisibleLayer = self.nextVisibleLayer(
-                target: .Busstop,
-                current: self.dependency.interactor.markerCategory
-            )
-            self.dependency.interactor.updateVisibleLayer(entity: nextVisibleLayer)
-            self.dependency.interactor.updateRestaurantMarkers(entity: [])
+            let nextStatus = self.categoryButtonsStatus.busstop.next()
+            self.categoryButtonsStatus.busstop = nextStatus
+            self.dependency.interactor.didSelectBusstopButton(nextStatus: nextStatus)
         }).disposed(by: disposeBag)
         
         input.restaurantButton.emit(onNext: { [weak self] in
             guard let self = self else { return }
             
-            let nextVisibleLayer = self.nextVisibleLayer(
-                target: .Restaurant,
-                current: self.dependency.interactor.markerCategory
-            )
-            
-            switch nextVisibleLayer.restaurant {
-            case .hidden:
-                self.dependency.interactor.updateRestaurantMarkers(entity: [])
-            case .visible:
-                self.fetchRestaurantsEntity()
-            }
-            
-            self.dependency.interactor.updateVisibleLayer(entity: nextVisibleLayer)
+            let nextStatus = self.categoryButtonsStatus.restaurant.next()
+            self.categoryButtonsStatus.restaurant = nextStatus
+            self.dependency.interactor.didSelectRestaurantButton(nextStatus: nextStatus)
         }).disposed(by: disposeBag)
         
         input.selectedCell.emit(onNext: { [weak self] (cell) in
@@ -103,33 +88,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
     }
 }
 
-private extension CategoryPresenter {
-    func fetchRestaurantsEntity() {
-        let centerCoordinate = dependency.interactor.mapViewCenterCoordinate
-        dependency.interactor.fetchRestaurants(location: centerCoordinate) { [weak self] (response) in
-            guard let self = self else { return }
-
-            var markers: [RestaurantMarkerEntity] = []
-            switch response {
-            case .success(let restaurantMarkers):
-                markers = restaurantMarkers
-            case .failure(let error):
-                switch error {
-                case .entryNotFound:
-                    self.dependency.router.showNoEntoryAlert()
-                default:
-                    self.dependency.router.showUnknownErrorAlert()
-                }
-            }
-            
-            self.dependency.interactor.updateRestaurantMarkers(entity: markers)
-        }
-    }
-    
-    private func nextVisibleLayer(target: MarkerCategory, current: MarkerCategoryEntity) -> MarkerCategoryEntity {
-        return current.update(category: target)
-    }
-    
+private extension CategoryPresenter {    
     private func categoryTableViewCellIconName(_ category: MarkerCategory) -> String {
         let iconName: String
         switch category {

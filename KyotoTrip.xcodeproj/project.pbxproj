@@ -9,12 +9,19 @@
 /* Begin PBXBuildFile section */
 		4C0CAEC72429735300EDCA82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */; };
 		4C0CAECB242B992800EDCA82 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0CAECA242B992800EDCA82 /* MapView.swift */; };
+		4C13E72124849C7200337D26 /* RestaurantsSearchGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C13E72024849C7200337D26 /* RestaurantsSearchGatewayStub.swift */; };
+		4C13E72324849D0E00337D26 /* RestaurantsRequestParamGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C13E72224849D0E00337D26 /* RestaurantsRequestParamGatewayStub.swift */; };
 		4C14D097247F6BDE00A7DB2C /* RestaurantDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D096247F6BDE00A7DB2C /* RestaurantDetailPresenter.swift */; };
 		4C14D099247F6BF200A7DB2C /* RestaurantDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D098247F6BF200A7DB2C /* RestaurantDetailRouter.swift */; };
 		4C14D09B247F6F1900A7DB2C /* RestaurantDetailViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D09A247F6F1900A7DB2C /* RestaurantDetailViewData.swift */; };
 		4C14D09E247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D09D247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift */; };
 		4C14D0A2247FA5A200A7DB2C /* StringExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D0A1247FA5A200A7DB2C /* StringExtensionTest.swift */; };
 		4C1D6A6C247BE15C0017BE19 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */; };
+		4C2BA4282484C9D10018B435 /* gnaviAPIDummyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */; };
+		4C2BA42B2484D2D80018B435 /* CategoryButtonStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */; };
+		4C2BA42D2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */; };
+		4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */; };
+		4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */; };
 		4C3652422479070800F53C52 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3652412479070800F53C52 /* CategoryPresenter.swift */; };
 		4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */; };
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
@@ -24,13 +31,13 @@
 		4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41666224434E07005EF1C2 /* AppDependencies.swift */; };
 		4C416667244495C2005EF1C2 /* DependencyInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416666244495C2005EF1C2 /* DependencyInjectable.swift */; };
 		4C4CA0C224258EC400C7AEAE /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CA0C124258EC400C7AEAE /* MapPresenter.swift */; };
+		4C5A33E72483F1150041FE48 /* CategoryButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */; };
 		4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AD1245036DD00DAC5F3 /* BusstopDetailViewController.swift */; };
 		4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */; };
 		4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */; };
 		4CA84AEA2459247F00DAC5F3 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AE92459247F00DAC5F3 /* Category.storyboard */; };
 		4CA84AF0245AB37900DAC5F3 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AEE245AB37900DAC5F3 /* CategoryTableViewCell.swift */; };
 		4CA84AF1245AB37900DAC5F3 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AEF245AB37900DAC5F3 /* CategoryTableViewCell.xib */; };
-		4CA84AF324618C4E00DAC5F3 /* MarkerCategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF224618C4E00DAC5F3 /* MarkerCategoryEntity.swift */; };
 		4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */; };
 		4CA84AF92462817C00DAC5F3 /* BusstopMarkerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF82462817C00DAC5F3 /* BusstopMarkerEntity.swift */; };
 		4CA84AFB246281F600DAC5F3 /* MarkerEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */; };
@@ -65,6 +72,7 @@
 		4CC77646247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC77645247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift */; };
 		4CC7764A247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC77649247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift */; };
 		4CE16C412480D9A6006EBD39 /* CategoryCellViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */; };
+		4CE4A0FF2483E72600E30B3A /* CategoryButtonsStatusViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE4A0FE2483E72600E30B3A /* CategoryButtonsStatusViewData.swift */; };
 		4CF4AFD42468508800991B2C /* CustomMGLPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */; };
 		4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */; };
 		4CF4AFE6246E188800991B2C /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE5246E188800991B2C /* SettingsPresenter.swift */; };
@@ -76,7 +84,6 @@
 		4CF4AFF22470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF4AFF12470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard */; };
 		4CF4AFF424716F8400991B2C /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFF324716F8400991B2C /* SettingsInteractor.swift */; };
 		4CF4B00A2472C9A600991B2C /* MapInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0092472C9A600991B2C /* MapInteractorTests.swift */; };
-		4CF4B012247362BA00991B2C /* VisibleLayerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B011247362B900991B2C /* VisibleLayerEntityTests.swift */; };
 		4CF4B0142475735C00991B2C /* RestaurantsRequestParamGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0132475735B00991B2C /* RestaurantsRequestParamGateway.swift */; };
 		4CF4B01724776C0800991B2C /* RestaurantsSearchRangeCellEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B01624776C0800991B2C /* RestaurantsSearchRangeCellEntity.swift */; };
 		4CF4B0192477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4B0182477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift */; };
@@ -116,12 +123,19 @@
 		404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C0CAECA242B992800EDCA82 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		4C13E72024849C7200337D26 /* RestaurantsSearchGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchGatewayStub.swift; sourceTree = "<group>"; };
+		4C13E72224849D0E00337D26 /* RestaurantsRequestParamGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamGatewayStub.swift; sourceTree = "<group>"; };
 		4C14D096247F6BDE00A7DB2C /* RestaurantDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPresenter.swift; sourceTree = "<group>"; };
 		4C14D098247F6BF200A7DB2C /* RestaurantDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailRouter.swift; sourceTree = "<group>"; };
 		4C14D09A247F6F1900A7DB2C /* RestaurantDetailViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewData.swift; sourceTree = "<group>"; };
 		4C14D09D247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPresenterTest.swift; sourceTree = "<group>"; };
 		4C14D0A1247FA5A200A7DB2C /* StringExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTest.swift; sourceTree = "<group>"; };
 		4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
+		4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gnaviAPIDummyResponse.json; sourceTree = "<group>"; };
+		4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStatusTests.swift; sourceTree = "<group>"; };
+		4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamEntityTests.swift; sourceTree = "<group>"; };
+		4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyMarkerEntityTests.swift; sourceTree = "<group>"; };
+		4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopMarkerEntityTests.swift; sourceTree = "<group>"; };
 		4C3652412479070800F53C52 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+FloatingPanelControllerDelegate.swift"; sourceTree = "<group>"; };
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -131,13 +145,13 @@
 		4C41666224434E07005EF1C2 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		4C416666244495C2005EF1C2 /* DependencyInjectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjectable.swift; sourceTree = "<group>"; };
 		4C4CA0C124258EC400C7AEAE /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
+		4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStatus.swift; sourceTree = "<group>"; };
 		4CA84AD1245036DD00DAC5F3 /* BusstopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BusstopDetail.storyboard; sourceTree = "<group>"; };
 		4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		4CA84AE92459247F00DAC5F3 /* Category.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
 		4CA84AEE245AB37900DAC5F3 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		4CA84AEF245AB37900DAC5F3 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
-		4CA84AF224618C4E00DAC5F3 /* MarkerCategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerCategoryEntity.swift; sourceTree = "<group>"; };
 		4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosition.swift; sourceTree = "<group>"; };
 		4CA84AF82462817C00DAC5F3 /* BusstopMarkerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopMarkerEntity.swift; sourceTree = "<group>"; };
 		4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerEntityProtocol.swift; sourceTree = "<group>"; };
@@ -173,6 +187,7 @@
 		4CC77645247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailViewData.swift; sourceTree = "<group>"; };
 		4CC77649247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailPresenterTest.swift; sourceTree = "<group>"; };
 		4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellViewData.swift; sourceTree = "<group>"; };
+		4CE4A0FE2483E72600E30B3A /* CategoryButtonsStatusViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonsStatusViewData.swift; sourceTree = "<group>"; };
 		4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMGLPointAnnotation.swift; sourceTree = "<group>"; };
 		4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamEntity.swift; sourceTree = "<group>"; };
 		4CF4AFE5246E188800991B2C /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -186,7 +201,6 @@
 		4CF4B0072472C9A600991B2C /* KyotoTripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KyotoTripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF4B0092472C9A600991B2C /* MapInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractorTests.swift; sourceTree = "<group>"; };
 		4CF4B00B2472C9A600991B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CF4B011247362B900991B2C /* VisibleLayerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleLayerEntityTests.swift; sourceTree = "<group>"; };
 		4CF4B0132475735B00991B2C /* RestaurantsRequestParamGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantsRequestParamGateway.swift; path = KyotoTrip/Modules/Map/Gateway/RestaurantsRequestParamGateway.swift; sourceTree = SOURCE_ROOT; };
 		4CF4B01624776C0800991B2C /* RestaurantsSearchRangeCellEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchRangeCellEntity.swift; sourceTree = "<group>"; };
 		4CF4B0182477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSettingCellEntity.swift; sourceTree = "<group>"; };
@@ -231,6 +245,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C13E72424849FD500337D26 /* ViewData */ = {
+			isa = PBXGroup;
+			children = (
+				4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */,
+				4CE4A0FE2483E72600E30B3A /* CategoryButtonsStatusViewData.swift */,
+				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
+			);
+			path = ViewData;
+			sourceTree = "<group>";
+		};
 		4C14D094247F6B9B00A7DB2C /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +313,17 @@
 				4CB8CCD0247BF25300B69BB2 /* CategoryRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		4C2BA4292484D2AD0018B435 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */,
+				4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */,
+				4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */,
+				4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		4C3F094424301AFE00FAEDC2 /* Common */ = {
@@ -376,9 +411,9 @@
 		4C3F095124301F8000FAEDC2 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				4C13E72424849FD500337D26 /* ViewData */,
 				4C4CA0C124258EC400C7AEAE /* MapPresenter.swift */,
 				4C3652412479070800F53C52 /* CategoryPresenter.swift */,
-				4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -518,15 +553,14 @@
 			children = (
 				4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */,
 				4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */,
-				4CA84AF224618C4E00DAC5F3 /* MarkerCategoryEntity.swift */,
 				4CA84AF82462817C00DAC5F3 /* BusstopMarkerEntity.swift */,
 				4CA84AFE24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift */,
 				4CA84B002462FDC900DAC5F3 /* BusRouteMarkerEntity.swift */,
 				4CA84B15246408DE00DAC5F3 /* RestaurantMarkerEntity.swift */,
-				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
 				4CA84B0F2463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift */,
 				4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */,
 				4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */,
+				4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -639,7 +673,10 @@
 			isa = PBXGroup;
 			children = (
 				4CF4B0092472C9A600991B2C /* MapInteractorTests.swift */,
-				4CF4B011247362B900991B2C /* VisibleLayerEntityTests.swift */,
+				4C13E72024849C7200337D26 /* RestaurantsSearchGatewayStub.swift */,
+				4C13E72224849D0E00337D26 /* RestaurantsRequestParamGatewayStub.swift */,
+				4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */,
+				4C2BA4292484D2AD0018B435 /* Entity */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -954,6 +991,7 @@
 				4CF4AFEE246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard in Resources */,
 				4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */,
 				4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */,
+				4C2BA4282484C9D10018B435 /* gnaviAPIDummyResponse.json in Resources */,
 				4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */,
 				4CC1ADE9241CC39700BF84B9 /* InfoTopPageTableViewCell.xib in Resources */,
 				4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */,
@@ -1124,10 +1162,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C14D0A2247FA5A200A7DB2C /* StringExtensionTest.swift in Sources */,
+				4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */,
+				4C2BA42B2484D2D80018B435 /* CategoryButtonStatusTests.swift in Sources */,
 				4CF4B00A2472C9A600991B2C /* MapInteractorTests.swift in Sources */,
-				4CF4B012247362BA00991B2C /* VisibleLayerEntityTests.swift in Sources */,
+				4C13E72124849C7200337D26 /* RestaurantsSearchGatewayStub.swift in Sources */,
 				4C14D09E247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift in Sources */,
+				4C2BA42D2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift in Sources */,
+				4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */,
 				4CC7764A247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift in Sources */,
+				4C13E72324849D0E00337D26 /* RestaurantsRequestParamGatewayStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,7 +1200,6 @@
 				4CC1ADE8241CC39700BF84B9 /* InfoTopPageTableViewCell.swift in Sources */,
 				4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */,
 				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
-				4CA84AF324618C4E00DAC5F3 /* MarkerCategoryEntity.swift in Sources */,
 				4CF4B0322478A14D00991B2C /* CommonSettingsPresenter.swift in Sources */,
 				4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */,
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
@@ -1189,6 +1231,7 @@
 				4CF4B03D2478CEA900991B2C /* RestaurantsSearchRangeSettingRouter.swift in Sources */,
 				4CF4B0142475735C00991B2C /* RestaurantsRequestParamGateway.swift in Sources */,
 				4CF4AFE6246E188800991B2C /* SettingsPresenter.swift in Sources */,
+				4C5A33E72483F1150041FE48 /* CategoryButtonStatus.swift in Sources */,
 				4CF4B0342478AB8F00991B2C /* TransitionerProtocol.swift in Sources */,
 				4CB9EFF2247EA59A00B7398D /* BusstopDetailRouter.swift in Sources */,
 				4C416655243FFA38005EF1C2 /* MapInteractor.swift in Sources */,
@@ -1201,6 +1244,7 @@
 				4CA84B1C2464339A00DAC5F3 /* RestaurantDetailViewController.swift in Sources */,
 				4CF4B0192477A6B900991B2C /* RestaurantsSearchSettingCellEntity.swift in Sources */,
 				4CF4AFD42468508800991B2C /* CustomMGLPointAnnotation.swift in Sources */,
+				4CE4A0FF2483E72600E30B3A /* CategoryButtonsStatusViewData.swift in Sources */,
 				4CF668CE24336514006AB40C /* KyotoCityInfoInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,6 @@ class MapView: MGLMapView {
     var busstopLayer: MGLStyleLayer?
     var busRouteLayer: MGLStyleLayer?
     var culturalPropertyLayer: MGLStyleLayer?
-    var visibleMarkerCategory: MarkerCategory = .None
     
     func setup() {
         self.setCenter(CLLocationCoordinate2D(latitude: MapView.kyotoStationLat, longitude: MapView.kyotoStationLong), zoomLevel: MapView.defaultZoomLv, animated: false)

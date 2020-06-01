@@ -1,5 +1,5 @@
 //
-//  KyotoMapUseCase.swift
+//  MapInteractor.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/04/10.
@@ -10,23 +10,21 @@ import RxCocoa
 import CoreLocation
 
 protocol MapInteractorProtocol: AnyObject {
-    /// Output from Presenter
-    var visibleMarkerCategoryDriver: Driver<MarkerCategoryEntity> { get }
+    /// Output from Interactor for Presenter
     var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> { get }
     var visibleMarkers: Driver<[MarkerEntityProtocol]> { get }
-    
+    var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> { get }
+    var restaurantStatusDriver: Driver<CategoryButtonStatus> { get }
+    var busstopStatusDriver: Driver<CategoryButtonStatus> { get }
     var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> { get }
-    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<[RestaurantMarkerEntity], RestaurantsSearchResponseError>) -> Void)
     
-    var markerCategory: MarkerCategoryEntity { get }
-    var mapViewCenterCoordinate: CLLocationCoordinate2D { get }
-
-    /// Input to Presenter
-    func updateVisibleLayer(entity: MarkerCategoryEntity)
-    func updateRestaurantMarkers(entity: [RestaurantMarkerEntity])
+    /// Input to Interactor
     func updateMarkersFromStyleLayers(entity: [MarkerEntityProtocol])
     func didSelectCategoryViewCell(entity: MarkerEntityProtocol)
     func updateMapViewViewpoint(centerCoordinate: CLLocationCoordinate2D)
+    func didSelectBusstopButton(nextStatus: CategoryButtonStatus)
+    func didSelectCulturalPropertyButton(nextStatus: CategoryButtonStatus)
+    func didSelectRestaurantButton(nextStatus: CategoryButtonStatus)
 }
 
 class MapInteractor: MapInteractorProtocol {
@@ -36,12 +34,6 @@ class MapInteractor: MapInteractorProtocol {
         let requestParamGateway: RestaurantsRequestParamGatewayProtocol
     }
 
-    var mapViewCenterCoordinate: CLLocationCoordinate2D
-        = CLLocationCoordinate2D(latitude: MapView.kyotoStationLat, longitude: MapView.kyotoStationLong)
-
-    var visibleMarkerCategoryDriver: Driver<MarkerCategoryEntity> {
-        return markerCategoryRelay.asDriver()
-    }
     var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> {
         return restaurantMarkersRelay.asDriver()
     }
@@ -52,29 +44,82 @@ class MapInteractor: MapInteractorProtocol {
         ){ $0 + $1 }
         return driver
     }
-    
     var selectedCategoryViewCellSignal: Signal<MarkerEntityProtocol> {
         return selectedCategoryViewCellRelay.asSignal()
     }
-    
-    // TODO: あとで修正
-    var markerCategory: MarkerCategoryEntity {
-        return markerCategoryRelay.value
+    var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> {
+        return culturalPropertyStatusRelay.asDriver()
     }
-    
-    private var dependency: Dependency!
-    private let markerCategoryRelay = BehaviorRelay<MarkerCategoryEntity>(value: MarkerCategoryEntity())
+    var restaurantStatusDriver: Driver<CategoryButtonStatus> {
+        return restaurantStatusRelay.asDriver()
+    }
+    var busstopStatusDriver: Driver<CategoryButtonStatus> {
+        return busstopStatusRelay.asDriver()
+    }
+    /// Relay vars using Rx
     private let restaurantMarkersRelay = BehaviorRelay<[RestaurantMarkerEntity]>(value: [])
     private let markersFromStyleLayersRelay = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
     private let selectedCategoryViewCellRelay = PublishRelay<MarkerEntityProtocol>()
+    private let culturalPropertyStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
+    private let restaurantStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
+    private let busstopStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
 
+    private var dependency: Dependency!
+    private var mapViewCenterCoordinate: CLLocationCoordinate2D
+        = CLLocationCoordinate2D(latitude: MapView.kyotoStationLat, longitude: MapView.kyotoStationLong)
     
     init(dependency: Dependency) {
         self.dependency = dependency
     }
     
-    func fetchRestaurants(location: CLLocationCoordinate2D, complition: @escaping (Result<[RestaurantMarkerEntity], RestaurantsSearchResponseError>) -> Void) {
-        createRestaurantsRequestParam(location: location) { [weak self] requestParam in
+    func updateMapViewViewpoint(centerCoordinate: CLLocationCoordinate2D) {
+        mapViewCenterCoordinate = centerCoordinate
+    }
+    
+    func updateMarkersFromStyleLayers(entity: [MarkerEntityProtocol]) {
+        markersFromStyleLayersRelay.accept(entity)
+    }
+    
+    func didSelectCategoryViewCell(entity: MarkerEntityProtocol) {
+        selectedCategoryViewCellRelay.accept(entity)
+    }
+    
+    func didSelectBusstopButton(nextStatus: CategoryButtonStatus) {
+        busstopStatusRelay.accept(nextStatus)
+    }
+    
+    func didSelectCulturalPropertyButton(nextStatus: CategoryButtonStatus) {
+        culturalPropertyStatusRelay.accept(nextStatus)
+    }
+    
+    func didSelectRestaurantButton(nextStatus: CategoryButtonStatus) {
+        restaurantStatusRelay.accept(nextStatus)
+        
+        switch nextStatus {
+        case .hidden:
+            restaurantMarkersRelay.accept([])
+        case .visible:
+            fetchRestaurants { [weak self] response in
+                guard let self = self else { return }
+                
+                var markers: [RestaurantMarkerEntity] = []
+                switch response {
+                case .success(let restaurantMarkers):
+                    markers = restaurantMarkers
+                default:
+                    // TODO: エラー状態をpresenterに渡せるようにしたい
+                    break
+                }
+                
+                self.restaurantMarkersRelay.accept(markers)
+            }
+        }
+    }
+}
+
+private extension MapInteractor {
+    private func fetchRestaurants(complition: @escaping (Result<[RestaurantMarkerEntity], RestaurantsSearchResponseError>) -> Void) {
+        createRestaurantsRequestParam(location: mapViewCenterCoordinate) { [weak self] requestParam in
             self?.dependency.searchGateway.fetch(param: requestParam) { response in
                 guard let self = self else { return }
 
@@ -94,40 +139,6 @@ class MapInteractor: MapInteractorProtocol {
         }
     }
     
-    func updateMapViewViewpoint(centerCoordinate: CLLocationCoordinate2D) {
-        self.mapViewCenterCoordinate = centerCoordinate
-    }
-    
-    func updateVisibleLayer(entity: MarkerCategoryEntity) {
-        markerCategoryRelay.accept(entity)
-    }
-    
-    func updateRestaurantMarkers(entity: [RestaurantMarkerEntity]) {
-        restaurantMarkersRelay.accept(entity)
-    }
-    
-    func updateMarkersFromStyleLayers(entity: [MarkerEntityProtocol]) {
-        markersFromStyleLayersRelay.accept(entity)
-    }
-    
-    func didSelectCategoryViewCell(entity: MarkerEntityProtocol) {
-        selectedCategoryViewCellRelay.accept(entity)
-    }
-}
-
-private extension MapInteractor {
-    private func createRestaurantMarker(source: RestaurantEntity) -> RestaurantMarkerEntity {
-        let latitude = atof(source.location.latitudeWgs84)
-        let longitude = atof(source.location.longitudeWgs84)
-        return RestaurantMarkerEntity(
-            title: source.name.name,
-            subtitle: source.categories.category,
-            coordinate: CLLocationCoordinate2DMake(latitude, longitude),
-            type: .Restaurant,
-            detail: source
-        )
-    }
-    
     private func createRestaurantsRequestParam(location: CLLocationCoordinate2D, compliton: (RestaurantsRequestParamEntity) -> Void) {
         dependency.requestParamGateway.fetch { response in
             var settings:RestaurantsRequestParamEntity
@@ -144,5 +155,17 @@ private extension MapInteractor {
             
             compliton(settings)
         }
+    }
+    
+    private func createRestaurantMarker(source: RestaurantEntity) -> RestaurantMarkerEntity {
+        let latitude = atof(source.location.latitudeWgs84)
+        let longitude = atof(source.location.longitudeWgs84)
+        return RestaurantMarkerEntity(
+            title: source.name.name,
+            subtitle: source.categories.category,
+            coordinate: CLLocationCoordinate2DMake(latitude, longitude),
+            type: .Restaurant,
+            detail: source
+        )
     }
 }

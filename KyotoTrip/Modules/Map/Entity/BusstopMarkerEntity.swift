@@ -25,13 +25,10 @@ struct BusstopMarkerEntity: MarkerEntityProtocol {
     
     var title = ""
     var subtitle: String {
-        var routeNameforSubtitle = "[路線] "
-        if routesDictionary.count > 1 {
+        var routeNameforSubtitle = "[路線] \(routes[0])"
+        if routes.count > 1 {
             routeNameforSubtitle =
-                routeNameforSubtitle + routesDictionary.first!.key + " 他"
-        } else {
-            routeNameforSubtitle =
-                routeNameforSubtitle + (routesDictionary.first?.key ?? "")
+                routeNameforSubtitle + " 他"
         }
 
         return routeNameforSubtitle
@@ -46,14 +43,5 @@ struct BusstopMarkerEntity: MarkerEntityProtocol {
     }
     var organizations: [String] {
         return organizationNameString.components(separatedBy: ",")
-    }
-    var routesDictionary: [String:String] {
-        var dictionary: [String:String] = [:]
-        
-        for i in 0..<routes.count {
-            dictionary[routes[i]] = organizations[i]
-        }
-        
-        return dictionary
     }
 }

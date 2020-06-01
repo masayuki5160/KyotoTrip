@@ -1,0 +1,235 @@
+{
+    "@attributes": {
+        "api_version": "v3"
+    },
+    "total_hit_count": 13095,
+    "hit_per_page": 3,
+    "page_offset": 1,
+    "rest": [
+        {
+            "@attributes": {
+                "order": 0
+            },
+            "id": "ka7c316",
+            "update_date": "2020-06-01T02:17:27+09:00",
+            "name": "京都 個室居酒屋1",
+            "name_kana": "キョウトコシツイザカヤ1",
+            "latitude": "34.9",
+            "longitude": "135.7",
+            "category": "完全個室 和風居酒屋",
+            "url": "",
+            "url_mobile": "",
+            "coupon_url": {
+                "pc": "",
+                "mobile": ""
+            },
+            "image_url": {
+                "shop_image1": "",
+                "shop_image2": "",
+                "qrcode": ""
+            },
+            "address": "〒600-8149 京都府京都市",
+            "tel": "050-1111-1111",
+            "tel_sub": "050-1111-1111",
+            "fax": "",
+            "opentime": "hogehoge",
+            "holiday": "無",
+            "access": {
+                "line": "ＪＲ",
+                "station": "京都駅",
+                "station_exit": "中央口",
+                "walk": "7",
+                "note": ""
+            },
+            "parking_lots": "",
+            "pr": {
+                "pr_short": "hogehoge",
+                "pr_long": "hogehoge"
+            },
+            "code": {
+                "areacode": "AREA120",
+                "areaname": "関西",
+                "prefcode": "PREF26",
+                "prefname": "京都府",
+                "areacode_s": "AREAS3404",
+                "areaname_s": "京都駅",
+                "category_code_l": [
+                    "RSFST09000",
+                    ""
+                ],
+                "category_name_l": [
+                    "居酒屋",
+                    ""
+                ],
+                "category_code_s": [
+                    "RSFST09004",
+                    ""
+                ],
+                "category_name_s": [
+                    "居酒屋",
+                    ""
+                ]
+            },
+            "budget": 2000,
+            "party": 2500,
+            "lunch": 1000,
+            "credit_card": "VISA,MasterCard,UC,アメリカン・エキスプレス,JCB,MUFG",
+            "e_money": "",
+            "flags": {
+                "mobile_site": 1,
+                "mobile_coupon": 1,
+                "pc_coupon": 1
+            }
+        },
+        {
+            "@attributes": {
+                "order": 1
+            },
+            "id": "ka7c316",
+            "update_date": "2020-06-01T02:17:27+09:00",
+            "name": "京都 個室居酒屋2",
+            "name_kana": "キョウトコシツイザカヤ2",
+            "latitude": "34.9",
+            "longitude": "135.7",
+            "category": "完全個室 和風居酒屋",
+            "url": "",
+            "url_mobile": "",
+            "coupon_url": {
+                "pc": "",
+                "mobile": ""
+            },
+            "image_url": {
+                "shop_image1": "",
+                "shop_image2": "",
+                "qrcode": ""
+            },
+            "address": "〒600-8149 京都府京都市",
+            "tel": "050-1111-1111",
+            "tel_sub": "050-1111-1111",
+            "fax": "",
+            "opentime": "hogehoge",
+            "holiday": "無",
+            "access": {
+                "line": "ＪＲ",
+                "station": "京都駅",
+                "station_exit": "中央口",
+                "walk": "7",
+                "note": ""
+            },
+            "parking_lots": "",
+            "pr": {
+                "pr_short": "hogehoge",
+                "pr_long": "hogehoge"
+            },
+            "code": {
+                "areacode": "AREA120",
+                "areaname": "関西",
+                "prefcode": "PREF26",
+                "prefname": "京都府",
+                "areacode_s": "AREAS3404",
+                "areaname_s": "京都駅",
+                "category_code_l": [
+                    "RSFST09000",
+                    ""
+                ],
+                "category_name_l": [
+                    "居酒屋",
+                    ""
+                ],
+                "category_code_s": [
+                    "RSFST09004",
+                    ""
+                ],
+                "category_name_s": [
+                    "居酒屋",
+                    ""
+                ]
+            },
+            "budget": 2000,
+            "party": 2500,
+            "lunch": 1000,
+            "credit_card": "VISA,MasterCard,UC,アメリカン・エキスプレス,JCB,MUFG",
+            "e_money": "",
+            "flags": {
+                "mobile_site": 1,
+                "mobile_coupon": 1,
+                "pc_coupon": 1
+            }
+        },
+        {
+            "@attributes": {
+                "order": 2
+            },
+            "id": "ka7c316",
+            "update_date": "2020-06-01T02:17:27+09:00",
+            "name": "京都 個室居酒屋3",
+            "name_kana": "キョウトコシツイザカヤ3",
+            "latitude": "34.9",
+            "longitude": "135.7",
+            "category": "完全個室 和風居酒屋",
+            "url": "",
+            "url_mobile": "",
+            "coupon_url": {
+                "pc": "",
+                "mobile": ""
+            },
+            "image_url": {
+                "shop_image1": "",
+                "shop_image2": "",
+                "qrcode": ""
+            },
+            "address": "〒600-8149 京都府京都市",
+            "tel": "050-1111-1111",
+            "tel_sub": "050-1111-1111",
+            "fax": "",
+            "opentime": "hogehoge",
+            "holiday": "無",
+            "access": {
+                "line": "ＪＲ",
+                "station": "京都駅",
+                "station_exit": "中央口",
+                "walk": "7",
+                "note": ""
+            },
+            "parking_lots": "",
+            "pr": {
+                "pr_short": "hogehoge",
+                "pr_long": "hogehoge"
+            },
+            "code": {
+                "areacode": "AREA120",
+                "areaname": "関西",
+                "prefcode": "PREF26",
+                "prefname": "京都府",
+                "areacode_s": "AREAS3404",
+                "areaname_s": "京都駅",
+                "category_code_l": [
+                    "RSFST09000",
+                    ""
+                ],
+                "category_name_l": [
+                    "居酒屋",
+                    ""
+                ],
+                "category_code_s": [
+                    "RSFST09004",
+                    ""
+                ],
+                "category_name_s": [
+                    "居酒屋",
+                    ""
+                ]
+            },
+            "budget": 2000,
+            "party": 2500,
+            "lunch": 1000,
+            "credit_card": "VISA,MasterCard,UC,アメリカン・エキスプレス,JCB,MUFG",
+            "e_money": "",
+            "flags": {
+                "mobile_site": 1,
+                "mobile_coupon": 1,
+                "pc_coupon": 1
+            }
+        }
+    ]
+}
