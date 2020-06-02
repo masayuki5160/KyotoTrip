@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingsPresenterProtocol {
-    func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell
+    func cellForSettings(indexPath: IndexPath) -> UITableViewCell
     var settingsTableSectionTitle: [String] { get }
     var settingsTableData: [[String]] { get }
 }
@@ -48,7 +48,7 @@ class SettingsPresenter: SettingsPresenterProtocol {
         ]
     }
     
-    func cellForSettings(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+    func cellForSettings(indexPath: IndexPath) -> UITableViewCell {
         let items = settingsTableData[indexPath.section]
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "SettingCell")
         cell.textLabel?.text = items[indexPath.row]

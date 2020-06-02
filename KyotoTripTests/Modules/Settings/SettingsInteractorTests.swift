@@ -13,7 +13,7 @@ class SettingsInteractorTests: XCTestCase {
     override func setUp() {
     }
     
-    func testShouldFetchSavedParam() {
+    func test_shouldFetchSavedParam() {
         /// Build SettingsInteractor() for test
         var settings = RestaurantsRequestParamEntity()
         settings.englishSpeakingStaff = .on

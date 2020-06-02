@@ -22,6 +22,7 @@
 		4C2BA42D2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */; };
 		4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */; };
 		4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */; };
+		4C2EA2342486813800FE98C5 /* SettingsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */; };
 		4C3652422479070800F53C52 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3652412479070800F53C52 /* CategoryPresenter.swift */; };
 		4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */; };
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
@@ -139,6 +140,7 @@
 		4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamEntityTests.swift; sourceTree = "<group>"; };
 		4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyMarkerEntityTests.swift; sourceTree = "<group>"; };
 		4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopMarkerEntityTests.swift; sourceTree = "<group>"; };
+		4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenterTests.swift; sourceTree = "<group>"; };
 		4C3652412479070800F53C52 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+FloatingPanelControllerDelegate.swift"; sourceTree = "<group>"; };
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				4C5A5DF0248610CF001EA2CE /* SettingsInteractorTests.swift */,
+				4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1085,6 +1088,7 @@
 				4C14D0A2247FA5A200A7DB2C /* StringExtensionTest.swift in Sources */,
 				4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */,
 				4C2BA42B2484D2D80018B435 /* CategoryButtonStatusTests.swift in Sources */,
+				4C2EA2342486813800FE98C5 /* SettingsPresenterTests.swift in Sources */,
 				4CF4B00A2472C9A600991B2C /* MapInteractorTests.swift in Sources */,
 				4C13E72124849C7200337D26 /* RestaurantsSearchGatewayStub.swift in Sources */,
 				4C14D09E247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift in Sources */,
