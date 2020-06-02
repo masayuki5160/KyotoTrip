@@ -48,6 +48,38 @@ class RestaurantsSearchRangeSettingPresenterTests: XCTestCase {
             XCTAssertTrue(cells[1].isSelected)
             XCTAssertFalse(cells[2].isSelected)
             XCTAssertFalse(cells[3].isSelected)
+            XCTAssertFalse(cells[4].isSelected)
+
+            functionAnswered.fulfill()
+        }).disposed(by: disposeBag)
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_is_correctCellsViewDatas_whenCellIsSelected() {
+        view.loadViewIfNeeded()
+        let disposeBag = DisposeBag()
+        
+        let defaultcell = RestaurantsSearchRangeCellViewData(
+            range: .range500,
+            isSelected: true
+        )
+        let relay = BehaviorRelay<RestaurantsSearchRangeCellViewData>(value: defaultcell)
+        presenter.bindView(input: .init(selectedCell: relay.asDriver()))
+        let selectedCell = RestaurantsSearchRangeCellViewData(
+            range: .range2000,
+            isSelected: true
+        )
+        /// Send selected cell to Presenter
+        relay.accept(selectedCell)
+        
+        let functionAnswered = expectation(description: "asynchronous function")
+        presenter.searchRangeRowsDriver.drive(onNext: { cells in
+            XCTAssertFalse(cells[0].isSelected)
+            XCTAssertFalse(cells[1].isSelected)
+            XCTAssertFalse(cells[2].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
+            XCTAssertFalse(cells[4].isSelected)
 
             functionAnswered.fulfill()
         }).disposed(by: disposeBag)
