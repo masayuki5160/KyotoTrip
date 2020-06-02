@@ -14,7 +14,7 @@ class CategoryButtonStatusTests: XCTestCase {
     override func setUp() {
     }
     
-    func testChangeStatusToVisible() {
+    func test_isVisibleStatus_whenUseNextMethod() {
         let status: CategoryButtonStatus = .hidden
         let actual = status.next()
         let expected: CategoryButtonStatus = .visible
@@ -22,7 +22,7 @@ class CategoryButtonStatusTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testChangeStatusToHidden() {
+    func test_isHiddenStatus_whenUseNextMethod() {
         let status: CategoryButtonStatus = .visible
         let actual = status.next()
         let expected: CategoryButtonStatus = .hidden

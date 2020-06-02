@@ -43,7 +43,8 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
-        let interactor = SettingsInteractor()
+        let gateway = RestaurantsRequestParamGateway()
+        let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let presenter = SettingsPresenter(dependency: .init(interactor: interactor))
         vc.inject(.init(presenter: presenter))
         
@@ -167,13 +168,13 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchSettingsViewController
         }()
 
-        let interactor = RestaurantsSearchSettingsInteractor()
+        let gateway = RestaurantsRequestParamGateway()
+        let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let router = RestaurantsSearchSettingsRouter(view: view)
-        let commonPresenter = CommonSettingsPresenter()
         let presenter = RestaurantsSearchSettingsPresenter(dependency: .init(
             interactor: interactor,
-            router: router,
-            commonPresenter: commonPresenter)
+            router: router
+            )
         )
         view.inject(.init(presenter: presenter))
         
@@ -186,13 +187,13 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchRangeSettingsViewController
         }()
 
-        let interactor = RestaurantsSearchRangeSettingInteractor()
+        let gateway = RestaurantsRequestParamGateway()
+        let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let router = RestaurantsSearchRangeSettingRouter(view: view)
-        let commonPresenter = CommonSettingsPresenter()
         let presenter = RestaurantsSearchRangeSettingPresenter(dependency: .init(
             interactor: interactor,
-            router: router,
-            commonPresenter: commonPresenter)
+            router: router
+            )
         )
         view.inject(.init(presenter: presenter))
         

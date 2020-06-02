@@ -15,11 +15,21 @@ class MapInteractorTests: XCTestCase {
     var interactor: MapInteractor?
 
     override func setUp() {
-        interactor = MapInteractor(dependency: .init(
-            searchGateway: RestaurantsSearchGatewayStub(),
-            requestParamGateway: RestaurantsRequestParamGatewayStub()
-            )
-        )
+        
+    }
+    
+    private func createRestaurantSearchResult() -> RestaurantsSearchResultEntity {
+        /// Set dummy data with json file
+        let path = Bundle.main.path(forResource: "gnaviAPIDummyResponse", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        let data = try! Data(contentsOf: url)
+
+        /// decode dummy json file
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let resultEntity = try! decoder.decode(RestaurantsSearchResultEntity.self, from: data)
+        
+        return resultEntity
     }
 
     override func tearDown() {

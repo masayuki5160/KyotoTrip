@@ -14,23 +14,22 @@ protocol RestaurantsSearchRangeSettingPresenterProtocol {
     func reloadSettings()
     
     // MARK: Output from presenter
-    var searchRangeRowsDriver: Driver<[RestaurantsSearchRangeCellEntity]>{ get }
+    var searchRangeRowsDriver: Driver<[RestaurantsSearchRangeCellViewData]>{ get }
 }
 
 struct RestauransSearchRangeSettingView {
-    let selectedCellEntity: Driver<RestaurantsSearchRangeCellEntity>
+    let selectedCellEntity: Driver<RestaurantsSearchRangeCellViewData>
 }
 
 class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPresenterProtocol {
     // MARK: Properties
 
     struct Dependency {
-        let interactor: RestaurantsSearchRangeSettingInteractorProtocol
+        let interactor: SettingsInteractorProtocol
         let router: RestaurantsSearchRangeSettingRouterProtocol
-        let commonPresenter: CommonSettingsPresenterProtocol
     }
 
-    var searchRangeRowsDriver: Driver<[RestaurantsSearchRangeCellEntity]> {
+    var searchRangeRowsDriver: Driver<[RestaurantsSearchRangeCellViewData]> {
         return restaurantsSearchRangeSettingsRows.asDriver()
     }
 
@@ -38,7 +37,15 @@ class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPrese
     private let disposeBag = DisposeBag()
     private var restaurantsRequestParam = RestaurantsRequestParamEntity()
     private let restaurantsSearchRangeSettingsRows =
-        BehaviorRelay<[RestaurantsSearchRangeCellEntity]>(value: [])
+        BehaviorRelay<[RestaurantsSearchRangeCellViewData]>(value: [])
+    
+    private let restaurantsSearchRangeSettings = [
+        RestaurantsRequestSearchRange.range300,
+        RestaurantsRequestSearchRange.range500,
+        RestaurantsRequestSearchRange.range1000,
+        RestaurantsRequestSearchRange.range2000,
+        RestaurantsRequestSearchRange.range3000
+    ]
 
     init(dependency: Dependency) {
         self.dependency = dependency
@@ -51,9 +58,7 @@ class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPrese
         input.selectedCellEntity.drive(onNext: { [weak self] entity in
             guard let self = self else { return }
 
-            self.restaurantsRequestParam.range =
-                self.dependency.commonPresenter.convertToSearchRange(rangeString: entity.range)
-            
+            self.restaurantsRequestParam.range = entity.range
             let searchRangeRows = self.buildSearchRangeRows(settings: self.restaurantsRequestParam)
             self.restaurantsSearchRangeSettingsRows.accept(searchRangeRows)
         }).disposed(by: disposeBag)
@@ -71,18 +76,13 @@ class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPrese
 private extension RestaurantsSearchRangeSettingPresenter {
     // MARK: Private functions
     
-    private func buildSearchRangeRows(settings: RestaurantsRequestParamEntity) -> [RestaurantsSearchRangeCellEntity] {
-        var searchRangeRows: [RestaurantsSearchRangeCellEntity] = []
-        let searchRangeDictionary = dependency.commonPresenter.restaurantsSearchRangeDictionary
+    private func buildSearchRangeRows(settings: RestaurantsRequestParamEntity) -> [RestaurantsSearchRangeCellViewData] {
+        var searchRangeRows: [RestaurantsSearchRangeCellViewData] = []
         
-        for (key, _) in searchRangeDictionary {
-            var model = RestaurantsSearchRangeCellEntity()
-            model.range = key
-            let rangeString = dependency.commonPresenter.convertToRangeString(from: settings.range)
-            if rangeString == key {
+        for range in restaurantsSearchRangeSettings {
+            var model = RestaurantsSearchRangeCellViewData(range: range, isSelected: false)
+            if settings.range == range {
                 model.isSelected = true
-            } else {
-                model.isSelected = false
             }
             
             searchRangeRows.append(model)

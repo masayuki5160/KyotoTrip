@@ -1,12 +1,13 @@
 //
-//  restaurantsSearchRangeRowEntity.swift
+//  RestaurantsSearchSettingCellEntity.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/05/22.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-struct RestaurantsSearchRangeCellEntity {
-    var range = ""
+struct RestaurantsSearchSettingsCellViewData {
+    var title = ""
+    var detail = ""
     var isSelected = false
 }

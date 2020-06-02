@@ -9,25 +9,24 @@ import RxSwift
 import RxCocoa
 
 protocol RestaurantsSearchSettingsPresenterProtocol {
-    var settingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]>{ get }
+    var settingsRowsDriver: Driver<[RestaurantsSearchSettingsCellViewData]>{ get }
     func bindView(input: RestauransSearchSettingsView)
     func saveSettings()
     func reloadSettings()
 }
 
 struct RestauransSearchSettingsView {
-    let selectedCellEntity: Driver<RestaurantsSearchSettingCellEntity>
+    let selectedCell: Driver<RestaurantsSearchSettingsCellViewData>
 }
 
 class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProtocol {
     
     struct Dependency {
-        let interactor: RestaurantsSearchSettingsInteractorProtocol
+        let interactor: SettingsInteractorProtocol
         let router: RestaurantsSearchSettingsRouterProtocol
-        let commonPresenter: CommonSettingsPresenterProtocol
     }
     
-    var settingsRowsDriver: Driver<[RestaurantsSearchSettingCellEntity]> {
+    var settingsRowsDriver: Driver<[RestaurantsSearchSettingsCellViewData]> {
         return restaurantsSearchSettingsRows.asDriver()
     }
     
@@ -44,7 +43,7 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
         "Wifi",
         "禁煙"
     ]
-    private let restaurantsSearchSettingsRows = BehaviorRelay<[RestaurantsSearchSettingCellEntity]>(value: [])
+    private let restaurantsSearchSettingsRows = BehaviorRelay<[RestaurantsSearchSettingsCellViewData]>(value: [])
     private let disposeBag = DisposeBag()
     
     init(dependency: Dependency) {
@@ -54,56 +53,56 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
     }
     
     func bindView(input: RestauransSearchSettingsView) {
-        input.selectedCellEntity.drive(onNext: { [weak self] entity in
+        input.selectedCell.drive(onNext: { [weak self] viewData in
             guard let self = self else { return }
             /// FIXME: Change to other good code
-            switch entity.title {
+            switch viewData.title {
             case self.restaurantsSearchSettingsTableData[0]:// 検索範囲
                 self.dependency.router.transitionToRestaurantsSearchRangeSettingView()
             case self.restaurantsSearchSettingsTableData[1]:// 英語スタッフ
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.englishSpeakingStaff = .off
                 } else {
                     self.restaurantsRequestParam.englishSpeakingStaff = .on
                 }
             case self.restaurantsSearchSettingsTableData[2]:// 韓国語スタッフ
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.koreanSpeakingStaff = .off
                 } else {
                     self.restaurantsRequestParam.koreanSpeakingStaff = .on
                 }
             case self.restaurantsSearchSettingsTableData[3]:// 中国語スタッフ
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.chineseSpeakingStaff = .off
                 } else {
                     self.restaurantsRequestParam.chineseSpeakingStaff = .on
                 }
             case self.restaurantsSearchSettingsTableData[4]:// ベジタリアンメニュー
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.vegetarianMenuOptions = .off
                 } else {
                     self.restaurantsRequestParam.vegetarianMenuOptions = .on
                 }
             case self.restaurantsSearchSettingsTableData[5]:// クレジットカード
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.card = .off
                 } else {
                     self.restaurantsRequestParam.card = .on
                 }
             case self.restaurantsSearchSettingsTableData[6]:// 個室
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.privateRoom = .off
                 } else {
                     self.restaurantsRequestParam.privateRoom = .on
                 }
             case self.restaurantsSearchSettingsTableData[7]:// Wifi
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.wifi = .off
                 } else {
                     self.restaurantsRequestParam.wifi = .on
                 }
             case self.restaurantsSearchSettingsTableData[8]:// 禁煙
-                if entity.isSelected {
+                if viewData.isSelected {
                     self.restaurantsRequestParam.noSmoking = .off
                 } else {
                     self.restaurantsRequestParam.noSmoking = .on
@@ -128,17 +127,17 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
 }
 
 private extension RestaurantsSearchSettingsPresenter {
-    private func buildRestaurantsSettingRows(settings: RestaurantsRequestParamEntity) -> [RestaurantsSearchSettingCellEntity] {
-        var searchSettingRows: [RestaurantsSearchSettingCellEntity] = []
+    private func buildRestaurantsSettingRows(settings: RestaurantsRequestParamEntity) -> [RestaurantsSearchSettingsCellViewData] {
+        var searchSettingRows: [RestaurantsSearchSettingsCellViewData] = []
         
         /// FIXME: Change to other good code
         for index in 0..<restaurantsSearchSettingsTableData.count {
-            var model = RestaurantsSearchSettingCellEntity()
+            var model = RestaurantsSearchSettingsCellViewData()
 
             model.title = restaurantsSearchSettingsTableData[index]
             switch index {
             case 0:// 検索範囲
-                model.detail = dependency.commonPresenter.convertToRangeString(from: settings.range)
+                model.detail = settings.range.toString()
             case 1:// 英語スタッフ
                 model.isSelected = settings.englishSpeakingStaff == .on ? true : false
             case 2:// 韓国語スタッフ

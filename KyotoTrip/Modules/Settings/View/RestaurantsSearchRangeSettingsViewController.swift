@@ -27,14 +27,14 @@ class RestaurantsSearchRangeSettingsViewController: UIViewController, Transition
         
         dependency.presenter.bindView(input:
             RestauransSearchRangeSettingView(
-                selectedCellEntity: tableView.rx.modelSelected(RestaurantsSearchRangeCellEntity.self).asDriver()
+                selectedCellEntity: tableView.rx.modelSelected(RestaurantsSearchRangeCellViewData.self).asDriver()
             )
         )
         
         dependency.presenter.searchRangeRowsDriver
             .drive(tableView.rx.items) { tableView, row, element in
                 let cell = UITableViewCell(style: .default, reuseIdentifier: "restaurantsSearchRange")
-                cell.textLabel?.text = element.range
+                cell.textLabel?.text = element.rangeString
                 cell.accessoryType = element.isSelected ? .checkmark : .none
 
                 return cell

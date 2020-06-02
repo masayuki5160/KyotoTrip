@@ -9,12 +9,17 @@
 @testable import KyotoTrip
 
 class RestaurantsRequestParamGatewayStub: RestaurantsRequestParamGatewayProtocol {
-    var settings = RestaurantsRequestParamEntity()
+    
+    let result: Result<RestaurantsRequestParamEntity, RestaurantsRequestParamGatewayError>
+    
+    init(result: Result<RestaurantsRequestParamEntity, RestaurantsRequestParamGatewayError>) {
+        self.result = result
+    }
+    
     func fetch(complition: (Result<RestaurantsRequestParamEntity, RestaurantsRequestParamGatewayError>) -> Void) {
-        complition(.success(settings))
+        complition(result)
     }
     
     func save(entity: RestaurantsRequestParamEntity) {
-        settings = entity
     }
 }

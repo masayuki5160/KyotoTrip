@@ -39,7 +39,7 @@ class RestaurantDetailPresenterTest: XCTestCase {
         )
     }
     
-    func testCreateCellForNameSection() {
+    func test_is_correctNameSction_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actualName = cell.textLabel?.text
@@ -52,7 +52,7 @@ class RestaurantDetailPresenterTest: XCTestCase {
         XCTAssertEqual(expectedKanaName, actualKanaName)
     }
     
-    func testCreateCellForAddressSection() {
+    func test_is_correctAddressSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 1)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actualAddress = cell.textLabel?.text
@@ -65,7 +65,7 @@ class RestaurantDetailPresenterTest: XCTestCase {
         XCTAssertEqual(expectedAccess, actualAccess)
     }
     
-    func testCreateCellForBusinessHourSection() {
+    func test_is_correctBusinessHourSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 2)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -74,7 +74,7 @@ class RestaurantDetailPresenterTest: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testCreateCellForHolidaySection() {
+    func test_is_correctHolidaySection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 3)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -83,7 +83,7 @@ class RestaurantDetailPresenterTest: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testCreateCellForTelSection() {
+    func test_is_correctTelSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 4)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -92,7 +92,7 @@ class RestaurantDetailPresenterTest: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testCreateCellForWebpageSection() {
+    func test_is_correctWebpageSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 5)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -101,7 +101,7 @@ class RestaurantDetailPresenterTest: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testCreateCellForOtherSection() {
+    func test_is_correctOtherSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 6)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text

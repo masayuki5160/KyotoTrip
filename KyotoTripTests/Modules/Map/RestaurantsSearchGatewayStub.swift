@@ -8,18 +8,14 @@
 @testable import KyotoTrip
 import Foundation
 
-struct RestaurantsSearchGatewayStub: RestaurantsSearchGatewayProtocol {
-    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
-        /// Set dummy data with json file
-        let path = Bundle.main.path(forResource: "gnaviAPIDummyResponse", ofType: "json")
-        let url = URL(fileURLWithPath: path!)
-        let data = try! Data(contentsOf: url)
+class RestaurantsSearchGatewayStub: RestaurantsSearchGatewayProtocol {
+    private var result: Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>
+    
+    init(result: Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) {
+        self.result = result
+    }
 
-        /// decode dummy json file
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let resultEntity = try! decoder.decode(RestaurantsSearchResultEntity.self, from: data)
-        
-        complition(.success(resultEntity))
+    func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
+        complition(result)
     }
 }

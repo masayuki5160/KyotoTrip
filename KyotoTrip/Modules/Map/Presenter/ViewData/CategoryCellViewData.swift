@@ -20,9 +20,9 @@ struct CategoryCellViewData {
         case .Busstop:
             iconName = busstopIconName
         case .CulturalProperty:
-            iconName = restaurantIconName
-        case .Restaurant:
             iconName = culturalPropertyIconName
+        case .Restaurant:
+            iconName = restaurantIconName
         default:
             // TODO: Set default icon name
             iconName = busstopIconName

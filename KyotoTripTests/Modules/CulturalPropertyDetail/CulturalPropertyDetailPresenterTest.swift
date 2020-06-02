@@ -35,7 +35,7 @@ class CulturalPropertyDetailPresenterTest: XCTestCase {
         )
     }
     
-    func testCreateCellForNameSection() {
+    func test_is_correctNameSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -44,7 +44,7 @@ class CulturalPropertyDetailPresenterTest: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testCreateCellForAddressSection() {
+    func test_is_correctAddressSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 1)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -54,7 +54,7 @@ class CulturalPropertyDetailPresenterTest: XCTestCase {
 
     }
     
-    func testCreateCellForLargeClassificationSection() {
+    func test_is_correctLargeClassificationSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 2)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -64,7 +64,7 @@ class CulturalPropertyDetailPresenterTest: XCTestCase {
 
     }
 
-    func testCreateCellForSmallClassificationSection() {
+    func test_is_correctSmallClassificationSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 3)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text
@@ -74,7 +74,7 @@ class CulturalPropertyDetailPresenterTest: XCTestCase {
 
     }
 
-    func testCreateCellForRegisterDateSection() {
+    func test_is_correctRegisterDateSection_atCreatedCell() {
         let indexPath = IndexPath(item: 0, section: 4)
         let cell = presenter.createCellForRowAt(indexPath: indexPath)
         let actual = cell.textLabel?.text

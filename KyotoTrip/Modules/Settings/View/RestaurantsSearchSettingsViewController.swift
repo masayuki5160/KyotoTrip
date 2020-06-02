@@ -38,7 +38,7 @@ class RestaurantsSearchSettingsViewController: UIViewController, TransitionerPro
         }.disposed(by: disposeBag)
         
         dependency.presenter.bindView(
-            input: RestauransSearchSettingsView(selectedCellEntity: tableView.rx.modelSelected(RestaurantsSearchSettingCellEntity.self).asDriver()
+            input: RestauransSearchSettingsView(selectedCell: tableView.rx.modelSelected(RestaurantsSearchSettingsCellViewData.self).asDriver()
             )
         )
         

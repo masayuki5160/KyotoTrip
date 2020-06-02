@@ -15,7 +15,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
     }
     
     func testSearchRange300ToString() {
-        let range: RestaurantsRequestParamEntity.SearchRange = .range300
+        let range: RestaurantsRequestSearchRange = .range300
         let actual = range.toString()
         let expected = "300m"
         
@@ -23,7 +23,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
     }
     
     func testSearchRange500ToString() {
-        let range: RestaurantsRequestParamEntity.SearchRange = .range500
+        let range: RestaurantsRequestSearchRange = .range500
         let actual = range.toString()
         let expected = "500m"
         
@@ -31,7 +31,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
     }
     
     func testSearchRange1000ToString() {
-        let range: RestaurantsRequestParamEntity.SearchRange = .range1000
+        let range: RestaurantsRequestSearchRange = .range1000
         let actual = range.toString()
         let expected = "1000m"
         
@@ -39,7 +39,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
     }
     
     func testSearchRange2000ToString() {
-        let range: RestaurantsRequestParamEntity.SearchRange = .range2000
+        let range: RestaurantsRequestSearchRange = .range2000
         let actual = range.toString()
         let expected = "2000m"
         
@@ -47,7 +47,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
     }
     
     func testSearchRange3000ToString() {
-        let range: RestaurantsRequestParamEntity.SearchRange = .range3000
+        let range: RestaurantsRequestSearchRange = .range3000
         let actual = range.toString()
         let expected = "3000m"
         
