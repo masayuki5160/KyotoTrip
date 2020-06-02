@@ -27,7 +27,7 @@ class RestaurantsSearchRangeSettingsViewController: UIViewController, Transition
         
         dependency.presenter.bindView(input:
             RestauransSearchRangeSettingView(
-                selectedCellEntity: tableView.rx.modelSelected(RestaurantsSearchRangeCellViewData.self).asDriver()
+                selectedCell: tableView.rx.modelSelected(RestaurantsSearchRangeCellViewData.self).asDriver()
             )
         )
         

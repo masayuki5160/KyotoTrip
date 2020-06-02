@@ -18,7 +18,7 @@ protocol RestaurantsSearchRangeSettingPresenterProtocol {
 }
 
 struct RestauransSearchRangeSettingView {
-    let selectedCellEntity: Driver<RestaurantsSearchRangeCellViewData>
+    let selectedCell: Driver<RestaurantsSearchRangeCellViewData>
 }
 
 class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPresenterProtocol {
@@ -55,7 +55,7 @@ class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPrese
     // MARK: Public functions
     
     func bindView(input: RestauransSearchRangeSettingView) {
-        input.selectedCellEntity.drive(onNext: { [weak self] entity in
+        input.selectedCell.drive(onNext: { [weak self] entity in
             guard let self = self else { return }
 
             self.restaurantsRequestParam.range = entity.range
