@@ -108,6 +108,7 @@
 		4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773DF241B97900032CC53 /* Assets.xcassets */; };
 		4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */; };
 		4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773EC241B9D910032CC53 /* MapViewController.swift */; };
+		4CFF123C2487E2D4002F23CB /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF123B2487E2D4002F23CB /* SettingsRouter.swift */; };
 		4CFF7F302486188E005DCF19 /* RestaurantsRequestSearchRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF7F2F2486188E005DCF19 /* RestaurantsRequestSearchRange.swift */; };
 		8B7FB77CBB673EA6F6691891 /* Pods_KyotoTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */; };
 		C6A6AA505C55E1400F52D053 /* Pods_KyotoTripTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB67A8DF6CA67FB2B023127 /* Pods_KyotoTripTests.framework */; };
@@ -234,6 +235,7 @@
 		4CF773E2241B97900032CC53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4CF773E4241B97900032CC53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CF773EC241B9D910032CC53 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		4CFF123B2487E2D4002F23CB /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		4CFF7F2F2486188E005DCF19 /* RestaurantsRequestSearchRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestSearchRange.swift; sourceTree = "<group>"; };
 		BB09C1A28A717DE8ACC178D9 /* Pods-KyotoTrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip.debug.xcconfig"; sourceTree = "<group>"; };
 		E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTripTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -775,6 +777,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF4B02F24789A4700991B2C /* RestaurantsSearchSettingsRouter.swift */,
+				4CFF123B2487E2D4002F23CB /* SettingsRouter.swift */,
 				4CF4B03C2478CEA900991B2C /* RestaurantsSearchRangeSettingRouter.swift */,
 			);
 			path = Router;
@@ -1183,6 +1186,7 @@
 				4CB9EFF2247EA59A00B7398D /* BusstopDetailRouter.swift in Sources */,
 				4C416655243FFA38005EF1C2 /* MapInteractor.swift in Sources */,
 				4CC1ADE5241CC30900BF84B9 /* KyotoCityInfo.swift in Sources */,
+				4CFF123C2487E2D4002F23CB /* SettingsRouter.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
 				4CA84B0E2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift in Sources */,
 				4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */,

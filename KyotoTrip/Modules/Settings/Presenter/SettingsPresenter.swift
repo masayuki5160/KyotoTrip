@@ -9,6 +9,7 @@ import UIKit
 
 protocol SettingsPresenterProtocol {
     func cellForSettings(indexPath: IndexPath) -> UITableViewCell
+    func didSelectRowAt(indexPath: IndexPath)
     var settingsTableSectionTitle: [String] { get }
     var settingsTableData: [[String]] { get }
 }
@@ -19,6 +20,7 @@ class SettingsPresenter: SettingsPresenterProtocol {
 
     struct Dependency {
         let interactor: SettingsInteractorProtocol
+        let router: SettingsRouterProtocol
     }
     
     let settingsTableSectionTitle = [
@@ -72,6 +74,23 @@ class SettingsPresenter: SettingsPresenterProtocol {
         }
         
         return cell
+    }
+    
+    func didSelectRowAt(indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 1 {
+                dependency.router.transitionToLisenceView()
+            }
+        case 1:
+            if indexPath.row == 0 {
+                // TODO: 言語設定ページ
+            } else {
+                dependency.router.transitionToRestaurantsSearchSettingsView()
+            }
+        default:
+            break
+        }
     }
 }
 

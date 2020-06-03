@@ -45,7 +45,12 @@ extension AppDefaultDependencies: AppDependencies {
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
         let gateway = RestaurantsRequestParamGateway()
         let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
-        let presenter = SettingsPresenter(dependency: .init(interactor: interactor))
+        let router = SettingsRouter(view: vc)
+        let presenter = SettingsPresenter(dependency: .init(
+            interactor: interactor,
+            router: router
+            )
+        )
         vc.inject(.init(presenter: presenter))
         
         return naviViewController

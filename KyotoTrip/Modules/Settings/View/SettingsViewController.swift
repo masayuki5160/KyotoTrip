@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, TransitionerProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -54,23 +54,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            if indexPath.row == 1 {
-                let vc = AppDefaultDependencies().assembleSettingsLisenceModule()
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        case 1:
-            if indexPath.row == 0 {
-                // TODO: 言語設定ページ
-            } else {
-                let vc = AppDefaultDependencies().assembleSettingsRestaurantsSearchModule()
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        default:
-            break
-        }
-        
+        dependency.presenter.didSelectRowAt(indexPath: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

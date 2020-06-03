@@ -14,6 +14,7 @@ class SettingsPresenterTests: XCTestCase {
     var view: SettingsViewController!
     var gateway: RestaurantsRequestParamGatewayStub!
     var interactor: SettingsInteractor!
+    var router: SettingsRouter!
     var presenter: SettingsPresenter!
     
     override func setUp() {
@@ -27,7 +28,12 @@ class SettingsPresenterTests: XCTestCase {
             return RestaurantsRequestParamGatewayStub(result: .success(settings))
         }()
         interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
-        presenter = SettingsPresenter(dependency: .init(interactor: interactor))
+        router = SettingsRouter(view: view)
+        presenter = SettingsPresenter(dependency: .init(
+            interactor: interactor,
+            router: router
+            )
+        )
         view.inject(.init(presenter: presenter))
     }
     
