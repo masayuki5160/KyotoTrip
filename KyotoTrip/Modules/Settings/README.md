@@ -1,0 +1,1 @@
+![](SettingsModuleArchitecture.drawio.svg)

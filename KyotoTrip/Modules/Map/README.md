@@ -1,0 +1,1 @@
+![](MapModuleArchitecture.drawio.svg)
