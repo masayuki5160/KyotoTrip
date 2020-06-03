@@ -38,7 +38,7 @@ class RestaurantsSearchRangeSettingPresenterTests: XCTestCase {
         view.inject(.init(presenter: presenter))
     }
     
-    func test_is_selectedCorrectSearchRange_whenDefault() {
+    func test_is_selectedCorrectSearchRange_whenLaunchedApp() {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         

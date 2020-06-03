@@ -9,12 +9,12 @@
 import XCTest
 @testable import KyotoTrip
 
-class RestaurantsRequestParamEntityTests: XCTestCase {
+class RestaurantsRequestSearchRangeTests: XCTestCase {
 
     override func setUp() {
     }
     
-    func testSearchRange300ToString() {
+    func test_is_correctSearchRange300String() {
         let range: RestaurantsRequestSearchRange = .range300
         let actual = range.toString()
         let expected = "300m"
@@ -22,7 +22,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testSearchRange500ToString() {
+    func test_is_correctSearchRange500String() {
         let range: RestaurantsRequestSearchRange = .range500
         let actual = range.toString()
         let expected = "500m"
@@ -30,7 +30,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testSearchRange1000ToString() {
+    func test_is_correctSearchRange1000String() {
         let range: RestaurantsRequestSearchRange = .range1000
         let actual = range.toString()
         let expected = "1000m"
@@ -38,7 +38,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testSearchRange2000ToString() {
+    func test_is_correctSearchRange2000String() {
         let range: RestaurantsRequestSearchRange = .range2000
         let actual = range.toString()
         let expected = "2000m"
@@ -46,7 +46,7 @@ class RestaurantsRequestParamEntityTests: XCTestCase {
         XCTAssertEqual(expected, actual)
     }
     
-    func testSearchRange3000ToString() {
+    func test_is_correctSearchRange3000String() {
         let range: RestaurantsRequestSearchRange = .range3000
         let actual = range.toString()
         let expected = "3000m"

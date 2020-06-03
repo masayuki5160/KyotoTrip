@@ -14,7 +14,7 @@ class StringExtensionTest: XCTestCase {
     override func setUp() {
     }
 
-    func testReplaceExtension() {
+    func test_check_replacedResult_whenReplaceDashStringToBlank() {
         let actual = "050-3477-8987".replace(from: "-", to: "")
         let expected = "05034778987"
         

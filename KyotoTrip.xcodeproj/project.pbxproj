@@ -19,11 +19,13 @@
 		4C1D6A6C247BE15C0017BE19 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */; };
 		4C2BA4282484C9D10018B435 /* gnaviAPIDummyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */; };
 		4C2BA42B2484D2D80018B435 /* CategoryButtonStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */; };
-		4C2BA42D2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */; };
+		4C2BA42D2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42C2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift */; };
 		4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */; };
 		4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */; };
 		4C2EA2342486813800FE98C5 /* SettingsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */; };
 		4C2EA23624868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA23524868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift */; };
+		4C2EA238248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA237248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift */; };
+		4C2EA23B248785C800FE98C5 /* BusstopDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA23A248785C800FE98C5 /* BusstopDetailPresenterTests.swift */; };
 		4C3652422479070800F53C52 /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3652412479070800F53C52 /* CategoryPresenter.swift */; };
 		4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */; };
 		4C41664A2435ECD2005EF1C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4166492435ECD2005EF1C2 /* TabBarController.swift */; };
@@ -138,11 +140,13 @@
 		4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
 		4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gnaviAPIDummyResponse.json; sourceTree = "<group>"; };
 		4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStatusTests.swift; sourceTree = "<group>"; };
-		4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamEntityTests.swift; sourceTree = "<group>"; };
+		4C2BA42C2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestSearchRangeTests.swift; sourceTree = "<group>"; };
 		4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyMarkerEntityTests.swift; sourceTree = "<group>"; };
 		4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopMarkerEntityTests.swift; sourceTree = "<group>"; };
 		4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenterTests.swift; sourceTree = "<group>"; };
 		4C2EA23524868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchRangeSettingPresenterTests.swift; sourceTree = "<group>"; };
+		4C2EA237248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSettingsPresenterTests.swift; sourceTree = "<group>"; };
+		4C2EA23A248785C800FE98C5 /* BusstopDetailPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailPresenterTests.swift; sourceTree = "<group>"; };
 		4C3652412479070800F53C52 /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+FloatingPanelControllerDelegate.swift"; sourceTree = "<group>"; };
 		4C4166492435ECD2005EF1C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 		4C14D0A3247FA5AC00A7DB2C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4C2EA239248785B300FE98C5 /* BusstopDetail */,
 				4C5A5DEF248610C1001EA2CE /* Settings */,
 				4C5A5DEC24860744001EA2CE /* Common */,
 				4C14D09C247F9FC000A7DB2C /* RestaurantDetail */,
@@ -335,11 +340,19 @@
 			isa = PBXGroup;
 			children = (
 				4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */,
-				4C2BA42C2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift */,
+				4C2BA42C2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift */,
 				4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */,
 				4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		4C2EA239248785B300FE98C5 /* BusstopDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4C2EA23A248785C800FE98C5 /* BusstopDetailPresenterTests.swift */,
+			);
+			path = BusstopDetail;
 			sourceTree = "<group>";
 		};
 		4C3F094424301AFE00FAEDC2 /* Common */ = {
@@ -554,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				4C5A5DF0248610CF001EA2CE /* SettingsInteractorTests.swift */,
+				4C2EA237248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift */,
 				4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */,
 				4C2EA23524868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift */,
 			);
@@ -1088,6 +1102,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C2EA238248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift in Sources */,
 				4C14D0A2247FA5A200A7DB2C /* StringExtensionTest.swift in Sources */,
 				4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */,
 				4C2BA42B2484D2D80018B435 /* CategoryButtonStatusTests.swift in Sources */,
@@ -1095,9 +1110,10 @@
 				4CF4B00A2472C9A600991B2C /* MapInteractorTests.swift in Sources */,
 				4C13E72124849C7200337D26 /* RestaurantsSearchGatewayStub.swift in Sources */,
 				4C14D09E247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift in Sources */,
-				4C2BA42D2484D4130018B435 /* RestaurantsRequestParamEntityTests.swift in Sources */,
+				4C2BA42D2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift in Sources */,
 				4C5A5DF1248610CF001EA2CE /* SettingsInteractorTests.swift in Sources */,
 				4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */,
+				4C2EA23B248785C800FE98C5 /* BusstopDetailPresenterTests.swift in Sources */,
 				4CC7764A247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift in Sources */,
 				4C2EA23624868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift in Sources */,
 				4C13E72324849D0E00337D26 /* RestaurantsRequestParamGatewayStub.swift in Sources */,

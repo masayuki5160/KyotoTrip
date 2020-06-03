@@ -12,20 +12,20 @@ import CoreLocation
 
 class BusstopMarkerEntityTests: XCTestCase {
     
-    var mock01Entity: BusstopMarkerEntity?
-    var mock02Entity: BusstopMarkerEntity?
+    var busstopA: BusstopMarkerEntity?
+    var busstopB: BusstopMarkerEntity?
 
     override func setUp() {
-        mock01Entity = BusstopMarkerEntity(
-            title: "五条千本MockData",
+        busstopA = BusstopMarkerEntity(
+            title: "五条千本A",
             coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
             type: .Busstop,
             routeNameString: "81,83",
             organizationNameString: "京都バス（株）,京阪バス（株）"
         )
         
-        mock02Entity = BusstopMarkerEntity(
-            title: "五条千本MockData",
+        busstopB = BusstopMarkerEntity(
+            title: "五条千本B",
             coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
             type: .Busstop,
             routeNameString: "81",
@@ -33,43 +33,43 @@ class BusstopMarkerEntityTests: XCTestCase {
         )
     }
     
-    func testSubtitleFormat1() {
-        let actual = mock01Entity!.subtitle
+    func test_check_subtitleFormat_whenRouteStringHaveTwoRoutes() {
+        let actual = busstopA!.subtitle
         let expected = "[路線] 81 他"
         
         XCTAssertEqual(expected, actual)
     }
     
-    func testSubtitleFormat2() {
-        let actual = mock02Entity!.subtitle
+    func test_check_subtitleFormat_whenRouteStringHaveOneRoute() {
+        let actual = busstopB!.subtitle
         let expected = "[路線] 81"
         
         XCTAssertEqual(expected, actual)
     }
     
-    func testRoutesArray1() {
-        let actual = mock01Entity!.routes
+    func test_check_routesArray_whenRouteStringHaveTwoRoutes() {
+        let actual = busstopA!.routes
         let expected = ["81","83"]
         
         XCTAssertEqual(expected, actual)
     }
     
-    func testRoutesArray2() {
-        let actual = mock02Entity!.routes
+    func test_check_routesArray_whenRouteStringHaveOneRoute() {
+        let actual = busstopB!.routes
         let expected = ["81"]
         
         XCTAssertEqual(expected, actual)
     }
     
-    func testOrganizationsArray1() {
-        let actual = mock01Entity!.organizations
+    func test_check_organizationsArray_whenRouteStringHaveTwoRoutes() {
+        let actual = busstopA!.organizations
         let expected = ["京都バス（株）","京阪バス（株）"]
         
         XCTAssertEqual(expected, actual)
     }
     
-    func testOrganizationsArray2() {
-        let actual = mock02Entity!.organizations
+    func test_check_organizationsArray_whenRouteStringHaveOneRoute() {
+        let actual = busstopB!.organizations
         let expected = ["京都バス（株）"]
         
         XCTAssertEqual(expected, actual)
