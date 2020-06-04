@@ -94,9 +94,12 @@ PODS:
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
   - Protobuf (3.11.4)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
   - SwiftyXMLParser (5.1.0)
 
 DEPENDENCIES:
@@ -104,8 +107,8 @@ DEPENDENCIES:
   - Firebase/MLNLTranslate
   - FloatingPanel (~> 1.7.4)
   - Mapbox-iOS-SDK (~> 5.7)
-  - RxCocoa (~> 4.5)
-  - RxSwift (~> 4.5)
+  - RxCocoa (~> 5.1)
+  - RxSwift (~> 5.1)
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
 
 SPEC REPOS:
@@ -134,7 +137,9 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+  trunk:
     - RxCocoa
+    - RxRelay
     - RxSwift
 
 EXTERNAL SOURCES:
@@ -171,10 +176,11 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftyXMLParser: 8271497e0a37b5c04b0b167c77b4896e36175a21
 
-PODFILE CHECKSUM: fc77f21d84fad9f453ac2ce3b4128ca0fb4c7a79
+PODFILE CHECKSUM: 87a16d53a304319327eb91116c2c833d4eaeaf1f
 
 COCOAPODS: 1.9.3
