@@ -109,7 +109,7 @@ DEPENDENCIES:
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Firebase
     - FirebaseABTesting
@@ -177,4 +177,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fc77f21d84fad9f453ac2ce3b4128ca0fb4c7a79
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.3
