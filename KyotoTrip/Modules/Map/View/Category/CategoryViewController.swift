@@ -25,6 +25,7 @@ class CategoryViewController: UIViewController, TransitionerProtocol {
     
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
+    private let cellId = "CategoryTableViewCell"
 
     // MARK: - Lifecycle
 
@@ -40,9 +41,9 @@ class CategoryViewController: UIViewController, TransitionerProtocol {
 
 private extension CategoryViewController {
     private func setuUI() {
-        // TODO: アイコンが見えにくいためCategoryViewControllerについてはダークモードOFFとする
+        // NOTE: アイコンが見えにくいためCategoryViewControllerについてはダークモードOFFとする
         self.overrideUserInterfaceStyle = .light
-        tableView.register(UINib(nibName: CategoryTableViewCell.id, bundle: nil), forCellReuseIdentifier: CategoryTableViewCell.id)
+        tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
     }
     
     private func bindPresenter() {
@@ -54,11 +55,11 @@ private extension CategoryViewController {
             )
         )
         
-        dependency.presenter.cellsDriver.drive(tableView.rx.items(cellIdentifier: CategoryTableViewCell.id, cellType: CategoryTableViewCell.self))
+        dependency.presenter.cellsDriver.drive(tableView.rx.items(cellIdentifier: cellId, cellType: UITableViewCell.self))
         { row, element, cell in
-            cell.title.text = element.title
-            let iconName = element.iconName
-            cell.icon.image = UIImage(named: iconName)
+            cell.textLabel?.text = element.title
+            cell.imageView?.image = UIImage(named: element.iconName)
+            cell.accessoryType = .disclosureIndicator
         }.disposed(by: disposeBag)
     }
 }
