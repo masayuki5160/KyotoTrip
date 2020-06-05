@@ -112,6 +112,8 @@
 		4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773DF241B97900032CC53 /* Assets.xcassets */; };
 		4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CF773E1241B97900032CC53 /* LaunchScreen.storyboard */; };
 		4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF773EC241B9D910032CC53 /* MapViewController.swift */; };
+		4CF8F85E248A6F6A00493E26 /* MapInteractorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF8F85D248A6F6A00493E26 /* MapInteractorStub.swift */; };
+		4CF8F860248A714D00493E26 /* MapPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF8F85F248A714D00493E26 /* MapPresenterTests.swift */; };
 		4CFF123C2487E2D4002F23CB /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF123B2487E2D4002F23CB /* SettingsRouter.swift */; };
 		4CFF7F302486188E005DCF19 /* RestaurantsRequestSearchRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF7F2F2486188E005DCF19 /* RestaurantsRequestSearchRange.swift */; };
 		8B7FB77CBB673EA6F6691891 /* Pods_KyotoTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */; };
@@ -243,6 +245,8 @@
 		4CF773E2241B97900032CC53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4CF773E4241B97900032CC53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CF773EC241B9D910032CC53 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		4CF8F85D248A6F6A00493E26 /* MapInteractorStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractorStub.swift; sourceTree = "<group>"; };
+		4CF8F85F248A714D00493E26 /* MapPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenterTests.swift; sourceTree = "<group>"; };
 		4CFF123B2487E2D4002F23CB /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		4CFF7F2F2486188E005DCF19 /* RestaurantsRequestSearchRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestSearchRange.swift; sourceTree = "<group>"; };
 		BB09C1A28A717DE8ACC178D9 /* Pods-KyotoTrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip.debug.xcconfig"; sourceTree = "<group>"; };
@@ -748,7 +752,9 @@
 				4CF4B0092472C9A600991B2C /* MapInteractorTests.swift */,
 				4C13E72024849C7200337D26 /* RestaurantsSearchGatewayStub.swift */,
 				4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */,
+				4CF8F85D248A6F6A00493E26 /* MapInteractorStub.swift */,
 				4C2BA4292484D2AD0018B435 /* Entity */,
+				4CF8F85F248A714D00493E26 /* MapPresenterTests.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1087,6 +1093,7 @@
 			files = (
 				4C2EA238248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift in Sources */,
 				4C14D0A2247FA5A200A7DB2C /* StringExtensionTest.swift in Sources */,
+				4CF8F860248A714D00493E26 /* MapPresenterTests.swift in Sources */,
 				4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */,
 				4C2BA42B2484D2D80018B435 /* CategoryButtonStatusTests.swift in Sources */,
 				4CD839362489F5A3005B10A1 /* KyotoCityInfoGatewayStub.swift in Sources */,
@@ -1098,6 +1105,7 @@
 				4C7BC1F8248A1CBC00A5C394 /* InfoPresenterTests.swift in Sources */,
 				4C5A5DF1248610CF001EA2CE /* SettingsInteractorTests.swift in Sources */,
 				4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */,
+				4CF8F85E248A6F6A00493E26 /* MapInteractorStub.swift in Sources */,
 				4C2EA23B248785C800FE98C5 /* BusstopDetailPresenterTests.swift in Sources */,
 				4CC7764A247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift in Sources */,
 				4C2EA23624868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift in Sources */,
