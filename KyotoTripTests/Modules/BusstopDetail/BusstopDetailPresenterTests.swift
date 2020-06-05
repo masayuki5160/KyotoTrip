@@ -88,4 +88,7 @@ class BusstopDetailPresenterTests: XCTestCase {
         let expectedAccessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         XCTAssertEqual(expectedAccessoryType, actualAccessoryType)
     }
+    
+    override func tearDown() {
+    }
 }

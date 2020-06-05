@@ -1,5 +1,5 @@
 //
-//  KyotoCityInfoInteractor.swift
+//  InfoInteractor.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/03/31.
@@ -8,26 +8,33 @@
 
 import Foundation
 
-protocol KyotoCityInfoInteractorProtocol: AnyObject {
-    func fetch(complition: @escaping (Result<[KyotoCityInfo], Error>) -> Void)
+protocol InfoInteractorProtocol: AnyObject {
+    func fetch(complition: @escaping (Result<[KyotoCityInfoEntity], Error>) -> Void)
 }
 
-final class KyotoCityInfoInteractor: KyotoCityInfoInteractorProtocol {
+final class InfoInteractor: InfoInteractorProtocol {
     
-    func fetch(complition: @escaping (Result<[KyotoCityInfo], Error>) -> Void) {
-        let kyotoCityInfoGateway = KyotoCityInfoGateway()
-        kyotoCityInfoGateway.fetch { [weak self] response in
+    struct Dependency {
+        let kyotoCityInfoGateway: KyotoCityInfoGatewayProtocol
+    }
+    private let dependency: Dependency
+    
+    init(dependency: Dependency) {
+        self.dependency = dependency
+    }
+    
+    func fetch(complition: @escaping (Result<[KyotoCityInfoEntity], Error>) -> Void) {
+        dependency.kyotoCityInfoGateway.fetch { response in
             switch response {
             case .failure(let error):
                 complition(.failure(error))
             case .success(let data):
                 complition(.success(data))
-                self?.fetchTranslatedTextSync(source: data)
             }
         }
     }
     
-    private func fetchTranslatedTextSync(source list: [KyotoCityInfo]) {
+    private func fetchTranslatedTextSync(source list: [KyotoCityInfoEntity]) {
         // TODO: 同期処理に不具合があるためあとで再実装
         // TODO: 翻訳処理が不要な場合は処理しない判定処理追加
 //        let translator = TranslatorInteractor()

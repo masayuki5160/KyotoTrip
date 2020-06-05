@@ -57,18 +57,21 @@ extension AppDefaultDependencies: AppDependencies {
     }
     
     func assembleKyotoInfoTopModule() -> UINavigationController {
-        let interactor = KyotoCityInfoInteractor()
-        let presenter = KyotoCityInfoPresenter(
-            dependency: .init(
-                interactor: interactor
-            )
-        )
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Info", bundle: nil)
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
-        let vc = naviViewController.viewControllers[0] as! InfoTopPageViewController
-        vc.inject(.init(presenter: presenter))
+        let view = naviViewController.viewControllers[0] as! InfoViewController
+        let kyotoCityInfoGateway = KyotoCityInfoGateway()
+        let interactor = InfoInteractor(dependency: .init(kyotoCityInfoGateway: kyotoCityInfoGateway))
+        let router = InfoRouter(view: view)
+        let presenter = InfoPresenter(
+            dependency: .init(
+                interactor: interactor,
+                router: router
+            )
+        )
+        view.inject(.init(presenter: presenter))
         
         return naviViewController
     }

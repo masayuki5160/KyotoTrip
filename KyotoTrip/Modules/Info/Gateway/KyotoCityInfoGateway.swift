@@ -9,39 +9,37 @@
 import SwiftyXMLParser
 import Alamofire
 
-protocol KyotoCityInfoGatewayProtocol: AnyObject {
-    func fetch(commplition: @escaping (Result<[KyotoCityInfo]>) -> Void)
+protocol KyotoCityInfoGatewayProtocol {
+    func fetch(complition: @escaping (Result<[KyotoCityInfoEntity]>) -> Void)
 }
 
-class KyotoCityInfoGateway: KyotoCityInfoGatewayProtocol {
+struct KyotoCityInfoGateway: KyotoCityInfoGatewayProtocol {
     
     private let rssUrlStr = "https://www.city.kyoto.lg.jp/menu2/rss/rss.xml"
     
-    init() {
-    }
-    
-    func fetch(commplition: @escaping (Result<[KyotoCityInfo]>) -> Void) {
+    func fetch(complition: @escaping (Result<[KyotoCityInfoEntity]>) -> Void) {
         Alamofire.request(rssUrlStr).responseData { response in
             
-            var modelList: [KyotoCityInfo] = []
+            var entityList: [KyotoCityInfoEntity] = []
             
             switch response.result {
             case .success(let data):
 
                 let xml = XML.parse(data)
                 for element in xml.rss.channel.item {
-                    var model = KyotoCityInfo()
-                    model.title = element.title.text ?? ""
-                    model.publishDate = element.pubDate.text ?? ""
-                    model.link = element.link.text ?? ""
-                    
-                    modelList.append(model)
+                    var entity = KyotoCityInfoEntity()
+                    entity.title = element.title.text ?? ""
+                    entity.publishDate = element.pubDate.text ?? ""
+                    entity.link = element.link.text ?? ""
+                    entity.description = element["description"].text ?? ""                    
+
+                    entityList.append(entity)
                 }
                 
-                commplition(.success(modelList))
+                complition(.success(entityList))
 
             case .failure(let error):
-                commplition(.failure(error))
+                complition(.failure(error))
             }
             
         }
