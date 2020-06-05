@@ -54,9 +54,16 @@ class InfoPresenterTests: XCTestCase {
         let cityInfoEntity = parsedKyotoCityInfo()
         let kyotoCityInfoGateway = KyotoCityInfoGatewayStub(result: .success(cityInfoEntity))
         let interactor = InfoInteractor(dependency: .init(kyotoCityInfoGateway: kyotoCityInfoGateway))
+        let naviViewController = { () -> UINavigationController in
+            let storyboard = UIStoryboard(name: "Info", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! UINavigationController
+        }()
+        let view = naviViewController.viewControllers[0] as! InfoViewController
+        let router = InfoRouter(view: view)
         let presenter = InfoPresenter(
             dependency: .init(
-                interactor: interactor
+                interactor: interactor,
+                router: router
             )
         )
         let disposeBag = DisposeBag()

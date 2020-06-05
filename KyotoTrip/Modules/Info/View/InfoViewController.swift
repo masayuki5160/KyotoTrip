@@ -36,7 +36,7 @@ class InfoViewController: UIViewController, TransitionerProtocol {
         dependency.presenter.infoDriver
             .drive(tableView.rx.items(cellIdentifier: infoCellId, cellType: UITableViewCell.self)) { row, element, cell in
                 cell.textLabel?.text = element.title
-                cell.detailTextLabel?.text = element.publishDate
+                cell.detailTextLabel?.text = element.publishDateForCellView
                 cell.textLabel?.numberOfLines = 0
                 cell.accessoryType = .disclosureIndicator}
             .disposed(by: disposeBag)
