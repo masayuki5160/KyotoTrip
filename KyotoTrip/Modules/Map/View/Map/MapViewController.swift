@@ -17,6 +17,7 @@ class MapViewController: UIViewController, TransitionerProtocol {
     struct Dependency {
         let presenter: MapPresenterProtocol
         let categoryView: UIViewController
+        let mglFeatureMediator: MGLFeatureMediatorProtocol
     }
     
     @IBOutlet weak var mapView: MapView!
@@ -191,14 +192,14 @@ private extension MapViewController {
         ).filter { $0 is MGLPointFeature }
         
         // Select the closest feature to the touch center.
-        let closestFeatures = dependency.presenter
+        let closestFeatures = dependency.mglFeatureMediator
             .sorteMGLFeatures(features: possibleFeatures, center: touchLocation)
 
         return closestFeatures
     }
     
     private func showCallout(from mglFeature: MGLPointFeature) {
-        let markerEntity = dependency.presenter.convertMGLFeatureToMarkerViewData(source: mglFeature)
+        let markerEntity = dependency.mglFeatureMediator.convertMGLFeatureToMarkerViewData(source: mglFeature)
         showCallout(from: markerEntity)
     }
     
@@ -236,7 +237,7 @@ extension MapViewController: MGLMapViewDelegate {
             ]
             /// Get features from Style Layers which is defined in Mapbox Studio
             let features = mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)
-            self.dependency.presenter.updateVisibleMGLFeatures(mglFeatures: features)
+            self.dependency.mglFeatureMediator.updateVisibleMGLFeatures(mglFeatures: features)
         }
     }
     

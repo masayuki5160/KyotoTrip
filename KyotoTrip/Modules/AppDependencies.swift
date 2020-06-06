@@ -100,10 +100,14 @@ extension AppDefaultDependencies: AppDependencies {
         )
         
         let categoryView = assembleCategoryModule(inject: interactor)
-        
+        let mglFeatureMediator = MGLFeatureMediator(dependency: .init(
+            presenter: presenter
+            )
+        )
         view.inject(.init(
             presenter: presenter,
-            categoryView: categoryView
+            categoryView: categoryView,
+            mglFeatureMediator: mglFeatureMediator
             )
         )
         
