@@ -8,8 +8,7 @@ KyotoTrip is iOS app for Visitors.
 Source Code
 --------------------------
 
-[![Test Status]()]()
-[![GitHub release]()]()
+![CI](https://github.com/masayuki5160/KyotoTrip/workflows/CI/badge.svg)
 
 ![](Overview.drawio.svg)
 
