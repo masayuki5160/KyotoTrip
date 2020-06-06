@@ -22,8 +22,10 @@ class SettingsLicenseViewController: UIViewController {
         navigationItem.title = "ライセンス"
         textView.isEditable = false
         textView.text = """
+        
+        本アプリケーションでは icons8( https://icons8.com/ )が提供するイラストを利用しています。
 
-        本アプリケーションは以下のオープンソースソフトウェアを使用しています。
+        また、以下OSSを使用しています。
         
         ・Mapbox Maps SDK for iOS
         mapbox-gl-native-ios copyright (c) 2014-2020 Mapbox.
@@ -512,7 +514,6 @@ class SettingsLicenseViewController: UIViewController {
         ■ Apache License 2.0で提供される以下OSSを利用しています。
         
         ・Firebase/MLNLTranslate
-
 
         """
     }
