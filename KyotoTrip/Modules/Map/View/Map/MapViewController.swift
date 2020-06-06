@@ -95,9 +95,10 @@ private extension MapViewController {
             .emit(onNext: {  [weak self] selectedCell in
                 guard let self = self else { return }
 
-                // Move camera position to the annotation position
+                /// Move camera position to the annotation position
                 let camera = MGLMapCamera(lookingAtCenter: selectedCell.coordinate, altitude: 4500, pitch: 0, heading: 0)
                 self.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
+                /// Add annotation to mapView
                 let selectedAnnotation = CustomMGLPointAnnotation(viewData: selectedCell)
                 self.mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
             }).disposed(by: disposeBag)
