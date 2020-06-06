@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='KyotoTripTests.xctest' tests='54' failures='0'>
+  <testsuite name='KyotoTripTests.BusstopDetailPresenterTests' tests='4' failures='0'>
+    <testcase classname='KyotoTripTests.BusstopDetailPresenterTests' name='test_check_busstopNameRow_atBusstopNameSection' time='0.008'/>
+    <testcase classname='KyotoTripTests.BusstopDetailPresenterTests' name='test_check_busstopRoutesRow_atBusstopRoutesSection' time='0.003'/>
+    <testcase classname='KyotoTripTests.BusstopDetailPresenterTests' name='test_check_openWebpageRowProperty' time='0.002'/>
+    <testcase classname='KyotoTripTests.BusstopDetailPresenterTests' name='test_is_correctRowsNumber_InRoutesSection' time='0.001'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.BusstopMarkerEntityTests' tests='6' failures='0'>
+    <testcase classname='KyotoTripTests.BusstopMarkerEntityTests' name='test_check_organizationsArray_whenRouteStringHaveOneRoute' time='0.003'/>
+    <testcase classname='KyotoTripTests.BusstopMarkerEntityTests' name='test_check_organizationsArray_whenRouteStringHaveTwoRoutes' time='0.002'/>
+    <testcase classname='KyotoTripTests.BusstopMarkerEntityTests' name='test_check_routesArray_whenRouteStringHaveOneRoute' time='0.001'/>
+    <testcase classname='KyotoTripTests.BusstopMarkerEntityTests' name='test_check_routesArray_whenRouteStringHaveTwoRoutes' time='0.001'/>
+    <testcase classname='KyotoTripTests.BusstopMarkerEntityTests' name='test_check_subtitleFormat_whenRouteStringHaveOneRoute' time='0.001'/>
+    <testcase classname='KyotoTripTests.BusstopMarkerEntityTests' name='test_check_subtitleFormat_whenRouteStringHaveTwoRoutes' time='0.003'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.CategoryButtonStatusTests' tests='2' failures='0'>
+    <testcase classname='KyotoTripTests.CategoryButtonStatusTests' name='test_isHiddenStatus_whenUseNextMethod' time='0.001'/>
+    <testcase classname='KyotoTripTests.CategoryButtonStatusTests' name='test_isVisibleStatus_whenUseNextMethod' time='0.001'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.CulturalPropertyDetailPresenterTest' tests='5' failures='0'>
+    <testcase classname='KyotoTripTests.CulturalPropertyDetailPresenterTest' name='test_is_correctAddressSection_atCreatedCell' time='0.004'/>
+    <testcase classname='KyotoTripTests.CulturalPropertyDetailPresenterTest' name='test_is_correctLargeClassificationSection_atCreatedCell' time='0.027'/>
+    <testcase classname='KyotoTripTests.CulturalPropertyDetailPresenterTest' name='test_is_correctNameSection_atCreatedCell' time='0.005'/>
+    <testcase classname='KyotoTripTests.CulturalPropertyDetailPresenterTest' name='test_is_correctRegisterDateSection_atCreatedCell' time='0.004'/>
+    <testcase classname='KyotoTripTests.CulturalPropertyDetailPresenterTest' name='test_is_correctSmallClassificationSection_atCreatedCell' time='0.005'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.CulturalPropertyMarkerEntityTests' tests='3' failures='0'>
+    <testcase classname='KyotoTripTests.CulturalPropertyMarkerEntityTests' name='test_check_FormatRegisterDate' time='0.006'/>
+    <testcase classname='KyotoTripTests.CulturalPropertyMarkerEntityTests' name='test_is_correctLargeClassificationName' time='0.018'/>
+    <testcase classname='KyotoTripTests.CulturalPropertyMarkerEntityTests' name='test_is_correctSmallClassificationName' time='0.002'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.InfoCellViewDataTests' tests='1' failures='0'>
+    <testcase classname='KyotoTripTests.InfoCellViewDataTests' name='test_check_publishDateFormat' time='0.003'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.InfoInteractorTests' tests='1' failures='0'>
+    <testcase classname='KyotoTripTests.InfoInteractorTests' name='test_check_fetchedKyotoCityInfo' time='0.004'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.InfoPresenterTests' tests='1' failures='0'>
+    <testcase classname='KyotoTripTests.InfoPresenterTests' name='test_check_fetchedViewData_whenSuccessed' time='0.005'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.MGLFeatureMediatorTests' tests='2' failures='0'>
+    <testcase classname='KyotoTripTests.MGLFeatureMediatorTests' name='test_check_sorteMGLFeaturesResult' time='0.018'/>
+    <testcase classname='KyotoTripTests.MGLFeatureMediatorTests' name='test_is_correctMarkerViewData_whenMGLFeatureTypeIsBusstop' time='0.005'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.RestaurantDetailPresenterTest' tests='7' failures='0'>
+    <testcase classname='KyotoTripTests.RestaurantDetailPresenterTest' name='test_is_correctAddressSection_atCreatedCell' time='0.003'/>
+    <testcase classname='KyotoTripTests.RestaurantDetailPresenterTest' name='test_is_correctBusinessHourSection_atCreatedCell' time='0.001'/>
+    <testcase classname='KyotoTripTests.RestaurantDetailPresenterTest' name='test_is_correctHolidaySection_atCreatedCell' time='0.011'/>
+    <testcase classname='KyotoTripTests.RestaurantDetailPresenterTest' name='test_is_correctNameSction_atCreatedCell' time='0.002'/>
+    <testcase classname='KyotoTripTests.RestaurantDetailPresenterTest' name='test_is_correctOtherSection_atCreatedCell' time='0.002'/>
+    <testcase classname='KyotoTripTests.RestaurantDetailPresenterTest' name='test_is_correctTelSection_atCreatedCell' time='0.002'/>
+    <testcase classname='KyotoTripTests.RestaurantDetailPresenterTest' name='test_is_correctWebpageSection_atCreatedCell' time='0.003'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.RestaurantsRequestSearchRangeTests' tests='5' failures='0'>
+    <testcase classname='KyotoTripTests.RestaurantsRequestSearchRangeTests' name='test_is_correctSearchRange1000String' time='0.001'/>
+    <testcase classname='KyotoTripTests.RestaurantsRequestSearchRangeTests' name='test_is_correctSearchRange2000String' time='0.000'/>
+    <testcase classname='KyotoTripTests.RestaurantsRequestSearchRangeTests' name='test_is_correctSearchRange3000String' time='0.001'/>
+    <testcase classname='KyotoTripTests.RestaurantsRequestSearchRangeTests' name='test_is_correctSearchRange300String' time='0.000'/>
+    <testcase classname='KyotoTripTests.RestaurantsRequestSearchRangeTests' name='test_is_correctSearchRange500String' time='0.000'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.RestaurantsSearchRangeSettingPresenterTests' tests='2' failures='0'>
+    <testcase classname='KyotoTripTests.RestaurantsSearchRangeSettingPresenterTests' name='test_is_correctCellsViewDatas_whenCellIsSelected' time='0.018'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchRangeSettingPresenterTests' name='test_is_selectedCorrectSearchRange_whenLaunchedApp' time='0.006'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' tests='9' failures='0'>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenLaunchedApp' time='0.008'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdateChainesSpeakerSeachSetting' time='0.004'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdateCreditCardSeachSetting' time='0.004'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdateEnglishSpeakerSeachSetting' time='0.004'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdateKoreanSpeakerSeachSetting' time='0.020'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdateNoSmokingSeachSetting' time='0.005'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdatePrivateRoomSeachSetting' time='0.009'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdateVesitalianSeachSetting' time='0.004'/>
+    <testcase classname='KyotoTripTests.RestaurantsSearchSettingsPresenterTests' name='test_is_correctDefaultSettingsRows_whenUpdateWifiSeachSetting' time='0.005'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.SettingsInteractorTests' tests='1' failures='0'>
+    <testcase classname='KyotoTripTests.SettingsInteractorTests' name='test_shouldFetchSavedParam' time='0.001'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.SettingsPresenterTests' tests='4' failures='0'>
+    <testcase classname='KyotoTripTests.SettingsPresenterTests' name='test_is_correctAppVersionRowProperty_atInfoSection' time='0.004'/>
+    <testcase classname='KyotoTripTests.SettingsPresenterTests' name='test_is_correctLanguageSettingRowProperty_atApplicationSection' time='0.003'/>
+    <testcase classname='KyotoTripTests.SettingsPresenterTests' name='test_is_correctLisenceRowProperty_atInfoSection' time='0.003'/>
+    <testcase classname='KyotoTripTests.SettingsPresenterTests' name='test_is_correctRestaurantsSettingRowProperty_atApplicationSection' time='0.002'/>
+  </testsuite>
+  <testsuite name='KyotoTripTests.StringExtensionTest' tests='1' failures='0'>
+    <testcase classname='KyotoTripTests.StringExtensionTest' name='test_check_replacedResult_whenReplaceDashStringToBlank' time='0.002'/>
+  </testsuite>
+</testsuites>
