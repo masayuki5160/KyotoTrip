@@ -18,7 +18,7 @@ struct InfoCellViewData {
     private func convertDateFormat(dateStr: String) -> String {
         let inFormatter = DateFormatter()
         inFormatter.dateFormat = "EEE, dd MM yyyy HH:mm:ss Z"
-        inFormatter.locale = Locale(identifier: "en_US")
+        inFormatter.locale = Locale(identifier: "en")
         if let date = inFormatter.date(from: dateStr) {
             let outFormatter = DateFormatter()
             outFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
