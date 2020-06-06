@@ -38,7 +38,7 @@ jobs:
        xcodebuild 
        -scheme KyotoTrip 
        -sdk iphonesimulator 
-       -configuration DEVELOP 
+       -configuration Develop 
        build
 
     # Run unit test
