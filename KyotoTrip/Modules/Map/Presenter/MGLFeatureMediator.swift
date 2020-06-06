@@ -13,7 +13,7 @@ protocol MGLFeatureMediatorProtocol {
     func updateVisibleMGLFeatures(mglFeatures: [MGLFeature])
     
     /// Others
-    func convertMGLFeatureToMarkerViewData(source: MGLFeature) -> MarkerViewDataProtocol
+    func convertMGLFeatureToAnnotation(source: MGLFeature) -> CustomMGLPointAnnotation
     func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
 }
 
@@ -49,18 +49,21 @@ class MGLFeatureMediator: MGLFeatureMediatorProtocol {
         })
     }
     
-    func convertMGLFeatureToMarkerViewData(source: MGLFeature) -> MarkerViewDataProtocol {
+    func convertMGLFeatureToAnnotation(source: MGLFeature) -> CustomMGLPointAnnotation {
         let markerEntity = convertMGLFeatureToMarkerEntity(source: source)
+        let markerViewData: MarkerViewDataProtocol
         switch markerEntity.type {
         case .Busstop:
-            return BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
+            markerViewData = BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
         case .CulturalProperty:
-            return CulturalPropertyMarkerViewData(entity: markerEntity as! CulturalPropertyMarkerEntity)
+            markerViewData = CulturalPropertyMarkerViewData(entity: markerEntity as! CulturalPropertyMarkerEntity)
         case .Restaurant:
-            return RestaurantMarkerViewData(entity: markerEntity as! RestaurantMarkerEntity)
+            markerViewData = RestaurantMarkerViewData(entity: markerEntity as! RestaurantMarkerEntity)
         default:
-            return BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
+            markerViewData = BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
         }
+        
+        return CustomMGLPointAnnotation(viewData: markerViewData)
     }
 }
 

@@ -107,7 +107,7 @@ class MGLFeatureMediatorTests: XCTestCase {
             "P11_004_1": "81,83",
             "P11_003_1": "京都バス（株）,京阪バス（株）"
         ]
-        let expected = BusstopMarkerViewData(entity: .init(
+        let busstopViewData = BusstopMarkerViewData(entity: .init(
             title: "五条千本",
             coordinate: CLLocationCoordinate2DMake(34.982929, 135.773914),
             type: .Busstop,
@@ -115,16 +115,23 @@ class MGLFeatureMediatorTests: XCTestCase {
             organizationNameString: "京都バス（株）,京阪バス（株）"
             )
         )
-        let actual = mediator.convertMGLFeatureToMarkerViewData(source: busstopMGLFeature) as! BusstopMarkerViewData
-        
-        XCTAssertEqual(expected.name, actual.name)
-        XCTAssertEqual(expected.type, actual.type)
+
+        let expected = CustomMGLPointAnnotation(viewData: busstopViewData)
+        let actual = mediator.convertMGLFeatureToAnnotation(source: busstopMGLFeature)
+        XCTAssertEqual(expected.title, actual.title)
+        XCTAssertEqual(expected.subtitle, actual.subtitle)
         XCTAssertEqual(expected.coordinate.latitude, actual.coordinate.latitude)
         XCTAssertEqual(expected.coordinate.longitude, actual.coordinate.longitude)
-        XCTAssertEqual(expected.detail.routes[0], actual.detail.routes[0])
-        XCTAssertEqual(expected.detail.routes[1], actual.detail.routes[1])
-        XCTAssertEqual(expected.detail.organizations[0], actual.detail.organizations[0])
-        XCTAssertEqual(expected.detail.organizations[1], actual.detail.organizations[1])
+
+        /// Check MarkerViewData
+        let expectedViewData = expected.viewData as! BusstopMarkerViewData
+        let actualViewData = actual.viewData as! BusstopMarkerViewData
+        XCTAssertEqual(expectedViewData.name, actualViewData.name)
+        XCTAssertEqual(expectedViewData.type, actualViewData.type)
+        XCTAssertEqual(expectedViewData.detail.routes[0], actualViewData.detail.routes[0])
+        XCTAssertEqual(expectedViewData.detail.routes[1], actualViewData.detail.routes[1])
+        XCTAssertEqual(expectedViewData.detail.organizations[0], actualViewData.detail.organizations[0])
+        XCTAssertEqual(expectedViewData.detail.organizations[1], actualViewData.detail.organizations[1])
     }
     
     override func tearDown() {

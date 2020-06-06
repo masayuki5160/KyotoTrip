@@ -98,7 +98,8 @@ private extension MapViewController {
                 // Move camera position to the annotation position
                 let camera = MGLMapCamera(lookingAtCenter: selectedCell.coordinate, altitude: 4500, pitch: 0, heading: 0)
                 self.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
-                self.showCallout(from: selectedCell)
+                let selectedAnnotation = CustomMGLPointAnnotation(viewData: selectedCell)
+                self.mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
             }).disposed(by: disposeBag)
     }
     
@@ -199,12 +200,7 @@ private extension MapViewController {
     }
     
     private func showCallout(from mglFeature: MGLPointFeature) {
-        let markerEntity = dependency.mglFeatureMediator.convertMGLFeatureToMarkerViewData(source: mglFeature)
-        showCallout(from: markerEntity)
-    }
-    
-    private func showCallout(from viewData: MarkerViewDataProtocol) {
-        let selectedAnnotation = CustomMGLPointAnnotation(viewData: viewData)
+        let selectedAnnotation = dependency.mglFeatureMediator.convertMGLFeatureToAnnotation(source: mglFeature)
         mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
     }
 }
