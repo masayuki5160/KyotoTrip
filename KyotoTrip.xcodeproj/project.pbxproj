@@ -253,6 +253,8 @@
 		4CF8F863248B263F00493E26 /* MGLFeatureMediatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGLFeatureMediatorTests.swift; sourceTree = "<group>"; };
 		4CFF123B2487E2D4002F23CB /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		4CFF7F2F2486188E005DCF19 /* RestaurantsRequestSearchRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestSearchRange.swift; sourceTree = "<group>"; };
+		4E8B2DF734299848272FC933 /* Pods-KyotoTrip.develop.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTrip.develop.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip.develop.xcconfig"; sourceTree = "<group>"; };
+		5904B670F4494E7A05F97269 /* Pods-KyotoTripTests.develop.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTripTests.develop.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests.develop.xcconfig"; sourceTree = "<group>"; };
 		BB09C1A28A717DE8ACC178D9 /* Pods-KyotoTrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTrip/Pods-KyotoTrip.debug.xcconfig"; sourceTree = "<group>"; };
 		E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTripTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -864,6 +866,8 @@
 				204C325FD10BE0F143E5B29D /* Pods-KyotoTrip.release.xcconfig */,
 				20FFEE00A95D9C9A5DE9EED9 /* Pods-KyotoTripTests.debug.xcconfig */,
 				E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */,
+				4E8B2DF734299848272FC933 /* Pods-KyotoTrip.develop.xcconfig */,
+				5904B670F4494E7A05F97269 /* Pods-KyotoTripTests.develop.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1232,51 +1236,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4CF4B00E2472C9A600991B2C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20FFEE00A95D9C9A5DE9EED9 /* Pods-KyotoTripTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L8ZGX2885D;
-				INFOPLIST_FILE = KyotoTripTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTripTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KyotoTrip.app/KyotoTrip";
-			};
-			name = Debug;
-		};
-		4CF4B00F2472C9A600991B2C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L8ZGX2885D;
-				INFOPLIST_FILE = KyotoTripTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTripTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KyotoTrip.app/KyotoTrip";
-			};
-			name = Release;
-		};
-		4CF773E5241B97900032CC53 /* Debug */ = {
+		4C6CCEFE248B5DE100C8B46D /* Develop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1318,7 +1278,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
+					"DEVELOP=1",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1331,11 +1291,79 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D DEVELOP";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = Develop;
+		};
+		4C6CCEFF248B5DE100C8B46D /* Develop */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E8B2DF734299848272FC933 /* Pods-KyotoTrip.develop.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = L8ZGX2885D;
+				INFOPLIST_FILE = KyotoTrip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Develop;
+		};
+		4C6CCF00248B5DE100C8B46D /* Develop */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5904B670F4494E7A05F97269 /* Pods-KyotoTripTests.develop.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L8ZGX2885D;
+				INFOPLIST_FILE = KyotoTripTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTripTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KyotoTrip.app/KyotoTrip";
+			};
+			name = Develop;
+		};
+		4CF4B00F2472C9A600991B2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E50141F456326EA63F822DCF /* Pods-KyotoTripTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L8ZGX2885D;
+				INFOPLIST_FILE = KyotoTripTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTripTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KyotoTrip.app/KyotoTrip";
+			};
+			name = Release;
 		};
 		4CF773E6241B97900032CC53 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1392,34 +1420,14 @@
 			};
 			name = Release;
 		};
-		4CF773E8241B97900032CC53 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB09C1A28A717DE8ACC178D9 /* Pods-KyotoTrip.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = L8ZGX2885D;
-				INFOPLIST_FILE = KyotoTrip/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
 		4CF773E9241B97900032CC53 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 204C325FD10BE0F143E5B29D /* Pods-KyotoTrip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Masayuki Tanaka (L8ZGX2885D)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1428,6 +1436,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = KyotoTrip_Production;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1440,7 +1449,7 @@
 		4CF4B0102472C9A600991B2C /* Build configuration list for PBXNativeTarget "KyotoTripTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CF4B00E2472C9A600991B2C /* Debug */,
+				4C6CCF00248B5DE100C8B46D /* Develop */,
 				4CF4B00F2472C9A600991B2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1449,7 +1458,7 @@
 		4CF773CE241B978B0032CC53 /* Build configuration list for PBXProject "KyotoTrip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CF773E5241B97900032CC53 /* Debug */,
+				4C6CCEFE248B5DE100C8B46D /* Develop */,
 				4CF773E6241B97900032CC53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1458,7 +1467,7 @@
 		4CF773E7241B97900032CC53 /* Build configuration list for PBXNativeTarget "KyotoTrip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CF773E8241B97900032CC53 /* Debug */,
+				4C6CCEFF248B5DE100C8B46D /* Develop */,
 				4CF773E9241B97900032CC53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
