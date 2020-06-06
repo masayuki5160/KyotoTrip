@@ -28,6 +28,9 @@ jobs:
 
     - name: Show Xcode version
       run: xcodebuild -version
+    
+    - name: Pod Install
+      run: pod install
 
     # Run build
     - name: Build
