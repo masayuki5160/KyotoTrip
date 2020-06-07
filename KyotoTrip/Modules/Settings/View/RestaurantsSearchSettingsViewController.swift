@@ -6,25 +6,25 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 class RestaurantsSearchSettingsViewController: UIViewController, TransitionerProtocol {
-
     struct Dependency {
         let presenter: RestaurantsSearchSettingsPresenterProtocol
     }
-    private var dependency: Dependency!
 
-    @IBOutlet weak var tableView: UITableView!
+    // swiftlint:disable implicitly_unwrapped_optional
+    private var dependency: Dependency!
     private let disposeBag = DisposeBag()
-    
+    @IBOutlet private weak var tableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+
         dependency.presenter.settingsRowsDriver
-            .drive(tableView.rx.items) { tableView, row, element in
+            .drive(tableView.rx.items) { _, row, element in
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "RestaurantsSearchSettingCell")
                 cell.textLabel?.text = element.title
                 if row == 0 {// For restaurants search range setting cell
@@ -35,24 +35,26 @@ class RestaurantsSearchSettingsViewController: UIViewController, TransitionerPro
                 }
 
                 return cell
-        }.disposed(by: disposeBag)
-        
+            }
+            .disposed(by: disposeBag)
+
         dependency.presenter.bindView(
-            input: RestauransSearchSettingsView(selectedCell: tableView.rx.modelSelected(RestaurantsSearchSettingsCellViewData.self).asDriver()
+            input: RestauransSearchSettingsView(
+                selectedCell: tableView.rx.modelSelected(RestaurantsSearchSettingsCellViewData.self).asDriver()
             )
         )
-        
+
         navigationItem.title = "飲食店検索設定"
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dependency.presenter.reloadSettings()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         dependency.presenter.saveSettings()
     }
 }

@@ -8,18 +8,19 @@
 
 protocol SettingsRouterProtocol {
     var view: SettingsViewController { get }
+
     func transitionToLisenceView()
     func transitionToRestaurantsSearchSettingsView()
 }
 
 struct SettingsRouter: SettingsRouterProtocol {
     var view: SettingsViewController
-    
+
     func transitionToLisenceView() {
         let targetVC = AppDefaultDependencies().assembleSettingsLisenceModule()
         view.pushViewController(targetVC, animated: true)
     }
-    
+
     func transitionToRestaurantsSearchSettingsView() {
         let targetVC = AppDefaultDependencies().assembleSettingsRestaurantsSearchModule()
         view.pushViewController(targetVC, animated: true)

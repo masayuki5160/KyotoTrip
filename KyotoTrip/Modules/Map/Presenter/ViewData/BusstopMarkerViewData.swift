@@ -13,12 +13,12 @@ struct BusstopMarkerViewData: MarkerViewDataProtocol {
     var coordinate: CLLocationCoordinate2D
     var type: MarkerCategory
     var detail: BusstopDetailViewData
-    
+
     init(entity: BusstopMarkerEntity) {
         self.name = entity.title
         self.subtitle = entity.subtitle
         self.coordinate = entity.coordinate
-        self.type = .Busstop
+        self.type = .busstop
         self.detail = BusstopDetailViewData(
             name: entity.title,
             routes: entity.routes,

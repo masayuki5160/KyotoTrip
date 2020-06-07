@@ -12,7 +12,7 @@ struct InfoCellViewData {
     var publishDate = ""
     var link = ""
     var publishDateForCellView: String {
-        return convertDateFormat(dateStr: publishDate)
+        convertDateFormat(dateStr: publishDate)
     }
     
     private func convertDateFormat(dateStr: String) -> String {

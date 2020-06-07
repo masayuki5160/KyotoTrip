@@ -10,25 +10,24 @@ import UIKit
 protocol SettingsPresenterProtocol {
     func cellForSettings(indexPath: IndexPath) -> UITableViewCell
     func didSelectRowAt(indexPath: IndexPath)
+
     var settingsTableSectionTitle: [String] { get }
     var settingsTableData: [[String]] { get }
 }
 
-class SettingsPresenter: SettingsPresenterProtocol {
-
+public class SettingsPresenter: SettingsPresenterProtocol {
     // MARK: Properties
 
     struct Dependency {
-        let interactor: SettingsInteractorProtocol
-        let router: SettingsRouterProtocol
+        public let interactor: SettingsInteractorProtocol
+        public let router: SettingsRouterProtocol
     }
-    
-    let settingsTableSectionTitle = [
+
+    public let settingsTableSectionTitle = [
         "情報",
         "アプリ設定"
     ]
-    let settingsTableData: [[String]]
-    
+    public let settingsTableData: [[String]]
     private let dependency: Dependency
     private let basicItems: [String] = [
         "バージョン",
@@ -40,7 +39,8 @@ class SettingsPresenter: SettingsPresenterProtocol {
     ]
 
     // MARK: Public functions
-    
+
+    // swiftlint:explicit_acl
     init(dependency: Dependency) {
         self.dependency = dependency
 
@@ -49,45 +49,55 @@ class SettingsPresenter: SettingsPresenterProtocol {
             settingItems
         ]
     }
-    
-    func cellForSettings(indexPath: IndexPath) -> UITableViewCell {
+
+    public func cellForSettings(indexPath: IndexPath) -> UITableViewCell {
         let items = settingsTableData[indexPath.section]
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "SettingCell")
         cell.textLabel?.text = items[indexPath.row]
 
         switch indexPath.section {
-        case 0:/// 情報セクション
+        case 0:
+
+            // 情報セクション
             switch indexPath.row {
             case 0:
                 cell.detailTextLabel?.text = appVersionString()
                 cell.accessoryType = .none
                 cell.selectionStyle = .none
+
             case 1:
                 cell.accessoryType = .disclosureIndicator
+
             default:
                 break
             }
-        case 1:/// アプリ設定セクション
+
+        case 1:
+
+            // アプリ設定セクション
             cell.accessoryType = .disclosureIndicator
+
         default:
             break
         }
-        
+
         return cell
     }
-    
-    func didSelectRowAt(indexPath: IndexPath) {
+
+    public func didSelectRowAt(indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             if indexPath.row == 1 {
                 dependency.router.transitionToLisenceView()
             }
+
         case 1:
             if indexPath.row == 0 {
                 // TODO: 言語設定ページ
             } else {
                 dependency.router.transitionToRestaurantsSearchSettingsView()
             }
+
         default:
             break
         }
@@ -97,8 +107,8 @@ class SettingsPresenter: SettingsPresenterProtocol {
 private extension SettingsPresenter {
     // MARK: Private functions
     private func appVersionString() -> String {
-        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
         return "\(version).\(build)"
     }
 }

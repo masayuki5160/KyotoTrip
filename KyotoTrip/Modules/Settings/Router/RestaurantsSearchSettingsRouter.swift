@@ -8,12 +8,13 @@
 
 protocol RestaurantsSearchSettingsRouterProtocol {
     var view: RestaurantsSearchSettingsViewController { get }
+
     func transitionToRestaurantsSearchRangeSettingView()
 }
 
 struct RestaurantsSearchSettingsRouter: RestaurantsSearchSettingsRouterProtocol {
     var view: RestaurantsSearchSettingsViewController
-    
+
     func transitionToRestaurantsSearchRangeSettingView() {
         let targetVC = AppDefaultDependencies().assembleSettingsRestaurantsSearchRangeModule()
         view.pushViewController(targetVC, animated: true)

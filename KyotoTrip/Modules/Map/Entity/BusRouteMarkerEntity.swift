@@ -28,17 +28,9 @@ struct BusRouteMarkerEntity: MarkerEntityProtocol {
     static var sundayId = "N07_006"
     /// 備考
     static var noteId = "N07_007"
-    
-//    enum BusCategory: String {
-//        case 1 = "路線バス(民間)"
-//        case 2 = "路線バス(公営)"
-//        case 3 = "コミュニティバス"
-//        case 4 = "デマンドバス"
-//        case 5 = "その他"
-//    }
-    
+
     var title = ""
     var subtitle = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    var type: MarkerCategory = .BusRoute
+    var type: MarkerCategory = .busRoute
 }

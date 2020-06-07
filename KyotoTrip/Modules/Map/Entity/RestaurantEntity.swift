@@ -8,20 +8,20 @@
 
 struct RestaurantEntity: Codable {
     var id: String = ""
-    var name: NameEntity = NameEntity()
+    var name: NameEntity
     var businessHour: String = ""
     var holiday: String = ""
-    var contacts: ContactsEntity = ContactsEntity()
-    var salesPoints: SalesPointsEntity = SalesPointsEntity()
+    var contacts: ContactsEntity
+    var salesPoints: SalesPointsEntity
     var access: String = ""
     var budget: Int = 0
     var creditCard: String = ""
-    var categories: CategoriesEntity = CategoriesEntity()
-    var location: LocationEntity = LocationEntity()
+    var categories: CategoriesEntity
+    var location: LocationEntity
     var url: String = ""
     var urlMobile: String = ""
-    var imageUrl: ImageUrlEntity = ImageUrlEntity()
-    
+    var imageUrl: ImageUrlEntity
+
     struct NameEntity: Codable {
         var name: String = ""
         var nameKana: String = ""
@@ -44,8 +44,9 @@ struct RestaurantEntity: Codable {
         var longitude: String = ""
         var latitudeWgs84: String = ""
         var longitudeWgs84: String = ""
-        var area: AreaEntity = AreaEntity()
-        
+        var area: AreaEntity
+
+        // swiftlint:disable nesting
         struct AreaEntity: Codable {
             var district: String = ""
             var prefname: String = ""

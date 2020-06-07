@@ -9,7 +9,7 @@
 enum UserPosition: Int {
     case kyotoCity = 0
     case currentLocation
-    
+
     func next() -> Self {
         switch self {
         case .kyotoCity: return .currentLocation

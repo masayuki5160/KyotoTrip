@@ -9,15 +9,14 @@
 import Firebase
 
 protocol TranslatorInteractorProtocol: AnyObject {
-    
 }
 
 class TranslatorInteractor: TranslatorInteractorProtocol {
     private let sourceLanguage = TranslateLanguage.ja
-    
+
     init() {
     }
-    
+
     // TODO: 設定ページで翻訳モデルをダウンロードする処理を追加するときに再度実装
     func downloadModel(targetLanguage: TranslateLanguage) {
         // TODO: 翻訳モデルをダウンロードをする
@@ -25,11 +24,11 @@ class TranslatorInteractor: TranslatorInteractorProtocol {
         let progress = ModelManager.modelManager().download(
             targetModel,
             conditions: ModelDownloadConditions(
-                allowsCellularAccess: true,// TODO: falseがいいか？
+                allowsCellularAccess: true, // TODO: falseがいいか？
                 allowsBackgroundDownloading: true
             )
         )
-        
+
         NotificationCenter.default.addObserver(
             forName: .firebaseMLModelDownloadDidSucceed,
             object: nil,
@@ -59,22 +58,21 @@ class TranslatorInteractor: TranslatorInteractorProtocol {
             // TODO: ダウンロードに失敗した時の処理
         }
     }
-    
+
     // TODO: 翻訳エラーを返すような処理を追加したい
     func translate(source: String, targetLanguage: TranslateLanguage, complition: @escaping (String) -> Void) {
         let options = TranslatorOptions(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage)
         let translator = NaturalLanguage.naturalLanguage().translator(options: options)
         let conditions = ModelDownloadConditions(
-            allowsCellularAccess: true,// TODO: falseがいいか？
+            allowsCellularAccess: true, // TODO: falseがいいか？
             allowsBackgroundDownloading: true
         )
-        
+
         translator.downloadModelIfNeeded(with: conditions) { error in
             guard error == nil else { return }
 
             translator.translate(source) { translatedText, error in
                 guard error == nil, let translatedText = translatedText else { return }
-                
                 complition(translatedText)
             }
         }

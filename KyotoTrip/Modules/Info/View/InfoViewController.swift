@@ -8,45 +8,48 @@
 
 import Foundation
 import SafariServices
-import RxSwift
 import RxCocoa
-import SafariServices
+import RxSwift
 
 class InfoViewController: UIViewController, TransitionerProtocol {
-
     struct Dependency {
         let presenter: InfoPresenterProtocol
     }
-    
-    @IBOutlet weak var tableView: UITableView!
-    private var disposeBag = DisposeBag()
+
+    // swiftlint:disable implicitly_unwrapped_optional
     private var dependency: Dependency!
+    private var disposeBag = DisposeBag()
     private let infoCellId = "InfoTableViewCell"
+    @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         dependency.presenter.fetch()
     }
-        
+
     private func setupTableView() {
         self.navigationItem.title = "NavigationBarTitleInfo".localized
         tableView.register(UINib(nibName: "InfoTableViewCell", bundle: nil), forCellReuseIdentifier: infoCellId)
-        
+
         dependency.presenter.infoDriver
-            .drive(tableView.rx.items(cellIdentifier: infoCellId, cellType: UITableViewCell.self)) { row, element, cell in
+            .drive(tableView.rx.items(cellIdentifier: infoCellId, cellType: UITableViewCell.self)) { _, element, cell in
                 cell.textLabel?.text = element.title
                 cell.detailTextLabel?.text = element.publishDateForCellView
                 cell.textLabel?.numberOfLines = 0
-                cell.accessoryType = .disclosureIndicator}
+                cell.accessoryType = .disclosureIndicator
+            }
             .disposed(by: disposeBag)
-        
+
         Driver.combineLatest(
             tableView.rx.modelSelected(InfoCellViewData.self).asDriver(),
-            tableView.rx.itemSelected.asDriver())
-            .drive(onNext: { [weak self] (cell, indexPath) in
-                self?.dependency.presenter.didSelectRowAt(indexPath: indexPath)
-                self?.tableView.deselectRow(at: indexPath, animated: true)})
+            tableView.rx.itemSelected.asDriver()
+        )
+            .drive(onNext: { [weak self] _, indexPath in
+                    self?.dependency.presenter.didSelectRowAt(indexPath: indexPath)
+                    self?.tableView.deselectRow(at: indexPath, animated: true)
+                }
+            )
             .disposed(by: disposeBag)
     }
 }

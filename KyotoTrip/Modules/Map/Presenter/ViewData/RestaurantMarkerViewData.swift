@@ -19,8 +19,9 @@ struct RestaurantMarkerViewData: MarkerViewDataProtocol {
         self.name = entity.title
         self.subtitle = entity.subtitle
         self.coordinate = entity.coordinate
-        self.type = .Restaurant
-        
+        self.type = .restaurant
+
+        // swiftlint:disable force_unwrapping
         let restaurantEntity = entity.detail!
         self.detail = RestaurantDetailViewData(
             name: restaurantEntity.name.name,

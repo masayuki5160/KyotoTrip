@@ -7,11 +7,10 @@
 //
 
 struct CategoryButtonsStatusViewData {
-    
     var busstop: CategoryButtonStatus
     var culturalProperty: CategoryButtonStatus
     var restaurant: CategoryButtonStatus
-    
+
     init() {
         busstop = .hidden
         culturalProperty = .hidden

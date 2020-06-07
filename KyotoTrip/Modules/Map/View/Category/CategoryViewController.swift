@@ -7,22 +7,21 @@
 //
 
 import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class CategoryViewController: UIViewController, TransitionerProtocol {
-    
-    // MARK: - Properties
-
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var culturalPropertyButton: UIButton!
-    @IBOutlet weak var busstopButton: UIButton!
-    @IBOutlet weak var restaurantButton: UIButton!
-    
     struct Dependency {
         let presenter: CategoryPresenterProtocol
     }
     
+    // MARK: - Properties
+
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var culturalPropertyButton: UIButton!
+    @IBOutlet private weak var busstopButton: UIButton!
+    @IBOutlet private weak var restaurantButton: UIButton!
+    // swiftlint:disable implicitly_unwrapped_optional
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
     private let cellId = "CategoryTableViewCell"
@@ -45,22 +44,28 @@ private extension CategoryViewController {
         self.overrideUserInterfaceStyle = .light
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
     }
-    
+
     private func bindPresenter() {
-        dependency.presenter.bindCategoryView(input: CategoryViewInput(
-            culturalPropertyButton: culturalPropertyButton.rx.tap.asSignal(),
-            busstopButton: busstopButton.rx.tap.asSignal(),
-            restaurantButton: restaurantButton.rx.tap.asSignal(),
-            selectedCell: tableView.rx.modelSelected(CategoryCellViewData.self).asSignal()
+        dependency.presenter.bindCategoryView(
+            input: CategoryViewInput(
+                culturalPropertyButton: culturalPropertyButton.rx.tap.asSignal(),
+                busstopButton: busstopButton.rx.tap.asSignal(),
+                restaurantButton: restaurantButton.rx.tap.asSignal(),
+                selectedCell: tableView.rx.modelSelected(CategoryCellViewData.self).asSignal()
             )
         )
-        
-        dependency.presenter.cellsDriver.drive(tableView.rx.items(cellIdentifier: cellId, cellType: UITableViewCell.self))
-        { row, element, cell in
-            cell.textLabel?.text = element.title
-            cell.imageView?.image = UIImage(named: element.iconName)
-            cell.accessoryType = .disclosureIndicator
-        }.disposed(by: disposeBag)
+
+        dependency.presenter.cellsDriver
+            .drive(
+                tableView.rx.items(
+                    cellIdentifier: cellId, cellType: UITableViewCell.self
+                )
+            ) { _, element, cell in
+                cell.textLabel?.text = element.title
+                cell.imageView?.image = UIImage(named: element.iconName)
+                cell.accessoryType = .disclosureIndicator
+            }
+            .disposed(by: disposeBag)
     }
 }
 

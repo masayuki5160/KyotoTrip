@@ -33,13 +33,13 @@ struct RestaurantsRequestParamGateway: RestaurantsRequestParamGatewayProtocol {
             complition(.failure(.decodeError))
         }
     }
-    
+
     func save(entity: RestaurantsRequestParamEntity) {
         do {
             let encodedData = try JSONEncoder().encode(entity)
             UserDefaults.standard.set(encodedData, forKey: userdefaultsKey)
-        } catch let error {
-            print(error)
+        } catch {
+            // TODO: Fix Later
         }
     }
 }

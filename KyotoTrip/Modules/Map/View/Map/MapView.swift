@@ -10,14 +10,13 @@ import Foundation
 import Mapbox
 
 class MapView: MGLMapView {
-    
     static let kyotoStationLat = 34.9857083
     static let kyotoStationLong = 135.7560416
     static let defaultZoomLv = 13.0
     var busstopLayer: MGLStyleLayer?
     var busRouteLayer: MGLStyleLayer?
     var culturalPropertyLayer: MGLStyleLayer?
-    
+
     func setup() {
         self.setCenter(CLLocationCoordinate2D(latitude: MapView.kyotoStationLat, longitude: MapView.kyotoStationLong), zoomLevel: MapView.defaultZoomLv, animated: false)
         self.showsUserLocation = true

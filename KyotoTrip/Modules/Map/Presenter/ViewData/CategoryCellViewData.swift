@@ -10,38 +10,48 @@ struct CategoryCellViewData {
     let busstopIconName = "icons8-bus-80"
     let restaurantIconName = "icons8-restaurant-100"
     let culturalPropertyIconName = "icons8-torii-48"
-    
+
     var title = ""
     /// Need to know this when tapped cell, and then tell the detail to MapView to add the marker.
     var viewData: MarkerViewDataProtocol
     var iconName: String {
         let iconName: String
         switch viewData.type {
-        case .Busstop:
+        case .busstop:
             iconName = busstopIconName
-        case .CulturalProperty:
+
+        case .culturalProperty:
             iconName = culturalPropertyIconName
-        case .Restaurant:
+
+        case .restaurant:
             iconName = restaurantIconName
+
         default:
             // TODO: Set default icon name
             iconName = busstopIconName
         }
-        
+
         return iconName
     }
         
     init(entity: MarkerEntityProtocol) {
         self.title = entity.title
-        
+
         switch entity.type {
-        case .Busstop:
+        case .busstop:
+            // swiftlint:disable force_cast
             self.viewData = BusstopMarkerViewData(entity: entity as! BusstopMarkerEntity)
-        case .CulturalProperty:
+
+        case .culturalProperty:
+            // swiftlint:disable force_cast
             self.viewData = CulturalPropertyMarkerViewData(entity: entity as! CulturalPropertyMarkerEntity)
-        case .Restaurant:
+
+        case .restaurant:
+            // swiftlint:disable force_cast
             self.viewData = RestaurantMarkerViewData(entity: entity as! RestaurantMarkerEntity)
+
         default:
+            // swiftlint:disable force_cast
             self.viewData = BusstopMarkerViewData(entity: entity as! BusstopMarkerEntity)
         }
     }

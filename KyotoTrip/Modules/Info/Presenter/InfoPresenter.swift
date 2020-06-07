@@ -6,18 +6,18 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
+import Foundation
 
 protocol InfoPresenterProtocol: AnyObject {
     func fetch()
     func didSelectRowAt(indexPath: IndexPath)
+
     var infoDriver: Driver<[InfoCellViewData]> { get }
 }
 
 class InfoPresenter: InfoPresenterProtocol {
-    
     struct Dependency {
         let interactor: InfoInteractorProtocol
         let router: InfoRouterProtocol
@@ -26,10 +26,10 @@ class InfoPresenter: InfoPresenterProtocol {
     var infoDriver: Driver<[InfoCellViewData]>
     private let kyotoCityInfoRelay = BehaviorRelay<[KyotoCityInfoEntity]>(value: [])
     private let dependency: Dependency
-    
+
     init(dependency: Dependency) {
         self.dependency = dependency
-        
+
         infoDriver = kyotoCityInfoRelay.asDriver()
             .map({ cityInfo -> [InfoCellViewData] in
                 cityInfo.map { cityInfoEntity -> InfoCellViewData in
@@ -39,9 +39,10 @@ class InfoPresenter: InfoPresenterProtocol {
                         link: cityInfoEntity.link
                     )
                 }
-            })
+            }
+        )
     }
-    
+
     func fetch() {
         dependency.interactor.fetch { [weak self] result in
             guard let self = self else { return }
@@ -49,6 +50,7 @@ class InfoPresenter: InfoPresenterProtocol {
             switch result {
             case .failure(_):
                 self.kyotoCityInfoRelay.accept([])
+
             case .success(let data):
                 self.kyotoCityInfoRelay.accept(data)
             }

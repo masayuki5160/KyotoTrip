@@ -110,7 +110,7 @@ class MGLFeatureMediatorTests: XCTestCase {
         let busstopViewData = BusstopMarkerViewData(entity: .init(
             title: "五条千本",
             coordinate: CLLocationCoordinate2DMake(34.982929, 135.773914),
-            type: .Busstop,
+            type: .busstop,
             routeNameString: "81,83",
             organizationNameString: "京都バス（株）,京阪バス（株）"
             )

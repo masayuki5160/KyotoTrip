@@ -11,58 +11,67 @@ import Mapbox.MGLFeature
 protocol MGLFeatureMediatorProtocol {
     /// Input from MapView
     func updateVisibleMGLFeatures(mglFeatures: [MGLFeature])
-    
+
     /// Others
     func convertMGLFeatureToAnnotation(source: MGLFeature) -> CustomMGLPointAnnotation
     func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
 }
 
 class MGLFeatureMediator: MGLFeatureMediatorProtocol {
-    
     struct Dependency {
         let presenter: MapPresenter
     }
+
     private let dependency: Dependency
-    
+
     init(dependency: Dependency) {
         self.dependency = dependency
     }
-    
-    func updateVisibleMGLFeatures(mglFeatures: [MGLFeature]) {
+
+    public func updateVisibleMGLFeatures(mglFeatures: [MGLFeature]) {
         let markers = mglFeatures.map { feature -> MarkerEntityProtocol in
             convertMGLFeatureToMarkerEntity(source: feature)
         }
-        
+
         dependency.presenter.updateVisibleMarkers(markers)
     }
-    
-    func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature] {
-        return features.sorted(by: {
-            let distanceFromLocationA =
-                CLLocation(latitude: $0.coordinate.latitude,longitude: $0.coordinate.longitude)
-                    .distance(from: center)
-            let distanceFromLocationB =
-                CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude)
-                    .distance(from: center)
-            
-            return distanceFromLocationA < distanceFromLocationB
-        })
+
+    public func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature] {
+        features.sorted(
+            by: {
+                let distanceFromLocationA =
+                    CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
+                        .distance(from: center)
+                let distanceFromLocationB =
+                    CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude)
+                        .distance(from: center)
+
+                return distanceFromLocationA < distanceFromLocationB
+            }
+        )
     }
-    
-    func convertMGLFeatureToAnnotation(source: MGLFeature) -> CustomMGLPointAnnotation {
+
+    public func convertMGLFeatureToAnnotation(source: MGLFeature) -> CustomMGLPointAnnotation {
         let markerEntity = convertMGLFeatureToMarkerEntity(source: source)
         let markerViewData: MarkerViewDataProtocol
         switch markerEntity.type {
-        case .Busstop:
+        case .busstop:
+            // swiftlint:disable force_cast
             markerViewData = BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
-        case .CulturalProperty:
+
+        case .culturalProperty:
+            // swiftlint:disable force_cast
             markerViewData = CulturalPropertyMarkerViewData(entity: markerEntity as! CulturalPropertyMarkerEntity)
-        case .Restaurant:
+
+        case .restaurant:
+            // swiftlint:disable force_cast
             markerViewData = RestaurantMarkerViewData(entity: markerEntity as! RestaurantMarkerEntity)
+
         default:
+            // swiftlint:disable force_cast
             markerViewData = BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
         }
-        
+
         return CustomMGLPointAnnotation(viewData: markerViewData)
     }
 }
@@ -70,24 +79,25 @@ class MGLFeatureMediator: MGLFeatureMediatorProtocol {
 private extension MGLFeatureMediator {
     private func convertMGLFeatureToMarkerEntity(source: MGLFeature) -> MarkerEntityProtocol {
         let category: MarkerCategory
-        if (source.attribute(forKey: BusstopMarkerEntity.titleId) != nil) {
-            category = .Busstop
-        } else if ((source.attribute(forKey: CulturalPropertyMarkerEntity.titleId)) != nil) {
-            category = .CulturalProperty
+        if source.attribute(forKey: BusstopMarkerEntity.titleId) != nil {
+            category = .busstop
+        } else if (source.attribute(forKey: CulturalPropertyMarkerEntity.titleId)) != nil {
+            category = .culturalProperty
         } else {
             // Fix me later
-            category = .Busstop
+            category = .busstop
         }
-        
+
         switch category {
-        case .Busstop:
+        case .busstop:
             return BusstopMarkerEntity(
                 title: source.attributes[BusstopMarkerEntity.titleId] as! String,
                 coordinate: source.coordinate,
                 routeNameString: source.attributes[BusstopMarkerEntity.busRouteId] as! String,
                 organizationNameString: source.attributes[BusstopMarkerEntity.organizationId] as! String
             )
-        case .CulturalProperty:
+
+        case .culturalProperty:
             return CulturalPropertyMarkerEntity(
                 title: source.attributes[CulturalPropertyMarkerEntity.titleId] as! String,
                 coordinate: source.coordinate,
@@ -96,6 +106,7 @@ private extension MGLFeatureMediator {
                 smallClassificationCode: source.attributes[CulturalPropertyMarkerEntity.smallClassificationCodeId] as! Int,
                 registerdDate: source.attributes[CulturalPropertyMarkerEntity.registerdDateId] as! Int
             )
+
         default:
             // TODO: Fix later
             return BusstopMarkerEntity(title: "", coordinate: source.coordinate)

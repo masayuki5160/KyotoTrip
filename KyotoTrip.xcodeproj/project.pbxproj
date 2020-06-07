@@ -86,6 +86,7 @@
 		4CD839362489F5A3005B10A1 /* KyotoCityInfoGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD839352489F5A3005B10A1 /* KyotoCityInfoGatewayStub.swift */; };
 		4CE16C412480D9A6006EBD39 /* CategoryCellViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */; };
 		4CE4A0FF2483E72600E30B3A /* CategoryButtonsStatusViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE4A0FE2483E72600E30B3A /* CategoryButtonsStatusViewData.swift */; };
+		4CECABDE248BE48400F4081E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4CECABDD248BE48400F4081E /* .swiftlint.yml */; };
 		4CF4AFD42468508800991B2C /* CustomMGLPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */; };
 		4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */; };
 		4CF4AFE6246E188800991B2C /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4AFE5246E188800991B2C /* SettingsPresenter.swift */; };
@@ -217,6 +218,7 @@
 		4CD839352489F5A3005B10A1 /* KyotoCityInfoGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyotoCityInfoGatewayStub.swift; sourceTree = "<group>"; };
 		4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellViewData.swift; sourceTree = "<group>"; };
 		4CE4A0FE2483E72600E30B3A /* CategoryButtonsStatusViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonsStatusViewData.swift; sourceTree = "<group>"; };
+		4CECABDD248BE48400F4081E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMGLPointAnnotation.swift; sourceTree = "<group>"; };
 		4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestParamEntity.swift; sourceTree = "<group>"; };
 		4CF4AFE5246E188800991B2C /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -384,16 +386,8 @@
 				4C41666924473E8F005EF1C2 /* Localize */,
 				4CC1ADFB242459C900BF84B9 /* Extension */,
 				4C4166512439D229005EF1C2 /* Interactor */,
-				4C3F094524301B0800FAEDC2 /* Entity */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		4C3F094524301B0800FAEDC2 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		4C3F094924301B5900FAEDC2 /* Modules */ = {
@@ -820,6 +814,7 @@
 		4CF773CA241B978B0032CC53 = {
 			isa = PBXGroup;
 			children = (
+				4CECABDD248BE48400F4081E /* .swiftlint.yml */,
 				4CF773D5241B978B0032CC53 /* KyotoTrip */,
 				4CF4B0082472C9A600991B2C /* KyotoTripTests */,
 				4CF773D4241B978B0032CC53 /* Products */,
@@ -906,6 +901,7 @@
 				4CF773D1241B978B0032CC53 /* Resources */,
 				80F3E6275C18DC8CFF9E753A /* [CP] Embed Pods Frameworks */,
 				02F26CAF8E48A753BB1F62C3 /* [CP] Copy Pods Resources */,
+				4C836924248BE0B900B124C9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -967,6 +963,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CECABDE248BE48400F4081E /* .swiftlint.yml in Resources */,
 				4CA84AEA2459247F00DAC5F3 /* Category.storyboard in Resources */,
 				4CF4AFEE246EE1A100991B2C /* SettingsRestaurantsSearch.storyboard in Resources */,
 				4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */,
@@ -1023,6 +1020,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4C836924248BE0B900B124C9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		617BF220473C6E5BF80804EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1305,7 +1319,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1427,7 +1441,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Masayuki Tanaka (L8ZGX2885D)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

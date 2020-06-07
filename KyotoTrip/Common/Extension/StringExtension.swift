@@ -11,9 +11,9 @@ import Foundation
 extension String {
     // appendix: https://techblog.zozo.com/entry/ios-localization
     var localized: String {
-        return NSLocalizedString(self, comment: "")
+        NSLocalizedString(self, comment: "")
     }
-    
+
     func replace(from: String, to: String) -> String {
         var replacedString = self
 
@@ -22,7 +22,7 @@ extension String {
                 replacedString.replaceSubrange(range, with: to)
             }
         }
-        
+
         return replacedString
     }
 }

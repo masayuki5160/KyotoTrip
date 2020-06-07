@@ -24,76 +24,90 @@ struct CulturalPropertyMarkerEntity: MarkerEntityProtocol {
     static var smallClassificationCodeId = "P32_005"
     /// 指定文化財に指定された年月日
     static var registerdDateId = "P32_008"
-    
-    var title = ""
-    var subtitle = ""
-    var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    var type: MarkerCategory = .CulturalProperty
-    var address = ""
-    var largeClassificationCode = 0
-    var smallClassificationCode = 0
-    var registerdDate = 0
-    
-    var largeClassification: String {
+
+    public var title = ""
+    public var subtitle = ""
+    public var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    public var type: MarkerCategory = .culturalProperty
+    public var address = ""
+    public var largeClassificationCode = 0
+    public var smallClassificationCode = 0
+    public var registerdDate = 0
+    public var largeClassification: String {
         let res: String
         switch largeClassificationCode {
         case 1:
             res = "有形文化財"
+
         case 2:
             res = "無形文化財"
+
         case 3:
             res = "民俗文化財"
+
         case 4:
             res = "記念物"
+
         case 5:
             res = "文化的景観"
+
         case 6:
             res = "伝統的建造物群"
+
         case 7:
             res = "文化財の保存技術"
+
         default:
             res = ""
         }
         return res
     }
-    
-    var smallClassification: String {
+    public var smallClassification: String {
         let res: String
         switch smallClassificationCode {
         case 11:
             res = "有形文化財"
+
         case 21:
             res = "無形文化財"
+
         case 31:
             res = "有形民俗文化財"
+
         case 32:
             res = "無形民俗文化財"
+
         case 41:
             res = "史跡（旧跡を含む）"
+
         case 42:
             res = "名勝"
+
         case 43:
             res = "天然記念物"
+
         case 51:
             res = "重要文化的景観"
+
         case 61:
             res = "伝統的建造物群保存地区"
+
         case 71:
             res = "選定保存技術"
+
         default:
             res = ""
         }
         return res
     }
-    
-    var registerDateString: String {
+    public var registerDateString: String {
         let registerDateStr = String(registerdDate)
         let year = registerDateStr.prefix(4)
         let month = (registerDateStr.prefix(6)).suffix(2)
         let day = registerDateStr.suffix(2)
         return "\(year)/\(month)/\(day)"
     }
-    
+
     init(title: String, coordinate: CLLocationCoordinate2D, address: String, largeClassificationCode: Int, smallClassificationCode: Int, registerdDate: Int) {
         self.title = title
         self.coordinate = coordinate

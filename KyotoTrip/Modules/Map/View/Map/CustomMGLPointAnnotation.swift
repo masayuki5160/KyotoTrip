@@ -13,7 +13,7 @@ class CustomMGLPointAnnotation: MGLPointAnnotation {
     override init() {
         super.init()
     }
-    
+
     init(viewData: MarkerViewDataProtocol) {
         super.init()
 
@@ -22,7 +22,7 @@ class CustomMGLPointAnnotation: MGLPointAnnotation {
         coordinate = viewData.coordinate
         self.viewData = viewData
     }
-    
+
     required init?(coder: NSCoder) {
         super.init()
     }

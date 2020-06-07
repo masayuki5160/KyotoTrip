@@ -9,6 +9,6 @@ import FloatingPanel
 
 extension MapViewController: FloatingPanelControllerDelegate {
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
-        return CustomFloatingPanelLayout()
+        CustomFloatingPanelLayout()
     }
 }

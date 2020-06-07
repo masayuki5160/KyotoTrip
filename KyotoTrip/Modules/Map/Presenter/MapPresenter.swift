@@ -6,8 +6,8 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 import CoreLocation
 
 struct MapViewInput {
@@ -20,7 +20,7 @@ protocol MapPresenterProtocol: AnyObject {
     static var layerIdentifiers: Set<String> { get }
 
     // MARK: - Input to Presenter from MapView
-    
+
     func bindMapView(input: MapViewInput)
     func updateViewpoint(centerCoordinate: CLLocationCoordinate2D)
     func updateVisibleMarkers(_ markers: [MarkerEntityProtocol])
@@ -35,7 +35,6 @@ protocol MapPresenterProtocol: AnyObject {
 }
 
 class MapPresenter: MapPresenterProtocol {
-    
     // MARK: - Properties
     struct Dependency {
         let interactor: MapInteractorProtocol
@@ -46,67 +45,75 @@ class MapPresenter: MapPresenterProtocol {
         BusstopMarkerEntity.layerId,
         CulturalPropertyMarkerEntity.layerId
     ]
-    
+
     var userPositionButtonStatusDriver: Driver<UserPosition> {
-        return userPositionButtonStatus.asDriver()
+        userPositionButtonStatus.asDriver()
     }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> {
-        return dependency.interactor.selectedCategoryViewCellSignal
+        dependency.interactor.selectedCategoryViewCellSignal
     }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData>
     var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])>
-    
-    private var dependency: Dependency!
+
+    private var dependency: Dependency
     private let disposeBag = DisposeBag()
     private let userPositionButtonStatus = BehaviorRelay<UserPosition>(value: .kyotoCity)
-    
+
     // MARK: - Public functions
-    
+
     init(dependency: Dependency) {
         self.dependency = dependency
-        
-        categoryButtonsStatusDriver = Driver.combineLatest(
-            dependency.interactor.busstopStatusDriver,
-            dependency.interactor.culturalPropertyStatusDriver,
-            dependency.interactor.restaurantStatusDriver
-        ).map({ (busstop, culturalProperty, restaurant) -> CategoryButtonsStatusViewData in
-            var buttonsStatus = CategoryButtonsStatusViewData()
-            buttonsStatus.busstop = busstop
-            buttonsStatus.culturalProperty = culturalProperty
-            buttonsStatus.restaurant = restaurant
 
-            return buttonsStatus
-        })
-        
-        restaurantMarkersDriver = Driver.combineLatest(
-            dependency.interactor.restaurantStatusDriver,
-            dependency.interactor.restaurantMarkersDriver
-        ).map({ (status, markers) -> (CategoryButtonStatus, [CustomMGLPointAnnotation]) in
-            let annotations = markers.map { marker -> CustomMGLPointAnnotation in
+        categoryButtonsStatusDriver =
+            Driver.combineLatest(
+                dependency.interactor.busstopStatusDriver,
+                dependency.interactor.culturalPropertyStatusDriver,
+                dependency.interactor.restaurantStatusDriver
+            )
+            .map({ busstop, culturalProperty, restaurant -> CategoryButtonsStatusViewData in
+                    var buttonsStatus = CategoryButtonsStatusViewData()
+                    buttonsStatus.busstop = busstop
+                    buttonsStatus.culturalProperty = culturalProperty
+                    buttonsStatus.restaurant = restaurant
+
+                    return buttonsStatus
+                }
+            )
+
+        restaurantMarkersDriver =
+            Driver.combineLatest(
+                dependency.interactor.restaurantStatusDriver,
+                dependency.interactor.restaurantMarkersDriver
+            )
+            .map({ status, markers -> (CategoryButtonStatus, [CustomMGLPointAnnotation]) in
+                let annotations = markers.map { marker -> CustomMGLPointAnnotation in
                 let viewData = RestaurantMarkerViewData(entity: marker)
-                return CustomMGLPointAnnotation(viewData: viewData)
+                    return CustomMGLPointAnnotation(viewData: viewData)
+                }
+                return (status, annotations)
             }
-            return (status, annotations)
-        })
+        )
     }
-    
+
     func bindMapView(input: MapViewInput) {
         input.compassButtonTapEvent.emit(onNext: { [weak self] in
-            guard let self = self else { return }
-            
-            let nextPosition = self.userPositionButtonStatus.value.next()
-            self.userPositionButtonStatus.accept(nextPosition)
-        }).disposed(by: disposeBag)
+                guard let self = self else { return }
+
+                let nextPosition = self.userPositionButtonStatus.value.next()
+                self.userPositionButtonStatus.accept(nextPosition)
+            }
+        )
+        .disposed(by: disposeBag)
     }
-    
+
     func updateVisibleMarkers(_ markers: [MarkerEntityProtocol]) {
         dependency.interactor.updateMarkersFromStyleLayers(entity: markers)
     }
-    
+
     func tapOnCallout(viewData: MarkerViewDataProtocol) {
         dependency.router.transitionToDetailViewController(inject: viewData)
     }
-    
+
     func updateViewpoint(centerCoordinate: CLLocationCoordinate2D) {
         dependency.interactor.updateMapViewViewpoint(centerCoordinate: centerCoordinate)
     }

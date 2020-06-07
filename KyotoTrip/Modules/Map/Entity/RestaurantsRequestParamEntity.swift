@@ -11,7 +11,7 @@ struct RestaurantsRequestParamEntity: Codable {
         case off = 0
         case on
     }
-    
+
     var latitude = ""
     var longitude = ""
     var range: RestaurantsRequestSearchRange = .range500

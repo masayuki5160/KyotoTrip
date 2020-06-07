@@ -8,11 +8,10 @@
 
 struct RestaurantsSearchRangeCellViewData {
     typealias SearchRange = RestaurantsRequestSearchRange
-    
+
     var range: SearchRange = .range300
     var isSelected = false
     var rangeString: String {
-        return range.toString()
+        range.toString()
     }
-
 }

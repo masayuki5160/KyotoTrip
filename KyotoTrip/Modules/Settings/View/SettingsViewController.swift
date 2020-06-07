@@ -8,25 +8,25 @@
 import UIKit
 
 class SettingsViewController: UIViewController, TransitionerProtocol {
-    
-    @IBOutlet weak var tableView: UITableView!
-    
     struct Dependency {
         let presenter: SettingsPresenterProtocol
     }
+
+    // swiftlint:disable implicitly_unwrapped_optional
     private var dependency: Dependency!
+    @IBOutlet private weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupUI()
         setupTableView()
     }
-    
+
     private func setupUI() {
         self.navigationItem.title = "SettingsPageTitle".localized
     }
-    
+
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -38,26 +38,25 @@ extension SettingsViewController: UITableViewDelegate {
 
 extension SettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dependency.presenter.settingsTableSectionTitle.count
+        dependency.presenter.settingsTableSectionTitle.count
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dependency.presenter.settingsTableSectionTitle[section]
+        dependency.presenter.settingsTableSectionTitle[section]
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dependency.presenter.settingsTableData[section].count
+        dependency.presenter.settingsTableData[section].count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return dependency.presenter.cellForSettings(indexPath: indexPath)
+        dependency.presenter.cellForSettings(indexPath: indexPath)
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dependency.presenter.didSelectRowAt(indexPath: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 }
 
 extension SettingsViewController: DependencyInjectable {

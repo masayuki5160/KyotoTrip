@@ -6,7 +6,6 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-
 import UIKit
 
 protocol AppDependencies {
@@ -23,39 +22,38 @@ protocol AppDependencies {
     func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController
 }
 
-public struct AppDefaultDependencies {
-
+struct AppDefaultDependencies {
     public init() {}
-
     public func rootViewController() -> UIViewController {
-        return assembleMainTabModule()
+        assembleMainTabModule()
     }
 }
 
 extension AppDefaultDependencies: AppDependencies {
     func assembleMainTabModule() -> UIViewController {
-        return TabBarController()
+        TabBarController()
     }
-    
     func assembleSettingsModule() -> UINavigationController {
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
         let gateway = RestaurantsRequestParamGateway()
         let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let router = SettingsRouter(view: vc)
-        let presenter = SettingsPresenter(dependency: .init(
-            interactor: interactor,
-            router: router
+        let presenter = SettingsPresenter(
+            dependency: .init(
+                interactor: interactor,
+                router: router
             )
         )
         vc.inject(.init(presenter: presenter))
-        
+
         return naviViewController
     }
-    
+
     func assembleKyotoInfoTopModule() -> UINavigationController {
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Info", bundle: nil)
@@ -72,23 +70,24 @@ extension AppDefaultDependencies: AppDependencies {
             )
         )
         view.inject(.init(presenter: presenter))
-        
+
         return naviViewController
     }
-    
+
     func assembleKyotoMapModule() -> UINavigationController {
-        
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Map", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let view = naviViewController.viewControllers[0] as! MapViewController
-        
+
         let restaurantsSearchGateway = RestaurantsSearchGateway()
         let requestParamGateway = RestaurantsRequestParamGateway()
-        let interactor = MapInteractor(dependency: .init(
-            searchGateway: restaurantsSearchGateway,
-            requestParamGateway: requestParamGateway
+        let interactor = MapInteractor(
+            dependency: .init(
+                searchGateway: restaurantsSearchGateway,
+                requestParamGateway: requestParamGateway
             )
         )
         let router = MapRouter(view: view)
@@ -98,25 +97,28 @@ extension AppDefaultDependencies: AppDependencies {
                 router: router
             )
         )
-        
+
         let categoryView = assembleCategoryModule(inject: interactor)
-        let mglFeatureMediator = MGLFeatureMediator(dependency: .init(
-            presenter: presenter
+        let mglFeatureMediator = MGLFeatureMediator(
+            dependency: .init(
+                presenter: presenter
             )
         )
-        view.inject(.init(
-            presenter: presenter,
-            categoryView: categoryView,
-            mglFeatureMediator: mglFeatureMediator
+        view.inject(
+            .init(
+                presenter: presenter,
+                categoryView: categoryView,
+                mglFeatureMediator: mglFeatureMediator
             )
         )
-        
+
         return naviViewController
     }
-    
+
     func assembleBusstopDetailModule(inject viewData: BusstopDetailViewData) -> UIViewController {
         let view = { () -> BusstopDetailViewController in
             let storyboard = UIStoryboard(name: "BusstopDetail", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! BusstopDetailViewController
         }()
         let router = BusstopDetailRouter(view: view)
@@ -127,13 +129,14 @@ extension AppDefaultDependencies: AppDependencies {
             )
         )
         view.inject(.init(presenter: presenter))
-        
+
         return view
     }
-    
+
     func assembleCulturalPropertyDetailModule(inject viewData: CulturalPropertyDetailViewData) -> UIViewController {
         let view = { () -> CulturalPropertyDetailViewController in
             let storyboard = UIStoryboard(name: "CulturalPropertyDetail", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! CulturalPropertyDetailViewController
         }()
         let router = CulturalPropertyDetailRouter(view: view)
@@ -144,13 +147,14 @@ extension AppDefaultDependencies: AppDependencies {
             )
         )
         view.inject(.init(presenter: presenter))
-        
+
         return view
     }
-    
+
     func assembleRestaurantDetailModule(inject viewData: RestaurantDetailViewData) -> UIViewController {
         let view = { () -> RestaurantDetailViewController in
             let storyboard = UIStoryboard(name: "RestaurantDetail", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! RestaurantDetailViewController
         }()
         let router = RestaurantDetailRouter(view: view)
@@ -161,71 +165,78 @@ extension AppDefaultDependencies: AppDependencies {
             )
         )
         view.inject(.init(presenter: presenter))
-        
+
         return view
     }
-    
+
     func assembleSettingsLisenceModule() -> UIViewController {
         let view = { () -> SettingsLicenseViewController in
             let storyboard = UIStoryboard(name: "SettingsLicense", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! SettingsLicenseViewController
         }()
-        
+
         return view
     }
 
     func assembleSettingsRestaurantsSearchModule() -> UIViewController {
         let view = { () -> RestaurantsSearchSettingsViewController in
             let storyboard = UIStoryboard(name: "SettingsRestaurantsSearch", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchSettingsViewController
         }()
 
         let gateway = RestaurantsRequestParamGateway()
         let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let router = RestaurantsSearchSettingsRouter(view: view)
-        let presenter = RestaurantsSearchSettingsPresenter(dependency: .init(
-            interactor: interactor,
-            router: router
+        let presenter = RestaurantsSearchSettingsPresenter(
+            dependency: .init(
+                interactor: interactor,
+                router: router
             )
         )
         view.inject(.init(presenter: presenter))
-        
+
         return view
     }
-    
+
     func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController {
         let view = { () -> RestaurantsSearchRangeSettingsViewController in
             let storyboard = UIStoryboard(name: "SettingsRestaurantsSearchRange", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchRangeSettingsViewController
         }()
 
         let gateway = RestaurantsRequestParamGateway()
         let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let router = RestaurantsSearchRangeSettingRouter(view: view)
-        let presenter = RestaurantsSearchRangeSettingPresenter(dependency: .init(
-            interactor: interactor,
-            router: router
+        let presenter = RestaurantsSearchRangeSettingPresenter(
+            dependency: .init(
+                interactor: interactor,
+                router: router
             )
         )
         view.inject(.init(presenter: presenter))
-        
+
         return view
     }
-    
+
     func assembleCategoryModule(inject interactor: MapInteractor) -> UIViewController {
         let view = { () -> CategoryViewController in
             let storyboard = UIStoryboard(name: "Category", bundle: nil)
+            // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! CategoryViewController
         }()
-        
+
         let router = CategoryRouter(view: view)
-        let presenter = CategoryPresenter(dependency: .init(
-            interactor: interactor,
-            router: router
+        let presenter = CategoryPresenter(
+            dependency: .init(
+                interactor: interactor,
+                router: router
             )
         )
         view.inject(.init(presenter: presenter))
-        
+
         return view
     }
 }

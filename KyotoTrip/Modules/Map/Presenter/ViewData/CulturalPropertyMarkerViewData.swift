@@ -14,12 +14,12 @@ struct CulturalPropertyMarkerViewData: MarkerViewDataProtocol {
     var coordinate: CLLocationCoordinate2D
     var type: MarkerCategory
     var detail: CulturalPropertyDetailViewData
-    
+
     init(entity: CulturalPropertyMarkerEntity) {
         self.name = entity.title
         self.subtitle = entity.subtitle
         self.coordinate = entity.coordinate
-        self.type = .CulturalProperty
+        self.type = .culturalProperty
         self.detail = CulturalPropertyDetailViewData(
             name: entity.title,
             address: entity.address,

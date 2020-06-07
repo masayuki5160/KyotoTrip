@@ -15,14 +15,14 @@ import CoreLocation
 struct BusstopMarkerEntity: MarkerEntityProtocol {
     /// Style Layer ID defined at Mapbox Studio
     static var layerId = "kyoto-busstop"
-    
+
     /// IDs defined in shapefile published by MLIT
 
     static var titleId = "P11_001"
     static var busCategoryId = "P11_002"
     static var organizationId = "P11_003_1"
     static var busRouteId = "P11_004_1"
-    
+
     var title = ""
     var subtitle: String {
         var routeNameforSubtitle = "[路線] \(routes[0])"
@@ -33,15 +33,14 @@ struct BusstopMarkerEntity: MarkerEntityProtocol {
 
         return routeNameforSubtitle
     }
-    var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    var type: MarkerCategory = .Busstop
-    var routeNameString = ""
-    var organizationNameString = ""
-    
-    var routes: [String] {
-        return routeNameString.components(separatedBy: ",")
+    public var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    public var type: MarkerCategory = .busstop
+    public var routeNameString = ""
+    public var organizationNameString = ""
+    public var routes: [String] {
+        routeNameString.components(separatedBy: ",")
     }
-    var organizations: [String] {
-        return organizationNameString.components(separatedBy: ",")
+    public var organizations: [String] {
+        organizationNameString.components(separatedBy: ",")
     }
 }

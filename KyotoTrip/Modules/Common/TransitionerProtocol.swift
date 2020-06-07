@@ -14,18 +14,15 @@ protocol TransitionerProtocol where Self: UIViewController {
     func popViewController(animated: Bool)
     func popToRootViewController(animated: Bool)
     func popToViewController(_ viewController: UIViewController, animated: Bool)
-    func present(viewController: UIViewController,
-                 animated: Bool,
-                 completion: (() -> ())?)
+    func present(viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func dismiss(animated: Bool)
 }
 
 extension TransitionerProtocol {
-    func pushViewController(_ viewController: UIViewController,
-                            animated: Bool) {
-        /// FIXME: navigationControllerがnilのときの処理追加?
-        guard let nc = navigationController else { return }
-        nc.pushViewController(viewController, animated: animated)
+    func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        /// TODO: navigationControllerがnilのときの処理追加?
+        guard let naviViewController = navigationController else { return }
+        naviViewController.pushViewController(viewController, animated: animated)
     }
 
     func popViewController(animated: Bool) {
@@ -37,7 +34,7 @@ extension TransitionerProtocol {
     func popToViewController(_ viewController: UIViewController, animated: Bool) {
     }
 
-    func present(viewController: UIViewController, animated: Bool, completion: (() -> ())? = nil) {
+    func present(viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         present(viewController, animated: animated, completion: completion)
     }
 

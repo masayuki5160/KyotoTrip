@@ -19,7 +19,7 @@ class BusstopMarkerEntityTests: XCTestCase {
         busstopA = BusstopMarkerEntity(
             title: "五条千本A",
             coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
-            type: .Busstop,
+            type: .busstop,
             routeNameString: "81,83",
             organizationNameString: "京都バス（株）,京阪バス（株）"
         )
@@ -27,7 +27,7 @@ class BusstopMarkerEntityTests: XCTestCase {
         busstopB = BusstopMarkerEntity(
             title: "五条千本B",
             coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0),
-            type: .Busstop,
+            type: .busstop,
             routeNameString: "81",
             organizationNameString: "京都バス（株）"
         )

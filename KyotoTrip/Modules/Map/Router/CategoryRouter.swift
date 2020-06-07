@@ -9,13 +9,13 @@ import UIKit
 
 protocol CategoryRouterProtocol {
     var view: CategoryViewController { get }
+
     func showNoEntoryAlert()
     func showUnknownErrorAlert()
     func transitionToDetailViewController(inject viewData: MarkerViewDataProtocol)
 }
 
 struct CategoryRouter: CategoryRouterProtocol {
-    
     var view: CategoryViewController
 
     func showNoEntoryAlert() {
@@ -24,41 +24,51 @@ struct CategoryRouter: CategoryRouterProtocol {
             message: "飲食店が見つかりませんでした",
             preferredStyle: .alert
         )
-        alert.addAction(.init(
-            title: "キャンセル",
-            style: .cancel,
-            handler: nil)
+        alert.addAction(
+            .init(
+                title: "キャンセル",
+                style: .cancel,
+                handler: nil
+            )
         )
 
         view.present(alert, animated: true, completion: nil)
     }
-    
+
     func showUnknownErrorAlert() {
         let alert = UIAlertController(
             title: nil,
             message: "不明なエラーが発生しました",
             preferredStyle: .alert
         )
-        alert.addAction(.init(
-            title: "キャンセル",
-            style: .cancel,
-            handler: nil)
+        alert.addAction(
+            .init(
+                title: "キャンセル",
+                style: .cancel,
+                handler: nil
+            )
         )
 
         view.present(alert, animated: true, completion: nil)
     }
-    
+
     func transitionToDetailViewController(inject viewData: MarkerViewDataProtocol) {
         switch viewData.type {
-        case .Busstop:
+        case .busstop:
+            // swiftlint:disable force_cast
             let busstopDetailViewData = (viewData as! BusstopMarkerViewData).detail
             transitionToBusstopDetailViewController(inject: busstopDetailViewData)
-        case .CulturalProperty:
+
+        case .culturalProperty:
+            // swiftlint:disable force_cast
             let culturalPropertyDetailViewData = (viewData as! CulturalPropertyMarkerViewData).detail
             transitionToCulturalPropertyDetailViewController(inject: culturalPropertyDetailViewData)
-        case .Restaurant:
+
+        case .restaurant:
+            // swiftlint:disable force_cast
             let restaurantDetailViewData = (viewData as! RestaurantMarkerViewData).detail
             transitionToRestaurantDetailViewController(inject: restaurantDetailViewData)
+
         default:
             break
         }
@@ -69,13 +79,13 @@ struct CategoryRouter: CategoryRouterProtocol {
             .assembleBusstopDetailModule(inject: viewData) as! BusstopDetailViewController
         view.pushViewController(targetVC, animated: true)
     }
-    
+
     private func transitionToCulturalPropertyDetailViewController(inject viewData: CulturalPropertyDetailViewData) {
         let targetVC = AppDefaultDependencies()
             .assembleCulturalPropertyDetailModule(inject: viewData) as! CulturalPropertyDetailViewController
         view.pushViewController(targetVC, animated: true)
     }
-    
+
     private func transitionToRestaurantDetailViewController(inject viewData: RestaurantDetailViewData) {
         let targetVC = AppDefaultDependencies()
             .assembleRestaurantDetailModule(inject: viewData) as! RestaurantDetailViewController

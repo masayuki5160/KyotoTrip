@@ -9,19 +9,18 @@
 import UIKit
 
 class CulturalPropertyDetailViewController: UIViewController {
-    
     struct Dependency {
         let presenter: CulturalPropertyDetailPresenterProtocol
     }
-    
+
+    // swiftlint:disable implicitly_unwrapped_optional
     private var dependency: Dependency!
-    @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet private weak var tableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigationItem.title = "都道府県指定文化財"
-        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -38,18 +37,18 @@ extension CulturalPropertyDetailViewController: UITableViewDelegate {
 
 extension CulturalPropertyDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dependency.presenter.sectionTitles.count
+        dependency.presenter.sectionTitles.count
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dependency.presenter.sectionTitles[section]
+        dependency.presenter.sectionTitles[section]
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dependency.presenter.numberOfRowsInSection(section: section)
+        dependency.presenter.numberOfRowsInSection(section: section)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return dependency.presenter.createCellForRowAt(indexPath: indexPath)
+        dependency.presenter.createCellForRowAt(indexPath: indexPath)
     }
 }

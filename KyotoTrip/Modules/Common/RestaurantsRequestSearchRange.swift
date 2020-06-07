@@ -12,7 +12,7 @@ enum RestaurantsRequestSearchRange: Int, Codable {
     case range1000
     case range2000
     case range3000
-    
+
     func toString() -> String {
         switch self {
         case .range300:  return "300m"

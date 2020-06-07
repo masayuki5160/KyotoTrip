@@ -6,11 +6,14 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-enum MarkerCategory {
-    case Busstop
-    case Event
-    case CulturalProperty
-    case BusRoute
-    case Restaurant
-    case None
+/// Marker category enum
+public enum MarkerCategory {
+    /// For busstop marker, viewdata, and entity
+    case busstop
+    /// For culturalProperty marker, viewdata, and entity
+    case culturalProperty
+    /// For busRoute marker, viewdata, and entity
+    case busRoute
+    /// For restaurant marker, viewdata, and entity
+    case restaurant
 }

@@ -9,7 +9,7 @@
 enum CategoryButtonStatus: Int {
     case hidden = 0
     case visible
-    
+
     func next() -> Self {
         switch self {
         case .hidden: return .visible
