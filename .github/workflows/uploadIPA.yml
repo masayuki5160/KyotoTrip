@@ -50,6 +50,7 @@ jobs:
         MGL_MAPBOX_ACCESSTOKEN: ${{ secrets.MGL_MAPBOX_ACCESSTOKEN }}
         FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+        FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
       run: |
         fastlane release_with_githubactions
 
