@@ -48,6 +48,7 @@ jobs:
         CERT_PASSWORD: ${{ secrets.CERT_PASSWORD }}
         GNAVI_ACCESSTOKEN: ${{ secrets.GNAVI_ACCESSTOKEN }}
         MGL_MAPBOX_ACCESSTOKEN: ${{ secrets.MGL_MAPBOX_ACCESSTOKEN }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
       run: |
         fastlane release_with_githubactions
 
