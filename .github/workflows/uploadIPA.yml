@@ -49,6 +49,7 @@ jobs:
         GNAVI_ACCESSTOKEN: ${{ secrets.GNAVI_ACCESSTOKEN }}
         MGL_MAPBOX_ACCESSTOKEN: ${{ secrets.MGL_MAPBOX_ACCESSTOKEN }}
         FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
       run: |
         fastlane release_with_githubactions
 
