@@ -49,6 +49,6 @@ jobs:
         GNAVI_ACCESSTOKEN: ${{ secrets.GNAVI_ACCESSTOKEN }}
         MGL_MAPBOX_ACCESSTOKEN: ${{ secrets.MGL_MAPBOX_ACCESSTOKEN }}
       run: |
-        echo "TEST UPLOAD IPA DONE"
+        fastlane release_with_githubactions
 
 

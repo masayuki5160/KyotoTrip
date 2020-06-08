@@ -44,7 +44,7 @@ platform :ios do
     private_lane :import_certificates_and_provisioning_profile do
         create_keychain(
             name: "mykeychain",
-            password: ENV["KEYCHAIN_PASSWORD"],
+            password: "",
             timeout: 1800
         )
         import_certificate(
