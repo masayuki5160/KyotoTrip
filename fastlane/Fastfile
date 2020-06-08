@@ -28,4 +28,31 @@ platform :ios do
             devices: ["iPhone 8"],
             scheme: "Develop_KyotoTrip")
   end
+
+  lane :release_with_githubactions do
+    import_certificates_and_provisioning_profile
+    increment_build_number(xcodeproj: "KyotoTrip.xcodeproj")
+    build_app(
+      workspace: "KyotoTrip.xcworkspace",
+      clean: true,
+      scheme: "Release_KyotoTrip"
+    )
+    upload_to_app_store(skip_metadata: true, skip_screenshots: true)
+  end
+
+  desc "Import Certificates and Provisioning Profile"
+    private_lane :import_certificates_and_provisioning_profile do
+        create_keychain(
+            name: "mykeychain",
+            password: ENV["KEYCHAIN_PASSWORD"],
+            timeout: 1800
+        )
+        import_certificate(
+            certificate_path: "ios_distribution.p12",
+            certificate_password: "",
+            keychain_name: "mykeychain",
+            keychain_password: ""
+        )
+        install_provisioning_profile(path: "kyoto_trip.mobileprovision")
+    end
 end
