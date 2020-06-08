@@ -30,15 +30,14 @@ class InfoPresenter: InfoPresenterProtocol {
     init(dependency: Dependency) {
         self.dependency = dependency
 
-        infoDriver = kyotoCityInfoRelay.asDriver()
-            .map({ cityInfo -> [InfoCellViewData] in
-                cityInfo.map { cityInfoEntity -> InfoCellViewData in
-                    InfoCellViewData(
-                        title: cityInfoEntity.title,
-                        publishDate: cityInfoEntity.publishDate,
-                        link: cityInfoEntity.link
-                    )
-                }
+        infoDriver = kyotoCityInfoRelay.asDriver().map({ cityInfo -> [InfoCellViewData] in
+            cityInfo.map { cityInfoEntity -> InfoCellViewData in
+                InfoCellViewData(
+                    title: cityInfoEntity.title,
+                    publishDate: cityInfoEntity.publishDate,
+                    link: cityInfoEntity.link
+                )
+            }
             }
         )
     }

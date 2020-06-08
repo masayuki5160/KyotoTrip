@@ -23,20 +23,18 @@ class RestaurantsSearchSettingsViewController: UIViewController, TransitionerPro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        dependency.presenter.settingsRowsDriver
-            .drive(tableView.rx.items) { _, row, element in
-                let cell = UITableViewCell(style: .value1, reuseIdentifier: "RestaurantsSearchSettingCell")
-                cell.textLabel?.text = element.title
-                if row == 0 {// For restaurants search range setting cell
-                    cell.detailTextLabel?.text = element.detail
-                    cell.accessoryType = .disclosureIndicator
-                } else {// Other cells
-                    cell.accessoryType = element.isSelected ? .checkmark : .none
-                }
-
-                return cell
+        dependency.presenter.settingsRowsDriver.drive(tableView.rx.items) { _, row, element in
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "RestaurantsSearchSettingCell")
+            cell.textLabel?.text = element.title
+            if row == 0 {// For restaurants search range setting cell
+                cell.detailTextLabel?.text = element.detail
+                cell.accessoryType = .disclosureIndicator
+            } else {// Other cells
+                cell.accessoryType = element.isSelected ? .checkmark : .none
             }
-            .disposed(by: disposeBag)
+
+            return cell
+        }.disposed(by: disposeBag)
 
         dependency.presenter.bindView(
             input: RestauransSearchSettingsView(

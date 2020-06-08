@@ -14,7 +14,7 @@ import CoreLocation
 struct RestaurantMarkerEntity: MarkerEntityProtocol {
     static var layerId = ""
     static var titleId = ""
-    
+
     var title = ""
     var subtitle = ""
     var coordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)

@@ -103,7 +103,7 @@ class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
         switch indexPath.section {
         case 4:// TELセクション
             let phoneString = cell?.textLabel?.text ?? ""
-            dependency.router.openPhoneApp(phoneNumber: phoneString.replace(from: "-", to: ""))
+            dependency.router.openPhoneApp(phoneNumber: phoneString.replace(fromStr: "-", toStr: ""))
 
         case 5:// URLセクション
             let urlString = cell?.textLabel?.text

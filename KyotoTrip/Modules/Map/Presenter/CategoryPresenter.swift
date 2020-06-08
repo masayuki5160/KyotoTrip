@@ -46,52 +46,46 @@ class CategoryPresenter: CategoryPresenterProtocol {
             markers.map { marker -> CategoryCellViewData in
                 CategoryCellViewData(entity: marker)
             }
+        }.drive(onNext: { cells in
+            self.cellsRelay.accept(cells)
         }
-        .drive(onNext: { cells in
-                self.cellsRelay.accept(cells)
-            }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
     }
 
     func bindCategoryView(input: CategoryViewInput) {
         input.culturalPropertyButton.emit(onNext: { [weak self] in
-                guard let self = self else { return }
+            guard let self = self else { return }
 
-                let nextStatus = self.categoryButtonsStatus.culturalProperty.next()
-                self.categoryButtonsStatus.culturalProperty = nextStatus
-                self.dependency.interactor.didSelectCulturalPropertyButton(nextStatus: nextStatus)
+            let nextStatus = self.categoryButtonsStatus.culturalProperty.next()
+            self.categoryButtonsStatus.culturalProperty = nextStatus
+            self.dependency.interactor.didSelectCulturalPropertyButton(nextStatus: nextStatus)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
 
         input.busstopButton.emit(onNext: { [weak self] in
-                guard let self = self else { return }
+            guard let self = self else { return }
 
-                let nextStatus = self.categoryButtonsStatus.busstop.next()
-                self.categoryButtonsStatus.busstop = nextStatus
-                self.dependency.interactor.didSelectBusstopButton(nextStatus: nextStatus)
+            let nextStatus = self.categoryButtonsStatus.busstop.next()
+            self.categoryButtonsStatus.busstop = nextStatus
+            self.dependency.interactor.didSelectBusstopButton(nextStatus: nextStatus)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
 
         input.restaurantButton.emit(onNext: { [weak self] in
-                guard let self = self else { return }
+            guard let self = self else { return }
 
-                let nextStatus = self.categoryButtonsStatus.restaurant.next()
-                self.categoryButtonsStatus.restaurant = nextStatus
-                self.dependency.interactor.didSelectRestaurantButton(nextStatus: nextStatus)
+            let nextStatus = self.categoryButtonsStatus.restaurant.next()
+            self.categoryButtonsStatus.restaurant = nextStatus
+            self.dependency.interactor.didSelectRestaurantButton(nextStatus: nextStatus)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
 
         input.selectedCell.emit(onNext: { [weak self] cell in
-                guard let self = self else { return }
+            guard let self = self else { return }
 
-                self.dependency.interactor.didSelectCategoryViewCell(viewData: cell.viewData)
-                self.dependency.router.transitionToDetailViewController(inject: cell.viewData)
+            self.dependency.interactor.didSelectCategoryViewCell(viewData: cell.viewData)
+            self.dependency.router.transitionToDetailViewController(inject: cell.viewData)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
     }
 }

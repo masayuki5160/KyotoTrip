@@ -16,6 +16,7 @@
 		4C14D09B247F6F1900A7DB2C /* RestaurantDetailViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D09A247F6F1900A7DB2C /* RestaurantDetailViewData.swift */; };
 		4C14D09E247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D09D247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift */; };
 		4C14D0A2247FA5A200A7DB2C /* StringExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14D0A1247FA5A200A7DB2C /* StringExtensionTest.swift */; };
+		4C175130248DC1B600891773 /* RestaurantsSearchSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17512F248DC1B600891773 /* RestaurantsSearchSetting.swift */; };
 		4C1D6A6C247BE15C0017BE19 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */; };
 		4C2BA4282484C9D10018B435 /* gnaviAPIDummyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */; };
 		4C2BA42B2484D2D80018B435 /* CategoryButtonStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */; };
@@ -147,6 +148,7 @@
 		4C14D09A247F6F1900A7DB2C /* RestaurantDetailViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewData.swift; sourceTree = "<group>"; };
 		4C14D09D247F9FEC00A7DB2C /* RestaurantDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPresenterTest.swift; sourceTree = "<group>"; };
 		4C14D0A1247FA5A200A7DB2C /* StringExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTest.swift; sourceTree = "<group>"; };
+		4C17512F248DC1B600891773 /* RestaurantsSearchSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSetting.swift; sourceTree = "<group>"; };
 		4C1D6A6B247BE15C0017BE19 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
 		4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gnaviAPIDummyResponse.json; sourceTree = "<group>"; };
 		4C2BA42A2484D2D80018B435 /* CategoryButtonStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStatusTests.swift; sourceTree = "<group>"; };
@@ -695,6 +697,7 @@
 			children = (
 				4CF4B0182477A6B900991B2C /* RestaurantsSearchSettingsCellViewData.swift */,
 				4CF4B01624776C0800991B2C /* RestaurantsSearchRangeCellViewData.swift */,
+				4C17512F248DC1B600891773 /* RestaurantsSearchSetting.swift */,
 			);
 			path = ViewData;
 			sourceTree = "<group>";
@@ -1036,7 +1039,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect --format\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		617BF220473C6E5BF80804EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1206,6 +1209,7 @@
 				4CFF123C2487E2D4002F23CB /* SettingsRouter.swift in Sources */,
 				4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */,
 				4CA84B0E2463C1B600DAC5F3 /* RestaurantsSearchGateway.swift in Sources */,
+				4C175130248DC1B600891773 /* RestaurantsSearchSetting.swift in Sources */,
 				4CB8D21D2489E71200177A10 /* InfoCellViewData.swift in Sources */,
 				4CA84B05246313A800DAC5F3 /* CulturalPropertyDetailViewController.swift in Sources */,
 				4CC77646247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift in Sources */,

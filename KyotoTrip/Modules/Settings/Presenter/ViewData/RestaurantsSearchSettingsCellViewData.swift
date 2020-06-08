@@ -10,4 +10,5 @@ struct RestaurantsSearchSettingsCellViewData {
     var title = ""
     var detail = ""
     var isSelected = false
+    var category: RestaurantsSearchSetting
 }

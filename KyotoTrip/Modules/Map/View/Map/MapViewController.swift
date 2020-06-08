@@ -54,12 +54,10 @@ private extension MapViewController {
             singleTap.require(toFail: recognizer)
         }
         mapView.addGestureRecognizer(singleTap)
-        singleTap.rx.event.asDriver()
-            .drive(onNext: { [weak self] gesture in
-                    self?.handleMapTap(sender: gesture)
-                }
-            )
-            .disposed(by: disposeBag)
+        singleTap.rx.event.asDriver().drive(onNext: { [weak self] gesture in
+            self?.handleMapTap(sender: gesture)
+            }
+        ).disposed(by: disposeBag)
     }
 
     private func bindPresenter() {
@@ -74,44 +72,40 @@ private extension MapViewController {
         /// Subscribe from Presenter
 
         dependency.presenter.categoryButtonsStatusDriver.drive(onNext: { [weak self] buttonsStatus in
-                guard let self = self else { return }
+            guard let self = self else { return }
 
-                /// Deselect markers
-                self.mapView.deselectAnnotation(self.mapView.selectedAnnotations.first, animated: true)
-                /// Update markers
-                self.updateBusstopLayer(status: buttonsStatus.busstop)
-                self.updateCulturalPropertyLayer(status: buttonsStatus.culturalProperty)
+            /// Deselect markers
+            self.mapView.deselectAnnotation(self.mapView.selectedAnnotations.first, animated: true)
+            /// Update markers
+            self.updateBusstopLayer(status: buttonsStatus.busstop)
+            self.updateCulturalPropertyLayer(status: buttonsStatus.culturalProperty)
             }
         )
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
 
         dependency.presenter.restaurantMarkersDriver.drive(onNext: { [weak self] status, annotations in
-                guard let self = self else { return }
-                self.updateRestaurantMarkers(status: status, annotations: annotations)
+            guard let self = self else { return }
+            self.updateRestaurantMarkers(status: status, annotations: annotations)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
 
         dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] compassButtonStatus in
-                guard let self = self else { return }
-                self.updateMapCenterPosition(compassButtonStatus)
+            guard let self = self else { return }
+            self.updateMapCenterPosition(compassButtonStatus)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
 
-        dependency.presenter.selectedCategoryViewCellSignal
-            .emit(onNext: {  [weak self] selectedCell in
-                guard let self = self else { return }
+        dependency.presenter.selectedCategoryViewCellSignal.emit(onNext: {  [weak self] selectedCell in
+            guard let self = self else { return }
 
-                /// Move camera position to the annotation position
-                let camera = MGLMapCamera(lookingAtCenter: selectedCell.coordinate, altitude: 4500, pitch: 0, heading: 0)
-                self.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
-                /// Add annotation to mapView
-                let selectedAnnotation = CustomMGLPointAnnotation(viewData: selectedCell)
-                self.mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
+            /// Move camera position to the annotation position
+            let camera = MGLMapCamera(lookingAtCenter: selectedCell.coordinate, altitude: 4500, pitch: 0, heading: 0)
+            self.mapView.fly(to: camera, withDuration: 3, completionHandler: nil)
+            /// Add annotation to mapView
+            let selectedAnnotation = CustomMGLPointAnnotation(viewData: selectedCell)
+            self.mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
     }
 
     private func setupCategorySemiModalView() {
@@ -203,8 +197,7 @@ private extension MapViewController {
         let possibleFeatures = mapView.visibleFeatures(
             in: touchRect,
             styleLayerIdentifiers: Set(MapPresenter.layerIdentifiers)
-        )
-        .filter { $0 is MGLPointFeature }
+        ).filter { $0 is MGLPointFeature }
 
         // Select the closest feature to the touch center.
         let closestFeatures = dependency.mglFeatureMediator

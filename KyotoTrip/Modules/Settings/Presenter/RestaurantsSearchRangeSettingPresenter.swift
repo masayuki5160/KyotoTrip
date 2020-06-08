@@ -55,16 +55,14 @@ class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPrese
     // MARK: Public functions
 
     func bindView(input: RestauransSearchRangeSettingView) {
-        input.selectedCell
-            .drive(onNext: { [weak self] entity in
-                    guard let self = self else { return }
+        input.selectedCell.drive(onNext: { [weak self] entity in
+            guard let self = self else { return }
 
-                    self.restaurantsRequestParam.range = entity.range
-                    let searchRangeRows = self.buildSearchRangeRows(settings: self.restaurantsRequestParam)
-                    self.restaurantsSearchRangeSettingsRows.accept(searchRangeRows)
-                }
-            )
-            .disposed(by: disposeBag)
+            self.restaurantsRequestParam.range = entity.range
+            let searchRangeRows = self.buildSearchRangeRows(settings: self.restaurantsRequestParam)
+            self.restaurantsSearchRangeSettingsRows.accept(searchRangeRows)
+            }
+        ).disposed(by: disposeBag)
     }
 
     func saveRestaurantsSettings() {

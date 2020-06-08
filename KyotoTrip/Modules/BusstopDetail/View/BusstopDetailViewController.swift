@@ -16,7 +16,7 @@ class BusstopDetailViewController: UIViewController, TransitionerProtocol {
     // swiftlint:disable implicitly_unwrapped_optional
     private var dependency: Dependency!
     @IBOutlet private weak var tableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

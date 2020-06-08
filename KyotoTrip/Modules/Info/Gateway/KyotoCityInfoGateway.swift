@@ -19,7 +19,7 @@ struct KyotoCityInfoGateway: KyotoCityInfoGatewayProtocol {
     func fetch(complition: @escaping (Result<[KyotoCityInfoEntity]>) -> Void) {
         Alamofire.request(rssUrlStr).responseData { response in
             var entityList: [KyotoCityInfoEntity] = []
-            
+
             switch response.result {
             case .success(let data):
 

@@ -33,7 +33,7 @@ struct CategoryCellViewData {
 
         return iconName
     }
-        
+
     init(entity: MarkerEntityProtocol) {
         self.title = entity.title
 

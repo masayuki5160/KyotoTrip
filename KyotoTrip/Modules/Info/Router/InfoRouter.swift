@@ -14,7 +14,7 @@ protocol InfoRouterProtocol {
 
 struct InfoRouter: InfoRouterProtocol {
     let view: InfoViewController
-    
+
     func presentWebView(url: String) {
         let url = URL(string: url)
         if let url = url {

@@ -31,15 +31,13 @@ class RestaurantsSearchRangeSettingsViewController: UIViewController, Transition
             )
         )
 
-        dependency.presenter.searchRangeRowsDriver
-            .drive(tableView.rx.items) { _, _, element in
-                let cell = UITableViewCell(style: .default, reuseIdentifier: "restaurantsSearchRange")
-                cell.textLabel?.text = element.rangeString
-                cell.accessoryType = element.isSelected ? .checkmark : .none
+        dependency.presenter.searchRangeRowsDriver.drive(tableView.rx.items) { _, _, element in
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "restaurantsSearchRange")
+            cell.textLabel?.text = element.rangeString
+            cell.accessoryType = element.isSelected ? .checkmark : .none
 
-                return cell
-            }
-            .disposed(by: disposeBag)
+            return cell
+        }.disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {

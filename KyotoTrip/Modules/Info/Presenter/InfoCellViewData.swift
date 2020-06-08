@@ -14,7 +14,7 @@ struct InfoCellViewData {
     var publishDateForCellView: String {
         convertDateFormat(dateStr: publishDate)
     }
-    
+
     private func convertDateFormat(dateStr: String) -> String {
         let inFormatter = DateFormatter()
         inFormatter.dateFormat = "EEE, dd MM yyyy HH:mm:ss Z"

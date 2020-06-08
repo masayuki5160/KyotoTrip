@@ -14,7 +14,7 @@ class CategoryViewController: UIViewController, TransitionerProtocol {
     struct Dependency {
         let presenter: CategoryPresenterProtocol
     }
-    
+
     // MARK: - Properties
 
     @IBOutlet private weak var tableView: UITableView!
@@ -30,7 +30,7 @@ class CategoryViewController: UIViewController, TransitionerProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setuUI()
         bindPresenter()
     }
@@ -55,17 +55,13 @@ private extension CategoryViewController {
             )
         )
 
-        dependency.presenter.cellsDriver
-            .drive(
-                tableView.rx.items(
-                    cellIdentifier: cellId, cellType: UITableViewCell.self
-                )
-            ) { _, element, cell in
-                cell.textLabel?.text = element.title
-                cell.imageView?.image = UIImage(named: element.iconName)
-                cell.accessoryType = .disclosureIndicator
-            }
-            .disposed(by: disposeBag)
+        dependency.presenter.cellsDriver.drive(
+            tableView.rx.items(cellIdentifier: cellId, cellType: UITableViewCell.self)
+        ) { _, element, cell in
+            cell.textLabel?.text = element.title
+            cell.imageView?.image = UIImage(named: element.iconName)
+            cell.accessoryType = .disclosureIndicator
+        }.disposed(by: disposeBag)
     }
 }
 

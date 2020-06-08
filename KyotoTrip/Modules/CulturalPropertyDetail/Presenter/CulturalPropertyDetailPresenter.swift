@@ -20,7 +20,7 @@ class CulturalPropertyDetailPresenter: CulturalPropertyDetailPresenterProtocol {
         let router: CulturalPropertyDetailRouterProtocol
         let viewData: CulturalPropertyDetailViewData
     }
-    
+
     let sectionTitles = [
         "都道府県指定文化財名称",
         "住所",

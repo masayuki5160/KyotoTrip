@@ -19,7 +19,7 @@ enum RestaurantsRequestParamGatewayError: Error {
 
 struct RestaurantsRequestParamGateway: RestaurantsRequestParamGatewayProtocol {
     private let userdefaultsKey = "RestaurantsRequestParam"
-    
+
     func fetch(complition: (Result<RestaurantsRequestParamEntity, RestaurantsRequestParamGatewayError>) -> Void) {
         guard let data = UserDefaults.standard.data(forKey: userdefaultsKey) else {
             complition(.failure(.entryNotFound))

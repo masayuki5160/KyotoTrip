@@ -37,17 +37,18 @@ class MGLFeatureMediator: MGLFeatureMediatorProtocol {
     }
 
     public func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature] {
-        features.sorted(
-            by: {
-                let distanceFromLocationA =
-                    CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
-                        .distance(from: center)
-                let distanceFromLocationB =
-                    CLLocation(latitude: $1.coordinate.latitude, longitude: $1.coordinate.longitude)
-                        .distance(from: center)
+        features.sorted(by: {
+            let distanceFromLocationA = CLLocation(
+                latitude: $0.coordinate.latitude,
+                longitude: $0.coordinate.longitude
+            ).distance(from: center)
+            let distanceFromLocationB = CLLocation(
+                latitude: $1.coordinate.latitude,
+                longitude: $1.coordinate.longitude
+            ).distance(from: center)
 
-                return distanceFromLocationA < distanceFromLocationB
-            }
+            return distanceFromLocationA < distanceFromLocationB
+        }
         )
     }
 

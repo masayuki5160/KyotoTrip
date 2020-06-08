@@ -15,7 +15,7 @@ class StringExtensionTest: XCTestCase {
     }
 
     func test_check_replacedResult_whenReplaceDashStringToBlank() {
-        let actual = "050-3477-8987".replace(from: "-", to: "")
+        let actual = "050-3477-8987".replace(fromStr: "-", toStr: "")
         let expected = "05034778987"
         
         XCTAssertEqual(expected, actual)

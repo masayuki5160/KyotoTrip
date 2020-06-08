@@ -46,7 +46,9 @@ opt_in_rules:
 - fallthrough
 - fatal_error_message
 - file_header
-- file_name
+- file_name:
+-  excluded:
+-    - StringExtension.swift
 - first_where
 - force_unwrapping
 - function_default_parameter_at_end
@@ -140,7 +142,7 @@ function_body_length:
 
 type_name:
   min_length: 3
-  max_length: 40
+  max_length: 50
 
 identifier_name:
   min_length: # only min_length

@@ -64,46 +64,41 @@ class MapPresenter: MapPresenterProtocol {
     init(dependency: Dependency) {
         self.dependency = dependency
 
-        categoryButtonsStatusDriver =
-            Driver.combineLatest(
-                dependency.interactor.busstopStatusDriver,
-                dependency.interactor.culturalPropertyStatusDriver,
-                dependency.interactor.restaurantStatusDriver
-            )
-            .map({ busstop, culturalProperty, restaurant -> CategoryButtonsStatusViewData in
-                    var buttonsStatus = CategoryButtonsStatusViewData()
-                    buttonsStatus.busstop = busstop
-                    buttonsStatus.culturalProperty = culturalProperty
-                    buttonsStatus.restaurant = restaurant
+        categoryButtonsStatusDriver = Driver.combineLatest(
+            dependency.interactor.busstopStatusDriver,
+            dependency.interactor.culturalPropertyStatusDriver,
+            dependency.interactor.restaurantStatusDriver
+        ).map({ busstop, culturalProperty, restaurant -> CategoryButtonsStatusViewData in
+            var buttonsStatus = CategoryButtonsStatusViewData()
+            buttonsStatus.busstop = busstop
+            buttonsStatus.culturalProperty = culturalProperty
+            buttonsStatus.restaurant = restaurant
 
-                    return buttonsStatus
-                }
-            )
+            return buttonsStatus
+            }
+        )
 
-        restaurantMarkersDriver =
-            Driver.combineLatest(
-                dependency.interactor.restaurantStatusDriver,
-                dependency.interactor.restaurantMarkersDriver
-            )
-            .map({ status, markers -> (CategoryButtonStatus, [CustomMGLPointAnnotation]) in
-                let annotations = markers.map { marker -> CustomMGLPointAnnotation in
+        restaurantMarkersDriver = Driver.combineLatest(
+            dependency.interactor.restaurantStatusDriver,
+            dependency.interactor.restaurantMarkersDriver
+        ).map({ status, markers -> (CategoryButtonStatus, [CustomMGLPointAnnotation]) in
+            let annotations = markers.map { marker -> CustomMGLPointAnnotation in
                 let viewData = RestaurantMarkerViewData(entity: marker)
-                    return CustomMGLPointAnnotation(viewData: viewData)
-                }
-                return (status, annotations)
+                return CustomMGLPointAnnotation(viewData: viewData)
+            }
+            return (status, annotations)
             }
         )
     }
 
     func bindMapView(input: MapViewInput) {
         input.compassButtonTapEvent.emit(onNext: { [weak self] in
-                guard let self = self else { return }
+            guard let self = self else { return }
 
-                let nextPosition = self.userPositionButtonStatus.value.next()
-                self.userPositionButtonStatus.accept(nextPosition)
+            let nextPosition = self.userPositionButtonStatus.value.next()
+            self.userPositionButtonStatus.accept(nextPosition)
             }
-        )
-        .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
     }
 
     func updateVisibleMarkers(_ markers: [MarkerEntityProtocol]) {

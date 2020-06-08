@@ -1,4 +1,3 @@
-//
 //  StringExtension.swift
 //  KyotoTrip
 //
@@ -11,15 +10,16 @@ import Foundation
 extension String {
     // appendix: https://techblog.zozo.com/entry/ios-localization
     var localized: String {
+        // swiftlint:disable nslocalizedstring_key
         NSLocalizedString(self, comment: "")
     }
 
-    func replace(from: String, to: String) -> String {
+    func replace(fromStr: String, toStr: String) -> String {
         var replacedString = self
 
-        while replacedString.range(of: from) != nil {
-            if let range = replacedString.range(of: from) {
-                replacedString.replaceSubrange(range, with: to)
+        while replacedString.range(of: fromStr) != nil {
+            if let range = replacedString.range(of: fromStr) {
+                replacedString.replaceSubrange(range, with: toStr)
             }
         }
 

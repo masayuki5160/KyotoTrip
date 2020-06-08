@@ -10,6 +10,13 @@ struct RestaurantsRequestParamEntity: Codable {
     enum RequestFilterFlg: Int, Codable {
         case off = 0
         case on
+
+        func nextStatus() -> RequestFilterFlg {
+            switch self {
+            case .off: return .on
+            case .on: return .off
+            }
+        }
     }
 
     var latitude = ""

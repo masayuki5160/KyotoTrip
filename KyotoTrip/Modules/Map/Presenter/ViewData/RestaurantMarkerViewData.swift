@@ -14,7 +14,7 @@ struct RestaurantMarkerViewData: MarkerViewDataProtocol {
     var coordinate: CLLocationCoordinate2D
     var type: MarkerCategory
     var detail: RestaurantDetailViewData
-    
+
     init(entity: RestaurantMarkerEntity) {
         self.name = entity.title
         self.subtitle = entity.subtitle

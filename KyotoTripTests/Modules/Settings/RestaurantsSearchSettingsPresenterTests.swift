@@ -75,11 +75,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .chaineseSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "英語スタッフ",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .englishSpeaker
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -89,7 +90,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertTrue(cells[1].isSelected)
             XCTAssertFalse(cells[2].isSelected)
-            XCTAssertFalse(cells[3].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
             XCTAssertFalse(cells[4].isSelected)
             XCTAssertFalse(cells[5].isSelected)
             XCTAssertFalse(cells[6].isSelected)
@@ -106,11 +107,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .chaineseSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "韓国語スタッフ",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .koreanSpeaker
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -120,7 +122,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertFalse(cells[1].isSelected)
             XCTAssertTrue(cells[2].isSelected)
-            XCTAssertFalse(cells[3].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
             XCTAssertFalse(cells[4].isSelected)
             XCTAssertFalse(cells[5].isSelected)
             XCTAssertFalse(cells[6].isSelected)
@@ -137,11 +139,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .koreanSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "中国語スタッフ",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .chaineseSpeaker
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -150,7 +153,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         let functionAnswered = expectation(description: "asynchronous function")
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertFalse(cells[1].isSelected)
-            XCTAssertFalse(cells[2].isSelected)
+            XCTAssertTrue(cells[2].isSelected)
             XCTAssertTrue(cells[3].isSelected)
             XCTAssertFalse(cells[4].isSelected)
             XCTAssertFalse(cells[5].isSelected)
@@ -168,11 +171,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .chaineseSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "ベジタリアンメニュー",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .vegetarian
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -182,7 +186,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertFalse(cells[1].isSelected)
             XCTAssertFalse(cells[2].isSelected)
-            XCTAssertFalse(cells[3].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
             XCTAssertTrue(cells[4].isSelected)
             XCTAssertFalse(cells[5].isSelected)
             XCTAssertFalse(cells[6].isSelected)
@@ -199,11 +203,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .chaineseSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "クレジットカード",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .creditCard
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -213,7 +218,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertFalse(cells[1].isSelected)
             XCTAssertFalse(cells[2].isSelected)
-            XCTAssertFalse(cells[3].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
             XCTAssertFalse(cells[4].isSelected)
             XCTAssertTrue(cells[5].isSelected)
             XCTAssertFalse(cells[6].isSelected)
@@ -230,11 +235,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .chaineseSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "禁煙",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .noSmoking
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -244,7 +250,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertFalse(cells[1].isSelected)
             XCTAssertFalse(cells[2].isSelected)
-            XCTAssertFalse(cells[3].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
             XCTAssertFalse(cells[4].isSelected)
             XCTAssertFalse(cells[5].isSelected)
             XCTAssertFalse(cells[6].isSelected)
@@ -261,11 +267,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .chaineseSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "個室",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .privateRoom
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -275,7 +282,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertFalse(cells[1].isSelected)
             XCTAssertFalse(cells[2].isSelected)
-            XCTAssertFalse(cells[3].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
             XCTAssertFalse(cells[4].isSelected)
             XCTAssertFalse(cells[5].isSelected)
             XCTAssertTrue(cells[6].isSelected)
@@ -292,11 +299,12 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         view.loadViewIfNeeded()
         let disposeBag = DisposeBag()
         
-        let defaultCell = RestaurantsSearchSettingsCellViewData()
+        let defaultCell = RestaurantsSearchSettingsCellViewData(category: .chaineseSpeaker)
         let selectedCellViewData = RestaurantsSearchSettingsCellViewData(
             title: "Wifi",
             detail: "",
-            isSelected: false
+            isSelected: false,
+            category: .wifi
         )
         let relay = BehaviorRelay<RestaurantsSearchSettingsCellViewData>(value: defaultCell)
         presenter.bindView(input: .init(selectedCell: relay.asDriver()))
@@ -306,7 +314,7 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
         presenter.settingsRowsDriver.drive(onNext: { cells in
             XCTAssertFalse(cells[1].isSelected)
             XCTAssertFalse(cells[2].isSelected)
-            XCTAssertFalse(cells[3].isSelected)
+            XCTAssertTrue(cells[3].isSelected)
             XCTAssertFalse(cells[4].isSelected)
             XCTAssertFalse(cells[5].isSelected)
             XCTAssertFalse(cells[6].isSelected)
