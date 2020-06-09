@@ -905,7 +905,7 @@
 				4CF773D1241B978B0032CC53 /* Resources */,
 				80F3E6275C18DC8CFF9E753A /* [CP] Embed Pods Frameworks */,
 				02F26CAF8E48A753BB1F62C3 /* [CP] Copy Pods Resources */,
-				4C836924248BE0B900B124C9 /* ShellScript */,
+				4C836924248BE0B900B124C9 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1043,7 +1043,7 @@
 			shellPath = /bin/sh;
 			shellScript = "GOOGLESERVICE_INFO_DEV=${PROJECT_DIR}/GoogleService-Info-Dev.plist\nGOOGLESERVICE_INFO_RELEASE=${PROJECT_DIR}/GoogleService-Info-Release.plist\nPLIST_DESTINATION=${PROJECT_DIR}/KyotoTrip/GoogleService-Info.plist\n\n# Copy over the prod GoogleService-Info.plist for Release builds\nif [ \"${CONFIGURATION}\" = \"Develop\" ]\nthen\necho \"Copy GoogleService-Info.plist for development\"\ncp -f \"${GOOGLESERVICE_INFO_DEV}\" \"${PLIST_DESTINATION}\"\nelif [ \"${CONFIGURATION}\" = \"Release\" ]\nthen\necho \"Copy GoogleService-Info.plist for production\"\ncp -f \"${GOOGLESERVICE_INFO_RELEASE}\" \"${PLIST_DESTINATION}\"\nfi\n";
 		};
-		4C836924248BE0B900B124C9 /* ShellScript */ = {
+		4C836924248BE0B900B124C9 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1052,6 +1052,7 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1342,7 +1343,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = 78a33f7ad28955fdaccc7c99e7ef6dc3;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
@@ -1466,7 +1467,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Masayuki Tanaka (L8ZGX2885D)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = "";
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
