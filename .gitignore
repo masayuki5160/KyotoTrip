@@ -15,6 +15,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+KyotoTrip.app.dSYM.zip
 
 # CocoaPod
 Pods/

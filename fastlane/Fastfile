@@ -19,7 +19,13 @@ platform :ios do
 
   lane :release do
     increment_build_number(xcodeproj: "KyotoTrip.xcodeproj")
-    build_app(workspace: "KyotoTrip.xcworkspace", scheme: "Release_KyotoTrip")
+    build_app(
+      workspace: "KyotoTrip.xcworkspace",
+      clean: true,
+      scheme: "Release_KyotoTrip",
+      xcargs: "MGL_MAPBOX_ACCESSTOKEN=ENV['MGL_MAPBOX_ACCESSTOKEN'] GNAVI_ACCESSTOKEN=ENV['GNAVI_ACCESSTOKEN']"
+    )
+    set_build_number_repository
     upload_to_app_store(skip_metadata: true, skip_screenshots: true)
   end
 
@@ -31,11 +37,12 @@ platform :ios do
 
   lane :release_with_githubactions do
     import_certificates_and_provisioning_profile
-    increment_build_number(xcodeproj: "KyotoTrip.xcodeproj")
+    set_build_number_repository
     build_app(
       workspace: "KyotoTrip.xcworkspace",
       clean: true,
-      scheme: "Release_KyotoTrip"
+      scheme: "Release_KyotoTrip",
+      xcargs: "MGL_MAPBOX_ACCESSTOKEN=ENV['MGL_MAPBOX_ACCESSTOKEN'] GNAVI_ACCESSTOKEN=ENV['GNAVI_ACCESSTOKEN']"
     )
     upload_to_app_store(skip_metadata: true, skip_screenshots: true)
   end

@@ -37,6 +37,11 @@ jobs:
         echo "${{ secrets.KYOTOTRIP_PRODUCTION_MOBILEPROVISION }}" > kyoto_trip.mobileprovision.txt
         base64 --decode kyoto_trip.mobileprovision.txt > kyoto_trip.mobileprovision
 
+    - name: GoogleServiceInfo
+      run: |
+        echo "${{ secrets.GOOGLESERVICE_INFO }}" > GoogleService-Info.plist.txt
+        base64 --decode GoogleService-Info.plist.txt > ./GoogleService-Info-Release.plist
+
     - name: list files
       run: ls -l
 

@@ -899,6 +899,7 @@
 			buildConfigurationList = 4CF773E7241B97900032CC53 /* Build configuration list for PBXNativeTarget "KyotoTrip" */;
 			buildPhases = (
 				BB8A8B390A39850524614A4A /* [CP] Check Pods Manifest.lock */,
+				4C175133248FB23200891773 /* Setup GoogleService-Info.plist */,
 				4CF773CF241B978B0032CC53 /* Sources */,
 				4CF773D0241B978B0032CC53 /* Frameworks */,
 				4CF773D1241B978B0032CC53 /* Resources */,
@@ -1023,6 +1024,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4C175133248FB23200891773 /* Setup GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Setup GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GOOGLESERVICE_INFO_DEV=${PROJECT_DIR}/GoogleService-Info-Dev.plist\nGOOGLESERVICE_INFO_RELEASE=${PROJECT_DIR}/GoogleService-Info-Release.plist\nPLIST_DESTINATION=${PROJECT_DIR}/KyotoTrip/GoogleService-Info.plist\n\n# Copy over the prod GoogleService-Info.plist for Release builds\nif [ \"${CONFIGURATION}\" = \"Develop\" ]\nthen\necho \"Copy GoogleService-Info.plist for development\"\ncp -f \"${GOOGLESERVICE_INFO_DEV}\" \"${PLIST_DESTINATION}\"\nelif [ \"${CONFIGURATION}\" = \"Release\" ]\nthen\necho \"Copy GoogleService-Info.plist for production\"\ncp -f \"${GOOGLESERVICE_INFO_RELEASE}\" \"${PLIST_DESTINATION}\"\nfi\n";
 		};
 		4C836924248BE0B900B124C9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1323,13 +1342,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
+				GNAVI_ACCESSTOKEN = 78a33f7ad28955fdaccc7c99e7ef6dc3;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MGL_MAPBOX_ACCESSTOKEN = pk.eyJ1IjoibWFzYXl1a2k1MTYwIiwiYSI6ImNqc2FmdGI5NjEwanY0M3FwNDJsdjd0YzkifQ.vkh1xLO76g2bU25WhVAQ5g;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1445,13 +1466,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Masayuki Tanaka (L8ZGX2885D)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
+				GNAVI_ACCESSTOKEN = "";
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MGL_MAPBOX_ACCESSTOKEN = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = KyotoTrip_Production;

@@ -26,6 +26,11 @@ fastlane ios release
 fastlane ios tests
 ```
 
+### ios release_with_githubactions
+```
+fastlane ios release_with_githubactions
+```
+
 
 ----
 

@@ -22,8 +22,9 @@ enum RestaurantsSearchResponseError: Error {
 ///   ForeignRestSearchAPI
 ///   request parameter details https://api.gnavi.co.jp/api/manual/foreignrestsearch/
 struct RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
-    // TODO: Access token is too open. Use more secure ways.
-    private var accessToken = "78a33f7ad28955fdaccc7c99e7ef6dc3"
+    private var accessToken: String {
+        Bundle.main.object(forInfoDictionaryKey: "GnaviAccessToken") as? String ?? ""
+    }
     private var targetPrefecture = "PREF26"// Set Kyoto prefecture code
 
     func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
