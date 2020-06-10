@@ -38,7 +38,7 @@ platform :ios do
   lane :release_with_githubactions do
     import_certificates_and_provisioning_profile
     increment_build_number(xcodeproj: "KyotoTrip.xcodeproj")
-    puts("[CHECK] MGL_MAPBOX_ACCESSTOKEN=ENV['MGL_MAPBOX_ACCESSTOKEN'], GNAVI_ACCESSTOKEN=ENV['GNAVI_ACCESSTOKEN']")
+    puts("[CHECK] MGL_MAPBOX_ACCESSTOKEN=", ENV['MGL_MAPBOX_ACCESSTOKEN'],"GNAVI_ACCESSTOKEN=", ENV['GNAVI_ACCESSTOKEN'])
     build_app(
       workspace: "KyotoTrip.xcworkspace",
       clean: true,
