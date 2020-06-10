@@ -9,6 +9,7 @@ Source Code
 --------------------------
 
 ![Unit Tests](https://github.com/masayuki5160/KyotoTrip/workflows/Unit%20Tests/badge.svg)
+![Upload IPA to App Store Connect](https://github.com/masayuki5160/KyotoTrip/workflows/Upload%20IPA%20to%20App%20Store%20Connect/badge.svg)
 
 ![](Overview.drawio.svg)
 
