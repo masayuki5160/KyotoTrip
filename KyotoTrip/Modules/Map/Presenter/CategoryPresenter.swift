@@ -30,26 +30,20 @@ class CategoryPresenter: CategoryPresenterProtocol {
         let router: CategoryRouterProtocol
     }
 
-    var cellsDriver: Driver<[CategoryCellViewData]> {
-        cellsRelay.asDriver()
-    }
+    var cellsDriver: Driver<[CategoryCellViewData]>
 
     private let dependency: Dependency
     private let disposeBag = DisposeBag()
-    private var cellsRelay = BehaviorRelay<[CategoryCellViewData]>(value: [])
     private var categoryButtonsStatus = CategoryButtonsStatusViewData()
 
     init(dependency: Dependency) {
         self.dependency = dependency
 
-        dependency.interactor.visibleMarkers.map { markers -> [CategoryCellViewData] in
+        cellsDriver = dependency.interactor.visibleMarkers.map { markers -> [CategoryCellViewData] in
             markers.map { marker -> CategoryCellViewData in
                 CategoryCellViewData(entity: marker)
             }
-        }.drive(onNext: { cells in
-            self.cellsRelay.accept(cells)
         }
-        ).disposed(by: disposeBag)
     }
 
     func bindCategoryView(input: CategoryViewInput) {
