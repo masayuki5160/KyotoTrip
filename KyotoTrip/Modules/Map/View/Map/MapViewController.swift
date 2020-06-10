@@ -80,8 +80,7 @@ private extension MapViewController {
             self.updateBusstopLayer(status: buttonsStatus.busstop)
             self.updateCulturalPropertyLayer(status: buttonsStatus.culturalProperty)
             }
-        )
-            .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
 
         dependency.presenter.restaurantMarkersDriver.drive(onNext: { [weak self] status, annotations in
             guard let self = self else { return }
@@ -89,7 +88,7 @@ private extension MapViewController {
             }
         ).disposed(by: disposeBag)
 
-        dependency.presenter.userPositionButtonStatusDriver.emit(onNext: { [weak self] compassButtonStatus in
+        dependency.presenter.userPositionButtonStatusSignal.emit(onNext: { [weak self] compassButtonStatus in
             guard let self = self else { return }
             self.updateMapCenterPosition(compassButtonStatus)
             }

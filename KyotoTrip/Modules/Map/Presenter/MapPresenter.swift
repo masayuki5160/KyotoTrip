@@ -28,7 +28,7 @@ protocol MapPresenterProtocol: AnyObject {
 
     // MARK: - Output from Presenter for MapView
 
-    var userPositionButtonStatusDriver: Signal<UserPosition>! { get }
+    var userPositionButtonStatusSignal: Signal<UserPosition>! { get }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData> { get }
     var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])> { get }
@@ -46,7 +46,7 @@ class MapPresenter: MapPresenterProtocol {
         CulturalPropertyMarkerEntity.layerId
     ]
 
-    var userPositionButtonStatusDriver: Signal<UserPosition>!
+    var userPositionButtonStatusSignal: Signal<UserPosition>!
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> {
         dependency.interactor.selectedCategoryViewCellSignal
     }
@@ -90,7 +90,7 @@ class MapPresenter: MapPresenterProtocol {
     }
 
     func bindMapView(input: MapViewInput) {
-        userPositionButtonStatusDriver = input.compassButtonTapEvent.map { [weak self] _ -> UserPosition in
+        userPositionButtonStatusSignal = input.compassButtonTapEvent.map { [weak self] _ -> UserPosition in
             guard let self = self else { return UserPosition.kyotoCity }
 
             let next = self.userPosition.next()
