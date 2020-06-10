@@ -89,7 +89,7 @@ private extension MapViewController {
             }
         ).disposed(by: disposeBag)
 
-        dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] compassButtonStatus in
+        dependency.presenter.userPositionButtonStatusDriver.emit(onNext: { [weak self] compassButtonStatus in
             guard let self = self else { return }
             self.updateMapCenterPosition(compassButtonStatus)
             }
