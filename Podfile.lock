@@ -106,6 +106,7 @@ PODS:
     - GoogleUtilities/Network
   - GoogleUtilities/Environment (6.6.0):
     - PromisesObjC (~> 1.2)
+  - GoogleUtilities/ISASwizzler (6.6.0)
   - GoogleUtilities/Logger (6.6.0):
     - GoogleUtilities/Environment
   - GoogleUtilities/MethodSwizzler (6.6.0):
@@ -119,7 +120,11 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
+  - GTMSessionFetcher (1.4.0):
+    - GTMSessionFetcher/Full (= 1.4.0)
   - GTMSessionFetcher/Core (1.4.0)
+  - GTMSessionFetcher/Full (1.4.0):
+    - GTMSessionFetcher/Core (= 1.4.0)
   - Mapbox-iOS-SDK (5.7.0):
     - MapboxMobileEvents (= 0.10.2)
   - MapboxMobileEvents (0.10.2)
@@ -145,6 +150,16 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/MLNLTranslate
   - FloatingPanel (~> 1.7.4)
+  - GoogleUtilities/AppDelegateSwizzler
+  - GoogleUtilities/Environment
+  - GoogleUtilities/ISASwizzler
+  - GoogleUtilities/Logger
+  - GoogleUtilities/MethodSwizzler
+  - GoogleUtilities/Network
+  - "GoogleUtilities/NSData+zlib"
+  - GoogleUtilities/Reachability
+  - GoogleUtilities/UserDefaults
+  - GTMSessionFetcher
   - Mapbox-iOS-SDK (~> 5.7)
   - RxCocoa (~> 5.1)
   - RxSwift (~> 5.1)
@@ -228,6 +243,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftyXMLParser: 8271497e0a37b5c04b0b167c77b4896e36175a21
 
-PODFILE CHECKSUM: f36a7fb3312a12d646c64c1f2e7da07a49008720
+PODFILE CHECKSUM: 51af8dbdf64eb904d4969c9431c6578ec7fe9feb
 
 COCOAPODS: 1.9.3
