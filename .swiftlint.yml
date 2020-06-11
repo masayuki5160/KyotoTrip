@@ -118,7 +118,6 @@ included:
 # Lint対象から除外するパス
 excluded:
 - Pods
-#- KyotoTrip/Modules/AppDependencies.swift
 
 # 1行の文字列制限
 line_length:

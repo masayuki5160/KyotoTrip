@@ -11,7 +11,7 @@ import RxSwift
 import CoreLocation
 
 struct MapViewInput {
-    let compassButtonTapEvent: Signal<Void>
+    let compassButtonTapEvent: Driver<Void>
 }
 
 protocol MapPresenterProtocol: AnyObject {
@@ -28,7 +28,7 @@ protocol MapPresenterProtocol: AnyObject {
 
     // MARK: - Output from Presenter for MapView
 
-    var userPositionButtonStatusDriver: Driver<UserPosition> { get }
+    var mapCenterPositionDriver: Driver<MapCenterPosition>! { get }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData> { get }
     var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])> { get }
@@ -46,9 +46,7 @@ class MapPresenter: MapPresenterProtocol {
         CulturalPropertyMarkerEntity.layerId
     ]
 
-    var userPositionButtonStatusDriver: Driver<UserPosition> {
-        userPositionButtonStatus.asDriver()
-    }
+    var mapCenterPositionDriver: Driver<MapCenterPosition>!
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> {
         dependency.interactor.selectedCategoryViewCellSignal
     }
@@ -57,7 +55,7 @@ class MapPresenter: MapPresenterProtocol {
 
     private var dependency: Dependency
     private let disposeBag = DisposeBag()
-    private let userPositionButtonStatus = BehaviorRelay<UserPosition>(value: .kyotoCity)
+    private var mapCenterPosition: MapCenterPosition = .kyotoCity
 
     // MARK: - Public functions
 
@@ -92,13 +90,15 @@ class MapPresenter: MapPresenterProtocol {
     }
 
     func bindMapView(input: MapViewInput) {
-        input.compassButtonTapEvent.emit(onNext: { [weak self] in
-            guard let self = self else { return }
+        mapCenterPositionDriver = input.compassButtonTapEvent
+            .map({ [weak self] _ -> MapCenterPosition in
+                guard let self = self else { return MapCenterPosition.kyotoCity }
 
-            let nextPosition = self.userPositionButtonStatus.value.next()
-            self.userPositionButtonStatus.accept(nextPosition)
-            }
-        ).disposed(by: disposeBag)
+                let next = self.mapCenterPosition.next()
+                self.mapCenterPosition = next
+                return next
+            })
+            .asDriver()
     }
 
     func updateVisibleMarkers(_ markers: [MarkerEntityProtocol]) {

@@ -65,7 +65,7 @@ private extension MapViewController {
 
         dependency.presenter.bindMapView(
             input: MapViewInput(
-                compassButtonTapEvent: compassButton.rx.tap.asSignal()
+                compassButtonTapEvent: compassButton.rx.tap.asDriver()
             )
         )
 
@@ -80,8 +80,7 @@ private extension MapViewController {
             self.updateBusstopLayer(status: buttonsStatus.busstop)
             self.updateCulturalPropertyLayer(status: buttonsStatus.culturalProperty)
             }
-        )
-            .disposed(by: disposeBag)
+        ).disposed(by: disposeBag)
 
         dependency.presenter.restaurantMarkersDriver.drive(onNext: { [weak self] status, annotations in
             guard let self = self else { return }
@@ -89,7 +88,7 @@ private extension MapViewController {
             }
         ).disposed(by: disposeBag)
 
-        dependency.presenter.userPositionButtonStatusDriver.drive(onNext: { [weak self] compassButtonStatus in
+        dependency.presenter.mapCenterPositionDriver.drive(onNext: { [weak self] compassButtonStatus in
             guard let self = self else { return }
             self.updateMapCenterPosition(compassButtonStatus)
             }
@@ -145,7 +144,7 @@ private extension MapViewController {
         }
     }
 
-    private func updateMapCenterPosition(_ compassButtonStatus: UserPosition) {
+    private func updateMapCenterPosition(_ compassButtonStatus: MapCenterPosition) {
         let clLocationCoordinate2D = CLLocationCoordinate2DMake(
             MapView.kyotoStationLat,
             MapView.kyotoStationLong
@@ -155,7 +154,7 @@ private extension MapViewController {
         case .kyotoCity:
             mapView.setCenter(clLocationCoordinate2D, animated: true)
 
-        case .currentLocation:
+        case .userLocation:
             mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
         }
     }

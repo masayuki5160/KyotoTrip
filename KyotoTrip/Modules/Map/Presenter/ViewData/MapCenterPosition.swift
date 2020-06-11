@@ -1,19 +1,19 @@
 //
-//  UserPosition.swift
+//  MapCenterPosition.swift
 //  KyotoTrip
 //
 //  Created by TANAKA MASAYUKI on 2020/05/05.
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-enum UserPosition: Int {
+enum MapCenterPosition: Int {
     case kyotoCity = 0
-    case currentLocation
+    case userLocation
 
     func next() -> Self {
         switch self {
-        case .kyotoCity: return .currentLocation
-        case .currentLocation: return .kyotoCity
+        case .kyotoCity: return .userLocation
+        case .userLocation: return .kyotoCity
         }
     }
 }
