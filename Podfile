@@ -14,6 +14,7 @@ target 'KyotoTrip' do
   pod 'Firebase/MLNLTranslate'
   pod 'Fabric', '~> 1.10.2'
   pod 'Crashlytics', '~> 3.14.0'
+  pod 'Firebase/Analytics'
   pod 'FloatingPanel', '~> 1.7.4'
   target 'KyotoTripTests' do
     inherit! :search_paths
