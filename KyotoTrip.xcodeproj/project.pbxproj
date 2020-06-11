@@ -48,7 +48,7 @@
 		4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */; };
 		4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */; };
 		4CA84AEA2459247F00DAC5F3 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AE92459247F00DAC5F3 /* Category.storyboard */; };
-		4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */; };
+		4CA84AF724619A4C00DAC5F3 /* MapCenterPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF624619A4C00DAC5F3 /* MapCenterPosition.swift */; };
 		4CA84AF92462817C00DAC5F3 /* BusstopMarkerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AF82462817C00DAC5F3 /* BusstopMarkerEntity.swift */; };
 		4CA84AFB246281F600DAC5F3 /* MarkerEntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */; };
 		4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */; };
@@ -180,7 +180,7 @@
 		4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BusstopDetail.storyboard; sourceTree = "<group>"; };
 		4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		4CA84AE92459247F00DAC5F3 /* Category.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
-		4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosition.swift; sourceTree = "<group>"; };
+		4CA84AF624619A4C00DAC5F3 /* MapCenterPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCenterPosition.swift; sourceTree = "<group>"; };
 		4CA84AF82462817C00DAC5F3 /* BusstopMarkerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopMarkerEntity.swift; sourceTree = "<group>"; };
 		4CA84AFA246281F600DAC5F3 /* MarkerEntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerEntityProtocol.swift; sourceTree = "<group>"; };
 		4CA84AFC246284EB00DAC5F3 /* MarkerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerCategory.swift; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 			children = (
 				4CE16C402480D9A6006EBD39 /* CategoryCellViewData.swift */,
 				4CE4A0FE2483E72600E30B3A /* CategoryButtonsStatusViewData.swift */,
-				4CA84AF624619A4C00DAC5F3 /* UserPosition.swift */,
+				4CA84AF624619A4C00DAC5F3 /* MapCenterPosition.swift */,
 				4CB3CEB324852D1C0013DC3D /* MarkerViewDataProtocol.swift */,
 				4CB3CEB524852D920013DC3D /* BusstopMarkerViewData.swift */,
 				4CB3CEB724852E320013DC3D /* CulturalPropertyMarkerViewData.swift */,
@@ -1170,7 +1170,7 @@
 				4CF4B03024789A4700991B2C /* RestaurantsSearchSettingsRouter.swift in Sources */,
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
 				4C4166532439D2DA005EF1C2 /* TranslatorInteractor.swift in Sources */,
-				4CA84AF724619A4C00DAC5F3 /* UserPosition.swift in Sources */,
+				4CA84AF724619A4C00DAC5F3 /* MapCenterPosition.swift in Sources */,
 				4CB3CEB424852D1C0013DC3D /* MarkerViewDataProtocol.swift in Sources */,
 				4CF4AFE8246EDAAC00991B2C /* SettingsLicenseViewController.swift in Sources */,
 				4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */,
