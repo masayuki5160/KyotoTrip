@@ -14,7 +14,6 @@ protocol MapInteractorProtocol: AnyObject {
     var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> { get }
     var visibleMarkers: Driver<[MarkerEntityProtocol]> { get }
     var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> { get }
-    var restaurantStatusDriver: Driver<CategoryButtonStatus> { get }
     var busstopStatusDriver: Driver<CategoryButtonStatus> { get }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
 
@@ -51,9 +50,6 @@ class MapInteractor: MapInteractorProtocol {
     var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> {
         culturalPropertyStatusRelay.asDriver()
     }
-    var restaurantStatusDriver: Driver<CategoryButtonStatus> {
-        restaurantStatusRelay.asDriver()
-    }
     var busstopStatusDriver: Driver<CategoryButtonStatus> {
         busstopStatusRelay.asDriver()
     }
@@ -62,7 +58,6 @@ class MapInteractor: MapInteractorProtocol {
     private let markersFromStyleLayersRelay = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
     private let selectedCategoryViewCellRelay = PublishRelay<MarkerViewDataProtocol>()
     private let culturalPropertyStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
-    private let restaurantStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private let busstopStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private var dependency: Dependency
     private var mapViewCenterCoordinate: CLLocationCoordinate2D
@@ -93,8 +88,6 @@ class MapInteractor: MapInteractorProtocol {
     }
 
     func didSelectRestaurantButton(nextStatus: CategoryButtonStatus) {
-        restaurantStatusRelay.accept(nextStatus)
-
         switch nextStatus {
         case .hidden:
             restaurantMarkersRelay.accept([])
