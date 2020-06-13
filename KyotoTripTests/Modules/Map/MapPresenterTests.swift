@@ -45,7 +45,7 @@ class MapPresenterTests: XCTestCase {
         //view.loadViewIfNeeded()
     }
     
-    func test_check_categoryButtonStatus() {
+    func test_check_categoryButtonStatus_whenRestaurantsIsVisible() {
         /// Input to Interactor
         interactor.didSelectBusstopButton(nextStatus: .visible)
         interactor.didSelectRestaurantButton(nextStatus: .visible)
@@ -63,6 +63,32 @@ class MapPresenterTests: XCTestCase {
         }).disposed(by: disposeBag)
 
         waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_check_categoryButtonStatus_whenRestaurantsIsHidden() {
+        /// Input to Interactor
+        interactor.didSelectBusstopButton(nextStatus: .visible)
+        interactor.didSelectRestaurantButton(nextStatus: .hidden)
+        interactor.didSelectCulturalPropertyButton(nextStatus: .hidden)
+        
+        let disposeBag = DisposeBag()
+        
+        let functionAnswered = expectation(description: "asynchronous function")
+        presenter.categoryButtonsStatusDriver.drive(onNext: { viewData in
+            XCTAssertEqual(CategoryButtonStatus.visible, viewData.busstop)
+            XCTAssertEqual(CategoryButtonStatus.hidden, viewData.restaurant)
+            XCTAssertEqual(CategoryButtonStatus.hidden, viewData.culturalProperty)
+
+            functionAnswered.fulfill()
+        }).disposed(by: disposeBag)
+
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_check_mapCenterPositionIsUserPosition_whenTapOneth() {
+    }
+    
+    func test_check_mapCenterPositionIsUserPosition_whenTapTwise() {
     }
     
     override func tearDown() {
