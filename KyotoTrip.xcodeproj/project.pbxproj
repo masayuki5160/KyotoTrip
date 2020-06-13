@@ -293,6 +293,7 @@
 				4CB3CEB524852D920013DC3D /* BusstopMarkerViewData.swift */,
 				4CB3CEB724852E320013DC3D /* CulturalPropertyMarkerViewData.swift */,
 				4CB3CEB924852E4A0013DC3D /* RestaurantMarkerViewData.swift */,
+				4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */,
 			);
 			path = ViewData;
 			sourceTree = "<group>";
@@ -708,7 +709,6 @@
 				4C0CAECA242B992800EDCA82 /* MapView.swift */,
 				4CC1ADD6241BB13700BF84B9 /* Map.storyboard */,
 				4CF773EC241B9D910032CC53 /* MapViewController.swift */,
-				4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */,
 				4C3C874D247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift */,
 			);
 			path = Map;
