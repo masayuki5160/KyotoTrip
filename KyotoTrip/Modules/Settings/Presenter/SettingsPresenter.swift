@@ -93,9 +93,15 @@ public class SettingsPresenter: SettingsPresenterProtocol {
 
         case 1:
             if indexPath.row == 0 {
-                // TODO: 言語設定ページ
+                dependency.router.transitionToLanguageSettingsView(
+                    // swiftlint:disable force_cast
+                    inject: dependency.interactor as! SettingsInteractor
+                )
             } else {
-                dependency.router.transitionToRestaurantsSearchSettingsView()
+                dependency.router.transitionToRestaurantsSearchSettingsView(
+                    // swiftlint:disable force_cast
+                    inject: dependency.interactor as! SettingsInteractor
+                )
             }
 
         default:

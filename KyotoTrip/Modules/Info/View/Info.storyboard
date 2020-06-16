@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6v9-Tx-efB">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,13 +12,16 @@
             <objects>
                 <viewController id="2AX-ip-tH2" customClass="InfoViewController" customModule="KyotoTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M9u-Tz-cO5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ru3-Ap-vkM">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hll-bP-evB">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -25,6 +29,8 @@
                             <constraint firstItem="ru3-Ap-vkM" firstAttribute="leading" secondItem="dRG-RW-bgy" secondAttribute="leading" id="Ffo-cn-yz1"/>
                             <constraint firstItem="ru3-Ap-vkM" firstAttribute="top" secondItem="dRG-RW-bgy" secondAttribute="top" id="Jp5-Hz-KMd"/>
                             <constraint firstItem="dRG-RW-bgy" firstAttribute="bottom" secondItem="ru3-Ap-vkM" secondAttribute="bottom" id="V7c-Ab-abR"/>
+                            <constraint firstItem="hll-bP-evB" firstAttribute="centerX" secondItem="M9u-Tz-cO5" secondAttribute="centerX" id="gJn-GK-Pi8"/>
+                            <constraint firstItem="hll-bP-evB" firstAttribute="centerY" secondItem="M9u-Tz-cO5" secondAttribute="centerY" id="oLj-vU-fV8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dRG-RW-bgy"/>
                     </view>
@@ -32,6 +38,7 @@
                     <navigationItem key="navigationItem" title="Information" id="7kC-rX-hus"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="indicator" destination="hll-bP-evB" id="F01-bh-wbQ"/>
                         <outlet property="tableView" destination="ru3-Ap-vkM" id="arz-3C-Cku"/>
                     </connections>
                 </viewController>
