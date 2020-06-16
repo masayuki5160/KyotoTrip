@@ -24,18 +24,18 @@ public class SettingsPresenter: SettingsPresenterProtocol {
     }
 
     public let settingsTableSectionTitle = [
-        "情報",
-        "アプリ設定"
+        "SettingPageSectionNameForInfoSection".localized,
+        "SettingPageSectionNameForAppSettingsSection".localized
     ]
     public let settingsTableData: [[String]]
     private let dependency: Dependency
     private let basicItems: [String] = [
-        "バージョン",
-        "ライセンス"
+        "SettingsPageInfoSectionVersion".localized,
+        "SettingsPageInfoSectionLicense".localized
     ]
     private let settingItems: [String] = [
-        "言語設定",
-        "飲食店検索設定"
+        "SettingsPageAppSettingsSectionLanguage".localized,
+        "SettingsPageAppSettingsRestaurantSearch".localized
     ]
 
     // MARK: Public functions

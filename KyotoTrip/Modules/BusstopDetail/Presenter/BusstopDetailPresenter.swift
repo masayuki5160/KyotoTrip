@@ -23,8 +23,8 @@ class BusstopDetailPresenter: BusstopDetailPresenterProtocol {
     }
 
     let sectionTitles = [
-        "バス停名称",
-        "路線(系統)",
+        "BusstopDetailPageSection1".localized,
+        "BusstopDetailPageSection2".localized,
         "" // バスの乗り方
     ]
 
@@ -53,7 +53,7 @@ class BusstopDetailPresenter: BusstopDetailPresenterProtocol {
 
         case 2:// バスの乗り方
             cell = UITableViewCell(style: .default, reuseIdentifier: "BusstopSettingCell")
-            cell.textLabel?.text = "バスの乗り方"
+            cell.textLabel?.text = "BusstopDetailPageLinkToWeb".localized
             cell.accessoryType = .disclosureIndicator
 
         default:

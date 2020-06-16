@@ -23,13 +23,13 @@ class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
     }
 
     var sectionTitles = [
-        "店舗名",
-        "住所",
-        "営業時間",
-        "休業日",
-        "TEL",
-        "ホームページ",
-        "その他"
+        "RestaurantDetailPageName".localized,
+        "RestaurantDetailPageAddress".localized,
+        "RestaurantDetailPageBuisinessHour".localized,
+        "RestaurantDetailPageHoliday".localized,
+        "RestaurantDetailPageTel".localized,
+        "RestaurantDetailPageWebsite".localized,
+        "RestaurantDetailPageOtherInfo".localized
     ]
 
     private var dependency: Dependency

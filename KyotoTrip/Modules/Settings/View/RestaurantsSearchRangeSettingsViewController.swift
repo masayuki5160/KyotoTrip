@@ -23,7 +23,7 @@ class RestaurantsSearchRangeSettingsViewController: UIViewController, Transition
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "飲食店検索範囲設定"
+        navigationItem.title = "RestaurantSearchRangeSettingsPageNavigationTitle".localized
 
         dependency.presenter.bindView(
             input: RestauransSearchRangeSettingView(

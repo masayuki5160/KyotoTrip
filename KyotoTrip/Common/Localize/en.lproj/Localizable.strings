@@ -23,3 +23,41 @@
 "NavigationBarTitleInfo" = "Information";
 "SettingsPageTitle" = "Settings";
 "BusstopDetailTitle" = "Busstop Infomation";
+// Settings Page
+"SettingPageSectionNameForInfoSection" = "Appli Info";
+"SettingPageSectionNameForAppSettingsSection" = "Appli Settings";
+"SettingsPageInfoSectionVersion" = "Version";
+"SettingsPageInfoSectionLicense" = "License";
+"SettingsPageAppSettingsSectionLanguage" = "Language";
+"SettingsPageAppSettingsRestaurantSearch" = "Restaurant Search Settings";
+// Restaurant Search Settings Page
+"RestaurantSearchSettingsPageSearchRange" = "Search Range";
+"RestaurantSearchSettingsPageEnglishSpeaker" = "English Speaker";
+"RestaurantSearchSettingsPageKoreanSpeaker" = "Korean Speaker";
+"RestaurantSearchSettingsPageChineseSpeaker" = "Chinese Speaker";
+"RestaurantSearchSettingsPageVegetarian" = "Vegetarian Menu";
+"RestaurantSearchSettingsPageCreditCard" = "Credit Card";
+"RestaurantSearchSettingsPagePrivateRoom" = "PrivateRoom";
+"RestaurantSearchSettingsPageWifi" = "Wifi";
+"RestaurantSearchSettingsPageNoSmoking" = "No Smoking";
+"RestaurantSearchSettingsPageNavigationTitle" = "Search Settings";
+// Restaurant Search Range Settings Page
+"RestaurantSearchRangeSettingsPageNavigationTitle" = "Search Range Settings";
+// Busstop Detail Page
+"BusstopDetailPageSection1" = "Busstop Name";
+"BusstopDetailPageSection2" = "Route Name";
+"BusstopDetailPageLinkToWeb" = "How To Take a bus";
+// Cultural Property Page
+"CulturalPropertyPageName" = "Cultural Property Name";
+"BusstopDetailPageAddress" = "Address";
+"BusstopDetailPageCategoryLarge" = "Large Category";
+"BusstopDetailPageCategorySmall" = "Small Category";
+"BusstopDetailPageRegisterdDate" = "Registered Date";
+// Restaurant Detail Page
+"RestaurantDetailPageName" = "Name";
+"RestaurantDetailPageAddress" = "Address";
+"RestaurantDetailPageBuisinessHour" = "Buisiness Hour";
+"RestaurantDetailPageHoliday" = "Holiday";
+"RestaurantDetailPageTel" = "TEL";
+"RestaurantDetailPageWebsite" = "Website";
+"RestaurantDetailPageOtherInfo" = "Other";
