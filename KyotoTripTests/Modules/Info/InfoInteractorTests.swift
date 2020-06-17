@@ -52,8 +52,12 @@ class InfoInteractorTests: XCTestCase {
         /// Build Interactor with stub for test
         let entityList = parsedKyotoCityInfo()
         let kyotoCityInfoGatewayStub = KyotoCityInfoGatewayStub(result: .success(entityList))
-        let interactor = InfoInteractor(dependency: .init(kyotoCityInfoGateway: kyotoCityInfoGatewayStub))
-        
+        let languageSettingGateway = LanguageSettingGatewayStub(result: .success(.japanese))
+        let interactor = InfoInteractor(dependency: .init(
+            kyotoCityInfoGateway: kyotoCityInfoGatewayStub,
+            languageSettingGateway: languageSettingGateway
+            )
+        )
         let functionAnswered = expectation(description: "asynchronous function")
         interactor.fetch { response in
             switch response {
@@ -65,10 +69,10 @@ class InfoInteractorTests: XCTestCase {
                 XCTAssertEqual("", kyotoCityInfo[0].description)
                 XCTAssertEqual("Fri, 05 Jun 2020 10:00:00 +0900", kyotoCityInfo[0].publishDate)
             }
-            
+
             functionAnswered.fulfill()
         }
-        
+
         waitForExpectations(timeout: 1, handler: nil)
     }
     

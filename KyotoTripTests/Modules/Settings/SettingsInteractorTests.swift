@@ -19,7 +19,12 @@ class SettingsInteractorTests: XCTestCase {
         settings.englishSpeakingStaff = .on
         settings.range = .range1000
         let gatewayStub = RestaurantsRequestParamGatewayStub(result: .success(settings))
-        let settingsInteractor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gatewayStub))
+        let languageSettingGateway = LanguageSettingGatewayStub(result: .success(.japanese))
+        let settingsInteractor = SettingsInteractor(dependency: .init(
+            restaurantsRequestParamGateway: gatewayStub,
+            languageSettingGateway: languageSettingGateway
+            )
+        )
         
         let functionAnswered = expectation(description: "asynchronous function")
         settingsInteractor.fetchRestaurantsRequestParam { requestEntity in

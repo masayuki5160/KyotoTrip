@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C097B4A249A40E9007B7E8C /* LanguageSettingGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C097B49249A40E8007B7E8C /* LanguageSettingGatewayStub.swift */; };
 		4C0CAEC72429735300EDCA82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */; };
 		4C0CAECB242B992800EDCA82 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0CAECA242B992800EDCA82 /* MapView.swift */; };
 		4C13E72124849C7200337D26 /* RestaurantsSearchGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C13E72024849C7200337D26 /* RestaurantsSearchGatewayStub.swift */; };
@@ -145,6 +146,7 @@
 		20FFEE00A95D9C9A5DE9EED9 /* Pods-KyotoTripTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTripTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2EB67A8DF6CA67FB2B023127 /* Pods_KyotoTripTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTripTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C097B49249A40E8007B7E8C /* LanguageSettingGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingGatewayStub.swift; sourceTree = "<group>"; };
 		4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C0CAECA242B992800EDCA82 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		4C13E72024849C7200337D26 /* RestaurantsSearchGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchGatewayStub.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				4CD839352489F5A3005B10A1 /* KyotoCityInfoGatewayStub.swift */,
+				4C097B49249A40E8007B7E8C /* LanguageSettingGatewayStub.swift */,
 				4C7BC1F52489F7E900A5C394 /* InfoInteractorTests.swift */,
 				4C7BC1F7248A1CBC00A5C394 /* InfoPresenterTests.swift */,
 				4C7BC1F9248A232A00A5C394 /* InfoCellViewDataTests.swift */,
@@ -1195,6 +1198,7 @@
 				4CC7764A247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift in Sources */,
 				4C2EA23624868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift in Sources */,
 				4CF8F864248B263F00493E26 /* MGLFeatureMediatorTests.swift in Sources */,
+				4C097B4A249A40E9007B7E8C /* LanguageSettingGatewayStub.swift in Sources */,
 				4C7BC1F62489F7E900A5C394 /* InfoInteractorTests.swift in Sources */,
 				4C7BC1FA248A232A00A5C394 /* InfoCellViewDataTests.swift in Sources */,
 				4C13E72324849D0E00337D26 /* RestaurantsRequestParamGatewayStub.swift in Sources */,

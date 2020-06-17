@@ -11,24 +11,25 @@ import XCTest
 
 class SettingsPresenterTests: XCTestCase {
     
-    var view: SettingsViewController!
-    var gateway: RestaurantsRequestParamGatewayStub!
-    var interactor: SettingsInteractor!
-    var router: SettingsRouter!
     var presenter: SettingsPresenter!
     
     override func setUp() {
-        view = { () -> SettingsViewController in
+        let view = { () -> SettingsViewController in
             let storyboard = UIStoryboard(name: "Settings", bundle: nil)
             let naviViewController = storyboard.instantiateInitialViewController() as! UINavigationController
             return naviViewController.viewControllers[0] as! SettingsViewController
         }()
-        gateway = { () -> RestaurantsRequestParamGatewayStub in
+        let restaurantRequestParamGateway = { () -> RestaurantsRequestParamGatewayStub in
             let settings = RestaurantsRequestParamEntity()
             return RestaurantsRequestParamGatewayStub(result: .success(settings))
         }()
-        interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
-        router = SettingsRouter(view: view)
+        let languageGateway = LanguageSettingGatewayStub(result: .success(.japanese))
+        let interactor = SettingsInteractor(dependency: .init(
+            restaurantsRequestParamGateway: restaurantRequestParamGateway,
+            languageSettingGateway: languageGateway
+            )
+        )
+        let router = SettingsRouter(view: view)
         presenter = SettingsPresenter(dependency: .init(
             interactor: interactor,
             router: router
