@@ -10,6 +10,7 @@ import Alamofire
 
 protocol RestaurantsSearchGatewayProtocol {
     func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void)
+    func fetchForEng(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultForEnglishEntity, RestaurantsSearchResponseError>) -> Void)
 }
 
 enum RestaurantsSearchResponseError: Error {
@@ -62,9 +63,45 @@ struct RestaurantsSearchGateway: RestaurantsSearchGatewayProtocol {
         }
     }
 
+    func fetchForEng(param: RestaurantsRequestParamEntity, complition: @escaping (Swift.Result<RestaurantsSearchResultForEnglishEntity, RestaurantsSearchResponseError>) -> Void) {
+        let url = buildUrl(param)
+        Alamofire.request(url).responseJSON { response in
+            if let responseError = response.error {
+                complition(.failure(RestaurantsSearchResponseError.unkownError(detail: responseError.localizedDescription)))
+                return
+            }
+
+            switch response.response?.statusCode {
+            case 404:// 検索結果の件数が0
+                complition(.failure(RestaurantsSearchResponseError.entryNotFound))
+
+            case 200:// 検索結果の件数が1以上
+                guard let responseData = response.data else {
+                    complition(.failure(RestaurantsSearchResponseError.unkownError(detail: "No response data in response result")))
+                    return
+                }
+
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let resultEntity = try decoder.decode(RestaurantsSearchResultForEnglishEntity.self, from: responseData)
+                    complition(.success(resultEntity))
+                } catch {
+                    let errorDetail = error.localizedDescription
+                    complition(.failure(RestaurantsSearchResponseError.jsonDecodeError(detail: errorDetail)))
+                }
+
+            default:
+                let errorDetail = "Unknown Error"
+                complition(.failure(RestaurantsSearchResponseError.unkownError(detail: errorDetail)))
+            }
+        }
+    }
+
     private func buildUrl(_ param: RestaurantsRequestParamEntity) -> String {
         let urlStr = "https://api.gnavi.co.jp/ForeignRestSearchAPI/v3/?"
             + "keyid=\(accessToken)&pref=\(targetPrefecture)"
+            + "&lang=\(param.langSettingRequestParam.rawValue)"
             + "&latitude=\(param.latitude)&longitude=\(param.longitude)"
             + "&range=\(param.range.rawValue)&hit_per_page=\(param.hitPerPage)"
             + "&english_speaking_staff=\(param.englishSpeakingStaff.rawValue)"

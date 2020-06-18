@@ -6,7 +6,7 @@
 //  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 //
 
-enum LanguageSettings: String, CaseIterable {
+enum LanguageSettings: String, CaseIterable, Codable {
     case japanese
     case english
 

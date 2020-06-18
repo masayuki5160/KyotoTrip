@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C074B03249AFABF00B4F1C5 /* RestaurantsSearchResultForEnglishEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C074B02249AFABF00B4F1C5 /* RestaurantsSearchResultForEnglishEntity.swift */; };
+		4C074B05249AFE1100B4F1C5 /* RestaurantForEnglishEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C074B04249AFE1100B4F1C5 /* RestaurantForEnglishEntity.swift */; };
 		4C097B4A249A40E9007B7E8C /* LanguageSettingGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C097B49249A40E8007B7E8C /* LanguageSettingGatewayStub.swift */; };
 		4C0CAEC72429735300EDCA82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */; };
 		4C0CAECB242B992800EDCA82 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0CAECA242B992800EDCA82 /* MapView.swift */; };
@@ -146,6 +148,8 @@
 		20FFEE00A95D9C9A5DE9EED9 /* Pods-KyotoTripTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotoTripTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KyotoTripTests/Pods-KyotoTripTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2EB67A8DF6CA67FB2B023127 /* Pods_KyotoTripTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTripTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		404C686A5820008C031B2607 /* Pods_KyotoTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KyotoTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C074B02249AFABF00B4F1C5 /* RestaurantsSearchResultForEnglishEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchResultForEnglishEntity.swift; sourceTree = "<group>"; };
+		4C074B04249AFE1100B4F1C5 /* RestaurantForEnglishEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantForEnglishEntity.swift; sourceTree = "<group>"; };
 		4C097B49249A40E8007B7E8C /* LanguageSettingGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingGatewayStub.swift; sourceTree = "<group>"; };
 		4C0CAEC62429735200EDCA82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C0CAECA242B992800EDCA82 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -649,9 +653,11 @@
 				4CA84B002462FDC900DAC5F3 /* BusRouteMarkerEntity.swift */,
 				4CA84B15246408DE00DAC5F3 /* RestaurantMarkerEntity.swift */,
 				4CA84B0F2463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift */,
+				4C074B02249AFABF00B4F1C5 /* RestaurantsSearchResultForEnglishEntity.swift */,
 				4CA84B112464080A00DAC5F3 /* RestaurantEntity.swift */,
 				4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */,
 				4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */,
+				4C074B04249AFE1100B4F1C5 /* RestaurantForEnglishEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1251,6 +1257,7 @@
 				4C416667244495C2005EF1C2 /* DependencyInjectable.swift in Sources */,
 				4CF773ED241B9D910032CC53 /* MapViewController.swift in Sources */,
 				4CA84B0B246398A400DAC5F3 /* CustomFloatingPanelLayout.swift in Sources */,
+				4C074B03249AFABF00B4F1C5 /* RestaurantsSearchResultForEnglishEntity.swift in Sources */,
 				4CF4AFF424716F8400991B2C /* SettingsInteractor.swift in Sources */,
 				4CE16C412480D9A6006EBD39 /* CategoryCellViewData.swift in Sources */,
 				4CF668D024336C14006AB40C /* InfoPresenter.swift in Sources */,
@@ -1260,6 +1267,7 @@
 				4CF4AFF02470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift in Sources */,
 				4C52ACCF249847FE00200B52 /* LanguageSettingGateway.swift in Sources */,
 				4CC77644247F3C2800EF5064 /* CulturalPropertyDetailRouter.swift in Sources */,
+				4C074B05249AFE1100B4F1C5 /* RestaurantForEnglishEntity.swift in Sources */,
 				4C416650243964A4005EF1C2 /* KyotoCityInfoGateway.swift in Sources */,
 				4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */,
 				4CF4B01724776C0800991B2C /* RestaurantsSearchRangeCellViewData.swift in Sources */,

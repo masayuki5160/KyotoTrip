@@ -95,10 +95,12 @@ extension AppDefaultDependencies: AppDependencies {
 
         let restaurantsSearchGateway = RestaurantsSearchGateway()
         let requestParamGateway = RestaurantsRequestParamGateway()
+        let languageSettingGateway = LanguageSettingGateway()
         let interactor = MapInteractor(
             dependency: .init(
                 searchGateway: restaurantsSearchGateway,
-                requestParamGateway: requestParamGateway
+                requestParamGateway: requestParamGateway,
+                languageSettingGateway: languageSettingGateway
             )
         )
         let router = MapRouter(view: view)
