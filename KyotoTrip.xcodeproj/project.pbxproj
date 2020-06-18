@@ -38,6 +38,7 @@
 		4C416655243FFA38005EF1C2 /* MapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416654243FFA38005EF1C2 /* MapInteractor.swift */; };
 		4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41666224434E07005EF1C2 /* AppDependencies.swift */; };
 		4C416667244495C2005EF1C2 /* DependencyInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C416666244495C2005EF1C2 /* DependencyInjectable.swift */; };
+		4C48910A249B962500F77CAA /* UserInfoGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C489109249B962500F77CAA /* UserInfoGateway.swift */; };
 		4C4CA0C224258EC400C7AEAE /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CA0C124258EC400C7AEAE /* MapPresenter.swift */; };
 		4C52ACCB2497BCCD00200B52 /* LanguageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C52ACCA2497BCCD00200B52 /* LanguageSettings.swift */; };
 		4C52ACCD2497C10F00200B52 /* LanguageSettingsCellViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C52ACCC2497C10F00200B52 /* LanguageSettingsCellViewData.swift */; };
@@ -179,6 +180,7 @@
 		4C416654243FFA38005EF1C2 /* MapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractor.swift; sourceTree = "<group>"; };
 		4C41666224434E07005EF1C2 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		4C416666244495C2005EF1C2 /* DependencyInjectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjectable.swift; sourceTree = "<group>"; };
+		4C489109249B962500F77CAA /* UserInfoGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoGateway.swift; sourceTree = "<group>"; };
 		4C4CA0C124258EC400C7AEAE /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		4C52ACCA2497BCCD00200B52 /* LanguageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettings.swift; sourceTree = "<group>"; };
 		4C52ACCC2497C10F00200B52 /* LanguageSettingsCellViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsCellViewData.swift; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 				4CF4B0132475735B00991B2C /* RestaurantsRequestParamGateway.swift */,
 				4CFF7F2F2486188E005DCF19 /* RestaurantsRequestSearchRange.swift */,
 				4C52ACCE249847FE00200B52 /* LanguageSettingGateway.swift */,
+				4C489109249B962500F77CAA /* UserInfoGateway.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1216,6 +1219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CF4B03024789A4700991B2C /* RestaurantsSearchSettingsRouter.swift in Sources */,
+				4C48910A249B962500F77CAA /* UserInfoGateway.swift in Sources */,
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
 				4C4166532439D2DA005EF1C2 /* TranslatorInteractor.swift in Sources */,
 				4CA84AF724619A4C00DAC5F3 /* MapCenterPosition.swift in Sources */,

@@ -24,6 +24,7 @@ protocol MapInteractorProtocol: AnyObject {
     func didSelectBusstopButton(nextStatus: CategoryButtonStatus)
     func didSelectCulturalPropertyButton(nextStatus: CategoryButtonStatus)
     func didSelectRestaurantButton(nextStatus: CategoryButtonStatus)
+    func initUser()
 }
 
 class MapInteractor: MapInteractorProtocol {
@@ -31,6 +32,7 @@ class MapInteractor: MapInteractorProtocol {
         let searchGateway: RestaurantsSearchGatewayProtocol
         let requestParamGateway: RestaurantsRequestParamGatewayProtocol
         let languageSettingGateway: LanguageSettingGatewayProtocol
+        let userInfoGateway: UserInfoGatewayProtocol
     }
 
     var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> {
@@ -108,6 +110,23 @@ class MapInteractor: MapInteractorProtocol {
                 }
 
                 self.restaurantMarkersRelay.accept(markers)
+            }
+        }
+    }
+
+    func initUser() {
+        dependency.userInfoGateway.fetchLaunchedBefore { [weak self] response in
+            switch response {
+            case .success(let launchedBefore):
+                if launchedBefore {
+                    // Not first launch
+                } else {
+                    // First launch
+                    self?.dependency.requestParamGateway.initSettings()
+                    self?.dependency.userInfoGateway.save(launchedBefore: true)
+                }
+            default:
+                break
             }
         }
     }

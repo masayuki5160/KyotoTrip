@@ -62,6 +62,8 @@ class MapPresenter: MapPresenterProtocol {
     init(dependency: Dependency) {
         self.dependency = dependency
 
+        dependency.interactor.initUser()
+
         categoryButtonsStatusDriver = Driver.combineLatest(
             dependency.interactor.busstopStatusDriver,
             dependency.interactor.culturalPropertyStatusDriver,

@@ -34,6 +34,7 @@ extension AppDefaultDependencies: AppDependencies {
     func assembleMainTabModule() -> UIViewController {
         TabBarController()
     }
+
     func assembleSettingsModule() -> UINavigationController {
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Settings", bundle: nil)
@@ -96,11 +97,13 @@ extension AppDefaultDependencies: AppDependencies {
         let restaurantsSearchGateway = RestaurantsSearchGateway()
         let requestParamGateway = RestaurantsRequestParamGateway()
         let languageSettingGateway = LanguageSettingGateway()
+        let userInfoGateway = UserInfoGateway()
         let interactor = MapInteractor(
             dependency: .init(
                 searchGateway: restaurantsSearchGateway,
                 requestParamGateway: requestParamGateway,
-                languageSettingGateway: languageSettingGateway
+                languageSettingGateway: languageSettingGateway,
+                userInfoGateway: userInfoGateway
             )
         )
         let router = MapRouter(view: view)

@@ -10,6 +10,7 @@ import Foundation
 protocol RestaurantsRequestParamGatewayProtocol {
     func fetch(complition: (Result<RestaurantsRequestParamEntity, RestaurantsRequestParamGatewayError>) -> Void)
     func save(entity: RestaurantsRequestParamEntity)
+    func initSettings()
 }
 
 enum RestaurantsRequestParamGatewayError: Error {
@@ -41,5 +42,10 @@ struct RestaurantsRequestParamGateway: RestaurantsRequestParamGatewayProtocol {
         } catch {
             // TODO: Fix Later
         }
+    }
+
+    func initSettings() {
+        let defaultSettings = RestaurantsRequestParamEntity()
+        save(entity: defaultSettings)
     }
 }

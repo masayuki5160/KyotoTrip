@@ -22,4 +22,7 @@ class RestaurantsRequestParamGatewayStub: RestaurantsRequestParamGatewayProtocol
     
     func save(entity: RestaurantsRequestParamEntity) {
     }
+    
+    func initSettings() {
+    }
 }

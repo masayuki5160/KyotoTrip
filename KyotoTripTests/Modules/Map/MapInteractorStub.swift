@@ -73,4 +73,7 @@ class MapInteractorStub: MapInteractorProtocol {
             restaurantMarkersRelay.accept([])
         }
     }
+    
+    func initUser() {
+    }
 }
