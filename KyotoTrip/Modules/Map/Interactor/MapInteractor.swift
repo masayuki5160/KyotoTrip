@@ -119,10 +119,24 @@ class MapInteractor: MapInteractorProtocol {
             switch response {
             case .success(let launchedBefore):
                 if launchedBefore {
-                    // Not first launch
+                    /* Not first launch */
                 } else {
-                    // First launch
-                    self?.dependency.requestParamGateway.initSettings()
+                    /* First launch */
+                    
+                    // Get language settings from device and set it to restaurant search settings as default language settings
+                    let languages = NSLocale.preferredLanguages
+                    let firstLanguage = languages[0].prefix(2)
+
+                    var restaurantSearchSettings = RestaurantsRequestParamEntity()
+                    if firstLanguage == "en" {
+                        restaurantSearchSettings.language = .english
+                        self?.dependency.languageSettingGateway.save(setting: .english)
+                    } else {
+                        restaurantSearchSettings.language = .japanese
+                        self?.dependency.languageSettingGateway.save(setting: .japanese)
+                    }
+
+                    self?.dependency.requestParamGateway.save(entity: restaurantSearchSettings)
                     self?.dependency.userInfoGateway.save(launchedBefore: true)
                 }
             default:
