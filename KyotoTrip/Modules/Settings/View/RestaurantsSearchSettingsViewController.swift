@@ -42,7 +42,7 @@ class RestaurantsSearchSettingsViewController: UIViewController, TransitionerPro
             )
         )
 
-        navigationItem.title = "飲食店検索設定"
+        navigationItem.title = "RestaurantSearchSettingsPageNavigationTitle".localized
     }
 
     override func viewWillAppear(_ animated: Bool) {

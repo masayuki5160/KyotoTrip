@@ -14,9 +14,6 @@ import RxCocoa
 class RestaurantsSearchSettingsPresenterTests: XCTestCase {
     
     var view: RestaurantsSearchSettingsViewController!
-    var gateway: RestaurantsRequestParamGatewayStub!
-    var interactor: SettingsInteractor!
-    var router: RestaurantsSearchSettingsRouter!
     var presenter: RestaurantsSearchSettingsPresenter!
     
     override func setUp() {
@@ -25,12 +22,17 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchSettingsViewController
         }()
 
-        gateway = { () -> RestaurantsRequestParamGatewayStub in
+        let restaurantsRequestParamGateway = { () -> RestaurantsRequestParamGatewayStub in
             let settings = RestaurantsRequestParamEntity()
             return RestaurantsRequestParamGatewayStub(result: .success(settings))
         }()
-        interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
-        router = RestaurantsSearchSettingsRouter(view: view)
+        let languageSettingGateway = LanguageSettingGatewayStub(result: .success(.japanese))
+        let interactor = SettingsInteractor(dependency: .init(
+            restaurantsRequestParamGateway: restaurantsRequestParamGateway,
+            languageSettingGateway: languageSettingGateway
+            )
+        )
+        let router = RestaurantsSearchSettingsRouter(view: view)
         presenter = RestaurantsSearchSettingsPresenter(dependency: .init(
             interactor: interactor,
             router: router
@@ -54,16 +56,16 @@ class RestaurantsSearchSettingsPresenterTests: XCTestCase {
             XCTAssertFalse(cells[7].isSelected)
             XCTAssertFalse(cells[8].isSelected)
 
-            XCTAssertEqual("検索範囲", cells[0].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageSearchRange".localized, cells[0].title)
             XCTAssertEqual("500m", cells[0].detail)
-            XCTAssertEqual("英語スタッフ", cells[1].title)
-            XCTAssertEqual("韓国語スタッフ", cells[2].title)
-            XCTAssertEqual("中国語スタッフ", cells[3].title)
-            XCTAssertEqual("ベジタリアンメニュー", cells[4].title)
-            XCTAssertEqual("クレジットカード", cells[5].title)
-            XCTAssertEqual("個室", cells[6].title)
-            XCTAssertEqual("Wifi", cells[7].title)
-            XCTAssertEqual("禁煙", cells[8].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageEnglishSpeaker".localized, cells[1].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageKoreanSpeaker".localized, cells[2].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageChineseSpeaker".localized, cells[3].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageVegetarian".localized, cells[4].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageCreditCard".localized, cells[5].title)
+            XCTAssertEqual("RestaurantSearchSettingsPagePrivateRoom".localized, cells[6].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageWifi".localized, cells[7].title)
+            XCTAssertEqual("RestaurantSearchSettingsPageNoSmoking".localized, cells[8].title)
             
             functionAnswered.fulfill()
         }).disposed(by: disposeBag)

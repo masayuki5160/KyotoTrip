@@ -21,7 +21,7 @@ class TranslatorInteractor: TranslatorInteractorProtocol {
     func downloadModel(targetLanguage: TranslateLanguage) {
         // TODO: 翻訳モデルをダウンロードをする
         let targetModel = TranslateRemoteModel.translateRemoteModel(language: targetLanguage)
-        let progress = ModelManager.modelManager().download(
+        _ = ModelManager.modelManager().download(
             targetModel,
             conditions: ModelDownloadConditions(
                 allowsCellularAccess: true, // TODO: falseがいいか？
@@ -29,31 +29,30 @@ class TranslatorInteractor: TranslatorInteractorProtocol {
             )
         )
 
-        NotificationCenter.default.addObserver(
+        _ = NotificationCenter.default.addObserver(
             forName: .firebaseMLModelDownloadDidSucceed,
             object: nil,
             queue: nil
         ) { [weak self] notification in
-            guard let strongSelf = self,
+            guard let _ = self,
                 let userInfo = notification.userInfo,
-                let model = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue]
-                    as? TranslateRemoteModel,
+                let model = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? TranslateRemoteModel,
                 model == targetModel
                 else { return }
             // The model was downloaded and is available on the device
             // TODO: ダウンロードが完了した後の処理
         }
 
-        NotificationCenter.default.addObserver(
+        _ = NotificationCenter.default.addObserver(
             forName: .firebaseMLModelDownloadDidFail,
             object: nil,
             queue: nil
         ) { [weak self] notification in
-            guard let strongSelf = self,
+            guard let _ = self,
                 let userInfo = notification.userInfo,
-                let model = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue]
-                    as? TranslateRemoteModel
+                let _ = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? TranslateRemoteModel
                 else { return }
+
             let error = userInfo[ModelDownloadUserInfoKey.error.rawValue]
             // TODO: ダウンロードに失敗した時の処理
         }

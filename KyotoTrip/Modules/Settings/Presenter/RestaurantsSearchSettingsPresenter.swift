@@ -50,7 +50,10 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
             guard let self = self else { return }
 
             if viewData.category == .searchRange {
-                self.dependency.router.transitionToRestaurantsSearchRangeSettingView()
+                self.dependency.router.transitionToRestaurantsSearchRangeSettingView(
+                    // swiftlint:disable force_cast
+                    inject: self.dependency.interactor as! SettingsInteractor
+                )
                 return
             }
 

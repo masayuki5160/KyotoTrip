@@ -14,9 +14,6 @@ import RxCocoa
 class RestaurantsSearchRangeSettingPresenterTests: XCTestCase {
     
     var view: RestaurantsSearchRangeSettingsViewController!
-    var gateway: RestaurantsRequestParamGatewayStub!
-    var interactor: SettingsInteractor!
-    var router: RestaurantsSearchRangeSettingRouter!
     var presenter: RestaurantsSearchRangeSettingPresenter!
     
     override func setUp() {
@@ -24,12 +21,17 @@ class RestaurantsSearchRangeSettingPresenterTests: XCTestCase {
             let storyboard = UIStoryboard(name: "SettingsRestaurantsSearchRange", bundle: nil)
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchRangeSettingsViewController
         }()
-        gateway = { () -> RestaurantsRequestParamGatewayStub in
+        let gateway = { () -> RestaurantsRequestParamGatewayStub in
             let settings = RestaurantsRequestParamEntity()
             return RestaurantsRequestParamGatewayStub(result: .success(settings))
         }()
-        interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
-        router = RestaurantsSearchRangeSettingRouter(view: view)
+        let languageSettingGateway = LanguageSettingGatewayStub(result: .success(.japanese))
+        let interactor = SettingsInteractor(dependency: .init(
+            restaurantsRequestParamGateway: gateway,
+            languageSettingGateway: languageSettingGateway
+            )
+        )
+        let router = RestaurantsSearchRangeSettingRouter(view: view)
         presenter = RestaurantsSearchRangeSettingPresenter(dependency: .init(
             interactor: interactor,
             router: router

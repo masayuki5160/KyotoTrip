@@ -8,12 +8,15 @@
 
 protocol SettingsInteractorProtocol: AnyObject {
     func fetchRestaurantsRequestParam(complition: (RestaurantsRequestParamEntity) -> Void)
+    func fetchLanguageSetting(complition: (Result<LanguageSettings, LanguageSettingGatewayError>) -> Void)
     func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity)
+    func saveLanguageSetting(setting: LanguageSettings)
 }
 
 class SettingsInteractor: SettingsInteractorProtocol {
     struct Dependency {
         let restaurantsRequestParamGateway: RestaurantsRequestParamGatewayProtocol
+        let languageSettingGateway: LanguageSettingGatewayProtocol
     }
 
     private let dependency: Dependency
@@ -38,5 +41,21 @@ class SettingsInteractor: SettingsInteractorProtocol {
 
     func saveRestaurantsRequestParam(entity: RestaurantsRequestParamEntity) {
         dependency.restaurantsRequestParamGateway.save(entity: entity)
+    }
+
+    func fetchLanguageSetting(complition: (Result<LanguageSettings, LanguageSettingGatewayError>) -> Void) {
+        dependency.languageSettingGateway.fetch { response in
+            switch response {
+            case .success(let setting):
+                complition(.success(setting))
+            case .failure(_):
+                // TODO: fix later
+                complition(.success(LanguageSettings.japanese))
+            }
+        }
+    }
+
+    func saveLanguageSetting(setting: LanguageSettings) {
+        dependency.languageSettingGateway.save(setting: setting)
     }
 }

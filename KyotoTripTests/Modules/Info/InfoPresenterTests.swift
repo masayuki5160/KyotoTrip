@@ -53,7 +53,12 @@ class InfoPresenterTests: XCTestCase {
     func test_check_fetchedViewData_whenSuccessed() {
         let cityInfoEntity = parsedKyotoCityInfo()
         let kyotoCityInfoGateway = KyotoCityInfoGatewayStub(result: .success(cityInfoEntity))
-        let interactor = InfoInteractor(dependency: .init(kyotoCityInfoGateway: kyotoCityInfoGateway))
+        let languageSettingGateway = LanguageSettingGatewayStub(result: .success(.japanese))
+        let interactor = InfoInteractor(dependency: .init(
+            kyotoCityInfoGateway: kyotoCityInfoGateway,
+            languageSettingGateway: languageSettingGateway
+            )
+        )
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Info", bundle: nil)
             return storyboard.instantiateInitialViewController() as! UINavigationController
@@ -69,24 +74,24 @@ class InfoPresenterTests: XCTestCase {
         let disposeBag = DisposeBag()
         
         presenter.fetch()
-        
+
         let functionAnswered = expectation(description: "asynchronous function")
         presenter.infoDriver.drive(onNext: { cells in
             XCTAssertEqual("京都市考古資料館特別展示「光秀と京～入京から本能寺の変～」の会期延長について ", cells[0].title)
             XCTAssertEqual("https://www.city.kyoto.lg.jp/bunshi/page/0000270768.html", cells[0].link)
             XCTAssertEqual("Fri, 05 Jun 2020 10:00:00 +0900", cells[0].publishDate)
-            
+
             XCTAssertEqual("京都市伝統産業つくり手支援事業補助金交付対象事業の募集について", cells[1].title)
             XCTAssertEqual("https://www.city.kyoto.lg.jp/sankan/page/0000270636.html", cells[1].link)
             XCTAssertEqual("Fri, 05 Jun 2020 08:00:00 +0900", cells[1].publishDate)
-            
+
             XCTAssertEqual("市内農産物の放射性物質モニタリング検査について", cells[2].title)
             XCTAssertEqual("https://www.city.kyoto.lg.jp/sankan/page/0000164441.html", cells[2].link)
             XCTAssertEqual("Fri, 05 Jun 2020 00:00:00 +0900", cells[2].publishDate)
-            
+
             functionAnswered.fulfill()
         }).disposed(by: disposeBag)
-        
+
         waitForExpectations(timeout: 1, handler: nil)
     }
     

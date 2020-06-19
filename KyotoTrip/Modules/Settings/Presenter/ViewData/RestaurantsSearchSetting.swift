@@ -19,15 +19,15 @@ enum RestaurantsSearchSetting: CaseIterable {
 
     func toString() -> String {
         switch self {
-        case .searchRange: return "検索範囲"
-        case .englishSpeaker: return "英語スタッフ"
-        case .koreanSpeaker: return "韓国語スタッフ"
-        case .chaineseSpeaker: return "中国語スタッフ"
-        case .vegetarian: return "ベジタリアンメニュー"
-        case .creditCard: return "クレジットカード"
-        case .privateRoom: return "個室"
-        case .wifi: return "Wifi"
-        case .noSmoking: return "禁煙"
+        case .searchRange: return "RestaurantSearchSettingsPageSearchRange".localized
+        case .englishSpeaker: return "RestaurantSearchSettingsPageEnglishSpeaker".localized
+        case .koreanSpeaker: return "RestaurantSearchSettingsPageKoreanSpeaker".localized
+        case .chaineseSpeaker: return "RestaurantSearchSettingsPageChineseSpeaker".localized
+        case .vegetarian: return "RestaurantSearchSettingsPageVegetarian".localized
+        case .creditCard: return "RestaurantSearchSettingsPageCreditCard".localized
+        case .privateRoom: return "RestaurantSearchSettingsPagePrivateRoom".localized
+        case .wifi: return "RestaurantSearchSettingsPageWifi".localized
+        case .noSmoking: return "RestaurantSearchSettingsPageNoSmoking".localized
         }
     }
 }

@@ -21,22 +21,39 @@ class InfoViewController: UIViewController, TransitionerProtocol {
     private var disposeBag = DisposeBag()
     private let infoCellId = "InfoTableViewCell"
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var indicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupTableView()
+        indicator.hidesWhenStopped = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         dependency.presenter.fetch()
+        indicator.startAnimating()
     }
 
     private func setupTableView() {
         self.navigationItem.title = "NavigationBarTitleInfo".localized
         tableView.register(UINib(nibName: "InfoTableViewCell", bundle: nil), forCellReuseIdentifier: infoCellId)
 
-        dependency.presenter.infoDriver.drive(tableView.rx.items(cellIdentifier: infoCellId, cellType: UITableViewCell.self)) { _, element, cell in
-            cell.textLabel?.text = element.title
-            cell.detailTextLabel?.text = element.publishDateForCellView
-            cell.textLabel?.numberOfLines = 0
-            cell.accessoryType = .disclosureIndicator
+        dependency.presenter.infoDriver
+            .drive(tableView.rx.items(
+                cellIdentifier: infoCellId,
+                cellType: UITableViewCell.self
+            )) { [weak self] _, element, cell in
+                guard let self = self else { return }
+                if self.indicator.isAnimating {
+                    self.indicator.stopAnimating()
+                }
+
+                cell.textLabel?.text = element.title
+                cell.detailTextLabel?.text = element.publishDateForCellView
+                cell.textLabel?.numberOfLines = 0
+                cell.accessoryType = .disclosureIndicator
         }.disposed(by: disposeBag)
 
         Driver.combineLatest(

@@ -18,9 +18,23 @@ struct RestaurantsRequestParamEntity: Codable {
             }
         }
     }
+    enum Language: String, Codable {
+        case japanese = "ja" // Japanese
+        case zhCn = "zh_cn" // Chinese (簡体字)
+        case zhTw = "zh_tw" // Chinese (繁体字)
+        case korean = "ko" // Korean
+        case english = "en" // English
+    }
 
     var latitude = ""
     var longitude = ""
+    var language: LanguageSettings = .japanese
+    var langSettingRequestParam: Language {
+        switch language {
+        case .japanese: return .japanese
+        case .english: return .english
+        }
+    }
     var range: RestaurantsRequestSearchRange = .range500
     var hitPerPage = 20
     var englishSpeakingStaff: RequestFilterFlg = .off

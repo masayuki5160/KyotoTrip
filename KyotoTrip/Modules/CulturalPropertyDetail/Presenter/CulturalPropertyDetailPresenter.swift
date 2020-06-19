@@ -22,11 +22,11 @@ class CulturalPropertyDetailPresenter: CulturalPropertyDetailPresenterProtocol {
     }
 
     let sectionTitles = [
-        "都道府県指定文化財名称",
-        "住所",
-        "種別大区分",
-        "種別小区分",
-        "指定年月日"
+        "CulturalPropertyPageName".localized,
+        "BusstopDetailPageAddress".localized,
+        "BusstopDetailPageCategoryLarge".localized,
+        "BusstopDetailPageCategorySmall".localized,
+        "BusstopDetailPageRegisterdDate".localized
     ]
 
     private var dependency: Dependency

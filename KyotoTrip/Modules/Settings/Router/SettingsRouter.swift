@@ -10,7 +10,8 @@ protocol SettingsRouterProtocol {
     var view: SettingsViewController { get }
 
     func transitionToLisenceView()
-    func transitionToRestaurantsSearchSettingsView()
+    func transitionToRestaurantsSearchSettingsView(inject interactor: SettingsInteractor)
+    func transitionToLanguageSettingsView(inject interactor: SettingsInteractor)
 }
 
 struct SettingsRouter: SettingsRouterProtocol {
@@ -21,8 +22,13 @@ struct SettingsRouter: SettingsRouterProtocol {
         view.pushViewController(targetVC, animated: true)
     }
 
-    func transitionToRestaurantsSearchSettingsView() {
-        let targetVC = AppDefaultDependencies().assembleSettingsRestaurantsSearchModule()
+    func transitionToRestaurantsSearchSettingsView(inject interactor: SettingsInteractor) {
+        let targetVC = AppDefaultDependencies().assembleSettingsRestaurantsSearchModule(inject: interactor)
+        view.pushViewController(targetVC, animated: true)
+    }
+
+    func transitionToLanguageSettingsView(inject interactor: SettingsInteractor) {
+        let targetVC = AppDefaultDependencies().assembleLanguagesSettingsModule(inject: interactor)
         view.pushViewController(targetVC, animated: true)
     }
 }

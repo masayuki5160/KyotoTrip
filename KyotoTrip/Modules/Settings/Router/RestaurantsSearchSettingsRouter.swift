@@ -9,14 +9,14 @@
 protocol RestaurantsSearchSettingsRouterProtocol {
     var view: RestaurantsSearchSettingsViewController { get }
 
-    func transitionToRestaurantsSearchRangeSettingView()
+    func transitionToRestaurantsSearchRangeSettingView(inject interactor: SettingsInteractor)
 }
 
 struct RestaurantsSearchSettingsRouter: RestaurantsSearchSettingsRouterProtocol {
     var view: RestaurantsSearchSettingsViewController
 
-    func transitionToRestaurantsSearchRangeSettingView() {
-        let targetVC = AppDefaultDependencies().assembleSettingsRestaurantsSearchRangeModule()
+    func transitionToRestaurantsSearchRangeSettingView(inject interactor: SettingsInteractor) {
+        let targetVC = AppDefaultDependencies().assembleSettingsRestaurantsSearchRangeModule(inject: interactor)
         view.pushViewController(targetVC, animated: true)
     }
 }

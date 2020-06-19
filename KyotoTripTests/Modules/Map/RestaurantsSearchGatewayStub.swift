@@ -18,4 +18,8 @@ class RestaurantsSearchGatewayStub: RestaurantsSearchGatewayProtocol {
     func fetch(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultEntity, RestaurantsSearchResponseError>) -> Void) {
         complition(result)
     }
+    
+    func fetchForEng(param: RestaurantsRequestParamEntity, complition: @escaping (Result<RestaurantsSearchResultForEnglishEntity, RestaurantsSearchResponseError>) -> Void) {
+        // TODO: fix later
+    }
 }

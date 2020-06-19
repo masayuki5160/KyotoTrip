@@ -82,9 +82,9 @@ private extension MapViewController {
             }
         ).disposed(by: disposeBag)
 
-        dependency.presenter.restaurantMarkersDriver.drive(onNext: { [weak self] status, annotations in
+        dependency.presenter.restaurantMarkersDriver.drive(onNext: { [weak self] annotations in
             guard let self = self else { return }
-            self.updateRestaurantMarkers(status: status, annotations: annotations)
+            self.updateRestaurantMarkers(annotations: annotations)
             }
         ).disposed(by: disposeBag)
 
@@ -115,8 +115,8 @@ private extension MapViewController {
         floatingPanelController.addPanel(toParent: self, belowView: nil, animated: false)
     }
 
-    private func updateRestaurantMarkers(status: CategoryButtonStatus, annotations: [MGLPointAnnotation]) {
-        if status == .visible {
+    private func updateRestaurantMarkers(annotations: [MGLPointAnnotation]) {
+        if annotations.count > 0 {
             mapView.addAnnotations(annotations)
         } else {
             if let selectedAnnotation = mapView.selectedAnnotations.first {

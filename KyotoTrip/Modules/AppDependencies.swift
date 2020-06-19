@@ -18,8 +18,9 @@ protocol AppDependencies {
     func assembleRestaurantDetailModule(inject viewData: RestaurantDetailViewData) -> UIViewController
     func assembleCategoryModule(inject interactor: MapInteractor) -> UIViewController
     func assembleSettingsLisenceModule() -> UIViewController
-    func assembleSettingsRestaurantsSearchModule() -> UIViewController
-    func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController
+    func assembleSettingsRestaurantsSearchModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
+    func assembleSettingsRestaurantsSearchRangeModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
+    func assembleLanguagesSettingsModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
 }
 
 struct AppDefaultDependencies {
@@ -33,6 +34,7 @@ extension AppDefaultDependencies: AppDependencies {
     func assembleMainTabModule() -> UIViewController {
         TabBarController()
     }
+
     func assembleSettingsModule() -> UINavigationController {
         let naviViewController = { () -> UINavigationController in
             let storyboard = UIStoryboard(name: "Settings", bundle: nil)
@@ -40,8 +42,13 @@ extension AppDefaultDependencies: AppDependencies {
             return storyboard.instantiateInitialViewController() as! UINavigationController
         }()
         let vc = naviViewController.viewControllers[0] as! SettingsViewController
-        let gateway = RestaurantsRequestParamGateway()
-        let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
+        let restaurntRequestParamGateway = RestaurantsRequestParamGateway()
+        let languageSettingGateway = LanguageSettingGateway()
+        let interactor = SettingsInteractor(dependency: .init(
+            restaurantsRequestParamGateway: restaurntRequestParamGateway,
+            languageSettingGateway: languageSettingGateway
+            )
+        )
         let router = SettingsRouter(view: vc)
         let presenter = SettingsPresenter(
             dependency: .init(
@@ -61,7 +68,12 @@ extension AppDefaultDependencies: AppDependencies {
         }()
         let view = naviViewController.viewControllers[0] as! InfoViewController
         let kyotoCityInfoGateway = KyotoCityInfoGateway()
-        let interactor = InfoInteractor(dependency: .init(kyotoCityInfoGateway: kyotoCityInfoGateway))
+        let languageSettingGateway = LanguageSettingGateway()
+        let interactor = InfoInteractor(dependency: .init(
+            kyotoCityInfoGateway: kyotoCityInfoGateway,
+            languageSettingGateway: languageSettingGateway
+            )
+        )
         let router = InfoRouter(view: view)
         let presenter = InfoPresenter(
             dependency: .init(
@@ -84,10 +96,14 @@ extension AppDefaultDependencies: AppDependencies {
 
         let restaurantsSearchGateway = RestaurantsSearchGateway()
         let requestParamGateway = RestaurantsRequestParamGateway()
+        let languageSettingGateway = LanguageSettingGateway()
+        let userInfoGateway = UserInfoGateway()
         let interactor = MapInteractor(
             dependency: .init(
                 searchGateway: restaurantsSearchGateway,
-                requestParamGateway: requestParamGateway
+                requestParamGateway: requestParamGateway,
+                languageSettingGateway: languageSettingGateway,
+                userInfoGateway: userInfoGateway
             )
         )
         let router = MapRouter(view: view)
@@ -179,15 +195,13 @@ extension AppDefaultDependencies: AppDependencies {
         return view
     }
 
-    func assembleSettingsRestaurantsSearchModule() -> UIViewController {
+    func assembleSettingsRestaurantsSearchModule(inject interactor: SettingsInteractorProtocol) -> UIViewController {
         let view = { () -> RestaurantsSearchSettingsViewController in
             let storyboard = UIStoryboard(name: "SettingsRestaurantsSearch", bundle: nil)
             // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchSettingsViewController
         }()
 
-        let gateway = RestaurantsRequestParamGateway()
-        let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let router = RestaurantsSearchSettingsRouter(view: view)
         let presenter = RestaurantsSearchSettingsPresenter(
             dependency: .init(
@@ -200,15 +214,13 @@ extension AppDefaultDependencies: AppDependencies {
         return view
     }
 
-    func assembleSettingsRestaurantsSearchRangeModule() -> UIViewController {
+    func assembleSettingsRestaurantsSearchRangeModule(inject interactor: SettingsInteractorProtocol) -> UIViewController {
         let view = { () -> RestaurantsSearchRangeSettingsViewController in
             let storyboard = UIStoryboard(name: "SettingsRestaurantsSearchRange", bundle: nil)
             // swiftlint:disable force_cast
             return storyboard.instantiateInitialViewController() as! RestaurantsSearchRangeSettingsViewController
         }()
 
-        let gateway = RestaurantsRequestParamGateway()
-        let interactor = SettingsInteractor(dependency: .init(restaurantsRequestParamGateway: gateway))
         let router = RestaurantsSearchRangeSettingRouter(view: view)
         let presenter = RestaurantsSearchRangeSettingPresenter(
             dependency: .init(
@@ -235,6 +247,19 @@ extension AppDefaultDependencies: AppDependencies {
                 router: router
             )
         )
+        view.inject(.init(presenter: presenter))
+
+        return view
+    }
+
+    func assembleLanguagesSettingsModule(inject interactor: SettingsInteractorProtocol) -> UIViewController {
+        let view = { () -> LanguageSettingsViewController in
+            let storyboard = UIStoryboard(name: "LanguageSettings", bundle: nil)
+            // swiftlint:disable force_cast
+            return storyboard.instantiateInitialViewController() as! LanguageSettingsViewController
+        }()
+
+        let presenter = LanguageSettingsPresenter(dependency: .init(interactor: interactor))
         view.inject(.init(presenter: presenter))
 
         return view

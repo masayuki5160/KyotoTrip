@@ -14,7 +14,6 @@ protocol MapInteractorProtocol: AnyObject {
     var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> { get }
     var visibleMarkers: Driver<[MarkerEntityProtocol]> { get }
     var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> { get }
-    var restaurantStatusDriver: Driver<CategoryButtonStatus> { get }
     var busstopStatusDriver: Driver<CategoryButtonStatus> { get }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
 
@@ -25,12 +24,15 @@ protocol MapInteractorProtocol: AnyObject {
     func didSelectBusstopButton(nextStatus: CategoryButtonStatus)
     func didSelectCulturalPropertyButton(nextStatus: CategoryButtonStatus)
     func didSelectRestaurantButton(nextStatus: CategoryButtonStatus)
+    func initUser()
 }
 
 class MapInteractor: MapInteractorProtocol {
     struct Dependency {
         let searchGateway: RestaurantsSearchGatewayProtocol
         let requestParamGateway: RestaurantsRequestParamGatewayProtocol
+        let languageSettingGateway: LanguageSettingGatewayProtocol
+        let userInfoGateway: UserInfoGatewayProtocol
     }
 
     var restaurantMarkersDriver: Driver<[RestaurantMarkerEntity]> {
@@ -51,9 +53,6 @@ class MapInteractor: MapInteractorProtocol {
     var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> {
         culturalPropertyStatusRelay.asDriver()
     }
-    var restaurantStatusDriver: Driver<CategoryButtonStatus> {
-        restaurantStatusRelay.asDriver()
-    }
     var busstopStatusDriver: Driver<CategoryButtonStatus> {
         busstopStatusRelay.asDriver()
     }
@@ -62,7 +61,6 @@ class MapInteractor: MapInteractorProtocol {
     private let markersFromStyleLayersRelay = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
     private let selectedCategoryViewCellRelay = PublishRelay<MarkerViewDataProtocol>()
     private let culturalPropertyStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
-    private let restaurantStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private let busstopStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private var dependency: Dependency
     private var mapViewCenterCoordinate: CLLocationCoordinate2D
@@ -93,8 +91,6 @@ class MapInteractor: MapInteractorProtocol {
     }
 
     func didSelectRestaurantButton(nextStatus: CategoryButtonStatus) {
-        restaurantStatusRelay.accept(nextStatus)
-
         switch nextStatus {
         case .hidden:
             restaurantMarkersRelay.accept([])
@@ -117,47 +113,109 @@ class MapInteractor: MapInteractorProtocol {
             }
         }
     }
+
+    func initUser() {
+        dependency.userInfoGateway.fetchLaunchedBefore { [weak self] response in
+            switch response {
+            case .success(let launchedBefore):
+                if launchedBefore {
+                    /* Not first launch */
+                } else {
+                    /* First launch */
+                    
+                    // Get language settings from device and set it to restaurant search settings as default language settings
+                    let languages = NSLocale.preferredLanguages
+                    let firstLanguage = languages[0].prefix(2)
+
+                    var restaurantSearchSettings = RestaurantsRequestParamEntity()
+                    if firstLanguage == "en" {
+                        restaurantSearchSettings.language = .english
+                        self?.dependency.languageSettingGateway.save(setting: .english)
+                    } else {
+                        restaurantSearchSettings.language = .japanese
+                        self?.dependency.languageSettingGateway.save(setting: .japanese)
+                    }
+
+                    self?.dependency.requestParamGateway.save(entity: restaurantSearchSettings)
+                    self?.dependency.userInfoGateway.save(launchedBefore: true)
+                }
+            default:
+                break
+            }
+        }
+    }
 }
 
 private extension MapInteractor {
     private func fetchRestaurants(complition: @escaping (Result<[RestaurantMarkerEntity], RestaurantsSearchResponseError>) -> Void) {
         createRestaurantsRequestParam(location: mapViewCenterCoordinate) { [weak self] requestParam in
-            self?.dependency.searchGateway.fetch(param: requestParam) { response in
-                guard let self = self else { return }
+            switch requestParam.langSettingRequestParam {
+            case .english:
+                self?.dependency.searchGateway.fetchForEng(param: requestParam, complition: { [weak self] response in
+                    guard let self = self else { return }
 
-                switch response {
-                case .success(let restaurants):
-                    var markers: [RestaurantMarkerEntity] = []
-                    for restaurant in restaurants.rest {
-                        let marker = self.createRestaurantMarker(source: restaurant)
-                        markers.append(marker)
+                    switch response {
+                    case .success(let restaurants):
+                        var markers: [RestaurantMarkerEntity] = []
+                        for restaurant in restaurants.rest {
+                            let marker = self.createRestaurantMarkerForEnglish(source: restaurant)
+                            markers.append(marker)
+                        }
+
+                        complition(.success(markers))
+                    case .failure(let error):
+                        complition(.failure(error))
                     }
+                })
+            default:
+                self?.dependency.searchGateway.fetch(param: requestParam) { [weak self] response in
+                    guard let self = self else { return }
 
-                    complition(.success(markers))
+                    switch response {
+                    case .success(let restaurants):
+                        var markers: [RestaurantMarkerEntity] = []
+                        for restaurant in restaurants.rest {
+                            let marker = self.createRestaurantMarker(source: restaurant)
+                            markers.append(marker)
+                        }
 
-                case .failure(let error):
-                    complition(.failure(error))
+                        complition(.success(markers))
+
+                    case .failure(let error):
+                        complition(.failure(error))
+                    }
                 }
             }
+
         }
     }
 
     private func createRestaurantsRequestParam(location: CLLocationCoordinate2D, compliton: (RestaurantsRequestParamEntity) -> Void) {
         dependency.requestParamGateway.fetch { response in
-            var settings: RestaurantsRequestParamEntity
 
             switch response {
             case .failure(_):
                 // Set default settings
-                settings = RestaurantsRequestParamEntity()
+                let settings = RestaurantsRequestParamEntity()
+                compliton(settings)
 
             case .success(let savedSettings):
-                settings = savedSettings
+                var settings = savedSettings
                 settings.latitude = String(location.latitude)
                 settings.longitude = String(location.longitude)
-            }
 
-            compliton(settings)
+                self.dependency.languageSettingGateway.fetch { response in
+                    switch response {
+                    case .success(let language):
+                        settings.language = language
+                    case .failure(_):
+                        // Set Japanese as default setting
+                        settings.language = .japanese
+                    }
+
+                    compliton(settings)
+                }
+            }
         }
     }
 
@@ -170,6 +228,19 @@ private extension MapInteractor {
             coordinate: CLLocationCoordinate2DMake(latitude, longitude),
             type: .restaurant,
             detail: source
+        )
+    }
+
+    private func createRestaurantMarkerForEnglish(source: RestaurantForEnglishEntity) -> RestaurantMarkerEntity {
+        let latitude = atof(source.location.latitudeWgs84)
+        let longitude = atof(source.location.longitudeWgs84)
+        let restaurantEntity = source.convertToRestaurntEntity()
+        return RestaurantMarkerEntity(
+            title: source.name.name,
+            subtitle: source.categories.categoryNameS[0],
+            coordinate: CLLocationCoordinate2DMake(latitude, longitude),
+            type: .restaurant,
+            detail: restaurantEntity
         )
     }
 }

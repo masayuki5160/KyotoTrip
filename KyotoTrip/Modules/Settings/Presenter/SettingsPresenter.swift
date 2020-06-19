@@ -24,18 +24,18 @@ public class SettingsPresenter: SettingsPresenterProtocol {
     }
 
     public let settingsTableSectionTitle = [
-        "情報",
-        "アプリ設定"
+        "SettingPageSectionNameForInfoSection".localized,
+        "SettingPageSectionNameForAppSettingsSection".localized
     ]
     public let settingsTableData: [[String]]
     private let dependency: Dependency
     private let basicItems: [String] = [
-        "バージョン",
-        "ライセンス"
+        "SettingsPageInfoSectionVersion".localized,
+        "SettingsPageInfoSectionLicense".localized
     ]
     private let settingItems: [String] = [
-        "言語設定",
-        "飲食店検索設定"
+        "SettingsPageAppSettingsSectionLanguage".localized,
+        "SettingsPageAppSettingsRestaurantSearch".localized
     ]
 
     // MARK: Public functions
@@ -93,9 +93,15 @@ public class SettingsPresenter: SettingsPresenterProtocol {
 
         case 1:
             if indexPath.row == 0 {
-                // TODO: 言語設定ページ
+                dependency.router.transitionToLanguageSettingsView(
+                    // swiftlint:disable force_cast
+                    inject: dependency.interactor as! SettingsInteractor
+                )
             } else {
-                dependency.router.transitionToRestaurantsSearchSettingsView()
+                dependency.router.transitionToRestaurantsSearchSettingsView(
+                    // swiftlint:disable force_cast
+                    inject: dependency.interactor as! SettingsInteractor
+                )
             }
 
         default:

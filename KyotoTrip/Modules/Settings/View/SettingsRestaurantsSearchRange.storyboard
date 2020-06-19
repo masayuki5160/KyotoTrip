@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XO0-16-zCu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XO0-16-zCu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,29 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在地からの検索範囲を設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgJ-Ej-e3g">
-                                <rect key="frame" x="16" y="59" width="277.5" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="FGM-g1-a3k"/>
-                                    <constraint firstAttribute="width" constant="277.67000000000002" id="Nti-yq-EUk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ctq-Ob-2DZ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="leading" secondItem="8ro-OO-znB" secondAttribute="leading" id="6Ed-98-fkU"/>
-                            <constraint firstItem="jgJ-Ej-e3g" firstAttribute="leading" secondItem="8ro-OO-znB" secondAttribute="leading" constant="16" id="PvB-Ke-BiK"/>
-                            <constraint firstItem="jgJ-Ej-e3g" firstAttribute="top" secondItem="8ro-OO-znB" secondAttribute="top" constant="15" id="SBR-b1-sNz"/>
-                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="bottom" secondItem="8ro-OO-znB" secondAttribute="bottom" id="a1g-XP-BzG"/>
-                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="top" secondItem="jgJ-Ej-e3g" secondAttribute="bottom" constant="8" id="ahs-Gf-xfh"/>
-                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="trailing" secondItem="8ro-OO-znB" secondAttribute="trailing" id="hAS-Aa-V4G"/>
+                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="trailing" secondItem="8ro-OO-znB" secondAttribute="trailing" id="Fcv-C9-coQ"/>
+                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="top" secondItem="8ro-OO-znB" secondAttribute="top" id="IYY-Hp-XYE"/>
+                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="leading" secondItem="8ro-OO-znB" secondAttribute="leading" id="VTf-2t-1QZ"/>
+                            <constraint firstItem="ctq-Ob-2DZ" firstAttribute="bottom" secondItem="8ro-OO-znB" secondAttribute="bottom" id="jXb-OY-M6P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8ro-OO-znB"/>
                     </view>

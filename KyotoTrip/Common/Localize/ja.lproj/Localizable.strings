@@ -23,3 +23,42 @@
 "NavigationBarTitleInfo" = "お知らせ/イベント情報";
 "SettingsPageTitle" = "設定";
 "BusstopDetailTitle" = "バス停情報";
+// Settings Page
+"SettingPageSectionNameForInfoSection" = "情報";
+"SettingPageSectionNameForAppSettingsSection" = "アプリ設定";
+"SettingsPageInfoSectionVersion" = "バージョン";
+"SettingsPageInfoSectionLicense" = "ライセンス";
+"SettingsPageAppSettingsSectionLanguage" = "言語設定";
+"SettingsPageAppSettingsRestaurantSearch" = "飲食店検索設定";
+// Restaurant Search Settings Page
+"RestaurantSearchSettingsPageSearchRange" = "検索範囲";
+"RestaurantSearchSettingsPageEnglishSpeaker" = "英語スタッフ";
+"RestaurantSearchSettingsPageKoreanSpeaker" = "韓国語スタッフ";
+"RestaurantSearchSettingsPageChineseSpeaker" = "中国語スタッフ";
+"RestaurantSearchSettingsPageVegetarian" = "ベジタリアンメニュー";
+"RestaurantSearchSettingsPageCreditCard" = "クレジットカード";
+"RestaurantSearchSettingsPagePrivateRoom" = "個室";
+"RestaurantSearchSettingsPageWifi" = "Wifi";
+"RestaurantSearchSettingsPageNoSmoking" = "禁煙";
+"RestaurantSearchSettingsPageNavigationTitle" = "飲食店検索設定";
+// Restaurant Search Range Settings Page
+"RestaurantSearchRangeSettingsPageNavigationTitle" = "飲食店検索範囲設定";
+// Busstop Detail Page
+"BusstopDetailPageSection1" = "バス停名称";
+"BusstopDetailPageSection2" = "路線(系統)";
+"BusstopDetailPageLinkToWeb" = "バスの乗り方";
+// Cultural Property Page
+"CulturalPropertyPageName" = "都道府県指定文化財名称";
+"BusstopDetailPageAddress" = "住所";
+"BusstopDetailPageCategoryLarge" = "種別大区分";
+"BusstopDetailPageCategorySmall" = "種別小区分";
+"BusstopDetailPageRegisterdDate" = "指定年月日";
+// Restaurant Detail Page
+"RestaurantDetailPageName" = "店舗名";
+"RestaurantDetailPageAddress" = "住所";
+"RestaurantDetailPageBuisinessHour" = "営業時間";
+"RestaurantDetailPageHoliday" = "休業日";
+"RestaurantDetailPageTel" = "TEL";
+"RestaurantDetailPageWebsite" = "ホームページ";
+"RestaurantDetailPageOtherInfo" = "その他";
+

@@ -31,7 +31,7 @@ protocol MapPresenterProtocol: AnyObject {
     var mapCenterPositionDriver: Driver<MapCenterPosition>! { get }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData> { get }
-    var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])> { get }
+    var restaurantMarkersDriver: Driver<[CustomMGLPointAnnotation]> { get }
 }
 
 class MapPresenter: MapPresenterProtocol {
@@ -51,7 +51,7 @@ class MapPresenter: MapPresenterProtocol {
         dependency.interactor.selectedCategoryViewCellSignal
     }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData>
-    var restaurantMarkersDriver: Driver<(CategoryButtonStatus, [CustomMGLPointAnnotation])>
+    var restaurantMarkersDriver: Driver<[CustomMGLPointAnnotation]>
 
     private var dependency: Dependency
     private let disposeBag = DisposeBag()
@@ -62,31 +62,30 @@ class MapPresenter: MapPresenterProtocol {
     init(dependency: Dependency) {
         self.dependency = dependency
 
+        dependency.interactor.initUser()
+
         categoryButtonsStatusDriver = Driver.combineLatest(
             dependency.interactor.busstopStatusDriver,
             dependency.interactor.culturalPropertyStatusDriver,
-            dependency.interactor.restaurantStatusDriver
-        ).map({ busstop, culturalProperty, restaurant -> CategoryButtonsStatusViewData in
+            dependency.interactor.restaurantMarkersDriver
+        ).map({ busstop, culturalProperty, restaurantMarkers -> CategoryButtonsStatusViewData in
             var buttonsStatus = CategoryButtonsStatusViewData()
             buttonsStatus.busstop = busstop
             buttonsStatus.culturalProperty = culturalProperty
-            buttonsStatus.restaurant = restaurant
+            buttonsStatus.restaurant =
+                restaurantMarkers.count > 0 ? CategoryButtonStatus.visible : CategoryButtonStatus.hidden
 
             return buttonsStatus
             }
         )
 
-        restaurantMarkersDriver = Driver.combineLatest(
-            dependency.interactor.restaurantStatusDriver,
-            dependency.interactor.restaurantMarkersDriver
-        ).map({ status, markers -> (CategoryButtonStatus, [CustomMGLPointAnnotation]) in
-            let annotations = markers.map { marker -> CustomMGLPointAnnotation in
-                let viewData = RestaurantMarkerViewData(entity: marker)
-                return CustomMGLPointAnnotation(viewData: viewData)
-            }
-            return (status, annotations)
-            }
-        )
+        restaurantMarkersDriver = dependency.interactor.restaurantMarkersDriver
+            .map({ markers -> [CustomMGLPointAnnotation] in
+                markers.map { marker -> CustomMGLPointAnnotation in
+                    let viewData = RestaurantMarkerViewData(entity: marker)
+                    return CustomMGLPointAnnotation(viewData: viewData)
+                }
+            })
     }
 
     func bindMapView(input: MapViewInput) {
