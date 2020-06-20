@@ -29,11 +29,13 @@ class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
         "RestaurantDetailPageHoliday".localized,
         "RestaurantDetailPageTel".localized,
         "RestaurantDetailPageWebsite".localized,
-        "RestaurantDetailPageOtherInfo".localized
+        "RestaurantDetailPageOtherInfo".localized,
+        "RestaurantDetailPageCredit".localized
     ]
 
     private var dependency: Dependency
     private let reuseCellId = "RestaurantDetailCell"
+    private let gnaviCreditInfo = "Supported by ぐるなびWebService : https://api.gnavi.co.jp/api/scope/"
 
     init(dependency: Dependency) {
         self.dependency = dependency
@@ -85,6 +87,11 @@ class RestaurantDetailPresenter: RestaurantDetailPresenterProtocol {
 
         case 6:// その他
             cell.textLabel?.text = dependency.viewData.salesPoint
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+            cell.textLabel?.numberOfLines = 0
+        case 7:
+            cell.textLabel?.text = gnaviCreditInfo
             cell.selectionStyle = .none
             cell.accessoryType = .none
             cell.textLabel?.numberOfLines = 0

@@ -122,7 +122,7 @@ class MapInteractor: MapInteractorProtocol {
                     /* Not first launch */
                 } else {
                     /* First launch */
-                    
+
                     // Get language settings from device and set it to restaurant search settings as default language settings
                     let languages = NSLocale.preferredLanguages
                     let firstLanguage = languages[0].prefix(2)

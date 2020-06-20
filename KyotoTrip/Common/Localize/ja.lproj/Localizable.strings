@@ -59,6 +59,6 @@
 "RestaurantDetailPageBuisinessHour" = "営業時間";
 "RestaurantDetailPageHoliday" = "休業日";
 "RestaurantDetailPageTel" = "TEL";
-"RestaurantDetailPageWebsite" = "ホームページ";
+"RestaurantDetailPageWebsite" = "ホームページ(ぐるなび店舗ページ)";
 "RestaurantDetailPageOtherInfo" = "その他";
-
+"RestaurantDetailPageCredit" = "クレジット";

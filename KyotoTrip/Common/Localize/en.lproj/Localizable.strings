@@ -59,5 +59,6 @@
 "RestaurantDetailPageBuisinessHour" = "Buisiness Hour";
 "RestaurantDetailPageHoliday" = "Holiday";
 "RestaurantDetailPageTel" = "TEL";
-"RestaurantDetailPageWebsite" = "Website";
+"RestaurantDetailPageWebsite" = "Website(gurunavi.com)";
 "RestaurantDetailPageOtherInfo" = "Other";
+"RestaurantDetailPageCredit" = "Credit";
