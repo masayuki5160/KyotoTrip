@@ -22,6 +22,7 @@ target 'KyotoTrip' do
 
   # Pods for KyotoTrip
   pod 'Mapbox-iOS-SDK', '~> 5.7'
+  pod 'MapboxNavigation', '~> 0.40.0'
   pod 'RxSwift', '~> 5.1'
   pod 'RxCocoa', '~> 5.1'
   pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
