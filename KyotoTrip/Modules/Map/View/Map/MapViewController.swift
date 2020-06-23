@@ -266,8 +266,10 @@ extension MapViewController: MGLMapViewDelegate {
     }
 
     func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
-        // TODO: Change button image
-        return UIButton(type: .infoLight)
+        let image = UIImage(named: "icons8-walking-50")
+        let button = UIButton(type: .infoLight)
+        button.setImage(image, for: .normal)
+        return button
     }
 
     func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
@@ -281,7 +283,7 @@ extension MapViewController: MGLMapViewDelegate {
         let origin = Waypoint(coordinate: location.coordinate, name: "CurrentLocation")
         let destination = Waypoint(coordinate: annotation.coordinate, name: annotation.title)
 
-        let routeOptions = NavigationRouteOptions(waypoints: [origin, destination])
+        let routeOptions = NavigationRouteOptions(waypoints: [origin, destination], profileIdentifier: .walking)
 
         // TODO: Add loading indicator
         // Request a route
