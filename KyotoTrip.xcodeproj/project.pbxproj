@@ -50,6 +50,7 @@
 		4C7BC1FA248A232A00A5C394 /* InfoCellViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BC1F9248A232A00A5C394 /* InfoCellViewDataTests.swift */; };
 		4C7F0342248A3FAF00B860ED /* InfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7F0341248A3FAF00B860ED /* InfoRouter.swift */; };
 		4C7F0346248A654600B860ED /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C7F0344248A654600B860ED /* CategoryTableViewCell.xib */; };
+		4C81DB3F249E53F300929F02 /* UserInfoGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81DB3E249E53F300929F02 /* UserInfoGatewayStub.swift */; };
 		4C9CB8222489CD7300010956 /* InfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9CB8202489CD7300010956 /* InfoTableViewCell.xib */; };
 		4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AD1245036DD00DAC5F3 /* BusstopDetailViewController.swift */; };
 		4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */; };
@@ -192,6 +193,7 @@
 		4C7BC1F9248A232A00A5C394 /* InfoCellViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCellViewDataTests.swift; sourceTree = "<group>"; };
 		4C7F0341248A3FAF00B860ED /* InfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRouter.swift; sourceTree = "<group>"; };
 		4C7F0344248A654600B860ED /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		4C81DB3E249E53F300929F02 /* UserInfoGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoGatewayStub.swift; sourceTree = "<group>"; };
 		4C9CB8202489CD7300010956 /* InfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTableViewCell.xib; sourceTree = "<group>"; };
 		4CA84AD1245036DD00DAC5F3 /* BusstopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BusstopDetail.storyboard; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF4B0092472C9A600991B2C /* MapInteractorTests.swift */,
+				4C81DB3E249E53F300929F02 /* UserInfoGatewayStub.swift */,
 				4C13E72024849C7200337D26 /* RestaurantsSearchGatewayStub.swift */,
 				4C2BA4272484C9D10018B435 /* gnaviAPIDummyResponse.json */,
 				4CF8F85D248A6F6A00493E26 /* MapInteractorStub.swift */,
@@ -1203,6 +1206,7 @@
 				4C5A5DF1248610CF001EA2CE /* SettingsInteractorTests.swift in Sources */,
 				4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */,
 				4CF8F85E248A6F6A00493E26 /* MapInteractorStub.swift in Sources */,
+				4C81DB3F249E53F300929F02 /* UserInfoGatewayStub.swift in Sources */,
 				4C2EA23B248785C800FE98C5 /* BusstopDetailPresenterTests.swift in Sources */,
 				4CC7764A247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift in Sources */,
 				4C2EA23624868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift in Sources */,

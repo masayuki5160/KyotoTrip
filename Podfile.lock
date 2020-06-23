@@ -127,12 +127,31 @@ PODS:
     - GTMSessionFetcher/Core (= 1.4.0)
   - Mapbox-iOS-SDK (5.7.0):
     - MapboxMobileEvents (= 0.10.2)
+  - MapboxAccounts (2.2.0)
+  - MapboxCoreNavigation (0.40.0):
+    - MapboxAccounts (~> 2.2.0)
+    - MapboxDirections (~> 0.31.0)
+    - MapboxMobileEvents (~> 0.10.2)
+    - MapboxNavigationNative (~> 6.2.1)
+    - Turf (~> 0.3.0)
+  - MapboxDirections (0.31.0):
+    - Polyline (~> 4.2)
+    - Turf (~> 0.3)
   - MapboxMobileEvents (0.10.2)
+  - MapboxNavigation (0.40.0):
+    - Mapbox-iOS-SDK (~> 5.6)
+    - MapboxCoreNavigation (= 0.40.0)
+    - MapboxMobileEvents (~> 0.10.2)
+    - MapboxSpeech (~> 0.3.0)
+    - Solar (~> 2.1)
+  - MapboxNavigationNative (6.2.1)
+  - MapboxSpeech (0.3.0)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - Polyline (4.2.1)
   - PromisesObjC (1.2.9)
   - Protobuf (3.12.0)
   - RxCocoa (5.1.1):
@@ -141,7 +160,9 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
+  - Solar (2.1.0)
   - SwiftyXMLParser (5.1.0)
+  - Turf (0.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.9)
@@ -161,6 +182,7 @@ DEPENDENCIES:
   - GoogleUtilities/UserDefaults
   - GTMSessionFetcher
   - Mapbox-iOS-SDK (~> 5.7)
+  - MapboxNavigation (~> 0.40.0)
   - RxCocoa (~> 5.1)
   - RxSwift (~> 5.1)
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
@@ -193,12 +215,21 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
+    - MapboxAccounts
+    - MapboxCoreNavigation
+    - MapboxDirections
+    - MapboxNavigation
+    - MapboxNavigationNative
+    - MapboxSpeech
     - nanopb
+    - Polyline
     - PromisesObjC
     - Protobuf
     - RxCocoa
     - RxRelay
     - RxSwift
+    - Solar
+    - Turf
 
 EXTERNAL SOURCES:
   SwiftyXMLParser:
@@ -234,15 +265,24 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   Mapbox-iOS-SDK: 1b7cb0e739247d20ef75f5f14aa6ce34e1f0660f
+  MapboxAccounts: f9716ba2cc66013e44ef93e0e16cfa1049f3aeec
+  MapboxCoreNavigation: 2856c46bd064bb11c406ba00191d579cda424efa
+  MapboxDirections: 0b97aa320d7cddbe72d6513becc07dd747935240
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
+  MapboxNavigation: 42bae50b0381dce317c85884ba0de38fc68a4814
+  MapboxNavigationNative: 11dc22140f4698d3f26989f2b6379dc81ef0d4c1
+  MapboxSpeech: 403415e932e084cf290b9d55c49ab7ea210b9595
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  Polyline: 0e9890790292741c8186201a536b6bb6a78d02dd
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
   SwiftyXMLParser: 8271497e0a37b5c04b0b167c77b4896e36175a21
+  Turf: c6bdf62d6a70c647874f295dd1cf4eefc0c3e9e6
 
-PODFILE CHECKSUM: 51af8dbdf64eb904d4969c9431c6578ec7fe9feb
+PODFILE CHECKSUM: a7daecbf35bf1e25943c8ed14dd54ee6b0e90d7c
 
 COCOAPODS: 1.9.3

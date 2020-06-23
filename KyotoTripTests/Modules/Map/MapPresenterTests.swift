@@ -86,9 +86,44 @@ class MapPresenterTests: XCTestCase {
     }
     
     func test_check_mapCenterPositionIsUserPosition_whenTapOneth() {
+        let tapEvent = PublishRelay<()>()
+        presenter.bindMapView(input: .init(compassButtonTapEvent: tapEvent.asDriver(onErrorJustReturn: ())))
+        
+        let disposeBag = DisposeBag()
+
+        let functionAnswered = expectation(description: "asynchronous function")
+        presenter.mapCenterPositionDriver.drive(onNext: { actualPosition in
+            XCTAssertEqual(MapCenterPosition.userLocation, actualPosition)
+            functionAnswered.fulfill()
+        }).disposed(by: disposeBag)
+        
+        tapEvent.accept(())
+
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func test_check_mapCenterPositionIsUserPosition_whenTapTwise() {
+    func test_check_mapCenterPositionIsKyotoCity_whenTapTwise() {
+        let tapEvent = PublishRelay<()>()
+        presenter.bindMapView(input: .init(compassButtonTapEvent: tapEvent.asDriver(onErrorJustReturn: ())))
+
+        let disposeBag = DisposeBag()
+
+        let functionAnswered = expectation(description: "asynchronous function")
+        var tapCounter = 0
+        presenter.mapCenterPositionDriver.drive(onNext: { actualPosition in
+            if tapCounter > 0 {
+                XCTAssertEqual(MapCenterPosition.kyotoCity, actualPosition)
+                functionAnswered.fulfill()
+            }
+            
+            tapCounter += 1
+        }).disposed(by: disposeBag)
+        
+        // Tap twice
+        tapEvent.accept(())
+        tapEvent.accept(())
+
+        waitForExpectations(timeout: 1, handler: nil)
     }
     
     override func tearDown() {

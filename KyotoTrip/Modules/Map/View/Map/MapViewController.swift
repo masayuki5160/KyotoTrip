@@ -7,10 +7,13 @@
 //
 
 import FloatingPanel
-import Mapbox
 import RxCocoa
 import RxSwift
 import UIKit
+import Mapbox
+import MapboxDirections
+import MapboxCoreNavigation
+import MapboxNavigation
 
 class MapViewController: UIViewController, TransitionerProtocol {
     struct Dependency {
@@ -260,5 +263,44 @@ extension MapViewController: MGLMapViewDelegate {
 
     func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
         dependency.presenter.updateViewpoint(centerCoordinate: mapView.centerCoordinate)
+    }
+
+    func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+        let image = UIImage(named: "icons8-walking-50")
+        let button = UIButton(type: .infoLight)
+        button.setImage(image, for: .normal)
+        return button
+    }
+
+    func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
+        mapView.deselectAnnotation(annotation, animated: false)
+
+        guard let userLocation = mapView.userLocation,
+            let location = userLocation.location,
+            let annotation = annotation as? CustomMGLPointAnnotation else { return }
+
+        // Define two waypoints to travel between
+        let origin = Waypoint(coordinate: location.coordinate, name: "CurrentLocation")
+        let destination = Waypoint(coordinate: annotation.coordinate, name: annotation.title)
+
+        let routeOptions = NavigationRouteOptions(waypoints: [origin, destination], profileIdentifier: .walking)
+
+        // TODO: Add loading indicator
+        // Request a route
+        Directions.shared.calculate(routeOptions) { [weak self] (_, result) in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let response):
+                guard let route = response.routes?.first, let strongSelf = self else {
+                    return
+                }
+
+                // Pass the generated route to the the NavigationViewController
+                let viewController = NavigationViewController(for: route, routeOptions: routeOptions)
+                viewController.modalPresentationStyle = .fullScreen
+                strongSelf.present(viewController, animated: true, completion: nil)
+            }
+        }
     }
 }
