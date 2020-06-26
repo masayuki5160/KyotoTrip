@@ -253,7 +253,6 @@ extension MapViewController: MGLMapViewDelegate {
     }
 
     func mapView(_ mapView: MGLMapView, didDeselect annotation: MGLAnnotation) {
-        mapView.removeAnnotations([annotation])
     }
 
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
