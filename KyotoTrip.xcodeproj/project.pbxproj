@@ -1406,7 +1406,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = 78a33f7ad28955fdaccc7c99e7ef6dc3;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
@@ -1414,6 +1414,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				MGL_MAPBOX_ACCESSTOKEN = pk.eyJ1IjoibWFzYXl1a2k1MTYwIiwiYSI6ImNqc2FmdGI5NjEwanY0M3FwNDJsdjd0YzkifQ.vkh1xLO76g2bU25WhVAQ5g;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1530,7 +1531,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Masayuki Tanaka (L8ZGX2885D)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = "";
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
@@ -1538,6 +1539,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				MGL_MAPBOX_ACCESSTOKEN = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.masaytan.KyotoTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
