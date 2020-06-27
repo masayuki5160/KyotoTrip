@@ -40,8 +40,6 @@ class CategoryViewController: UIViewController, TransitionerProtocol {
 
 private extension CategoryViewController {
     private func setuUI() {
-        // NOTE: アイコンが見えにくいためCategoryViewControllerについてはダークモードOFFとする
-        self.overrideUserInterfaceStyle = .light
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
     }
 

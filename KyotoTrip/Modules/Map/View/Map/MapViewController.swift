@@ -283,6 +283,12 @@ extension MapViewController: MGLMapViewDelegate {
         let destination = Waypoint(coordinate: annotation.coordinate, name: annotation.title)
 
         let routeOptions = NavigationRouteOptions(waypoints: [origin, destination], profileIdentifier: .walking)
+        let navigationOptions = NavigationOptions()
+        if #available(iOS 13, *), UITraitCollection.current.userInterfaceStyle == .dark {
+            navigationOptions.styles = [CustomNavigationNightStyle()]
+        } else {
+            navigationOptions.styles = [CustomNavigationDayStyle()]
+        }
 
         // TODO: Add loading indicator
         // Request a route
@@ -296,7 +302,7 @@ extension MapViewController: MGLMapViewDelegate {
                 }
 
                 // Pass the generated route to the the NavigationViewController
-                let viewController = NavigationViewController(for: route, routeOptions: routeOptions)
+                let viewController = NavigationViewController(for: route, routeOptions: routeOptions, navigationOptions: navigationOptions)
                 viewController.modalPresentationStyle = .fullScreen
                 strongSelf.present(viewController, animated: true, completion: nil)
             }
