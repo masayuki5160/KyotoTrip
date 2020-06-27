@@ -52,6 +52,8 @@
 		4C7F0346248A654600B860ED /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C7F0344248A654600B860ED /* CategoryTableViewCell.xib */; };
 		4C81DB3F249E53F300929F02 /* UserInfoGatewayStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81DB3E249E53F300929F02 /* UserInfoGatewayStub.swift */; };
 		4C9CB8222489CD7300010956 /* InfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9CB8202489CD7300010956 /* InfoTableViewCell.xib */; };
+		4C9F8EAC24A6E74400C14583 /* CustomNavigationDayStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F8EAB24A6E74400C14583 /* CustomNavigationDayStyle.swift */; };
+		4C9F8EAE24A6E75100C14583 /* CustomNavigationNightStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F8EAD24A6E75100C14583 /* CustomNavigationNightStyle.swift */; };
 		4CA84AD2245036DD00DAC5F3 /* BusstopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AD1245036DD00DAC5F3 /* BusstopDetailViewController.swift */; };
 		4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */; };
 		4CA84AE82459246400DAC5F3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */; };
@@ -195,6 +197,8 @@
 		4C7F0344248A654600B860ED /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		4C81DB3E249E53F300929F02 /* UserInfoGatewayStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoGatewayStub.swift; sourceTree = "<group>"; };
 		4C9CB8202489CD7300010956 /* InfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTableViewCell.xib; sourceTree = "<group>"; };
+		4C9F8EAB24A6E74400C14583 /* CustomNavigationDayStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationDayStyle.swift; sourceTree = "<group>"; };
+		4C9F8EAD24A6E75100C14583 /* CustomNavigationNightStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationNightStyle.swift; sourceTree = "<group>"; };
 		4CA84AD1245036DD00DAC5F3 /* BusstopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopDetailViewController.swift; sourceTree = "<group>"; };
 		4CA84AD3245036F000DAC5F3 /* BusstopDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BusstopDetail.storyboard; sourceTree = "<group>"; };
 		4CA84AE72459246400DAC5F3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -460,6 +464,7 @@
 		4C3F094D24301E4F00FAEDC2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4C9F8EAA24A6E72200C14583 /* Navigation */,
 				4CBEA5EB2480843A008EF69D /* Category */,
 				4CBEA5EA24808422008EF69D /* Map */,
 			);
@@ -617,6 +622,15 @@
 				4C2EA23524868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		4C9F8EAA24A6E72200C14583 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F8EAB24A6E74400C14583 /* CustomNavigationDayStyle.swift */,
+				4C9F8EAD24A6E75100C14583 /* CustomNavigationNightStyle.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		4CA84ACD2450365700DAC5F3 /* BusstopDetail */ = {
@@ -1231,6 +1245,7 @@
 				4CF4AFE8246EDAAC00991B2C /* SettingsLicenseViewController.swift in Sources */,
 				4C3C874E247D3FB600B5FF6F /* MapViewController+FloatingPanelControllerDelegate.swift in Sources */,
 				4CB3CEB624852D920013DC3D /* BusstopMarkerViewData.swift in Sources */,
+				4C9F8EAC24A6E74400C14583 /* CustomNavigationDayStyle.swift in Sources */,
 				4CA84AF92462817C00DAC5F3 /* BusstopMarkerEntity.swift in Sources */,
 				4CB9EFEF247E8C2D00B7398D /* BusstopDetailViewData.swift in Sources */,
 				4C52ACCB2497BCCD00200B52 /* LanguageSettings.swift in Sources */,
@@ -1249,6 +1264,7 @@
 				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
 				4CB3CEB824852E320013DC3D /* CulturalPropertyMarkerViewData.swift in Sources */,
 				4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */,
+				4C9F8EAE24A6E75100C14583 /* CustomNavigationNightStyle.swift in Sources */,
 				4CC1ADEF241FA55F00BF84B9 /* SettingsViewController.swift in Sources */,
 				4CF773D9241B978B0032CC53 /* SceneDelegate.swift in Sources */,
 				4CA84AFD246284EB00DAC5F3 /* MarkerCategory.swift in Sources */,
