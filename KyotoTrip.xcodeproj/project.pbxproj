@@ -43,6 +43,7 @@
 		4C52ACCB2497BCCD00200B52 /* LanguageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C52ACCA2497BCCD00200B52 /* LanguageSettings.swift */; };
 		4C52ACCD2497C10F00200B52 /* LanguageSettingsCellViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C52ACCC2497C10F00200B52 /* LanguageSettingsCellViewData.swift */; };
 		4C52ACCF249847FE00200B52 /* LanguageSettingGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C52ACCE249847FE00200B52 /* LanguageSettingGateway.swift */; };
+		4C5334F824AB77EF00DF68F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C5334FA24AB77EF00DF68F7 /* InfoPlist.strings */; };
 		4C5A33E72483F1150041FE48 /* CategoryButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */; };
 		4C5A5DF1248610CF001EA2CE /* SettingsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A5DF0248610CF001EA2CE /* SettingsInteractorTests.swift */; };
 		4C7BC1F62489F7E900A5C394 /* InfoInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BC1F52489F7E900A5C394 /* InfoInteractorTests.swift */; };
@@ -188,6 +189,8 @@
 		4C52ACCA2497BCCD00200B52 /* LanguageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettings.swift; sourceTree = "<group>"; };
 		4C52ACCC2497C10F00200B52 /* LanguageSettingsCellViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsCellViewData.swift; sourceTree = "<group>"; };
 		4C52ACCE249847FE00200B52 /* LanguageSettingGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingGateway.swift; sourceTree = "<group>"; };
+		4C5334F924AB77EF00DF68F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C5334FB24AB77F600DF68F7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStatus.swift; sourceTree = "<group>"; };
 		4C5A5DF0248610CF001EA2CE /* SettingsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractorTests.swift; sourceTree = "<group>"; };
 		4C7BC1F52489F7E900A5C394 /* InfoInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInteractorTests.swift; sourceTree = "<group>"; };
@@ -601,6 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				4CC1AE0F2424615D00BF84B9 /* Localizable.strings */,
+				4C5334FA24AB77EF00DF68F7 /* InfoPlist.strings */,
 			);
 			path = Localize;
 			sourceTree = "<group>";
@@ -1024,6 +1028,7 @@
 				4C2BA4282484C9D10018B435 /* gnaviAPIDummyResponse.json in Resources */,
 				4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */,
 				4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */,
+				4C5334F824AB77EF00DF68F7 /* InfoPlist.strings in Resources */,
 				4CC1AE0D2424615D00BF84B9 /* Localizable.strings in Resources */,
 				4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */,
 				4CF4AFF22470AC7A00991B2C /* SettingsRestaurantsSearchRange.storyboard in Resources */,
@@ -1333,6 +1338,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4C5334FA24AB77EF00DF68F7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C5334F924AB77EF00DF68F7 /* en */,
+				4C5334FB24AB77F600DF68F7 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		4CC1AE0F2424615D00BF84B9 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
