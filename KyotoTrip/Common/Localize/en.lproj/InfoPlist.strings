@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  KyotoTrip
+
+  Created by TANAKA MASAYUKI on 2020/06/30.
+  Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
+*/
+"NSLocationWhenInUseUsageDescription" = "This application requires location services to work";
