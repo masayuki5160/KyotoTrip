@@ -50,6 +50,10 @@ struct CategoryCellViewData {
             // swiftlint:disable force_cast
             self.viewData = RestaurantMarkerViewData(entity: entity as! RestaurantMarkerEntity)
 
+        case .famousSites:
+            // swiftlint:disable force_cast
+            self.viewData = FamousSitesMarkerViewData(entity: entity as! FamousSitesMarkerEntity)
+
         default:
             // swiftlint:disable force_cast
             self.viewData = BusstopMarkerViewData(entity: entity as! BusstopMarkerEntity)

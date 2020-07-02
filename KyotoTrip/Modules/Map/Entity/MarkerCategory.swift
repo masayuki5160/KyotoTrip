@@ -16,4 +16,6 @@ public enum MarkerCategory {
     case busRoute
     /// For restaurant marker, viewdata, and entity
     case restaurant
+    /// For famous sites marker, viewdata, and entity
+    case famousSites
 }

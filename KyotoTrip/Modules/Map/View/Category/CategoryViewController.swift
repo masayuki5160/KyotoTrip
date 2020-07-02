@@ -21,6 +21,7 @@ class CategoryViewController: UIViewController, TransitionerProtocol {
     @IBOutlet private weak var culturalPropertyButton: UIButton!
     @IBOutlet private weak var busstopButton: UIButton!
     @IBOutlet private weak var restaurantButton: UIButton!
+    @IBOutlet private weak var famousSitesButton: UIButton!
     // swiftlint:disable implicitly_unwrapped_optional
     private var dependency: Dependency!
     private let disposeBag = DisposeBag()
@@ -49,6 +50,7 @@ private extension CategoryViewController {
                 culturalPropertyButton: culturalPropertyButton.rx.tap.asSignal(),
                 busstopButton: busstopButton.rx.tap.asSignal(),
                 restaurantButton: restaurantButton.rx.tap.asSignal(),
+                famousSitesButton: famousSitesButton.rx.tap.asSignal(),
                 selectedCell: tableView.rx.modelSelected(CategoryCellViewData.self).asSignal()
             )
         )

@@ -23,6 +23,9 @@ class MapInteractorStub: MapInteractorProtocol {
     var busstopStatusDriver: Driver<CategoryButtonStatus> {
         return busstopStatusRelay.asDriver()
     }
+    var famousSitesStatusDriver: Driver<CategoryButtonStatus> {
+        return famousSitesStatusRelay.asDriver()
+    }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> {
         return selectedCategoryViewCellRelay.asSignal()
     }
@@ -38,6 +41,7 @@ class MapInteractorStub: MapInteractorProtocol {
     private var selectedCategoryViewCellRelay = PublishRelay<MarkerViewDataProtocol>()
     private var culturalPropertyStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private var busstopStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
+    private let famousSitesStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     
     init(dependency: Dependency) {
         self.dependency = dependency
@@ -60,6 +64,10 @@ class MapInteractorStub: MapInteractorProtocol {
     
     func didSelectCulturalPropertyButton(nextStatus: CategoryButtonStatus) {
         culturalPropertyStatusRelay.accept(nextStatus)
+    }
+    
+    func didSelectFamousSitesButton(nextStatus: CategoryButtonStatus) {
+        famousSitesStatusRelay.accept(nextStatus)
     }
     
     func didSelectRestaurantButton(nextStatus: CategoryButtonStatus) {

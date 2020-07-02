@@ -82,6 +82,7 @@ private extension MapViewController {
             /// Update markers
             self.updateBusstopLayer(status: buttonsStatus.busstop)
             self.updateCulturalPropertyLayer(status: buttonsStatus.culturalProperty)
+            self.updateFamousSitesLayer(status: buttonsStatus.famousSites)
             }
         ).disposed(by: disposeBag)
 
@@ -144,6 +145,14 @@ private extension MapViewController {
             self.mapView.culturalPropertyLayer?.isVisible = true
         } else {
             self.mapView.culturalPropertyLayer?.isVisible = false
+        }
+    }
+
+    private func updateFamousSitesLayer(status: CategoryButtonStatus) {
+        if status == .visible {
+            self.mapView.famousSitesLayer?.isVisible = true
+        } else {
+            self.mapView.famousSitesLayer?.isVisible = false
         }
     }
 
@@ -227,11 +236,13 @@ extension MapViewController: MGLMapViewDelegate {
         kyotoMapView.busstopLayer = style.layer(withIdentifier: BusstopMarkerEntity.layerId)
         kyotoMapView.busRouteLayer = style.layer(withIdentifier: BusRouteMarkerEntity.layerId)
         kyotoMapView.culturalPropertyLayer = style.layer(withIdentifier: CulturalPropertyMarkerEntity.layerId)
+        kyotoMapView.famousSitesLayer = style.layer(withIdentifier: FamousSitesMarkerEntity.layerId)
 
         // Init visible layers
         kyotoMapView.busstopLayer?.isVisible = false
         kyotoMapView.busRouteLayer?.isVisible = false
         kyotoMapView.culturalPropertyLayer?.isVisible = false
+        kyotoMapView.famousSitesLayer?.isVisible = false
     }
 
     func mapViewDidFinishRenderingFrame(_ mapView: MGLMapView, fullyRendered: Bool) {
@@ -239,7 +250,8 @@ extension MapViewController: MGLMapViewDelegate {
             let rect = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
             let layers: Set<String> = [
                 BusstopMarkerEntity.layerId,
-                CulturalPropertyMarkerEntity.layerId
+                CulturalPropertyMarkerEntity.layerId,
+                FamousSitesMarkerEntity.layerId
             ]
             /// Get features from Style Layers which is defined in Mapbox Studio
             let features = mapView.visibleFeatures(in: rect, styleLayerIdentifiers: layers)

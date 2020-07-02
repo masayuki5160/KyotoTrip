@@ -21,6 +21,7 @@ struct CategoryViewInput {
     let culturalPropertyButton: Signal<Void>
     let busstopButton: Signal<Void>
     let restaurantButton: Signal<Void>
+    let famousSitesButton: Signal<(Void)>
     let selectedCell: Signal<CategoryCellViewData>
 }
 
@@ -71,6 +72,15 @@ class CategoryPresenter: CategoryPresenterProtocol {
             let nextStatus = self.categoryButtonsStatus.restaurant.next()
             self.categoryButtonsStatus.restaurant = nextStatus
             self.dependency.interactor.didSelectRestaurantButton(nextStatus: nextStatus)
+            }
+        ).disposed(by: disposeBag)
+
+        input.famousSitesButton.emit(onNext: { [weak self] in
+            guard let self = self else { return }
+
+            let nextStatus = self.categoryButtonsStatus.famousSites.next()
+            self.categoryButtonsStatus.famousSites = nextStatus
+            self.dependency.interactor.didSelectFamousSitesButton(nextStatus: nextStatus)
             }
         ).disposed(by: disposeBag)
 

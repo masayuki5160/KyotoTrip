@@ -10,10 +10,12 @@ struct CategoryButtonsStatusViewData {
     var busstop: CategoryButtonStatus
     var culturalProperty: CategoryButtonStatus
     var restaurant: CategoryButtonStatus
+    var famousSites: CategoryButtonStatus
 
     init() {
         busstop = .hidden
         culturalProperty = .hidden
         restaurant = .hidden
+        famousSites = .hidden
     }
 }
