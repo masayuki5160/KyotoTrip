@@ -68,6 +68,10 @@ class MGLFeatureMediator: MGLFeatureMediatorProtocol {
             // swiftlint:disable force_cast
             markerViewData = RestaurantMarkerViewData(entity: markerEntity as! RestaurantMarkerEntity)
 
+        case .famousSites:
+            // swiftlint:disable force_cast
+            markerViewData = FamousSitesMarkerViewData(entity: markerEntity as! FamousSitesMarkerEntity)
+
         default:
             // swiftlint:disable force_cast
             markerViewData = BusstopMarkerViewData(entity: markerEntity as! BusstopMarkerEntity)
@@ -84,6 +88,8 @@ private extension MGLFeatureMediator {
             category = .busstop
         } else if (source.attribute(forKey: CulturalPropertyMarkerEntity.titleId)) != nil {
             category = .culturalProperty
+        } else if (source.attribute(forKey: FamousSitesMarkerEntity.titleId(lang: .japanese))) != nil {// TODO: Need to get language setting from LanguageGateway
+            category = .famousSites
         } else {
             // Fix me later
             category = .busstop
@@ -106,6 +112,15 @@ private extension MGLFeatureMediator {
                 largeClassificationCode: source.attributes[CulturalPropertyMarkerEntity.largeClassificationCodeId] as! Int,
                 smallClassificationCode: source.attributes[CulturalPropertyMarkerEntity.smallClassificationCodeId] as! Int,
                 registerdDate: source.attributes[CulturalPropertyMarkerEntity.registerdDateId] as! Int
+            )
+
+        case .famousSites:
+            return FamousSitesMarkerEntity(
+                // TODO: Need to get language setting from LanguageGateway
+                title: source.attributes[FamousSitesMarkerEntity.titleId(lang: .japanese)] as! String,
+                subtitle: "",
+                coordinate: source.coordinate,
+                type: .famousSites
             )
 
         default:

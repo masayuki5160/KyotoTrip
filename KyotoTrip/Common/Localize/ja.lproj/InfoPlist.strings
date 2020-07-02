@@ -5,4 +5,4 @@
   Created by TANAKA MASAYUKI on 2020/06/30.
   Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 */
-"NSLocationWhenInUseUsageDescription" = "現在地情報を利用します";
+"NSLocationWhenInUseUsageDescription" = "現在地表示、ルート案内を行うために位置情報を利用します。";

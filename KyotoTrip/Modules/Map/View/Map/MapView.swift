@@ -17,6 +17,7 @@ class MapView: MGLMapView {
     var busstopLayer: MGLStyleLayer?
     var busRouteLayer: MGLStyleLayer?
     var culturalPropertyLayer: MGLStyleLayer?
+    var famousSitesLayer: MGLStyleLayer?
 
     func setup() {
         if #available(iOS 13, *), UITraitCollection.current.userInterfaceStyle == .dark {

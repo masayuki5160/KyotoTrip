@@ -32,6 +32,7 @@ protocol MapPresenterProtocol: AnyObject {
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
     var categoryButtonsStatusDriver: Driver<CategoryButtonsStatusViewData> { get }
     var restaurantMarkersDriver: Driver<[CustomMGLPointAnnotation]> { get }
+    func fetchLanguageSetting(complition: (LanguageSettings) -> Void)
 }
 
 class MapPresenter: MapPresenterProtocol {
@@ -43,7 +44,8 @@ class MapPresenter: MapPresenterProtocol {
 
     static var layerIdentifiers: Set<String> = [
         BusstopMarkerEntity.layerId,
-        CulturalPropertyMarkerEntity.layerId
+        CulturalPropertyMarkerEntity.layerId,
+        FamousSitesMarkerEntity.layerId
     ]
 
     var mapCenterPositionDriver: Driver<MapCenterPosition>!
@@ -67,13 +69,15 @@ class MapPresenter: MapPresenterProtocol {
         categoryButtonsStatusDriver = Driver.combineLatest(
             dependency.interactor.busstopStatusDriver,
             dependency.interactor.culturalPropertyStatusDriver,
-            dependency.interactor.restaurantMarkersDriver
-        ).map({ busstop, culturalProperty, restaurantMarkers -> CategoryButtonsStatusViewData in
+            dependency.interactor.restaurantMarkersDriver,
+            dependency.interactor.famousSitesStatusDriver
+        ).map({ busstop, culturalProperty, restaurantMarkers, famousSites -> CategoryButtonsStatusViewData in
             var buttonsStatus = CategoryButtonsStatusViewData()
             buttonsStatus.busstop = busstop
             buttonsStatus.culturalProperty = culturalProperty
             buttonsStatus.restaurant =
                 restaurantMarkers.count > 0 ? CategoryButtonStatus.visible : CategoryButtonStatus.hidden
+            buttonsStatus.famousSites = famousSites
 
             return buttonsStatus
             }
@@ -110,5 +114,11 @@ class MapPresenter: MapPresenterProtocol {
 
     func updateViewpoint(centerCoordinate: CLLocationCoordinate2D) {
         dependency.interactor.updateMapViewViewpoint(centerCoordinate: centerCoordinate)
+    }
+
+    func fetchLanguageSetting(complition: (LanguageSettings) -> Void) {
+        dependency.interactor.fetchLanguageSetting { language in
+            complition(language)
+        }
     }
 }

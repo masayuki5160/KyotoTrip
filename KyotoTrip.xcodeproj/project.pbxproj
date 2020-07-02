@@ -26,6 +26,9 @@
 		4C2BA42D2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42C2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift */; };
 		4C2BA42F2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */; };
 		4C2BA4312484D8C60018B435 /* BusstopMarkerEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */; };
+		4C2DCC2824ACC128002F6262 /* FamousSitesMarkerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DCC2724ACC128002F6262 /* FamousSitesMarkerEntity.swift */; };
+		4C2DCC2A24ACD3A2002F6262 /* FamousSitesMarkerViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DCC2924ACD3A2002F6262 /* FamousSitesMarkerViewData.swift */; };
+		4C2DCC3024ACD449002F6262 /* FamousSitesDetailViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DCC2F24ACD449002F6262 /* FamousSitesDetailViewData.swift */; };
 		4C2EA2342486813800FE98C5 /* SettingsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */; };
 		4C2EA23624868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA23524868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift */; };
 		4C2EA238248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EA237248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift */; };
@@ -172,6 +175,9 @@
 		4C2BA42C2484D4130018B435 /* RestaurantsRequestSearchRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsRequestSearchRangeTests.swift; sourceTree = "<group>"; };
 		4C2BA42E2484D58F0018B435 /* CulturalPropertyMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyMarkerEntityTests.swift; sourceTree = "<group>"; };
 		4C2BA4302484D8C60018B435 /* BusstopMarkerEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopMarkerEntityTests.swift; sourceTree = "<group>"; };
+		4C2DCC2724ACC128002F6262 /* FamousSitesMarkerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSitesMarkerEntity.swift; sourceTree = "<group>"; };
+		4C2DCC2924ACD3A2002F6262 /* FamousSitesMarkerViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSitesMarkerViewData.swift; sourceTree = "<group>"; };
+		4C2DCC2F24ACD449002F6262 /* FamousSitesDetailViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSitesDetailViewData.swift; sourceTree = "<group>"; };
 		4C2EA2332486813800FE98C5 /* SettingsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenterTests.swift; sourceTree = "<group>"; };
 		4C2EA23524868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchRangeSettingPresenterTests.swift; sourceTree = "<group>"; };
 		4C2EA237248725B800FE98C5 /* RestaurantsSearchSettingsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsSearchSettingsPresenterTests.swift; sourceTree = "<group>"; };
@@ -321,6 +327,7 @@
 				4CB3CEB324852D1C0013DC3D /* MarkerViewDataProtocol.swift */,
 				4CB3CEB524852D920013DC3D /* BusstopMarkerViewData.swift */,
 				4CB3CEB724852E320013DC3D /* CulturalPropertyMarkerViewData.swift */,
+				4C2DCC2924ACD3A2002F6262 /* FamousSitesMarkerViewData.swift */,
 				4CB3CEB924852E4A0013DC3D /* RestaurantMarkerViewData.swift */,
 				4CF4AFD32468508800991B2C /* CustomMGLPointAnnotation.swift */,
 			);
@@ -402,6 +409,38 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		4C2DCC2B24ACD3FE002F6262 /* FamousSitesDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4C2DCC2E24ACD426002F6262 /* Router */,
+				4C2DCC2D24ACD41F002F6262 /* Presenter */,
+				4C2DCC2C24ACD419002F6262 /* View */,
+			);
+			path = FamousSitesDetail;
+			sourceTree = "<group>";
+		};
+		4C2DCC2C24ACD419002F6262 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4C2DCC2D24ACD41F002F6262 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4C2DCC2F24ACD449002F6262 /* FamousSitesDetailViewData.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4C2DCC2E24ACD426002F6262 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		4C2EA239248785B300FE98C5 /* BusstopDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +472,7 @@
 				4CA84ACD2450365700DAC5F3 /* BusstopDetail */,
 				4CA84B192464335A00DAC5F3 /* RestaurantDetail */,
 				4CA84B022463132A00DAC5F3 /* CulturalPropertyDetail */,
+				4C2DCC2B24ACD3FE002F6262 /* FamousSitesDetail */,
 				4C3F094A24301C0000FAEDC2 /* Map */,
 			);
 			path = Modules;
@@ -680,6 +720,7 @@
 				4CF4AFD52469782700991B2C /* RestaurantsRequestParamEntity.swift */,
 				4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */,
 				4C074B04249AFE1100B4F1C5 /* RestaurantForEnglishEntity.swift */,
+				4C2DCC2724ACC128002F6262 /* FamousSitesMarkerEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1257,6 +1298,7 @@
 				4CA84AFF24628CAD00DAC5F3 /* CulturalPropertyMarkerEntity.swift in Sources */,
 				4CA84B16246408DE00DAC5F3 /* RestaurantMarkerEntity.swift in Sources */,
 				4CA84AFB246281F600DAC5F3 /* MarkerEntityProtocol.swift in Sources */,
+				4C2DCC2A24ACD3A2002F6262 /* FamousSitesMarkerViewData.swift in Sources */,
 				4CA84B012462FDC900DAC5F3 /* BusRouteMarkerEntity.swift in Sources */,
 				4C52ACCD2497C10F00200B52 /* LanguageSettingsCellViewData.swift in Sources */,
 				4CA84B102463C3EF00DAC5F3 /* RestaurantsSearchResultEntity.swift in Sources */,
@@ -1267,6 +1309,7 @@
 				4CF4B02B247899C400991B2C /* RestaurantsSearchSettingsPresenter.swift in Sources */,
 				4CF4AFD62469782700991B2C /* RestaurantsRequestParamEntity.swift in Sources */,
 				4CC1ADFD242459EE00BF84B9 /* StringExtension.swift in Sources */,
+				4C2DCC2824ACC128002F6262 /* FamousSitesMarkerEntity.swift in Sources */,
 				4CB3CEB824852E320013DC3D /* CulturalPropertyMarkerViewData.swift in Sources */,
 				4C41666324434E07005EF1C2 /* AppDependencies.swift in Sources */,
 				4C9F8EAE24A6E75100C14583 /* CustomNavigationNightStyle.swift in Sources */,
@@ -1320,6 +1363,7 @@
 				4CA84B1C2464339A00DAC5F3 /* RestaurantDetailViewController.swift in Sources */,
 				4CD5272724974FEC0022B204 /* LanguageSettingsPresenter.swift in Sources */,
 				4CF4B0192477A6B900991B2C /* RestaurantsSearchSettingsCellViewData.swift in Sources */,
+				4C2DCC3024ACD449002F6262 /* FamousSitesDetailViewData.swift in Sources */,
 				4CFF7F302486188E005DCF19 /* RestaurantsRequestSearchRange.swift in Sources */,
 				4CF4AFD42468508800991B2C /* CustomMGLPointAnnotation.swift in Sources */,
 				4CE4A0FF2483E72600E30B3A /* CategoryButtonsStatusViewData.swift in Sources */,
@@ -1436,7 +1480,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = 78a33f7ad28955fdaccc7c99e7ef6dc3;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
@@ -1561,7 +1605,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Masayuki Tanaka (L8ZGX2885D)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = "";
 				INFOPLIST_FILE = KyotoTrip/Info.plist;

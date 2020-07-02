@@ -15,7 +15,9 @@ protocol MapInteractorProtocol: AnyObject {
     var visibleMarkers: Driver<[MarkerEntityProtocol]> { get }
     var culturalPropertyStatusDriver: Driver<CategoryButtonStatus> { get }
     var busstopStatusDriver: Driver<CategoryButtonStatus> { get }
+    var famousSitesStatusDriver: Driver<CategoryButtonStatus> { get }
     var selectedCategoryViewCellSignal: Signal<MarkerViewDataProtocol> { get }
+    func fetchLanguageSetting(complition: (LanguageSettings) -> Void)
 
     /// Input to Interactor
     func updateMarkersFromStyleLayers(entity: [MarkerEntityProtocol])
@@ -24,6 +26,7 @@ protocol MapInteractorProtocol: AnyObject {
     func didSelectBusstopButton(nextStatus: CategoryButtonStatus)
     func didSelectCulturalPropertyButton(nextStatus: CategoryButtonStatus)
     func didSelectRestaurantButton(nextStatus: CategoryButtonStatus)
+    func didSelectFamousSitesButton(nextStatus: CategoryButtonStatus)
     func initUser()
 }
 
@@ -56,18 +59,34 @@ class MapInteractor: MapInteractorProtocol {
     var busstopStatusDriver: Driver<CategoryButtonStatus> {
         busstopStatusRelay.asDriver()
     }
+    var famousSitesStatusDriver: Driver<CategoryButtonStatus> {
+        famousSitesStatusRelay.asDriver()
+    }
 
     private let restaurantMarkersRelay = BehaviorRelay<[RestaurantMarkerEntity]>(value: [])
     private let markersFromStyleLayersRelay = BehaviorRelay<[MarkerEntityProtocol]>(value: [])
     private let selectedCategoryViewCellRelay = PublishRelay<MarkerViewDataProtocol>()
     private let culturalPropertyStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private let busstopStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
+    private let famousSitesStatusRelay = BehaviorRelay<CategoryButtonStatus>(value: .hidden)
     private var dependency: Dependency
     private var mapViewCenterCoordinate: CLLocationCoordinate2D
         = CLLocationCoordinate2D(latitude: MapView.kyotoStationLat, longitude: MapView.kyotoStationLong)
 
     init(dependency: Dependency) {
         self.dependency = dependency
+    }
+
+    func fetchLanguageSetting(complition: (LanguageSettings) -> Void) {
+        dependency.languageSettingGateway.fetch { response in
+            switch response {
+            case .success(let language):
+                complition(language)
+            case .failure(_):
+                // Return Japanese as default setting when failure
+                complition(LanguageSettings.japanese)
+            }
+        }
     }
 
     func updateMapViewViewpoint(centerCoordinate: CLLocationCoordinate2D) {
@@ -112,6 +131,10 @@ class MapInteractor: MapInteractorProtocol {
                 self.restaurantMarkersRelay.accept(markers)
             }
         }
+    }
+
+    func didSelectFamousSitesButton(nextStatus: CategoryButtonStatus) {
+        famousSitesStatusRelay.accept(nextStatus)
     }
 
     func initUser() {
