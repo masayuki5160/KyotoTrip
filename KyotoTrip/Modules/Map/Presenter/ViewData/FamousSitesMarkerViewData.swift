@@ -19,9 +19,15 @@ struct FamousSitesMarkerViewData: MarkerViewDataProtocol {
         self.name = entity.title
         self.subtitle = entity.subtitle
         self.coordinate = entity.coordinate
-        self.type = .culturalProperty
+        self.type = .famousSites
         self.detail = FamousSitesDetailViewData(
-            name: entity.title
+            name: entity.title,
+            category: entity.siteCategpry,
+            facebook: entity.facebook,
+            twitter: entity.twitter,
+            instagram: entity.instagram,
+            youtube: entity.youtube,
+            url: entity.url
         )
     }
 }

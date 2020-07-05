@@ -21,6 +21,7 @@ protocol AppDependencies {
     func assembleSettingsRestaurantsSearchModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
     func assembleSettingsRestaurantsSearchRangeModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
     func assembleLanguagesSettingsModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
+    func assembleFamousSitesDetailModule(inject viewData: FamousSitesDetailViewData) -> UIViewController
 }
 
 struct AppDefaultDependencies {
@@ -260,6 +261,25 @@ extension AppDefaultDependencies: AppDependencies {
         }()
 
         let presenter = LanguageSettingsPresenter(dependency: .init(interactor: interactor))
+        view.inject(.init(presenter: presenter))
+
+        return view
+    }
+
+    func assembleFamousSitesDetailModule(inject viewData: FamousSitesDetailViewData) -> UIViewController {
+        let view = { () -> FamousSitesDetailViewController in
+            let storyboard = UIStoryboard(name: "FamousSitesDetail", bundle: nil)
+            // swiftlint:disable force_cast
+            return storyboard.instantiateInitialViewController() as! FamousSitesDetailViewController
+        }()
+
+        let router = FamousSitesDetailRouter(view: view)
+        let presenter = FamousSitesDetailPresenter(
+            dependency: .init(
+                router: router,
+                viewData: viewData
+            )
+        )
         view.inject(.init(presenter: presenter))
 
         return view

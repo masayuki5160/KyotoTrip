@@ -128,7 +128,13 @@ private extension MGLFeatureMediator {
                 title: source.attributes[FamousSitesMarkerEntity.titleId(lang: language)] as! String,
                 subtitle: "",
                 coordinate: source.coordinate,
-                type: .famousSites
+                type: .famousSites,
+                facebook: source.attributes[FamousSitesMarkerEntity.facebookURLKey] as? String ?? "",
+                twitter: source.attributes[FamousSitesMarkerEntity.twitterURLKey] as? String ?? "",
+                instagram: source.attributes[FamousSitesMarkerEntity.instagramURLKey] as? String ?? "",
+                youtube: source.attributes[FamousSitesMarkerEntity.youtubeURLKey] as? String ?? "",
+                url: source.attributes[FamousSitesMarkerEntity.urlKey] as? String ?? "",
+                siteCategpry: source.attributes[FamousSitesMarkerEntity.categoryKey] as! String
             )
 
         default:

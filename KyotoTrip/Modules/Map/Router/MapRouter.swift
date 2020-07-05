@@ -32,6 +32,11 @@ struct MapRouter: MapRouterProtocol {
             let restaurantDetailViewData = (viewData as! RestaurantMarkerViewData).detail
             transitionToRestaurantDetailViewController(inject: restaurantDetailViewData)
 
+        case .famousSites:
+            // swiftlint:disable force_cast
+            let famousDetailViewData = (viewData as! FamousSitesMarkerViewData).detail
+            transitionToFamousDetailViewController(inject: famousDetailViewData)
+
         default:
             break
         }
@@ -53,6 +58,12 @@ struct MapRouter: MapRouterProtocol {
     private func transitionToRestaurantDetailViewController(inject viewData: RestaurantDetailViewData) {
         let targetVC = AppDefaultDependencies()
             .assembleRestaurantDetailModule(inject: viewData) as! RestaurantDetailViewController
+        view.pushViewController(targetVC, animated: true)
+    }
+
+    private func transitionToFamousDetailViewController(inject viewData: FamousSitesDetailViewData) {
+        let targetVC = AppDefaultDependencies()
+            .assembleFamousSitesDetailModule(inject: viewData) as! FamousSitesDetailViewController
         view.pushViewController(targetVC, animated: true)
     }
 }

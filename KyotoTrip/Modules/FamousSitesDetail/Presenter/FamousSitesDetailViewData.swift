@@ -8,4 +8,10 @@
 
 struct FamousSitesDetailViewData {
     var name = ""
+    var category = ""
+    var facebook = ""
+    var twitter = ""
+    var instagram = ""
+    var youtube = ""
+    var url = ""
 }
