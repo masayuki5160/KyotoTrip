@@ -70,6 +70,10 @@ class MapInteractorStub: MapInteractorProtocol {
         famousSitesStatusRelay.accept(nextStatus)
     }
     
+    func fetchLanguageSetting(complition: (LanguageSettings) -> Void) {
+        complition(.japanese)
+    }
+    
     func didSelectRestaurantButton(nextStatus: CategoryButtonStatus) {
         switch nextStatus {
         case .visible:
