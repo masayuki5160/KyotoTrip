@@ -10,6 +10,7 @@ struct CategoryCellViewData {
     let busstopIconName = "icons8-bus-80"
     let restaurantIconName = "icons8-restaurant-100"
     let culturalPropertyIconName = "icons8-torii-48"
+    let famousSitesIconName = "icons8-idea-64"
 
     var title = ""
     /// Need to know this when tapped cell, and then tell the detail to MapView to add the marker.
@@ -25,6 +26,9 @@ struct CategoryCellViewData {
 
         case .restaurant:
             iconName = restaurantIconName
+
+        case .famousSites:
+            iconName = famousSitesIconName
 
         default:
             // TODO: Set default icon name

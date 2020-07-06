@@ -69,6 +69,10 @@ struct CategoryRouter: CategoryRouterProtocol {
             let restaurantDetailViewData = (viewData as! RestaurantMarkerViewData).detail
             transitionToRestaurantDetailViewController(inject: restaurantDetailViewData)
 
+        case .famousSites:
+            let famousDetailViewData = (viewData as! FamousSitesMarkerViewData).detail
+            transitionToFamousDetailViewController(inject: famousDetailViewData)
+
         default:
             break
         }
@@ -89,6 +93,12 @@ struct CategoryRouter: CategoryRouterProtocol {
     private func transitionToRestaurantDetailViewController(inject viewData: RestaurantDetailViewData) {
         let targetVC = AppDefaultDependencies()
             .assembleRestaurantDetailModule(inject: viewData) as! RestaurantDetailViewController
+        view.pushViewController(targetVC, animated: true)
+    }
+
+    private func transitionToFamousDetailViewController(inject viewData: FamousSitesDetailViewData) {
+        let targetVC = AppDefaultDependencies()
+            .assembleFamousSitesDetailModule(inject: viewData) as! FamousSitesDetailViewController
         view.pushViewController(targetVC, animated: true)
     }
 }

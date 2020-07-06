@@ -38,6 +38,11 @@ class MapViewController: UIViewController, TransitionerProtocol {
         bindPresenter()
         setupCategorySemiModalView()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dependency.mglFeatureMediator.loadSettings()
+    }
 }
 
 private extension MapViewController {

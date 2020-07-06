@@ -15,6 +15,7 @@ protocol MGLFeatureMediatorProtocol {
     /// Others
     func convertMGLFeatureToAnnotation(source: MGLFeature) -> CustomMGLPointAnnotation
     func sorteMGLFeatures(features: [MGLFeature], center: CLLocation) -> [MGLFeature]
+    func loadSettings()
 }
 
 class MGLFeatureMediator: MGLFeatureMediatorProtocol {
@@ -23,9 +24,11 @@ class MGLFeatureMediator: MGLFeatureMediatorProtocol {
     }
 
     private let dependency: Dependency
+    private var language: LanguageSettings = .japanese
 
     init(dependency: Dependency) {
         self.dependency = dependency
+        loadSettings()
     }
 
     public func updateVisibleMGLFeatures(mglFeatures: [MGLFeature]) {
@@ -79,6 +82,12 @@ class MGLFeatureMediator: MGLFeatureMediatorProtocol {
 
         return CustomMGLPointAnnotation(viewData: markerViewData)
     }
+
+    func loadSettings() {
+        dependency.presenter.fetchLanguageSetting { [weak self] language in
+            self?.language = language
+        }
+    }
 }
 
 private extension MGLFeatureMediator {
@@ -88,7 +97,7 @@ private extension MGLFeatureMediator {
             category = .busstop
         } else if (source.attribute(forKey: CulturalPropertyMarkerEntity.titleId)) != nil {
             category = .culturalProperty
-        } else if (source.attribute(forKey: FamousSitesMarkerEntity.titleId(lang: .japanese))) != nil {// TODO: Need to get language setting from LanguageGateway
+        } else if (source.attribute(forKey: FamousSitesMarkerEntity.titleId(lang: language))) != nil {
             category = .famousSites
         } else {
             // Fix me later
@@ -116,11 +125,16 @@ private extension MGLFeatureMediator {
 
         case .famousSites:
             return FamousSitesMarkerEntity(
-                // TODO: Need to get language setting from LanguageGateway
-                title: source.attributes[FamousSitesMarkerEntity.titleId(lang: .japanese)] as! String,
+                title: source.attributes[FamousSitesMarkerEntity.titleId(lang: language)] as! String,
                 subtitle: "",
                 coordinate: source.coordinate,
-                type: .famousSites
+                type: .famousSites,
+                facebook: source.attributes[FamousSitesMarkerEntity.facebookURLKey] as? String ?? "",
+                twitter: source.attributes[FamousSitesMarkerEntity.twitterURLKey] as? String ?? "",
+                instagram: source.attributes[FamousSitesMarkerEntity.instagramURLKey] as? String ?? "",
+                youtube: source.attributes[FamousSitesMarkerEntity.youtubeURLKey] as? String ?? "",
+                url: source.attributes[FamousSitesMarkerEntity.urlKey] as? String ?? "",
+                siteCategpry: source.attributes[FamousSitesMarkerEntity.categoryKey] as! String
             )
 
         default:

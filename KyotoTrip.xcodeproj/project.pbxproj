@@ -98,6 +98,10 @@
 		4CC77644247F3C2800EF5064 /* CulturalPropertyDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC77643247F3C2800EF5064 /* CulturalPropertyDetailRouter.swift */; };
 		4CC77646247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC77645247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift */; };
 		4CC7764A247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC77649247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift */; };
+		4CD26F5724B179BA009E3FE4 /* FamousSitesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD26F5624B179BA009E3FE4 /* FamousSitesDetailViewController.swift */; };
+		4CD26F5924B179CE009E3FE4 /* FamousSitesDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD26F5824B179CE009E3FE4 /* FamousSitesDetail.storyboard */; };
+		4CD26F5B24B17BA8009E3FE4 /* FamousSitesDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD26F5A24B17BA8009E3FE4 /* FamousSitesDetailPresenter.swift */; };
+		4CD26F5D24B17BE1009E3FE4 /* FamousSitesDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD26F5C24B17BE1009E3FE4 /* FamousSitesDetailRouter.swift */; };
 		4CD5272324974F100022B204 /* LanguageSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5272224974F100022B204 /* LanguageSettingsViewController.swift */; };
 		4CD5272524974F390022B204 /* LanguageSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5272424974F390022B204 /* LanguageSettings.storyboard */; };
 		4CD5272724974FEC0022B204 /* LanguageSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5272624974FEC0022B204 /* LanguageSettingsPresenter.swift */; };
@@ -249,6 +253,10 @@
 		4CC77643247F3C2800EF5064 /* CulturalPropertyDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailRouter.swift; sourceTree = "<group>"; };
 		4CC77645247F3D0D00EF5064 /* CulturalPropertyDetailViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailViewData.swift; sourceTree = "<group>"; };
 		4CC77649247F49CF00EF5064 /* CulturalPropertyDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturalPropertyDetailPresenterTest.swift; sourceTree = "<group>"; };
+		4CD26F5624B179BA009E3FE4 /* FamousSitesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSitesDetailViewController.swift; sourceTree = "<group>"; };
+		4CD26F5824B179CE009E3FE4 /* FamousSitesDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FamousSitesDetail.storyboard; sourceTree = "<group>"; };
+		4CD26F5A24B17BA8009E3FE4 /* FamousSitesDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSitesDetailPresenter.swift; sourceTree = "<group>"; };
+		4CD26F5C24B17BE1009E3FE4 /* FamousSitesDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousSitesDetailRouter.swift; sourceTree = "<group>"; };
 		4CD5272224974F100022B204 /* LanguageSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsViewController.swift; sourceTree = "<group>"; };
 		4CD5272424974F390022B204 /* LanguageSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LanguageSettings.storyboard; sourceTree = "<group>"; };
 		4CD5272624974FEC0022B204 /* LanguageSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsPresenter.swift; sourceTree = "<group>"; };
@@ -422,6 +430,8 @@
 		4C2DCC2C24ACD419002F6262 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4CD26F5624B179BA009E3FE4 /* FamousSitesDetailViewController.swift */,
+				4CD26F5824B179CE009E3FE4 /* FamousSitesDetail.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				4C2DCC2F24ACD449002F6262 /* FamousSitesDetailViewData.swift */,
+				4CD26F5A24B17BA8009E3FE4 /* FamousSitesDetailPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -437,6 +448,7 @@
 		4C2DCC2E24ACD426002F6262 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				4CD26F5C24B17BE1009E3FE4 /* FamousSitesDetailRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1067,6 +1079,7 @@
 				4CF773E3241B97900032CC53 /* LaunchScreen.storyboard in Resources */,
 				4CC1ADD5241BAFCC00BF84B9 /* Info.storyboard in Resources */,
 				4C2BA4282484C9D10018B435 /* gnaviAPIDummyResponse.json in Resources */,
+				4CD26F5924B179CE009E3FE4 /* FamousSitesDetail.storyboard in Resources */,
 				4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */,
 				4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */,
 				4C5334F824AB77EF00DF68F7 /* InfoPlist.strings in Resources */,
@@ -1324,6 +1337,7 @@
 				4C4CA0C224258EC400C7AEAE /* MapPresenter.swift in Sources */,
 				4C7F0342248A3FAF00B860ED /* InfoRouter.swift in Sources */,
 				4C14D097247F6BDE00A7DB2C /* RestaurantDetailPresenter.swift in Sources */,
+				4CD26F5B24B17BA8009E3FE4 /* FamousSitesDetailPresenter.swift in Sources */,
 				4CF4AFEC246EE17800991B2C /* RestaurantsSearchSettingsViewController.swift in Sources */,
 				4CC1ADDD241BC68100BF84B9 /* InfoViewController.swift in Sources */,
 				4C416667244495C2005EF1C2 /* DependencyInjectable.swift in Sources */,
@@ -1331,11 +1345,13 @@
 				4CA84B0B246398A400DAC5F3 /* CustomFloatingPanelLayout.swift in Sources */,
 				4C074B03249AFABF00B4F1C5 /* RestaurantsSearchResultForEnglishEntity.swift in Sources */,
 				4CF4AFF424716F8400991B2C /* SettingsInteractor.swift in Sources */,
+				4CD26F5D24B17BE1009E3FE4 /* FamousSitesDetailRouter.swift in Sources */,
 				4CE16C412480D9A6006EBD39 /* CategoryCellViewData.swift in Sources */,
 				4CF668D024336C14006AB40C /* InfoPresenter.swift in Sources */,
 				4C14D099247F6BF200A7DB2C /* RestaurantDetailRouter.swift in Sources */,
 				4CF4B0362478CD8000991B2C /* RestaurantsSearchRangeSettingPresenter.swift in Sources */,
 				4C1D6A6C247BE15C0017BE19 /* MapRouter.swift in Sources */,
+				4CD26F5724B179BA009E3FE4 /* FamousSitesDetailViewController.swift in Sources */,
 				4CF4AFF02470AC4700991B2C /* RestaurantsSearchRangeSettingsViewController.swift in Sources */,
 				4C52ACCF249847FE00200B52 /* LanguageSettingGateway.swift in Sources */,
 				4CC77644247F3C2800EF5064 /* CulturalPropertyDetailRouter.swift in Sources */,
@@ -1480,7 +1496,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = 78a33f7ad28955fdaccc7c99e7ef6dc3;
 				INFOPLIST_FILE = KyotoTrip/Info.plist;
@@ -1605,7 +1621,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Masayuki Tanaka (L8ZGX2885D)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L8ZGX2885D;
 				GNAVI_ACCESSTOKEN = "";
 				INFOPLIST_FILE = KyotoTrip/Info.plist;

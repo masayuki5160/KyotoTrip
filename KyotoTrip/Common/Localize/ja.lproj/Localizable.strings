@@ -62,3 +62,5 @@
 "RestaurantDetailPageWebsite" = "ホームページ(ぐるなび店舗ページ)";
 "RestaurantDetailPageOtherInfo" = "その他";
 "RestaurantDetailPageCredit" = "クレジット";
+// Famous Sites Detail Page
+"FamousSitesDetailPage" = "おすすめ観光スポット";

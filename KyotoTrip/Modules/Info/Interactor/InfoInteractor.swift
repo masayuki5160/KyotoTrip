@@ -31,18 +31,21 @@ final class InfoInteractor: InfoInteractorProtocol {
                 complition(.failure(error))
 
             case .success(let data):
+                // Apple reviewer says KyotoTrip cannot show information related to covid-19.
+                let filterCoronaInfo = data.filter({ $0.title.contains("コロナ") == false })
+
                 self?.dependency.languageSettingGateway.fetch(complition: { response in
                     switch response {
                     case .success(let setting):
                         if setting == .english {
-                            self?.fetchTranslatedInfo(source: data, complition: { translatedList in
+                            self?.fetchTranslatedInfo(source: filterCoronaInfo, complition: { translatedList in
                                 complition(.success(translatedList))
                             })
                         } else {
-                            complition(.success(data))
+                            complition(.success(filterCoronaInfo))
                         }
                     case .failure(_):
-                        complition(.success(data))
+                        complition(.success(filterCoronaInfo))
                     }
                 })
             }
