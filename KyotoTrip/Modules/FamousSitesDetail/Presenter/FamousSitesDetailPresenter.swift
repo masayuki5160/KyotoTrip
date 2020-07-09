@@ -38,37 +38,57 @@ class FamousSitesDetailPresenter: FamousSitesDetailPresenterProtocol {
 
     func createCellForRowAt(indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "FamousSitesCell")
+        cell.accessoryType = .none
+        cell.selectionStyle = .none
 
         switch indexPath.section {
         case 0:
-            cell.accessoryType = .none
-            cell.selectionStyle = .none
             cell.textLabel?.text = dependency.viewData.name
 
         case 1:// Facebook
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .default
-            cell.textLabel?.text = dependency.viewData.facebook
+            if dependency.viewData.facebook.isEmpty {
+                cell.textLabel?.text = "-"
+            } else {
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .default
+                cell.textLabel?.text = dependency.viewData.facebook
+            }
 
         case 2:// Twitter
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .default
-            cell.textLabel?.text = dependency.viewData.twitter
+            if dependency.viewData.twitter.isEmpty {
+                cell.textLabel?.text = "-"
+            } else {
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .default
+                cell.textLabel?.text = dependency.viewData.twitter
+            }
 
         case 3:// Instagram
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .default
-            cell.textLabel?.text = dependency.viewData.instagram
+            if dependency.viewData.instagram.isEmpty {
+                cell.textLabel?.text = "-"
+            } else {
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .default
+                cell.textLabel?.text = dependency.viewData.instagram
+            }
 
         case 4:// Youtube
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .default
-            cell.textLabel?.text = dependency.viewData.youtube
+            if dependency.viewData.youtube.isEmpty {
+                cell.textLabel?.text = "-"
+            } else {
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .default
+                cell.textLabel?.text = dependency.viewData.youtube
+            }
 
         case 5:// Website
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .default
-            cell.textLabel?.text = dependency.viewData.url
+            if dependency.viewData.url.isEmpty {
+                cell.textLabel?.text = "-"
+            } else {
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .default
+                cell.textLabel?.text = dependency.viewData.url
+            }
 
         default:
             break

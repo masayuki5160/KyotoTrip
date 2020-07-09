@@ -14,7 +14,6 @@ struct FamousSitesMarkerEntity: MarkerEntityProtocol {
     static var twitterURLKey = "sns_twitter"
     static var instagramURLKey = "sns_instagram"
     static var youtubeURLKey = "sns_youtube"
-    static var urlKey = "url"
     static var categoryKey = "category"
     var title = ""
     var subtitle = ""
@@ -31,6 +30,13 @@ struct FamousSitesMarkerEntity: MarkerEntityProtocol {
         switch lang {
         case .english: return "name_en"
         case .japanese: return "name_jp"
+        }
+    }
+
+    static func urlKey(lang: LanguageSettings) -> String {
+        switch lang {
+        case .english: return "url_en"
+        case .japanese: return "url_jp"
         }
     }
 }

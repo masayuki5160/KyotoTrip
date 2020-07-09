@@ -133,7 +133,7 @@ private extension MGLFeatureMediator {
                 twitter: source.attributes[FamousSitesMarkerEntity.twitterURLKey] as? String ?? "",
                 instagram: source.attributes[FamousSitesMarkerEntity.instagramURLKey] as? String ?? "",
                 youtube: source.attributes[FamousSitesMarkerEntity.youtubeURLKey] as? String ?? "",
-                url: source.attributes[FamousSitesMarkerEntity.urlKey] as? String ?? "",
+                url: source.attributes[FamousSitesMarkerEntity.urlKey(lang: language)] as? String ?? "",
                 siteCategpry: source.attributes[FamousSitesMarkerEntity.categoryKey] as! String
             )
 
