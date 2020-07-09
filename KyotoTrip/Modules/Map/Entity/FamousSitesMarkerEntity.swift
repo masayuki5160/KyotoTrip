@@ -14,7 +14,6 @@ struct FamousSitesMarkerEntity: MarkerEntityProtocol {
     static var twitterURLKey = "sns_twitter"
     static var instagramURLKey = "sns_instagram"
     static var youtubeURLKey = "sns_youtube"
-    static var urlKey = "url"
     static var categoryKey = "category"
     var title = ""
     var subtitle = ""
