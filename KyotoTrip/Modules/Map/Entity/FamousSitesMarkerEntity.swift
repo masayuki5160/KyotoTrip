@@ -33,4 +33,11 @@ struct FamousSitesMarkerEntity: MarkerEntityProtocol {
         case .japanese: return "name_jp"
         }
     }
+
+    static func urlKey(lang: LanguageSettings) -> String {
+        switch lang {
+        case .english: return "url_en"
+        case .japanese: return "url_jp"
+        }
+    }
 }
