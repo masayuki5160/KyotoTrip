@@ -247,7 +247,7 @@ extension MapViewController: MGLMapViewDelegate {
         kyotoMapView.busstopLayer?.isVisible = false
         kyotoMapView.busRouteLayer?.isVisible = false
         kyotoMapView.culturalPropertyLayer?.isVisible = false
-        kyotoMapView.famousSitesLayer?.isVisible = false
+        kyotoMapView.famousSitesLayer?.isVisible = true
     }
 
     func mapViewDidFinishRenderingFrame(_ mapView: MGLMapView, fullyRendered: Bool) {

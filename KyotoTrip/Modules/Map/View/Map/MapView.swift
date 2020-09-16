@@ -12,7 +12,7 @@ import Mapbox
 class MapView: MGLMapView {
     static let kyotoStationLat = 34.9857083
     static let kyotoStationLong = 135.7560416
-    static let defaultZoomLv = 13.0
+    static let defaultZoomLv = 10.5
     private let darkSytleURL = "mapbox://styles/masayuki5160/ckbwyma0h1l2e1in4j357f4ha"
     var busstopLayer: MGLStyleLayer?
     var busRouteLayer: MGLStyleLayer?
