@@ -61,7 +61,7 @@ class RestaurantsSearchSettingsPresenter: RestaurantsSearchSettingsPresenterProt
                 self.buildNewRequestSettings(from: viewData, current: self.restaurantsRequestParam)
             let searchSettingsRows = self.buildRestaurantsSettingRows(currentSettings: self.restaurantsRequestParam)
             self.restaurantsSearchSettingsRows.accept(searchSettingsRows)
-            }
+        }
         ).disposed(by: disposeBag)
     }
 

@@ -48,7 +48,7 @@ extension AppDefaultDependencies: AppDependencies {
         let interactor = SettingsInteractor(dependency: .init(
             restaurantsRequestParamGateway: restaurntRequestParamGateway,
             languageSettingGateway: languageSettingGateway
-            )
+        )
         )
         let router = SettingsRouter(view: vc)
         let presenter = SettingsPresenter(
@@ -73,7 +73,7 @@ extension AppDefaultDependencies: AppDependencies {
         let interactor = InfoInteractor(dependency: .init(
             kyotoCityInfoGateway: kyotoCityInfoGateway,
             languageSettingGateway: languageSettingGateway
-            )
+        )
         )
         let router = InfoRouter(view: view)
         let presenter = InfoPresenter(

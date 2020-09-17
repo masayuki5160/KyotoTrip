@@ -3,91 +3,77 @@ PODS:
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
-  - Firebase/Analytics (6.26.0):
+  - Firebase/Analytics (6.32.2):
     - Firebase/Core
-  - Firebase/Core (6.26.0):
+  - Firebase/Core (6.32.2):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.6.0)
-  - Firebase/CoreOnly (6.26.0):
-    - FirebaseCore (= 6.7.2)
-  - Firebase/MLNLTranslate (6.26.0):
+    - FirebaseAnalytics (= 6.8.2)
+  - Firebase/CoreOnly (6.32.2):
+    - FirebaseCore (= 6.10.2)
+  - Firebase/MLNLTranslate (6.32.2):
     - Firebase/CoreOnly
-    - FirebaseMLNLTranslate (~> 0.18.0)
-  - FirebaseABTesting (3.2.0):
-    - FirebaseAnalyticsInterop (~> 1.3)
-    - FirebaseCore (~> 6.1)
-    - Protobuf (>= 3.9.2, ~> 3.9)
-  - FirebaseAnalytics (6.6.0):
-    - FirebaseCore (~> 6.7)
-    - FirebaseInstallations (~> 1.3)
-    - GoogleAppMeasurement (= 6.6.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
-    - GoogleUtilities/MethodSwizzler (~> 6.0)
-    - GoogleUtilities/Network (~> 6.0)
-    - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (~> 1.30905.0)
-  - FirebaseAnalyticsInterop (1.5.0)
-  - FirebaseCore (6.7.2):
-    - FirebaseCoreDiagnostics (~> 1.3)
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.3.0):
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleDataTransportCCTSupport (~> 3.1)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-    - nanopb (~> 1.30905.0)
-  - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseInstallations (1.3.0):
-    - FirebaseCore (~> 6.6)
-    - GoogleUtilities/Environment (~> 6.6)
-    - GoogleUtilities/UserDefaults (~> 6.6)
+    - FirebaseMLNLTranslate (~> 0.19.0)
+  - FirebaseABTesting (4.2.0):
+    - FirebaseCore (~> 6.10)
+  - FirebaseAnalytics (6.8.2):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleAppMeasurement (= 6.8.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30906.0)
+  - FirebaseCore (6.10.2):
+    - FirebaseCoreDiagnostics (~> 1.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+  - FirebaseCoreDiagnostics (1.6.0):
+    - GoogleDataTransport (~> 7.2)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+    - nanopb (~> 1.30906.0)
+  - FirebaseInstallations (1.7.0):
+    - FirebaseCore (~> 6.10)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstanceID (4.3.4):
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.0)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/UserDefaults (~> 6.5)
-  - FirebaseMLCommon (0.20.1):
-    - FirebaseCore (~> 6.7)
-    - FirebaseInstanceID (~> 4.3)
+  - FirebaseMLCommon (0.21.0):
+    - FirebaseCore (~> 6.9)
+    - FirebaseInstallations (~> 1.5)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - GoogleUtilities/UserDefaults (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
     - Protobuf (~> 3.12)
-  - FirebaseMLNaturalLanguage (0.17.0):
-    - FirebaseCore (~> 6.3)
-    - FirebaseMLCommon (~> 0.19)
+  - FirebaseMLNaturalLanguage (0.18.0):
+    - FirebaseCore (~> 6.9)
+    - FirebaseMLCommon (~> 0.21)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
-    - Protobuf (~> 3.5)
-  - FirebaseMLNLTranslate (0.18.0):
-    - FirebaseCore (~> 6.7)
-    - FirebaseMLNaturalLanguage (~> 0.17)
-    - FirebaseRemoteConfig (~> 4.5)
-  - FirebaseRemoteConfig (4.5.0):
-    - FirebaseABTesting (~> 3.1)
-    - FirebaseAnalyticsInterop (~> 1.4)
-    - FirebaseCore (~> 6.2)
-    - FirebaseInstallations (~> 1.1)
-    - GoogleUtilities/Environment (~> 6.2)
-    - "GoogleUtilities/NSData+zlib (~> 6.2)"
-  - FloatingPanel (1.7.4)
-  - GoogleAppMeasurement (6.6.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
-    - GoogleUtilities/MethodSwizzler (~> 6.0)
-    - GoogleUtilities/Network (~> 6.0)
-    - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (~> 1.30905.0)
-  - GoogleDataTransport (6.2.1)
-  - GoogleDataTransportCCTSupport (3.1.0):
-    - GoogleDataTransport (~> 6.1)
-    - nanopb (~> 1.30905.0)
+    - Protobuf (~> 3.12)
+  - FirebaseMLNLTranslate (0.19.0):
+    - FirebaseCore (~> 6.9)
+    - FirebaseMLNaturalLanguage (~> 0.18)
+    - FirebaseRemoteConfig (~> 4.7)
+  - FirebaseRemoteConfig (4.9.0):
+    - FirebaseABTesting (~> 4.2)
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+  - FloatingPanel (1.7.5)
+  - GoogleAppMeasurement (6.8.2):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30906.0)
+  - GoogleDataTransport (7.3.0):
+    - nanopb (~> 1.30906.0)
   - GoogleToolboxForMac/DebugUtils (2.2.2):
     - GoogleToolboxForMac/Defines (= 2.2.2)
   - GoogleToolboxForMac/Defines (2.2.2)
@@ -100,32 +86,32 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.2.2)
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.2)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.2)"
-  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.6.0):
+  - GoogleUtilities/Environment (6.7.2):
     - PromisesObjC (~> 1.2)
-  - GoogleUtilities/ISASwizzler (6.6.0)
-  - GoogleUtilities/Logger (6.6.0):
+  - GoogleUtilities/ISASwizzler (6.7.2)
+  - GoogleUtilities/Logger (6.7.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.6.0):
+  - GoogleUtilities/MethodSwizzler (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.6.0):
+  - GoogleUtilities/Network (6.7.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.6.0)"
-  - GoogleUtilities/Reachability (6.6.0):
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.6.0):
+  - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
   - GTMSessionFetcher (1.4.0):
     - GTMSessionFetcher/Full (= 1.4.0)
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
-  - Mapbox-iOS-SDK (5.7.0):
+  - Mapbox-iOS-SDK (5.9.0):
     - MapboxMobileEvents (= 0.10.2)
   - MapboxAccounts (2.2.0)
   - MapboxCoreNavigation (0.40.0):
@@ -134,9 +120,9 @@ PODS:
     - MapboxMobileEvents (~> 0.10.2)
     - MapboxNavigationNative (~> 6.2.1)
     - Turf (~> 0.3.0)
-  - MapboxDirections (0.31.0):
+  - MapboxDirections (0.31.1):
     - Polyline (~> 4.2)
-    - Turf (~> 0.3)
+    - Turf (~> 0.3.0)
   - MapboxMobileEvents (0.10.2)
   - MapboxNavigation (0.40.0):
     - Mapbox-iOS-SDK (~> 5.6)
@@ -145,15 +131,15 @@ PODS:
     - MapboxSpeech (~> 0.3.0)
     - Solar (~> 2.1)
   - MapboxNavigationNative (6.2.1)
-  - MapboxSpeech (0.3.0)
-  - nanopb (1.30905.0):
-    - nanopb/decode (= 1.30905.0)
-    - nanopb/encode (= 1.30905.0)
-  - nanopb/decode (1.30905.0)
-  - nanopb/encode (1.30905.0)
+  - MapboxSpeech (0.3.1)
+  - nanopb (1.30906.0):
+    - nanopb/decode (= 1.30906.0)
+    - nanopb/encode (= 1.30906.0)
+  - nanopb/decode (1.30906.0)
+  - nanopb/encode (1.30906.0)
   - Polyline (4.2.1)
-  - PromisesObjC (1.2.9)
-  - Protobuf (3.12.0)
+  - PromisesObjC (1.2.10)
+  - Protobuf (3.13.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -188,36 +174,31 @@ DEPENDENCIES:
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Alamofire
-    - FloatingPanel
-    - Mapbox-iOS-SDK
-    - MapboxMobileEvents
   trunk:
+    - Alamofire
     - Crashlytics
     - Fabric
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
-    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
-    - FirebaseCoreDiagnosticsInterop
     - FirebaseInstallations
-    - FirebaseInstanceID
     - FirebaseMLCommon
     - FirebaseMLNaturalLanguage
     - FirebaseMLNLTranslate
     - FirebaseRemoteConfig
+    - FloatingPanel
     - GoogleAppMeasurement
     - GoogleDataTransport
-    - GoogleDataTransportCCTSupport
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
+    - Mapbox-iOS-SDK
     - MapboxAccounts
     - MapboxCoreNavigation
     - MapboxDirections
+    - MapboxMobileEvents
     - MapboxNavigation
     - MapboxNavigationNative
     - MapboxSpeech
@@ -237,50 +218,46 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyXMLParser:
-    :commit: bc85162ecee60d6eb94b778648bc4c51e1c4d34f
+    :commit: 5009f14af051cc8e0f20957375deb709f7b53758
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  Firebase: 7cf5f9c67f03cb3b606d1d6535286e1080e57eb6
-  FirebaseABTesting: 821a3a3e4a145987e80fee3657c4de1cb9adf693
-  FirebaseAnalytics: 96634d356482d4f3af8fe459a0ebf19a99c71b75
-  FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
-  FirebaseCore: f42e5e5f382cdcf6b617ed737bf6c871a6947b17
-  FirebaseCoreDiagnostics: 4a773a47bd83bbd5a9b1ccf1ce7caa8b2d535e67
-  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseInstallations: 6f5f680e65dc374397a483c32d1799ba822a395b
-  FirebaseInstanceID: cef67c4967c7cecb56ea65d8acbb4834825c587b
-  FirebaseMLCommon: 5e1184cfdddbd097f55cad75b598881d348d900f
-  FirebaseMLNaturalLanguage: 9d38301a41b1201d248588bf66937b975391e8f4
-  FirebaseMLNLTranslate: 1e7cbff140959a13f89bf10745992d9de5bf5da2
-  FirebaseRemoteConfig: 1725314c4b89d8853c876099ded037f11bee26db
-  FloatingPanel: 3c9d0e30fe350e1613157557769d2ec97f76b96b
-  GoogleAppMeasurement: 67458367830514fb20fd9e233496f1eef9d90185
-  GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
-  GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
+  Firebase: 47176280bfba198e531f909cfb1612dad216cb96
+  FirebaseABTesting: 8a9d8df3acc2b43f4a22014ddf9f601bca6af699
+  FirebaseAnalytics: 3c2fee6a922023ccfda7af87e4e641bad1fc11ba
+  FirebaseCore: 1d697bb944bf2af5fc248f1a66e165c9dd88bf97
+  FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
+  FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
+  FirebaseMLCommon: d218d75dd1c6c4e447f731ac22da56b88cb79431
+  FirebaseMLNaturalLanguage: 32cccde63dfdf82341d570b3d4b24e746303d4cd
+  FirebaseMLNLTranslate: 1184a149568196a5cb60a4145922237c1b93af5d
+  FirebaseRemoteConfig: e40f9e084658210c4d9c341cfa9f6cab6ad4f67e
+  FloatingPanel: bb17fd6fc7ae519f877f7bd30f4f6115a78acf07
+  GoogleAppMeasurement: 1a66f478c68ecd6c16ee63ee60c7c3a648e6b337
+  GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
   GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
-  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  Mapbox-iOS-SDK: 1b7cb0e739247d20ef75f5f14aa6ce34e1f0660f
+  Mapbox-iOS-SDK: a5915700ec84bc1a7f8b3e746d474789e35b7956
   MapboxAccounts: f9716ba2cc66013e44ef93e0e16cfa1049f3aeec
   MapboxCoreNavigation: 2856c46bd064bb11c406ba00191d579cda424efa
-  MapboxDirections: 0b97aa320d7cddbe72d6513becc07dd747935240
+  MapboxDirections: 69dca02d780c5e506bdcc65385dd5fb77b9e90b5
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
   MapboxNavigation: 42bae50b0381dce317c85884ba0de38fc68a4814
   MapboxNavigationNative: 11dc22140f4698d3f26989f2b6379dc81ef0d4c1
-  MapboxSpeech: 403415e932e084cf290b9d55c49ab7ea210b9595
-  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  MapboxSpeech: 67a558a672dc2b6266a993f4624895f69e58d105
+  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   Polyline: 0e9890790292741c8186201a536b6bb6a78d02dd
-  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
+  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
+  Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
-  SwiftyXMLParser: 8271497e0a37b5c04b0b167c77b4896e36175a21
+  SwiftyXMLParser: c39a7854b7d32e447e19d0fabdd98696fe26f03a
   Turf: c6bdf62d6a70c647874f295dd1cf4eefc0c3e9e6
 
 PODFILE CHECKSUM: a7daecbf35bf1e25943c8ed14dd54ee6b0e90d7c

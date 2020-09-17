@@ -32,7 +32,7 @@ class LanguageSettingsViewController: UIViewController {
 
         dependency.presenter.bindView(input: .init(
             selectedCell: tableView.rx.modelSelected(LanguageSettingsCellViewData.self).asDriver()
-            )
+        )
         )
     }
 

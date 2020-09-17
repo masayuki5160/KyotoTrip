@@ -54,7 +54,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             let nextStatus = self.categoryButtonsStatus.culturalProperty.next()
             self.categoryButtonsStatus.culturalProperty = nextStatus
             self.dependency.interactor.didSelectCulturalPropertyButton(nextStatus: nextStatus)
-            }
+        }
         ).disposed(by: disposeBag)
 
         input.busstopButton.emit(onNext: { [weak self] in
@@ -63,7 +63,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             let nextStatus = self.categoryButtonsStatus.busstop.next()
             self.categoryButtonsStatus.busstop = nextStatus
             self.dependency.interactor.didSelectBusstopButton(nextStatus: nextStatus)
-            }
+        }
         ).disposed(by: disposeBag)
 
         input.restaurantButton.emit(onNext: { [weak self] in
@@ -72,7 +72,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             let nextStatus = self.categoryButtonsStatus.restaurant.next()
             self.categoryButtonsStatus.restaurant = nextStatus
             self.dependency.interactor.didSelectRestaurantButton(nextStatus: nextStatus)
-            }
+        }
         ).disposed(by: disposeBag)
 
         input.famousSitesButton.emit(onNext: { [weak self] in
@@ -81,7 +81,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
             let nextStatus = self.categoryButtonsStatus.famousSites.next()
             self.categoryButtonsStatus.famousSites = nextStatus
             self.dependency.interactor.didSelectFamousSitesButton(nextStatus: nextStatus)
-            }
+        }
         ).disposed(by: disposeBag)
 
         input.selectedCell.emit(onNext: { [weak self] cell in
@@ -89,7 +89,7 @@ class CategoryPresenter: CategoryPresenterProtocol {
 
             self.dependency.interactor.didSelectCategoryViewCell(viewData: cell.viewData)
             self.dependency.router.transitionToDetailViewController(inject: cell.viewData)
-            }
+        }
         ).disposed(by: disposeBag)
     }
 }

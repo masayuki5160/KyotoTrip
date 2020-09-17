@@ -38,7 +38,7 @@ class InfoPresenter: InfoPresenterProtocol {
                     link: cityInfoEntity.link
                 )
             }
-            }
+        }
         )
     }
 

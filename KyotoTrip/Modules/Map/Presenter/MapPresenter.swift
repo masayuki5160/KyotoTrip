@@ -80,7 +80,7 @@ class MapPresenter: MapPresenterProtocol {
             buttonsStatus.famousSites = famousSites
 
             return buttonsStatus
-            }
+        }
         )
 
         restaurantMarkersDriver = dependency.interactor.restaurantMarkersDriver

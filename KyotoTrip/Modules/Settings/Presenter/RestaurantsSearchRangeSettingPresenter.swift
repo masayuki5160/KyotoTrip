@@ -61,7 +61,7 @@ class RestaurantsSearchRangeSettingPresenter: RestaurantsSearchRangeSettingPrese
             self.restaurantsRequestParam.range = entity.range
             let searchRangeRows = self.buildSearchRangeRows(settings: self.restaurantsRequestParam)
             self.restaurantsSearchRangeSettingsRows.accept(searchRangeRows)
-            }
+        }
         ).disposed(by: disposeBag)
     }
 
