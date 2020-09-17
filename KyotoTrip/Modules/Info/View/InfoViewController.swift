@@ -56,14 +56,11 @@ class InfoViewController: UIViewController, TransitionerProtocol {
                 cell.accessoryType = .disclosureIndicator
             }.disposed(by: disposeBag)
 
-        Driver.combineLatest(
-            tableView.rx.modelSelected(InfoCellViewData.self).asDriver(),
-            tableView.rx.itemSelected.asDriver()
-        ).drive(onNext: { [weak self] _, indexPath in
+        tableView.rx.itemSelected.asDriver().drive(onNext: { [weak self] indexPath in
             self?.dependency.presenter.didSelectRowAt(indexPath: indexPath)
             self?.tableView.deselectRow(at: indexPath, animated: true)
-        }
-        ).disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
+
     }
 }
 
