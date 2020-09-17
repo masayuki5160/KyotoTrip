@@ -64,7 +64,7 @@ private extension MapViewController {
         mapView.addGestureRecognizer(singleTap)
         singleTap.rx.event.asDriver().drive(onNext: { [weak self] gesture in
             self?.handleMapTap(sender: gesture)
-            }
+        }
         ).disposed(by: disposeBag)
     }
 
@@ -88,19 +88,19 @@ private extension MapViewController {
             self.updateBusstopLayer(status: buttonsStatus.busstop)
             self.updateCulturalPropertyLayer(status: buttonsStatus.culturalProperty)
             self.updateFamousSitesLayer(status: buttonsStatus.famousSites)
-            }
+        }
         ).disposed(by: disposeBag)
 
         dependency.presenter.restaurantMarkersDriver.drive(onNext: { [weak self] annotations in
             guard let self = self else { return }
             self.updateRestaurantMarkers(annotations: annotations)
-            }
+        }
         ).disposed(by: disposeBag)
 
         dependency.presenter.mapCenterPositionDriver.drive(onNext: { [weak self] compassButtonStatus in
             guard let self = self else { return }
             self.updateMapCenterPosition(compassButtonStatus)
-            }
+        }
         ).disposed(by: disposeBag)
 
         dependency.presenter.selectedCategoryViewCellSignal.emit(onNext: {  [weak self] selectedCell in
@@ -112,7 +112,7 @@ private extension MapViewController {
             /// Add annotation to mapView
             let selectedAnnotation = CustomMGLPointAnnotation(viewData: selectedCell)
             self.mapView.selectAnnotation(selectedAnnotation, animated: true, completionHandler: nil)
-            }
+        }
         ).disposed(by: disposeBag)
     }
 
@@ -292,8 +292,8 @@ extension MapViewController: MGLMapViewDelegate {
         mapView.deselectAnnotation(annotation, animated: false)
 
         guard let userLocation = mapView.userLocation,
-            let location = userLocation.location,
-            let annotation = annotation as? CustomMGLPointAnnotation else { return }
+              let location = userLocation.location,
+              let annotation = annotation as? CustomMGLPointAnnotation else { return }
 
         // Define two waypoints to travel between
         let origin = Waypoint(coordinate: location.coordinate, name: "CurrentLocation")

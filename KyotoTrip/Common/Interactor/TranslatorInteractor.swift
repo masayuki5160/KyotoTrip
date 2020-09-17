@@ -35,10 +35,10 @@ class TranslatorInteractor: TranslatorInteractorProtocol {
             queue: nil
         ) { [weak self] notification in
             guard let _ = self,
-                let userInfo = notification.userInfo,
-                let model = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? TranslateRemoteModel,
-                model == targetModel
-                else { return }
+                  let userInfo = notification.userInfo,
+                  let model = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? TranslateRemoteModel,
+                  model == targetModel
+            else { return }
             // The model was downloaded and is available on the device
             // TODO: ダウンロードが完了した後の処理
         }
@@ -49,9 +49,9 @@ class TranslatorInteractor: TranslatorInteractorProtocol {
             queue: nil
         ) { [weak self] notification in
             guard let _ = self,
-                let userInfo = notification.userInfo,
-                let _ = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? TranslateRemoteModel
-                else { return }
+                  let userInfo = notification.userInfo,
+                  let _ = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue] as? TranslateRemoteModel
+            else { return }
 
             let error = userInfo[ModelDownloadUserInfoKey.error.rawValue]
             // TODO: ダウンロードに失敗した時の処理

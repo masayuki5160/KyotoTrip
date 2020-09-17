@@ -54,7 +54,7 @@ class InfoViewController: UIViewController, TransitionerProtocol {
                 cell.detailTextLabel?.text = element.publishDateForCellView
                 cell.textLabel?.numberOfLines = 0
                 cell.accessoryType = .disclosureIndicator
-        }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
 
         Driver.combineLatest(
             tableView.rx.modelSelected(InfoCellViewData.self).asDriver(),
@@ -62,7 +62,7 @@ class InfoViewController: UIViewController, TransitionerProtocol {
         ).drive(onNext: { [weak self] _, indexPath in
             self?.dependency.presenter.didSelectRowAt(indexPath: indexPath)
             self?.tableView.deselectRow(at: indexPath, animated: true)
-            }
+        }
         ).disposed(by: disposeBag)
     }
 }
