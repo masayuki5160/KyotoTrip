@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AppTrackingTransparency
 
 class TabBarController: UITabBarController {
     override func awakeFromNib() {
@@ -21,5 +22,9 @@ class TabBarController: UITabBarController {
         let settingViewController = AppDefaultDependencies().assembleSettingsModule()
 
         self.viewControllers = [mapViewController, infoTopViewController, settingViewController]
+
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { _ in }
+        }
     }
 }

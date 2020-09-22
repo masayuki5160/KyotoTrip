@@ -6,3 +6,4 @@
   Copyright © 2020 TANAKA MASAYUKI. All rights reserved.
 */
 "NSLocationWhenInUseUsageDescription" = "This application requires location services to show your location.";
+"NSUserTrackingUsageDescription" = "App would like to access IDFA for tracking purpose.";
