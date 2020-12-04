@@ -23,8 +23,8 @@ class TabBarController: UITabBarController {
 
         self.viewControllers = [mapViewController, infoTopViewController, settingViewController]
 
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization { _ in }
-        }
+        //        if #available(iOS 14, *) {
+        //            ATTrackingManager.requestTrackingAuthorization { _ in }
+        //        }
     }
 }
