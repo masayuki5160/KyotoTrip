@@ -15,7 +15,7 @@ Source Code
 
 ### Development Environment
 
-- Xcode 11.5
+- Xcode 12.2
 
 How to Build
 --------------------------
