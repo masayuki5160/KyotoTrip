@@ -22,6 +22,7 @@ protocol AppDependencies {
     func assembleSettingsRestaurantsSearchRangeModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
     func assembleLanguagesSettingsModule(inject interactor: SettingsInteractorProtocol) -> UIViewController
     func assembleFamousSitesDetailModule(inject viewData: FamousSitesDetailViewData) -> UIViewController
+    func assembleBookmarksModule() -> UINavigationController
 }
 
 struct AppDefaultDependencies {
@@ -32,6 +33,7 @@ struct AppDefaultDependencies {
 }
 
 extension AppDefaultDependencies: AppDependencies {
+
     func assembleMainTabModule() -> UIViewController {
         TabBarController()
     }
@@ -283,5 +285,14 @@ extension AppDefaultDependencies: AppDependencies {
         view.inject(.init(presenter: presenter))
 
         return view
+    }
+
+    func assembleBookmarksModule() -> UINavigationController {
+        let naviViewController = { () -> UINavigationController in
+            let storyboard = UIStoryboard(name: "Bookmarks", bundle: nil)
+            return storyboard.instantiateInitialViewController() as! UINavigationController
+        }()
+
+        return naviViewController
     }
 }

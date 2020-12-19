@@ -49,6 +49,8 @@
 		4C5334F824AB77EF00DF68F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C5334FA24AB77EF00DF68F7 /* InfoPlist.strings */; };
 		4C5A33E72483F1150041FE48 /* CategoryButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */; };
 		4C5A5DF1248610CF001EA2CE /* SettingsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A5DF0248610CF001EA2CE /* SettingsInteractorTests.swift */; };
+		4C79F1B1258E2B9A003D04E1 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79F1B0258E2B9A003D04E1 /* BookmarksViewController.swift */; };
+		4C79F1B5258E2BAC003D04E1 /* Bookmarks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C79F1B4258E2BAC003D04E1 /* Bookmarks.storyboard */; };
 		4C7BC1F62489F7E900A5C394 /* InfoInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BC1F52489F7E900A5C394 /* InfoInteractorTests.swift */; };
 		4C7BC1F8248A1CBC00A5C394 /* InfoPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BC1F7248A1CBC00A5C394 /* InfoPresenterTests.swift */; };
 		4C7BC1FA248A232A00A5C394 /* InfoCellViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7BC1F9248A232A00A5C394 /* InfoCellViewDataTests.swift */; };
@@ -203,6 +205,8 @@
 		4C5334FB24AB77F600DF68F7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C5A33E62483F1150041FE48 /* CategoryButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStatus.swift; sourceTree = "<group>"; };
 		4C5A5DF0248610CF001EA2CE /* SettingsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractorTests.swift; sourceTree = "<group>"; };
+		4C79F1B0258E2B9A003D04E1 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
+		4C79F1B4258E2BAC003D04E1 /* Bookmarks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bookmarks.storyboard; sourceTree = "<group>"; };
 		4C7BC1F52489F7E900A5C394 /* InfoInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInteractorTests.swift; sourceTree = "<group>"; };
 		4C7BC1F7248A1CBC00A5C394 /* InfoPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPresenterTests.swift; sourceTree = "<group>"; };
 		4C7BC1F9248A232A00A5C394 /* InfoCellViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCellViewDataTests.swift; sourceTree = "<group>"; };
@@ -485,6 +489,7 @@
 				4CA84B192464335A00DAC5F3 /* RestaurantDetail */,
 				4CA84B022463132A00DAC5F3 /* CulturalPropertyDetail */,
 				4C2DCC2B24ACD3FE002F6262 /* FamousSitesDetail */,
+				4C79F1A8258E2AE3003D04E1 /* Bookmarks */,
 				4C3F094A24301C0000FAEDC2 /* Map */,
 			);
 			path = Modules;
@@ -678,6 +683,23 @@
 				4C2EA23524868AF800FE98C5 /* RestaurantsSearchRangeSettingPresenterTests.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		4C79F1A8258E2AE3003D04E1 /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				4C79F1A9258E2B13003D04E1 /* View */,
+			);
+			path = Bookmarks;
+			sourceTree = "<group>";
+		};
+		4C79F1A9258E2B13003D04E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C79F1B0258E2B9A003D04E1 /* BookmarksViewController.swift */,
+				4C79F1B4258E2BAC003D04E1 /* Bookmarks.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		4C9F8EAA24A6E72200C14583 /* Navigation */ = {
@@ -1082,6 +1104,7 @@
 				4CD26F5924B179CE009E3FE4 /* FamousSitesDetail.storyboard in Resources */,
 				4CA84AD4245036F000DAC5F3 /* BusstopDetail.storyboard in Resources */,
 				4CF773E0241B97900032CC53 /* Assets.xcassets in Resources */,
+				4C79F1B5258E2BAC003D04E1 /* Bookmarks.storyboard in Resources */,
 				4C5334F824AB77EF00DF68F7 /* InfoPlist.strings in Resources */,
 				4CC1AE0D2424615D00BF84B9 /* Localizable.strings in Resources */,
 				4CC1ADD7241BB13700BF84B9 /* Map.storyboard in Resources */,
@@ -1295,6 +1318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C79F1B1258E2B9A003D04E1 /* BookmarksViewController.swift in Sources */,
 				4CF4B03024789A4700991B2C /* RestaurantsSearchSettingsRouter.swift in Sources */,
 				4C48910A249B962500F77CAA /* UserInfoGateway.swift in Sources */,
 				4CF773D7241B978B0032CC53 /* AppDelegate.swift in Sources */,
