@@ -20,8 +20,9 @@ class TabBarController: UITabBarController {
         let infoTopViewController = AppDefaultDependencies().assembleKyotoInfoTopModule()
         let mapViewController = AppDefaultDependencies().assembleKyotoMapModule()
         let settingViewController = AppDefaultDependencies().assembleSettingsModule()
+        let bookmarksViewController = AppDefaultDependencies().assembleBookmarksModule()
 
-        self.viewControllers = [mapViewController, infoTopViewController, settingViewController]
+        self.viewControllers = [mapViewController, infoTopViewController, bookmarksViewController, settingViewController]
 
         //        if #available(iOS 14, *) {
         //            ATTrackingManager.requestTrackingAuthorization { _ in }
